@@ -38,7 +38,7 @@ export class TimerService {
 
   public cancelTimer() {
     this.pauseTimer();
-    this.totalSeconds = 0;
+    this.totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
     this.timerCancelled = true;
     this.totalSecondsBehaviorSubject.next(this.totalSeconds);
   }
