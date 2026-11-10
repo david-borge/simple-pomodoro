@@ -12,7 +12,11 @@
       </div>
     </div>
     <div id="bottom-content">
-      <div class="center-horizontally">
+      <div class="center-horizontally" style="gap: 30px">
+        @if(!isTimerRunning() && !this.isTimerCancelled()) {
+        <ion-button (click)="onClickCancelBtn()" class="ion-text-uppercase" color="danger">Cancel</ion-button>
+        }
+
         <ion-button (click)="onClickStartPauseBtn()" class="ion-text-uppercase" [color]="startPauseBtnColor()">
           {{ startPauseBtnText() }}
         </ion-button>

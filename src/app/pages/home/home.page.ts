@@ -27,8 +27,18 @@ export class HomePage {
     return this.timerService.isTimerRunning();
   }
 
+  isTimerCancelled(): boolean {
+    return this.timerService.isTimerCancelled();
+  }
+
   startPauseBtnText(): string {
-    return !this.isTimerRunning() ? 'Start' : 'Pause';
+    if (!this.isTimerRunning() && this.isTimerCancelled()) {
+      return 'Start';
+    } else if (!this.isTimerRunning() && !this.isTimerCancelled()) {
+      return 'Continue';
+    } else {
+      return 'Pause';
+    }
   }
 
   startPauseBtnColor(): PredefinedColors {
@@ -42,5 +52,9 @@ export class HomePage {
     }
 
     this.timerService.startTimer();
+  }
+
+  onClickCancelBtn() {
+    this.timerService.cancelTimer();
   }
 }
