@@ -1,5 +1,15 @@
-# Prettier only reads the root .gitignore, not the ones inside the native
-# projects, so ignore them here to skip Capacitor's copied web build and
-# Gradle's build output.
+# Docs: https://prettier.io/docs/ignore
+
+# Ignore VS Code settings
+# IMPORTANT: .vscode/settings.json can cause Prettier inconsistencies when saving in VSC and when running "format": "prettier --write .",
+# which causes "npx prettier --check ." to detect issues, which can impide deployment if so configured in GitHub Actions.
+.vscode/
+
+# Built web assets
+www/
+
+# Built Android assets
 android/
+
+# Built iOS assets
 ios/

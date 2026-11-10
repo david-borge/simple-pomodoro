@@ -1,11 +1,54 @@
 {
-  // Keeps VS Code from suggesting Ionic components off the entry points this app
-  // does not use. Patterns are matched against resolved .d.ts paths, not import
-  // specifiers, so they name @ionic/angular's actual type files. Never use a bare
-  // "@ionic/angular" here: it matches the whole package and blocks every Ionic
-  // auto-import (ionic-team/starters#1873).
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    "@ionic/angular/types/ionic-angular-lazy.d.ts",
-    "@ionic/angular/types/ionic-angular-common.d.ts"
-  ]
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "always",
+        "source.organizeImports": "explicit",
+        "source.fixAll": "explicit"
+    },
+    "eslint.codeActionsOnSave.mode": "all",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[sass]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.requireConfig": false,
+    "eslint.validate": [
+        "javascript",
+        "typescript"
+    ],
+    "eslint.format.enable": false,
+    // Keeps VS Code from suggesting Ionic components off the entry points this app
+    // does not use. Patterns are matched against resolved .d.ts paths, not import
+    // specifiers, so they name @ionic/angular's actual type files. Never use a bare
+    // "@ionic/angular" here: it matches the whole package and blocks every Ionic
+    // auto-import (ionic-team/starters#1873).
+    "typescript.preferences.autoImportFileExcludePatterns": [
+        "@ionic/angular/types/ionic-angular-lazy.d.ts",
+        "@ionic/angular/types/ionic-angular-common.d.ts"
+    ],
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml"
+    }
 }

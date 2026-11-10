@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular';
+
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
