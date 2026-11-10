@@ -8,6 +8,6 @@ export const routes: Routes = [
   },
   {
     path: 'simple-pomodoro',
-    loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
+    loadComponent: () => import('./pages/simple-pomodoro/simple-pomodoro.page').then((m) => m.SimplePomodoroPage),
   },
 ];

@@ -7,12 +7,12 @@ import { TimerComponent } from '../../components/timer/timer.component';
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-simple-pomodoro',
+  templateUrl: 'simple-pomodoro.page.html',
+  styleUrls: ['simple-pomodoro.page.scss'],
   imports: [IonButton, IonContent, IonHeader, TimerComponent],
 })
-export class HomePage {
+export class SimplePomodoroPage {
   private readonly timerService = inject(TimerService);
 
   public readonly totalSeconds = signal(0);
