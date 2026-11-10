@@ -13,7 +13,9 @@
     </div>
     <div id="bottom-content">
       <div class="center-horizontally">
-        <ion-button (click)="onClickStartPauseBtn()" class="ion-text-uppercase">Start</ion-button>
+        <ion-button (click)="onClickStartPauseBtn()" class="ion-text-uppercase" [color]="startPauseBtnColor()">
+          {{ startPauseBtnText() }}
+        </ion-button>
       </div>
     </div>
   </div>

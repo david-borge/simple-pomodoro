@@ -1,4 +1,5 @@
 import { IonButton, IonContent, IonHeader } from '@ionic/angular';
+import type { PredefinedColors } from '@ionic/core/components';
 
 import { Component, inject, signal } from '@angular/core';
 
@@ -14,7 +15,7 @@ import { TimerService } from '../../services/timer/timer.service';
 export class HomePage {
   private readonly timerService = inject(TimerService);
 
-  readonly totalSeconds = signal(0);
+  public readonly totalSeconds = signal(0);
 
   constructor() {
     this.timerService.totalSeconds$.subscribe((timeInSec) => {
@@ -22,7 +23,24 @@ export class HomePage {
     });
   }
 
+  isTimerRunning(): boolean {
+    return this.timerService.isTimerRunning();
+  }
+
+  startPauseBtnText(): string {
+    return !this.isTimerRunning() ? 'Start' : 'Pause';
+  }
+
+  startPauseBtnColor(): PredefinedColors {
+    return !this.isTimerRunning() ? 'dark' : 'medium';
+  }
+
   onClickStartPauseBtn() {
+    if (this.isTimerRunning()) {
+      this.timerService.pauseTimer();
+      return;
+    }
+
     this.timerService.startTimer();
   }
 }

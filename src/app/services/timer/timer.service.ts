@@ -23,4 +23,17 @@ export class TimerService {
       this.totalSecondsBehaviorSubject.next(this.totalSeconds);
     }, ONE_SECOND_IN_MILIISECONDS);
   }
+
+  public pauseTimer() {
+    if (!this.intervalId) {
+      return;
+    }
+
+    clearInterval(this.intervalId);
+    this.intervalId = null;
+  }
+
+  public isTimerRunning(): boolean {
+    return this.intervalId !== null;
+  }
 }
