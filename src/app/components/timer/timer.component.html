@@ -1,18 +1,39 @@
-<div id="label-container">
-  @if (hours() >= 1) {
-    <div>hr</div>
+@if (!timerIsBeingEdited()) {
+  <div>
+    <div id="label-container">
+      @if (hours() >= 1) {
+        <div>hr</div>
+      }
+      <div>min</div>
+      <div>sec</div>
+    </div>
+    <div>
+      <p id="timer">
+        @if (hours() >= 1) {
+          <span id="hours">{{ hours() | twoDigits }}</span>
+          <span>:</span>
+        }
+        <span id="minutes">{{ minutes() | twoDigits }}</span>
+        <span>:</span>
+        <span id="seconds">{{ seconds() | twoDigits }}</span>
+      </p>
+    </div>
+  </div>
+  @if (!isTimerRunning()) {
+    <div class="center-horizontally" style="margin-top: 30px">
+      <ion-button (click)="onClickEditBtn()" class="ion-text-uppercase" color="dark" fill="outline" size="small"
+        >Edit</ion-button
+      >
+    </div>
   }
-  <div>min</div>
-  <div>sec</div>
-</div>
-<div>
-  <p id="timer">
-    @if (hours() >= 1) {
-      <span id="hours">{{ hours() | twoDigits }}</span>
-      <span>:</span>
-    }
-    <span id="minutes">{{ minutes() | twoDigits }}</span>
-    <span>:</span>
-    <span id="seconds">{{ seconds() | twoDigits }}</span>
-  </p>
-</div>
+} @else {
+  <ion-picker>
+    <ion-picker-column value="javascript">
+      @for (timerEditorOption of timerEditorOptions(); track $index) {
+        <ion-picker-column-option [value]="timerEditorOption.timeInSec">{{
+          timerEditorOption.text
+        }}</ion-picker-column-option>
+      }
+    </ion-picker-column>
+  </ion-picker>
+}
