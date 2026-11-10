@@ -1,0 +1,11 @@
+#label-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+#timer {
+  margin: 0;
+  font-size: 64px;
+  font-weight: bold;
+}
