@@ -5,10 +5,10 @@
 </div>
 <div>
   <p id="timer">
-    <span id="hours">00</span>
+    <span id="hours">{{ hours() | twoDigits }}</span>
     <span>:</span>
-    <span id="minutes">00</span>
+    <span id="minutes">{{ minutes() | twoDigits }}</span>
     <span>:</span>
-    <span id="seconds">00</span>
+    <span id="seconds">{{ seconds() | twoDigits }}</span>
   </p>
 </div>

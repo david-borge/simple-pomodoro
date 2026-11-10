@@ -7,7 +7,9 @@
 <ion-content [fullscreen]="true">
   <div class="container expand-main-content">
     <div id="main-content">
-      <div class="center-horizontally center-vertically" style="height: 100%"><app-timer></app-timer></div>
+      <div class="center-horizontally center-vertically" style="height: 100%">
+        <app-timer [totalSeconds]="totalSeconds()"></app-timer>
+      </div>
     </div>
     <div id="bottom-content">
       <div class="center-horizontally">
