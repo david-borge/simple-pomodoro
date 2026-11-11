@@ -6,8 +6,9 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { EditTimerService } from '../../services/edit-timer/edit-timer.service';
 import { TimerEditorOptions } from '../../services/edit-timer/timer-editor.options.type';
 import { IonicPickerHelperService } from '../../services/ionic-picker-helper/ionic-picker-helper';
+import { TimerService } from '../../services/timer/timer.service';
 
-enum COMPLETE_FORM_EXAMPLE_INPUT {
+enum TIMER_EDIT_FORM_INPUT {
   PickerInput = 'picker_input',
 }
 
@@ -18,14 +19,15 @@ enum COMPLETE_FORM_EXAMPLE_INPUT {
   imports: [FormsModule, IonPicker, IonPickerColumn, IonPickerColumnOption],
 })
 export class TimerEditComponent {
+  private readonly timerService = inject(TimerService);
   private readonly editTimerService = inject(EditTimerService);
   private readonly formPickerHelperService = inject(IonicPickerHelperService);
 
   timerEditorOptions = signal<TimerEditorOptions>(this.editTimerService.getTimerEditorOptions());
   pickerInputValue = signal(this.timerEditorOptions()[0].timeInSec.toString());
-  COMPLETE_FORM_EXAMPLE_INPUT = COMPLETE_FORM_EXAMPLE_INPUT;
+  COMPLETE_FORM_EXAMPLE_INPUT = TIMER_EDIT_FORM_INPUT;
 
-  onPickerInputChange(event: CustomEvent<{ value: string | number | undefined }>) {
+  protected onPickerInputChange(event: CustomEvent<{ value: string | number | undefined }>) {
     const timerEditorValuesStringArray = this.timerEditorOptions().map((timerEditorOption) =>
       timerEditorOption.timeInSec.toString(),
     );
@@ -38,10 +40,13 @@ export class TimerEditComponent {
         timerEditorValuesStringSet,
       ),
     );
+
+    console.log('this.pickerInputValue():', this.pickerInputValue());
+    this.timerService.totalSeconds = Number(this.pickerInputValue());
   }
 
-  onSubmit(completeFormExample: NgForm) {
-    const pickerInputValue = completeFormExample.value[COMPLETE_FORM_EXAMPLE_INPUT.PickerInput];
-    console.log('pickerInputValue:', pickerInputValue);
+  protected onSubmit(completeFormExample: NgForm) {
+    // const pickerInputValue = completeFormExample.value[TIMER_EDIT_FORM_INPUT.PickerInput];
+    // console.log('pickerInputValue:', pickerInputValue);
   }
 }

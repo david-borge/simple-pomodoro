@@ -8,13 +8,17 @@ import { ONE_SECOND_IN_MILIISECONDS } from '../../constants/time-conversion.cons
 
 @Injectable({ providedIn: InjectionScopes.ROOT })
 export class TimerService {
-  private totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
-  private totalSecondsBehaviorSubject = new BehaviorSubject<number>(this.totalSeconds);
   private intervalId: ReturnType<typeof setInterval> | null = null;
   private _isTimerCancelled = true;
   private _isTimerPaused = false;
 
+  private _totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
+  private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
   public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
+
+  private _isTimerBeingEdited = false;
+  private isTimerBeingEditedBehaviorSubject = new BehaviorSubject(this._isTimerBeingEdited);
+  public readonly isTimerBeingEdited$ = this.isTimerBeingEditedBehaviorSubject.asObservable();
 
   public startTimer() {
     if (this.intervalId) {
@@ -23,9 +27,13 @@ export class TimerService {
 
     this._isTimerCancelled = false;
     this._isTimerPaused = false;
+
+    this._isTimerBeingEdited = false;
+    this.isTimerBeingEditedBehaviorSubject.next(this._isTimerBeingEdited);
+
     this.intervalId = setInterval(() => {
-      this.totalSeconds--;
-      this.totalSecondsBehaviorSubject.next(this.totalSeconds);
+      this._totalSeconds--;
+      this.totalSecondsBehaviorSubject.next(this._totalSeconds);
     }, ONE_SECOND_IN_MILIISECONDS);
   }
 
@@ -41,21 +49,35 @@ export class TimerService {
 
   public cancelTimer() {
     this.pauseTimer();
-    this.totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
+    this._totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
     this._isTimerCancelled = true;
     this._isTimerPaused = false;
-    this.totalSecondsBehaviorSubject.next(this.totalSeconds);
+    this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+  }
+
+  public starEditingTimer() {
+    this._isTimerBeingEdited = true;
+    this.isTimerBeingEditedBehaviorSubject.next(this._isTimerBeingEdited);
+  }
+
+  public stopEditingTimer() {
+    this._isTimerBeingEdited = false;
+    this.isTimerBeingEditedBehaviorSubject.next(this._isTimerBeingEdited);
   }
 
   public get isTimerRunning(): boolean {
     return this.intervalId !== null;
   }
 
-  public get isTimerPaused(): boolean {
+  public get isTimerPaused(): typeof this._isTimerPaused {
     return this._isTimerPaused;
   }
 
-  public get isTimerCancelled(): boolean {
+  public get isTimerCancelled(): typeof this._isTimerCancelled {
     return this._isTimerCancelled;
+  }
+
+  public set totalSeconds(totalSeconds: typeof this._totalSeconds) {
+    this._totalSeconds = totalSeconds;
   }
 }

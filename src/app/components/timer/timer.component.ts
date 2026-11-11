@@ -1,10 +1,12 @@
 import { IonButton } from '@ionic/angular';
 
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
 import { TwoDigitsPipe } from '../../pipes/two-digits.pipe';
 import { TimeConversionService } from '../../services/time-conversion/time-conversion.service';
+import { TimerService } from '../../services/timer/timer.service';
 import { TimerEditComponent } from '../timer-edit/timer-edit.component';
 
 @Component({
@@ -13,20 +15,28 @@ import { TimerEditComponent } from '../timer-edit/timer-edit.component';
   styleUrls: ['./timer.component.scss'],
   imports: [FormsModule, IonButton, TimerEditComponent, TwoDigitsPipe],
 })
-export class TimerComponent {
+export class TimerComponent implements OnInit {
+  private readonly timerService = inject(TimerService);
   private readonly timeConversionService = inject(TimeConversionService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly totalSeconds = input.required<number>();
   readonly isTimerRunning = input.required<boolean>();
-
-  timerIsBeingEdited = signal(false);
 
   readonly hours = computed(() => this.timeConversionService.totalSecondsToHours(this.totalSeconds()));
   readonly minutes = computed(() => this.timeConversionService.totalSecondsToMinutes(this.totalSeconds()));
   readonly seconds = computed(() => this.timeConversionService.totalSecondsToSeconds(this.totalSeconds()));
 
+  isTimerBeingEdited = signal<boolean | null>(null);
+
+  ngOnInit() {
+    this.timerService.isTimerBeingEdited$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isTimerBeingEdited) => {
+      this.isTimerBeingEdited.set(isTimerBeingEdited);
+    });
+  }
+
   onClickEditBtn() {
-    this.timerIsBeingEdited.set(true);
+    this.timerService.starEditingTimer();
     // console.log(this.editTimerService.getTimerEditorOptions());
   }
 }
