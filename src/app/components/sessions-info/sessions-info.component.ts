@@ -40,8 +40,6 @@ export class SessionsInfoComponent implements OnInit {
       TimerSessionType.LongRest,
     );
 
-    console.log(focusSessions, shortRestSessions, longRestSessions);
-
     this.sessionsInfoService.renderSessionsInfo(
       this.el,
       this.renderer,
