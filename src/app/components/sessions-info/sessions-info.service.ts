@@ -13,7 +13,7 @@ export class SessionsInfoService {
     shortRests: number | null,
     longRests: number | null,
   ): void {
-    if (focusSessions === null || focusSessions <= 1) return;
+    if (focusSessions === null || (focusSessions <= 1 && shortRests === 0)) return;
 
     const paragraphEl: HTMLParagraphElement = renderer.createElement('p');
 
@@ -24,19 +24,23 @@ export class SessionsInfoService {
     const focusSpan = this.createSpan(renderer, focusSessions.toString(), 'text-focus-color', true);
     renderer.appendChild(paragraphEl, focusSpan);
 
-    const focusTextSpan = this.createSpan(renderer, ' focus sessions', 'text-focus-color', false);
+    const focusText = focusSessions === 1 ? ' focus session' : ' focus sessions';
+    const focusTextSpan = this.createSpan(renderer, focusText, 'text-focus-color', false);
     renderer.appendChild(paragraphEl, focusTextSpan);
 
     // Rest sessions if applicable
-    if (shortRests !== null && longRests !== null && shortRests > 0 && longRests > 0) {
-      renderer.appendChild(paragraphEl, renderer.createText(' and '));
-
+    if (shortRests !== null && longRests !== null) {
       const totalRests = shortRests + longRests;
-      const restSpan = this.createSpan(renderer, totalRests.toString(), 'text-rest-color', true);
-      renderer.appendChild(paragraphEl, restSpan);
+      if (totalRests >= 1) {
+        renderer.appendChild(paragraphEl, renderer.createText(' and '));
 
-      const restTextSpan = this.createSpan(renderer, ' rests', 'text-rest-color', false);
-      renderer.appendChild(paragraphEl, restTextSpan);
+        const restSpan = this.createSpan(renderer, totalRests.toString(), 'text-rest-color', true);
+        renderer.appendChild(paragraphEl, restSpan);
+
+        const restText = totalRests === 1 ? ' rest' : ' rests';
+        const restTextSpan = this.createSpan(renderer, restText, 'text-rest-color', false);
+        renderer.appendChild(paragraphEl, restTextSpan);
+      }
     }
 
     renderer.appendChild(paragraphEl, renderer.createText('.'));

@@ -25,8 +25,7 @@ export class SessionsInfoComponent implements OnInit {
   TimerSessionType = TimerSessionType;
 
   ngOnInit(): void {
-    this.timerSessionsList.set(this.timerSessionsService.getTimerSessionsFromTotalSeconds(2 * 60 * 60));
-    // this.timerSessionsList.set(this.timerSessionsService.getTimerSessionsFromTotalSeconds(this.totalSeconds()));
+    this.timerSessionsList.set(this.timerSessionsService.getTimerSessionsFromTotalSeconds(this.totalSeconds()));
 
     const focusSessions = this.timerSessionsService.getNumberOfSessionsOfAParticulaType(
       this.timerSessionsList(),
@@ -40,6 +39,8 @@ export class SessionsInfoComponent implements OnInit {
       this.timerSessionsList(),
       TimerSessionType.LongRest,
     );
+
+    console.log(focusSessions, shortRestSessions, longRestSessions);
 
     this.sessionsInfoService.renderSessionsInfo(
       this.el,
