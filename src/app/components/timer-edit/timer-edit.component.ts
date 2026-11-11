@@ -8,7 +8,7 @@ import { TimerEditorOptions } from '../../services/edit-timer/timer-editor.optio
 import { IonicPickerHelperService } from '../../services/ionic-picker-helper/ionic-picker-helper';
 import { TimerService } from '../../services/timer/timer.service';
 
-enum TIMER_EDIT_FORM_INPUT {
+enum TimerEditFormInput {
   PickerInput = 'picker_input',
 }
 
@@ -25,7 +25,7 @@ export class TimerEditComponent {
 
   timerEditorOptions = signal<TimerEditorOptions>(this.editTimerService.getTimerEditorOptions());
   pickerInputValue = signal(this.getDefaultEditorTimeOptions().timeInSec.toString());
-  COMPLETE_FORM_EXAMPLE_INPUT = TIMER_EDIT_FORM_INPUT;
+  COMPLETE_FORM_EXAMPLE_INPUT = TimerEditFormInput;
 
   protected onPickerInputChange(event: CustomEvent<{ value: string | number | undefined }>) {
     const timerEditorValuesStringArray = this.timerEditorOptions().map((timerEditorOption) =>
@@ -45,7 +45,7 @@ export class TimerEditComponent {
   }
 
   protected onSubmit(completeFormExample: NgForm) {
-    // const pickerInputValue = completeFormExample.value[TIMER_EDIT_FORM_INPUT.PickerInput];
+    // const pickerInputValue = completeFormExample.value[TimerEditFormInput.PickerInput];
     // console.log('pickerInputValue:', pickerInputValue);
   }
 

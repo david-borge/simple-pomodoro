@@ -7,8 +7,13 @@
 <ion-content [fullscreen]="true">
   <div class="container expand-main-content">
     <div id="main-content">
-      <div class="center-horizontally center-vertically" style="height: 100%">
-        <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning"></app-timer>
+      <div style="height: 100%; display: flex; flex-direction: column">
+        <div class="center-horizontally center-vertically" style="height: 100%">
+          <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning"></app-timer>
+        </div>
+        <div>
+          <app-sessions-info></app-sessions-info>
+        </div>
       </div>
     </div>
     <div id="bottom-content">

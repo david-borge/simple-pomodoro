@@ -4,6 +4,7 @@ import type { PredefinedColors } from '@ionic/core/components';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { SessionsInfoComponent } from '../../components/sessions-info/sessions-info.component';
 import { TimerComponent } from '../../components/timer/timer.component';
 import { INITIAL_TIMER_VALUE_IN_SEC } from '../../constants/initial-timer-value.const';
 import { TimerService } from '../../services/timer/timer.service';
@@ -12,7 +13,7 @@ import { TimerService } from '../../services/timer/timer.service';
   selector: 'app-simple-pomodoro',
   templateUrl: 'simple-pomodoro.page.html',
   styleUrls: ['simple-pomodoro.page.scss'],
-  imports: [IonButton, IonContent, IonHeader, TimerComponent],
+  imports: [IonButton, IonContent, IonHeader, SessionsInfoComponent, TimerComponent],
 })
 export class SimplePomodoroPage {
   private readonly timerService = inject(TimerService);
