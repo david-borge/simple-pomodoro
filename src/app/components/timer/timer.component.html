@@ -19,7 +19,7 @@
       </p>
     </div>
   </div>
-  @if (!isTimerRunning()) {
+  @if (!timerService.isTimerRunning && !isTimerBeingEdited() && !timerService.isTimerPaused) {
     <div class="center-horizontally" style="margin-top: 30px">
       <ion-button (click)="onClickEditBtn()" class="ion-text-uppercase" color="dark" fill="outline" size="small"
         >Edit</ion-button
