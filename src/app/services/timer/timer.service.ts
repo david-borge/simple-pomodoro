@@ -79,5 +79,6 @@ export class TimerService {
 
   public set totalSeconds(totalSeconds: typeof this._totalSeconds) {
     this._totalSeconds = totalSeconds;
+    this.totalSecondsBehaviorSubject.next(this._totalSeconds);
   }
 }

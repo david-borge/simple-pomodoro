@@ -41,7 +41,6 @@ export class TimerEditComponent {
       ),
     );
 
-    console.log('this.pickerInputValue():', this.pickerInputValue());
     this.timerService.totalSeconds = Number(this.pickerInputValue());
   }
 
