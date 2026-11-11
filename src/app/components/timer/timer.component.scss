@@ -5,15 +5,22 @@
 }
 
 #circle-container {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-end;
 
-  padding: 0 calc(2 * var(--ion-padding) + var(--circle-border-width));
+  padding: calc(2 * var(--ion-padding) + var(--circle-border-width));
 }
 
 #timer-container {
+  // TODO: center vertically the numbers (measure height of labels and compensate)
+  transform: translate(-50%, -49%);
+
   width: max-content;
   display: flex;
   flex-direction: column;
@@ -34,14 +41,9 @@
 }
 
 #circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
   width: 100%;
-  aspect-ratio: 1;
   height: auto;
+  aspect-ratio: 1;
 
   border: var(--circle-border-width) solid #d9d9d9;
   border-radius: 100%;
