@@ -20,6 +20,8 @@ export class TimerService {
   private isTimerBeingEditedBehaviorSubject = new BehaviorSubject(this._isTimerBeingEdited);
   public readonly isTimerBeingEdited$ = this.isTimerBeingEditedBehaviorSubject.asObservable();
 
+  private editedTotalSeconds = this._totalSeconds;
+
   public startTimer() {
     if (this.intervalId) {
       return;
@@ -49,7 +51,7 @@ export class TimerService {
 
   public cancelTimer() {
     this.pauseTimer();
-    this._totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
+    this._totalSeconds = this.editedTotalSeconds;
     this._isTimerCancelled = true;
     this._isTimerPaused = false;
     this.totalSecondsBehaviorSubject.next(this._totalSeconds);
@@ -80,5 +82,7 @@ export class TimerService {
   public set totalSeconds(totalSeconds: typeof this._totalSeconds) {
     this._totalSeconds = totalSeconds;
     this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+
+    this.editedTotalSeconds = totalSeconds;
   }
 }
