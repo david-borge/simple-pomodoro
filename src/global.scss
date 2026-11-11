@@ -73,3 +73,11 @@
   display: flex;
   align-items: center;
 }
+
+// Theme colors
+.text-focus-color {
+  color: var(--focus-color);
+}
+.text-rest-color {
+  color: var(--rest-color);
+}

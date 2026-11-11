@@ -4,6 +4,7 @@ export const TIMER_CONFIG = {
     shortRestSessionDurationInMin: 5,
     longRestSessionDurationInMin: 20,
     longRestCadence: 4,
+    showSessionsInfoThresholdInMin: 25,
   },
   colors: {
     focus: '#0088FF',

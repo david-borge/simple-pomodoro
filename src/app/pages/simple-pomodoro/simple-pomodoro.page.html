@@ -11,9 +11,11 @@
         <div class="center-horizontally center-vertically" style="height: 100%">
           <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning"></app-timer>
         </div>
+        <!-- @if (showSessionInfo()) { -->
         <div>
           <app-sessions-info [totalSeconds]="totalSeconds()"></app-sessions-info>
         </div>
+        <!-- } -->
       </div>
     </div>
     <div id="bottom-content">
