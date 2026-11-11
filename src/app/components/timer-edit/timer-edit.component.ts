@@ -24,7 +24,7 @@ export class TimerEditComponent {
   private readonly formPickerHelperService = inject(IonicPickerHelperService);
 
   timerEditorOptions = signal<TimerEditorOptions>(this.editTimerService.getTimerEditorOptions());
-  pickerInputValue = signal(this.timerEditorOptions()[0].timeInSec.toString());
+  pickerInputValue = signal(this.getDefaultEditorTimeOptions().timeInSec.toString());
   COMPLETE_FORM_EXAMPLE_INPUT = TIMER_EDIT_FORM_INPUT;
 
   protected onPickerInputChange(event: CustomEvent<{ value: string | number | undefined }>) {
@@ -47,5 +47,13 @@ export class TimerEditComponent {
   protected onSubmit(completeFormExample: NgForm) {
     // const pickerInputValue = completeFormExample.value[TIMER_EDIT_FORM_INPUT.PickerInput];
     // console.log('pickerInputValue:', pickerInputValue);
+  }
+
+  private getDefaultEditorTimeOptions() {
+    return (
+      this.timerEditorOptions().find(
+        (timerEditorOption) => timerEditorOption.timeInSec === this.timerService.editedTotalSeconds,
+      ) || this.timerEditorOptions()[0]
+    );
   }
 }
