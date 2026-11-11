@@ -27,13 +27,23 @@
     </div>
   }
 } @else {
-  <ion-picker>
-    <ion-picker-column value="javascript">
-      @for (timerEditorOption of timerEditorOptions(); track $index) {
-        <ion-picker-column-option [value]="timerEditorOption.timeInSec">{{
-          timerEditorOption.text
-        }}</ion-picker-column-option>
-      }
-    </ion-picker-column>
-  </ion-picker>
+  <form #completeFormExampleLocalRef="ngForm" (ngSubmit)="onSubmit(completeFormExampleLocalRef)">
+    <ion-picker>
+      <ion-picker-column [value]="pickerInputValue()" (ionChange)="onPickerInputChange($event)">
+        @for (timerEditorOption of timerEditorOptions(); track $index) {
+          <ion-picker-column-option [value]="timerEditorOption.timeInSec.toString()">{{
+            timerEditorOption.text
+          }}</ion-picker-column-option>
+        }
+      </ion-picker-column>
+    </ion-picker>
+
+    <input
+      type="hidden"
+      [name]="COMPLETE_FORM_EXAMPLE_INPUT.PickerInput"
+      [ngModel]="pickerInputValue()"
+      (ngModelChange)="pickerInputValue.set($event)"
+    />
+    <button type="submit">Submit</button>
+  </form>
 }
