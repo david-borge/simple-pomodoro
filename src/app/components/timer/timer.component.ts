@@ -4,7 +4,7 @@ import { Component, computed, inject, input, signal } from '@angular/core';
 
 import { TwoDigitsPipe } from '../../pipes/two-digits.pipe';
 import { EditTimerService } from '../../services/edit-timer/edit-timer.service';
-import { TimerEditorOptions } from '../../services/edit-timer/timer-editor.options.interface';
+import { TimerEditorOptions } from '../../services/edit-timer/timer-editor.options.type';
 import { TimeConversionService } from '../../services/time-conversion/time-conversion.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class TimerComponent {
   readonly isTimerRunning = input.required<boolean>();
 
   timerIsBeingEdited = signal(false);
-  timerEditorOptions = signal<TimerEditorOptions['options'] | null>(null);
+  timerEditorOptions = signal<TimerEditorOptions>([]);
 
   readonly hours = computed(() => this.timeConversionService.totalSecondsToHours(this.totalSeconds()));
   readonly minutes = computed(() => this.timeConversionService.totalSecondsToMinutes(this.totalSeconds()));
@@ -30,5 +30,6 @@ export class TimerComponent {
   onClickEditBtn() {
     this.timerIsBeingEdited.set(true);
     this.timerEditorOptions.set(this.editTimerService.getTimerEditorOptions());
+    // console.log(this.editTimerService.getTimerEditorOptions());
   }
 }
