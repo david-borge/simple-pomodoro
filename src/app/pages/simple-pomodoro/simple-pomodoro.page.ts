@@ -5,6 +5,7 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TimerComponent } from '../../components/timer/timer.component';
+import { INITIAL_TIMER_VALUE_IN_SEC } from '../../constants/initial-timer-value.const';
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class SimplePomodoroPage {
   private readonly timerService = inject(TimerService);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly totalSeconds = signal(0);
+  readonly totalSeconds = signal(INITIAL_TIMER_VALUE_IN_SEC);
 
   constructor() {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {

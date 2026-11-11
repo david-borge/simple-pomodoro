@@ -10,12 +10,12 @@
     <div>
       <p id="timer">
         @if (hours() >= 1) {
-          <span id="hours">{{ hours() | twoDigits }}</span>
+          <span>{{ hours() | twoDigits }}</span>
           <span>:</span>
         }
-        <span id="minutes">{{ minutes() | twoDigits }}</span>
+        <span>{{ minutes() | twoDigits }}</span>
         <span>:</span>
-        <span id="seconds">{{ seconds() | twoDigits }}</span>
+        <span>{{ seconds() | twoDigits }}</span>
       </p>
     </div>
   </div>
