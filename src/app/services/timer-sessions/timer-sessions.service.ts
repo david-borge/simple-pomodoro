@@ -62,4 +62,8 @@ export class TimerSessionsService {
 
     return timerSessions;
   }
+
+  public getNumberOfSessionsOfAParticulaType(timerSessionsList: TimerSessionsList, sessionType: TimerSessionType) {
+    return timerSessionsList.filter((timerSession) => timerSession.type === sessionType).length;
+  }
 }
