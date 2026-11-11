@@ -41,7 +41,7 @@ export class TimerEditComponent {
       ),
     );
 
-    this.timerService.totalSeconds = Number(this.pickerInputValue());
+    this.timerService.editTimer(Number(this.pickerInputValue()));
   }
 
   protected onSubmit(completeFormExample: NgForm) {

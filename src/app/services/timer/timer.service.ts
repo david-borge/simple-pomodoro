@@ -67,6 +67,13 @@ export class TimerService {
     this.isTimerBeingEditedBehaviorSubject.next(this._isTimerBeingEdited);
   }
 
+  public editTimer(totalSeconds: typeof this._totalSeconds) {
+    this._totalSeconds = totalSeconds;
+    this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+
+    this.editedTotalSeconds = totalSeconds;
+  }
+
   public get isTimerRunning(): boolean {
     return this.intervalId !== null;
   }
@@ -77,12 +84,5 @@ export class TimerService {
 
   public get isTimerCancelled(): typeof this._isTimerCancelled {
     return this._isTimerCancelled;
-  }
-
-  public set totalSeconds(totalSeconds: typeof this._totalSeconds) {
-    this._totalSeconds = totalSeconds;
-    this.totalSecondsBehaviorSubject.next(this._totalSeconds);
-
-    this.editedTotalSeconds = totalSeconds;
   }
 }
