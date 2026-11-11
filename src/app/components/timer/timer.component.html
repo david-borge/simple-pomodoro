@@ -1,31 +1,34 @@
-@if (!isTimerBeingEdited()) {
-  <div>
-    <div id="label-container">
-      @if (hours() >= 1) {
-        <div>hr</div>
-      }
-      <div>min</div>
-      <div>sec</div>
-    </div>
-    <div>
-      <p id="timer">
+<div id="circle-container">
+  <div id="circle"></div>
+  @if (!isTimerBeingEdited()) {
+    <div id="timer-container">
+      <div id="label-container">
         @if (hours() >= 1) {
-          <span>{{ hours() | twoDigits }}</span>
-          <span>:</span>
+          <div>hr</div>
         }
-        <span>{{ minutes() | twoDigits }}</span>
-        <span>:</span>
-        <span>{{ seconds() | twoDigits }}</span>
-      </p>
+        <div>min</div>
+        <div>sec</div>
+      </div>
+      <div>
+        <p id="timer-numbers">
+          @if (hours() >= 1) {
+            <span>{{ hours() | twoDigits }}</span>
+            <span>:</span>
+          }
+          <span>{{ minutes() | twoDigits }}</span>
+          <span>:</span>
+          <span>{{ seconds() | twoDigits }}</span>
+        </p>
+      </div>
     </div>
-  </div>
-  @if (!timerService.isTimerRunning && !isTimerBeingEdited() && !timerService.isTimerPaused) {
-    <div class="center-horizontally" style="margin-top: 30px">
-      <ion-button (click)="onClickEditBtn()" class="ion-text-uppercase" color="dark" fill="outline" size="small"
-        >Edit</ion-button
-      >
-    </div>
+    @if (!timerService.isTimerRunning && !isTimerBeingEdited() && !timerService.isTimerPaused) {
+      <div class="center-horizontally" style="margin-top: 30px">
+        <ion-button (click)="onClickEditBtn()" class="ion-text-uppercase" color="dark" fill="outline" size="default"
+          >Edit</ion-button
+        >
+      </div>
+    }
+  } @else {
+    <app-timer-edit></app-timer-edit>
   }
-} @else {
-  <app-timer-edit></app-timer-edit>
-}
+</div>
