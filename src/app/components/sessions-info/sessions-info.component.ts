@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, OnInit, Renderer2, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, input, OnChanges, Renderer2, signal } from '@angular/core';
 
 import { TimerSessionsList, TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
@@ -11,7 +11,7 @@ import { SessionsInfoService } from './sessions-info.service';
   styleUrls: ['./sessions-info.component.scss'],
   imports: [BulletComponent],
 })
-export class SessionsInfoComponent implements OnInit {
+export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   private readonly timerSessionsService = inject(TimerSessionsService);
   private readonly sessionsInfoService = inject(SessionsInfoService);
   private readonly renderer = inject(Renderer2);
@@ -24,9 +24,23 @@ export class SessionsInfoComponent implements OnInit {
 
   TimerSessionType = TimerSessionType;
 
-  ngOnInit(): void {
+  private viewInitialized = false;
+  private lastRenderedSessionCounts: [number, number, number] | null = null;
+
+  ngOnChanges(): void {
     this.timerSessionsList.set(this.timerSessionsService.getTimerSessionsFromTotalSeconds(this.totalSeconds()));
 
+    if (this.viewInitialized) {
+      this.renderSessionsInfoIfChanged();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.viewInitialized = true;
+    this.renderSessionsInfoIfChanged();
+  }
+
+  private renderSessionsInfoIfChanged(): void {
     const focusSessions = this.timerSessionsService.getNumberOfSessionsOfAParticulaType(
       this.timerSessionsList(),
       TimerSessionType.Focus,
@@ -39,6 +53,13 @@ export class SessionsInfoComponent implements OnInit {
       this.timerSessionsList(),
       TimerSessionType.LongRest,
     );
+    const sessionCounts: [number, number, number] = [focusSessions, shortRestSessions, longRestSessions];
+
+    if (this.lastRenderedSessionCounts?.every((count, index) => count === sessionCounts[index])) {
+      return;
+    }
+
+    this.lastRenderedSessionCounts = sessionCounts;
 
     this.sessionsInfoService.renderSessionsInfo(
       this.el,

@@ -13,6 +13,17 @@ export class SessionsInfoService {
     shortRests: number | null,
     longRests: number | null,
   ): void {
+    // Target element lookup
+    const targetElement: Element | null =
+      el.nativeElement.querySelector('#timer-sessions-info-text') ||
+      document.getElementById('timer-sessions-info-text');
+
+    if (!targetElement) return;
+
+    while (targetElement.firstChild) {
+      renderer.removeChild(targetElement, targetElement.firstChild);
+    }
+
     if (focusSessions === null || (focusSessions <= 1 && shortRests === 0)) return;
 
     const paragraphEl: HTMLParagraphElement = renderer.createElement('p');
@@ -45,15 +56,8 @@ export class SessionsInfoService {
 
     renderer.appendChild(paragraphEl, renderer.createText('.'));
 
-    // Target element lookup
-    const targetElement: HTMLDivElement =
-      el.nativeElement.querySelector('#timer-sessions-info-text') ||
-      document.getElementById('timer-sessions-info-text');
-
-    if (targetElement) {
-      targetElement.classList.add('ion-text-center');
-      renderer.appendChild(targetElement, paragraphEl);
-    }
+    targetElement.classList.add('ion-text-center');
+    renderer.appendChild(targetElement, paragraphEl);
   }
 
   private createSpan(renderer: Renderer2, text: string, className: string, isBold: boolean): HTMLSpanElement {
