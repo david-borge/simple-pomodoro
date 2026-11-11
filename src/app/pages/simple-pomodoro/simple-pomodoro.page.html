@@ -12,7 +12,7 @@
           <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning"></app-timer>
         </div>
         <div>
-          <app-sessions-info></app-sessions-info>
+          <app-sessions-info [totalSeconds]="totalSeconds()"></app-sessions-info>
         </div>
       </div>
     </div>

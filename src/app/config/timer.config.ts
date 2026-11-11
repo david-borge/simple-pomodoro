@@ -1,6 +1,12 @@
-// TODO:
 export const TIMER_CONFIG = {
+  sessions: {
+    focusSessionDurationInMin: 25,
+    shortRestSessionDurationInMin: 5,
+    longRestSessionDurationInMin: 20,
+    longRestCadence: 4,
+  },
   colors: {
     focus: '#0088FF',
+    rest: '#34c759',
   },
 };

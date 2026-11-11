@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TimerSessionType } from './timer-session.interface';
-import { TimerSessions } from './timer-sessions';
+import { TimerSessionsService } from './timer-sessions.service';
 
-describe('TimerSessions', () => {
-  let service: TimerSessions;
+describe('TimerSessionsService', () => {
+  let service: TimerSessionsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TimerSessions);
+    service = TestBed.inject(TimerSessionsService);
   });
 
   it('should be created', () => {
@@ -166,10 +166,10 @@ describe('TimerSessions', () => {
     for (const testCase of testCases) {
       const sessions = service.getTimerSessionsFromTotalSeconds(testCase.totalMinutes * 60);
       const actualTypes = sessions.map((session) => session.type);
-      const totalDurationInMs = sessions.reduce((acc, session) => acc + session.durationInMs, 0);
+      const totalDurationInSec = sessions.reduce((acc, session) => acc + session.durationInSec, 0);
 
       expect(actualTypes).toEqual(testCase.expectedTypes);
-      expect(totalDurationInMs).toBe(testCase.totalMinutes * 60 * 1000);
+      expect(totalDurationInSec).toBe(testCase.totalMinutes * 60);
     }
   });
 
@@ -179,9 +179,25 @@ describe('TimerSessions', () => {
     expect(() => service.getTimerSessionsFromTotalSeconds(1.5)).toThrowError('totalSeconds must be a positive integer');
   });
 
-  it('should throw when total seconds does not match complete sessions', () => {
-    expect(() => service.getTimerSessionsFromTotalSeconds(26 * 60)).toThrowError(
-      'totalSeconds does not map to complete Pomodoro sessions',
-    );
+  it('should use a partial short rest when remaining time cannot complete it', () => {
+    const sessions = service.getTimerSessionsFromTotalSeconds(26 * 60);
+
+    expect(sessions).toEqual([
+      { durationInSec: 25 * 60, type: TimerSessionType.Focus },
+      { durationInSec: 60, type: TimerSessionType.ShortRest },
+    ]);
+  });
+
+  it('should use a partial focus session when remaining time cannot complete it', () => {
+    const sessions = service.getTimerSessionsFromTotalSeconds(10 * 60);
+
+    expect(sessions).toEqual([{ durationInSec: 10 * 60, type: TimerSessionType.Focus }]);
+  });
+
+  it('should use a partial long rest when it is the next session in sequence', () => {
+    const completeCycleInSec = 4 * 25 * 60 + 3 * 5 * 60;
+    const sessions = service.getTimerSessionsFromTotalSeconds(completeCycleInSec + 10 * 60);
+
+    expect(sessions.at(-1)).toEqual({ durationInSec: 10 * 60, type: TimerSessionType.LongRest });
   });
 });

@@ -37,6 +37,5 @@ export class TimerComponent implements OnInit {
 
   protected onClickEditBtn() {
     this.timerService.starEditingTimer();
-    // console.log(this.editTimerService.getTimerEditorOptions());
   }
 }

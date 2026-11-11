@@ -5,7 +5,7 @@ export enum TimerSessionType {
 }
 
 interface TimerSession {
-  durationInMs: number;
+  durationInSec: number;
   type: TimerSessionType;
 }
 
