@@ -8,12 +8,12 @@
   <div class="container expand-main-content">
     <div id="main-content">
       <div class="center-horizontally center-vertically" style="height: 100%">
-        <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="isTimerRunning()"></app-timer>
+        <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="!timerService.isTimerPaused"></app-timer>
       </div>
     </div>
     <div id="bottom-content">
       <div class="center-horizontally" style="gap: 30px">
-        @if(!isTimerRunning() && !this.isTimerCancelled()) {
+        @if(timerService.isTimerPaused && !timerService.isTimerCancelled) {
         <ion-button (click)="onClickCancelBtn()" class="ion-text-uppercase" color="danger">Cancel</ion-button>
         }
 

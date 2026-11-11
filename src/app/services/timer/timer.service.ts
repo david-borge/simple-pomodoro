@@ -11,7 +11,8 @@ export class TimerService {
   private totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
   private totalSecondsBehaviorSubject = new BehaviorSubject<number>(this.totalSeconds);
   private intervalId: ReturnType<typeof setInterval> | null = null;
-  private timerCancelled = true;
+  private _isTimerCancelled = true;
+  private _isTimerPaused = false;
 
   public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
 
@@ -20,7 +21,8 @@ export class TimerService {
       return;
     }
 
-    this.timerCancelled = false;
+    this._isTimerCancelled = false;
+    this._isTimerPaused = false;
     this.intervalId = setInterval(() => {
       this.totalSeconds--;
       this.totalSecondsBehaviorSubject.next(this.totalSeconds);
@@ -34,20 +36,26 @@ export class TimerService {
 
     clearInterval(this.intervalId);
     this.intervalId = null;
+    this._isTimerPaused = true;
   }
 
   public cancelTimer() {
     this.pauseTimer();
     this.totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
-    this.timerCancelled = true;
+    this._isTimerCancelled = true;
+    this._isTimerPaused = false;
     this.totalSecondsBehaviorSubject.next(this.totalSeconds);
   }
 
-  public isTimerRunning(): boolean {
+  public get isTimerRunning(): boolean {
     return this.intervalId !== null;
   }
 
-  public isTimerCancelled(): boolean {
-    return this.timerCancelled;
+  public get isTimerPaused(): boolean {
+    return this._isTimerPaused;
+  }
+
+  public get isTimerCancelled(): boolean {
+    return this._isTimerCancelled;
   }
 }

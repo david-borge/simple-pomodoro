@@ -15,7 +15,7 @@ import { TimerService } from '../../services/timer/timer.service';
 export class SimplePomodoroPage {
   private readonly timerService = inject(TimerService);
 
-  public readonly totalSeconds = signal(0);
+  readonly totalSeconds = signal(0);
 
   constructor() {
     this.timerService.totalSeconds$.subscribe((timeInSec) => {
@@ -23,30 +23,8 @@ export class SimplePomodoroPage {
     });
   }
 
-  isTimerRunning(): boolean {
-    return this.timerService.isTimerRunning();
-  }
-
-  isTimerCancelled(): boolean {
-    return this.timerService.isTimerCancelled();
-  }
-
-  startPauseBtnText(): string {
-    if (!this.isTimerRunning() && this.isTimerCancelled()) {
-      return 'Start';
-    } else if (!this.isTimerRunning() && !this.isTimerCancelled()) {
-      return 'Continue';
-    } else {
-      return 'Pause';
-    }
-  }
-
-  startPauseBtnColor(): PredefinedColors {
-    return !this.isTimerRunning() ? 'dark' : 'medium';
-  }
-
   onClickStartPauseBtn() {
-    if (this.isTimerRunning()) {
+    if (this.timerService.isTimerRunning) {
       this.timerService.pauseTimer();
       return;
     }
@@ -56,5 +34,19 @@ export class SimplePomodoroPage {
 
   onClickCancelBtn() {
     this.timerService.cancelTimer();
+  }
+
+  startPauseBtnColor(): PredefinedColors {
+    return !this.timerService.isTimerRunning ? 'dark' : 'medium';
+  }
+
+  startPauseBtnText(): string {
+    if (!this.timerService.isTimerRunning && this.timerService.isTimerCancelled) {
+      return 'Start';
+    } else if (!this.timerService.isTimerRunning && !this.timerService.isTimerCancelled) {
+      return 'Continue';
+    } else {
+      return 'Pause';
+    }
   }
 }
