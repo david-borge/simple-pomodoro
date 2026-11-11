@@ -56,9 +56,14 @@
 
 #main-content {
   flex: 1;
+  display: flex;
 }
 
-#main-content,
+#main-content {
+  padding-top: var(--ion-padding);
+  padding-bottom: calc(var(--ion-padding));
+}
+
 #bottom-content {
   padding-top: var(--ion-padding);
   padding-bottom: calc(2 * var(--ion-padding));

@@ -7,12 +7,12 @@
 <ion-content [fullscreen]="true">
   <div class="container expand-main-content">
     <div id="main-content">
-      <div style="height: 100%; display: flex; flex-direction: column">
-        <div class="center-horizontally center-vertically" style="height: 100%">
+      <div class="center-horizontally center-vertically" style="width: 100%; flex-direction: column">
+        <div class="center-horizontally center-vertically" style="width: 100%">
           <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning"></app-timer>
         </div>
         @if (showSessionInfo()) {
-        <div>
+        <div style="margin-top: 50px">
           <app-sessions-info [totalSeconds]="totalSeconds()"></app-sessions-info>
         </div>
         }
