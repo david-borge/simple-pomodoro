@@ -1,8 +1,8 @@
 import { Service } from '@angular/core';
 
-import { INITIAL_TIMER_VALUE_IN_SEC } from '../../constants/initial-timer-value.const';
+import { TIMER_CONFIG } from '../../config/timer.config';
 import { MAXIMUM_TIMER } from '../../constants/maximum-timer.constant';
-import { SECONDS_PER_HOUR } from '../../constants/time-conversion.constants';
+import { ONE_MINUTE_IN_SECONDS, SECONDS_PER_HOUR } from '../../constants/time-conversion.constants';
 import { TIMER_EDITOR_INTERVAL_IN_SEC } from '../../constants/timer-editor-interval.constant';
 import { TimerEditorOptions } from './timer-editor.options.type';
 
@@ -10,7 +10,7 @@ import { TimerEditorOptions } from './timer-editor.options.type';
 export class EditTimerService {
   public getTimerEditorOptions(): TimerEditorOptions {
     let timerEditorOptions: TimerEditorOptions = [];
-    let counterInSec = INITIAL_TIMER_VALUE_IN_SEC;
+    let counterInSec = TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS;
 
     do {
       timerEditorOptions.push({

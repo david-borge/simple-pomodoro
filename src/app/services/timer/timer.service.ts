@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { INITIAL_TIMER_VALUE_IN_SEC } from '../../constants/initial-timer-value.const';
+import { TIMER_CONFIG } from '../../config/timer.config';
 import { InjectionScopes } from '../../constants/injection-scopes.constant';
-import { ONE_SECOND_IN_MILIISECONDS } from '../../constants/time-conversion.constants';
+import { ONE_MINUTE_IN_SECONDS, ONE_SECOND_IN_MILIISECONDS } from '../../constants/time-conversion.constants';
 
 @Injectable({ providedIn: InjectionScopes.ROOT })
 export class TimerService {
@@ -12,7 +12,7 @@ export class TimerService {
   private _isTimerCancelled = true;
   private _isTimerPaused = false;
 
-  private _totalSeconds = INITIAL_TIMER_VALUE_IN_SEC;
+  private _totalSeconds = TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS;
   private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
   public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
 

@@ -8,7 +8,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SessionsInfoComponent } from '../../components/sessions-info/sessions-info.component';
 import { TimerComponent } from '../../components/timer/timer.component';
 import { TIMER_CONFIG } from '../../config/timer.config';
-import { INITIAL_TIMER_VALUE_IN_SEC } from '../../constants/initial-timer-value.const';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
 import { TimerService } from '../../services/timer/timer.service';
 
@@ -31,7 +30,7 @@ export class SimplePomodoroPage {
   private readonly timerService = inject(TimerService);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly totalSeconds = signal(INITIAL_TIMER_VALUE_IN_SEC);
+  readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
 
   constructor() {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {

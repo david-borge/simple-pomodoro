@@ -1,4 +1,0 @@
-import { ONE_MINUTE_IN_SECONDS } from './time-conversion.constants';
-
-const INITIAL_TIMER_VALUE_IN_MIN = 25;
-export const INITIAL_TIMER_VALUE_IN_SEC = INITIAL_TIMER_VALUE_IN_MIN * ONE_MINUTE_IN_SECONDS;
