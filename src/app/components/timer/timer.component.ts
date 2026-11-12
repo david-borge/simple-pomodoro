@@ -1,6 +1,19 @@
 import { IonButton } from '@ionic/angular';
 
-import { Component, computed, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  DestroyRef,
+  ElementRef,
+  inject,
+  input,
+  OnChanges,
+  OnInit,
+  signal,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
@@ -8,6 +21,7 @@ import { TwoDigitsPipe } from '../../pipes/two-digits.pipe';
 import { TimeConversionService } from '../../services/time-conversion/time-conversion.service';
 import { TimerService } from '../../services/timer/timer.service';
 import { TimerEditComponent } from '../timer-edit/timer-edit.component';
+import { CIRCLE } from './circle.constants';
 
 @Component({
   selector: 'app-timer',
@@ -15,7 +29,7 @@ import { TimerEditComponent } from '../timer-edit/timer-edit.component';
   styleUrls: ['./timer.component.scss'],
   imports: [FormsModule, IonButton, TimerEditComponent, TwoDigitsPipe],
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, OnChanges, AfterViewInit {
   private readonly timerService = inject(TimerService);
   private readonly timeConversionService = inject(TimeConversionService);
   private readonly destroyRef = inject(DestroyRef);
@@ -29,6 +43,11 @@ export class TimerComponent implements OnInit {
 
   isTimerBeingEdited = signal<boolean | null>(null);
 
+  // Circle variables
+  private readonly intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
+  // eslint-disable-next-line angular-class-members-order/angular-class-members-order
+  @ViewChild('circleLocalRef') private readonly circleEl!: ElementRef<HTMLDivElement>;
+
   ngOnInit() {
     this.timerService.isTimerBeingEdited$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isTimerBeingEdited) => {
       this.isTimerBeingEdited.set(isTimerBeingEdited);
@@ -37,5 +56,32 @@ export class TimerComponent implements OnInit {
 
   protected onClickEditBtn() {
     this.timerService.starEditingTimer();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // this.setCircleProgress(310);
+  }
+
+  ngAfterViewInit(): void {
+    this.setCircleProgress(135);
+  }
+
+  setCircleProgress(degrees: number) {
+    if (degrees < CIRCLE.minDegrees) {
+      throw new Error('The degrees for the circle have to be greater than ' + CIRCLE.minDegrees + '.');
+    } else if (degrees > CIRCLE.maxDegrees) {
+      throw new Error('The degrees for the circle have to be lower than ' + CIRCLE.maxDegrees + '.');
+    }
+
+    this.circleEl.nativeElement.style.setProperty('--progress', degrees + 'deg');
+  }
+
+  getCurrentIntervalDurationRatio() {
+    console.log(this.totalSeconds());
+    return this.totalSeconds() / this.intervalDurationInSec;
+  }
+
+  getCircleProgressFromRatio(ratio: number) {
+    return ratio / CIRCLE.maxDegrees;
   }
 }

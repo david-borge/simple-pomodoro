@@ -1,5 +1,9 @@
 <div id="timer-and-circle-container">
-  <div id="circle"></div>
+  <!-- TODO: move circle to separate component -->
+  <div id="circle" #circleLocalRef>
+    <div id="circle-inner"></div>
+  </div>
+
   @if (!isTimerBeingEdited()) {
     <div id="timer-container">
       <div id="label-container">

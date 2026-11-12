@@ -1,6 +1,4 @@
 :host {
-  --circle-border-width: 17px;
-
   width: 100%;
   max-width: 400px;
 }
@@ -44,14 +42,31 @@
 }
 
 #circle {
+  --progress: 290deg;
+  --progress-color: var(--focus-color);
+  --border-color: #d9d9d9;
+  --circle-border-width: 12px;
+
+  background: conic-gradient(var(--progress-color) var(--progress), var(--border-color) var(--progress));
+
   @extend .center-absolute;
 
   width: 100%;
   height: auto;
   aspect-ratio: 1;
 
-  border: var(--circle-border-width) solid #d9d9d9;
-  border-radius: 100%;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#circle-inner {
+  width: calc(100% - var(--circle-border-width) * 2);
+  height: calc(100% - var(--circle-border-width) * 2);
+  border-radius: 50%;
+  background: var(--ion-background-color);
 }
 
 app-timer-edit {
