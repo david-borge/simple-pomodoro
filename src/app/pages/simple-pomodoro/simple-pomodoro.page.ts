@@ -27,7 +27,7 @@ export class SimplePomodoroPage {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {
       this.totalSeconds.set(timeInSec);
 
-      if (this.totalSeconds() === 0) {
+      if (this.totalSeconds() < 0) {
         this.timerService.cancelTimer();
       }
     });
