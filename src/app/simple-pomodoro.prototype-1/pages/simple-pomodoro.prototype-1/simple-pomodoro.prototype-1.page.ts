@@ -13,8 +13,8 @@ import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
   selector: 'app-simple-pomodoro',
-  templateUrl: 'simple-pomodoro.page.html',
-  styleUrls: ['simple-pomodoro.page.scss'],
+  templateUrl: 'simple-pomodoro.prototype-1.page.html',
+  styleUrls: ['simple-pomodoro.prototype-1.page.scss'],
   imports: [
     CommonModule,
     IonButton,
@@ -26,7 +26,7 @@ import { TimerService } from '../../services/timer/timer.service';
     TimerAndCircleComponent,
   ],
 })
-export class SimplePomodoroPage {
+export class SimplePomodoroPrototype1Page {
   private readonly timerService = inject(TimerService);
   private readonly destroyRef = inject(DestroyRef);
 
