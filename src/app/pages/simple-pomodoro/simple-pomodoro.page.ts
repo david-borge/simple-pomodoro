@@ -6,7 +6,7 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { SessionsInfoComponent } from '../../components/sessions-info/sessions-info.component';
-import { TimerComponent } from '../../components/timer/timer.component';
+import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer-and-circle.component';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
 import { TimerService } from '../../services/timer/timer.service';
@@ -23,7 +23,7 @@ import { TimerService } from '../../services/timer/timer.service';
     IonTitle,
     IonToolbar,
     SessionsInfoComponent,
-    TimerComponent,
+    TimerAndCircleComponent,
   ],
 })
 export class SimplePomodoroPage {

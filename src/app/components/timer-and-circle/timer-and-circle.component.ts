@@ -23,12 +23,12 @@ import { TimerEditComponent } from '../timer-edit/timer-edit.component';
 import { CIRCLE } from './circle.constants';
 
 @Component({
-  selector: 'app-timer',
-  templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.scss'],
+  selector: 'app-timer-and-circle',
+  templateUrl: './timer-and-circle.component.html',
+  styleUrls: ['./timer-and-circle.component.scss'],
   imports: [FormsModule, IonButton, TimerEditComponent, TwoDigitsPipe],
 })
-export class TimerComponent implements OnInit, OnChanges, AfterViewInit {
+export class TimerAndCircleComponent implements OnInit, OnChanges, AfterViewInit {
   private readonly timerService = inject(TimerService);
   private readonly timeConversionService = inject(TimeConversionService);
   private readonly destroyRef = inject(DestroyRef);

@@ -11,7 +11,7 @@
     <div id="main-content">
       <div class="center-horizontally center-vertically" style="width: 100%; flex-direction: column">
         <div class="center-horizontally center-vertically" style="width: 100%">
-          <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
+          <app-timer-and-circle [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
         </div>
         <div [ngStyle]="{ visibility: showSessionInfo() ? 'visible' : 'hidden' }" style="margin-top: 50px">
           <app-sessions-info [totalSeconds]="totalSeconds()" />
