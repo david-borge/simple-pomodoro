@@ -74,14 +74,27 @@ export class TimerComponent implements OnInit, OnChanges, AfterViewInit {
   private changeCircleProgressBasedOnTimePassedOnInterval() {
     const currentIntervalDurationRatio = this.getCurrentIntervalDurationRatio();
     const circleProgressFromRatio = this.getCircleDegreesFromRatio(currentIntervalDurationRatio);
+    console.log(this.totalSeconds(), this.intervalDurationInSec);
     this.setCircleProgress(circleProgressFromRatio);
   }
 
   private setCircleProgress(degrees: number) {
     if (degrees < CIRCLE.minDegrees) {
-      throw new Error('The degrees for the circle have to be greater than ' + CIRCLE.minDegrees + '.');
+      throw new Error(
+        'The degrees for the circle have to be greater than ' +
+          CIRCLE.minDegrees +
+          '. Current value: ' +
+          degrees +
+          'deg.',
+      );
     } else if (degrees > CIRCLE.maxDegrees) {
-      throw new Error('The degrees for the circle have to be lower than ' + CIRCLE.maxDegrees + '.');
+      throw new Error(
+        'The degrees for the circle have to be lower than ' +
+          CIRCLE.maxDegrees +
+          '. Current value: ' +
+          degrees +
+          'deg.',
+      );
     }
 
     this.circleEl.nativeElement.style.setProperty('--progress', degrees + 'deg');
