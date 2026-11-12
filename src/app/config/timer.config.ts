@@ -1,3 +1,4 @@
+// TODO: move from initial-timer-value.const.ts and other const files
 export const TIMER_CONFIG = {
   sessions: {
     focusSessionDurationInMin: 25,

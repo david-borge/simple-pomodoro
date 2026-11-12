@@ -11,7 +11,6 @@ import {
   OnChanges,
   OnInit,
   signal,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -44,7 +43,8 @@ export class TimerComponent implements OnInit, OnChanges, AfterViewInit {
   isTimerBeingEdited = signal<boolean | null>(null);
 
   // Circle variables
-  private readonly intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
+  private intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
+  private isViewInitialized = false;
   // eslint-disable-next-line angular-class-members-order/angular-class-members-order
   @ViewChild('circleLocalRef') private readonly circleEl!: ElementRef<HTMLDivElement>;
 
@@ -52,21 +52,34 @@ export class TimerComponent implements OnInit, OnChanges, AfterViewInit {
     this.timerService.isTimerBeingEdited$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isTimerBeingEdited) => {
       this.isTimerBeingEdited.set(isTimerBeingEdited);
     });
+
+    this.intervalDurationInSec = this.totalSeconds();
+  }
+
+  ngAfterViewInit(): void {
+    this.isViewInitialized = true;
+    this.changeCircleProgressBasedOnTimePassedOnInterval();
+  }
+
+  ngOnChanges(): void {
+    if (!this.isViewInitialized) return;
+
+    this.changeCircleProgressBasedOnTimePassedOnInterval();
   }
 
   protected onClickEditBtn() {
     this.timerService.starEditingTimer();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // this.setCircleProgress(310);
+  private changeCircleProgressBasedOnTimePassedOnInterval() {
+    const currentIntervalDurationRatio = this.getCurrentIntervalDurationRatio();
+    const circleProgressFromRatio = this.getCircleDegreesFromRatio(currentIntervalDurationRatio);
+    this.setCircleProgress(circleProgressFromRatio);
+
+    console.log(this.totalSeconds(), currentIntervalDurationRatio, circleProgressFromRatio);
   }
 
-  ngAfterViewInit(): void {
-    this.setCircleProgress(135);
-  }
-
-  setCircleProgress(degrees: number) {
+  private setCircleProgress(degrees: number) {
     if (degrees < CIRCLE.minDegrees) {
       throw new Error('The degrees for the circle have to be greater than ' + CIRCLE.minDegrees + '.');
     } else if (degrees > CIRCLE.maxDegrees) {
@@ -76,12 +89,11 @@ export class TimerComponent implements OnInit, OnChanges, AfterViewInit {
     this.circleEl.nativeElement.style.setProperty('--progress', degrees + 'deg');
   }
 
-  getCurrentIntervalDurationRatio() {
-    console.log(this.totalSeconds());
+  private getCurrentIntervalDurationRatio() {
     return this.totalSeconds() / this.intervalDurationInSec;
   }
 
-  getCircleProgressFromRatio(ratio: number) {
-    return ratio / CIRCLE.maxDegrees;
+  private getCircleDegreesFromRatio(ratio: number) {
+    return ratio * CIRCLE.maxDegrees;
   }
 }
