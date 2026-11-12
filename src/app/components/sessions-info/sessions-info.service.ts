@@ -20,13 +20,21 @@ export class SessionsInfoService {
 
     if (!targetElement) return;
 
-    while (targetElement.firstChild) {
-      renderer.removeChild(targetElement, targetElement.firstChild);
+    const placeholderElement = targetElement.querySelector('#timer-sessions-info-placeholder');
+    const existingInfo = targetElement.querySelector('#timer-sessions-info-dynamic');
+
+    if (focusSessions === null || (focusSessions <= 1 && shortRests === 0)) {
+      if (existingInfo) renderer.removeChild(targetElement, existingInfo);
+      if (placeholderElement) renderer.setProperty(placeholderElement, 'hidden', false);
+      renderer.removeClass(targetElement, 'ion-text-center');
+      return;
     }
 
-    if (focusSessions === null || (focusSessions <= 1 && shortRests === 0)) return;
+    if (existingInfo) renderer.removeChild(targetElement, existingInfo);
+    if (placeholderElement) renderer.setProperty(placeholderElement, 'hidden', true);
 
     const paragraphEl: HTMLParagraphElement = renderer.createElement('p');
+    renderer.setAttribute(paragraphEl, 'id', 'timer-sessions-info-dynamic');
 
     // Initial text
     renderer.appendChild(paragraphEl, renderer.createText("You'll have "));

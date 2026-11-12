@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, input, OnChanges, Renderer2, signal } from '@angular/core';
 
 import { TimerSessionsList, TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
@@ -9,7 +10,7 @@ import { SessionsInfoService } from './sessions-info.service';
   selector: 'app-sessions-info',
   templateUrl: './sessions-info.component.html',
   styleUrls: ['./sessions-info.component.scss'],
-  imports: [BulletComponent],
+  imports: [BulletComponent, CommonModule],
 })
 export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   private readonly timerSessionsService = inject(TimerSessionsService);

@@ -9,13 +9,11 @@
     <div id="main-content">
       <div class="center-horizontally center-vertically" style="width: 100%; flex-direction: column">
         <div class="center-horizontally center-vertically" style="width: 100%">
-          <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning"></app-timer>
+          <app-timer [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
         </div>
-        @if (showSessionInfo()) {
-        <div style="margin-top: 50px">
-          <app-sessions-info [totalSeconds]="totalSeconds()"></app-sessions-info>
+        <div [ngStyle]="{ visibility: showSessionInfo() ? 'visible' : 'hidden' }" style="margin-top: 50px">
+          <app-sessions-info [totalSeconds]="totalSeconds()" />
         </div>
-        }
       </div>
     </div>
     <div id="bottom-content">
