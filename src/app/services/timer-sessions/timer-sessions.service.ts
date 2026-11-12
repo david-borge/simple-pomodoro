@@ -16,7 +16,7 @@ export class TimerSessionsService {
   private static readonly LONG_REST_CADENCE = TIMER_CONFIG.sessions.longRestCadence;
 
   public getTimerSessionsFromTotalSeconds(totalSeconds: number): TimerSessionsList {
-    if (!Number.isInteger(totalSeconds) || totalSeconds <= 0) {
+    if (totalSeconds <= 0) {
       throw new Error('totalSeconds must be a positive integer');
     }
 

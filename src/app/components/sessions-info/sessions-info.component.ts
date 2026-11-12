@@ -30,6 +30,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   private lastRenderedSessionCounts: [number, number, number, boolean] | null = null;
 
   ngOnChanges(): void {
+    // TODO: do I need to call this fn on it changes? Would it be enough with onInit?
     this.timerSessionsList.set(this.timerSessionsService.getTimerSessionsFromTotalSeconds(this.totalSeconds()));
 
     if (this.viewInitialized) {

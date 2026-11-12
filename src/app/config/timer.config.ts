@@ -1,4 +1,3 @@
-// TODO: move from initial-timer-value.const.ts and other const files
 export const TIMER_CONFIG = {
   defautlTimerDurationInMin: 25,
   sessions: {
