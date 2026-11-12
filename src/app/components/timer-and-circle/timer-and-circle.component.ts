@@ -62,7 +62,12 @@ export class TimerAndCircleComponent implements OnInit, OnChanges, AfterViewInit
   }
 
   ngOnChanges(): void {
-    if (!this.isViewInitialized || this.isTimerBeingEdited()) return;
+    if (!this.isViewInitialized) return;
+
+    if (this.isTimerBeingEdited()) {
+      this.intervalDurationInSec = this.totalSeconds();
+      return;
+    }
 
     this.changeCircleProgressBasedOnTimePassedOnInterval();
   }
@@ -74,9 +79,6 @@ export class TimerAndCircleComponent implements OnInit, OnChanges, AfterViewInit
   private changeCircleProgressBasedOnTimePassedOnInterval() {
     const currentIntervalDurationRatio = this.getCurrentIntervalDurationRatio();
     const circleProgressFromRatio = this.getCircleDegreesFromRatio(currentIntervalDurationRatio);
-
-    // TODO:
-
     this.setCircleProgress(circleProgressFromRatio);
   }
 
