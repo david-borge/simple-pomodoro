@@ -19,6 +19,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   private readonly el = inject(ElementRef);
 
   readonly totalSeconds = input.required<number>();
+  readonly isTimerRunning = input.required<boolean>();
 
   // Exposed publicly so the template can bind to timerSessionsList without modifications
   readonly timerSessionsList = signal<TimerSessionsList>([]);
@@ -26,7 +27,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   TimerSessionType = TimerSessionType;
 
   private viewInitialized = false;
-  private lastRenderedSessionCounts: [number, number, number] | null = null;
+  private lastRenderedSessionCounts: [number, number, number, boolean] | null = null;
 
   ngOnChanges(): void {
     this.timerSessionsList.set(this.timerSessionsService.getTimerSessionsFromTotalSeconds(this.totalSeconds()));
@@ -54,7 +55,12 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
       this.timerSessionsList(),
       TimerSessionType.LongRest,
     );
-    const sessionCounts: [number, number, number] = [focusSessions, shortRestSessions, longRestSessions];
+    const sessionCounts: [number, number, number, boolean] = [
+      focusSessions,
+      shortRestSessions,
+      longRestSessions,
+      this.isTimerRunning(),
+    ];
 
     if (this.lastRenderedSessionCounts?.every((count, index) => count === sessionCounts[index])) {
       return;
@@ -68,6 +74,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
       focusSessions,
       shortRestSessions,
       longRestSessions,
+      this.isTimerRunning(),
     );
   }
 }

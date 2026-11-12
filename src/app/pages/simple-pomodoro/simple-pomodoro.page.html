@@ -14,7 +14,7 @@
           <app-timer-and-circle [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
         </div>
         <div [ngStyle]="{ visibility: showSessionInfo() ? 'visible' : 'hidden' }" style="margin-top: 50px">
-          <app-sessions-info [totalSeconds]="totalSeconds()" />
+          <app-sessions-info [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
         </div>
       </div>
     </div>

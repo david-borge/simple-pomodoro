@@ -12,6 +12,7 @@ export class SessionsInfoService {
     focusSessions: number | null,
     shortRests: number | null,
     longRests: number | null,
+    isTimerRunning: boolean,
   ): void {
     const targetElement = this.getTargetElement(el);
 
@@ -24,7 +25,7 @@ export class SessionsInfoService {
 
     this.clearSessionsInfo(targetElement, renderer);
 
-    const paragraphEl = this.createSessionsInfoParagraph(renderer, focusSessions, shortRests, longRests);
+    const paragraphEl = this.createSessionsInfoParagraph(renderer, focusSessions, shortRests, longRests, isTimerRunning);
     renderer.appendChild(targetElement, paragraphEl);
   }
 
@@ -44,21 +45,26 @@ export class SessionsInfoService {
     focusSessions: number,
     shortRests: number | null,
     longRests: number | null,
+    isTimerRunning: boolean,
   ): HTMLParagraphElement {
     const paragraphEl: HTMLParagraphElement = renderer.createElement('p');
     paragraphEl.style.setProperty('margin-bottom', '0');
     renderer.setAttribute(paragraphEl, 'id', 'timer-sessions-info-dynamic');
 
-    this.appendInitialText(paragraphEl, renderer);
+    this.appendInitialText(paragraphEl, renderer, isTimerRunning);
     this.appendFocusSessions(paragraphEl, renderer, focusSessions);
     this.appendRestSessions(paragraphEl, renderer, shortRests, longRests);
 
-    renderer.appendChild(paragraphEl, renderer.createText('.'));
+    this.appendFinalText(paragraphEl, renderer, isTimerRunning);
     return paragraphEl;
   }
 
-  private appendInitialText(paragraphEl: HTMLParagraphElement, renderer: Renderer2): void {
-    renderer.appendChild(paragraphEl, renderer.createText("You'll have "));
+  private appendInitialText(paragraphEl: HTMLParagraphElement, renderer: Renderer2, isTimerRunning: boolean): void {
+    renderer.appendChild(paragraphEl, renderer.createText(isTimerRunning ? 'You have ' : "You'll have "));
+  }
+
+  private appendFinalText(paragraphEl: HTMLParagraphElement, renderer: Renderer2, isTimerRunning: boolean): void {
+    renderer.appendChild(paragraphEl, renderer.createText(isTimerRunning ? ' left.' : '.'));
   }
 
   private appendFocusSessions(paragraphEl: HTMLParagraphElement, renderer: Renderer2, focusSessions: number): void {
