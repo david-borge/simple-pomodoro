@@ -49,7 +49,7 @@
 
   background: conic-gradient(var(--progress-color) var(--progress), var(--border-color) var(--progress));
 
-  transition: --progress 500ms linear;
+  transition: --progress 1s linear;
 
   @extend .center-absolute;
 
