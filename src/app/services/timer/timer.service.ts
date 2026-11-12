@@ -86,6 +86,10 @@ export class TimerService {
     return this._isTimerCancelled;
   }
 
+  public get isTimerBeingEdited(): typeof this._isTimerBeingEdited {
+    return this._isTimerBeingEdited;
+  }
+
   public get editedTotalSeconds(): typeof this._editedTotalSeconds {
     return this._editedTotalSeconds;
   }

@@ -70,6 +70,10 @@ export class SimplePomodoroPage {
   }
 
   showSessionInfo() {
-    return this.totalSeconds() > TIMER_CONFIG.sessions.showSessionsInfoThresholdInMin * ONE_MINUTE_IN_SECONDS;
+    return (
+      this.timerService.isTimerBeingEdited ||
+      (!this.timerService.isTimerBeingEdited &&
+        this.totalSeconds() > TIMER_CONFIG.sessions.showSessionsInfoThresholdInMin * ONE_MINUTE_IN_SECONDS)
+    );
   }
 }

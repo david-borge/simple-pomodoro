@@ -20,20 +20,18 @@ export class SessionsInfoService {
 
     if (!targetElement) return;
 
-    const placeholderElement = targetElement.querySelector('#timer-sessions-info-placeholder');
     const existingInfo = targetElement.querySelector('#timer-sessions-info-dynamic');
 
-    if (focusSessions === null || (focusSessions <= 1 && shortRests === 0)) {
+    if (focusSessions === null) {
       if (existingInfo) renderer.removeChild(targetElement, existingInfo);
-      if (placeholderElement) renderer.setProperty(placeholderElement, 'hidden', false);
       renderer.removeClass(targetElement, 'ion-text-center');
       return;
     }
 
     if (existingInfo) renderer.removeChild(targetElement, existingInfo);
-    if (placeholderElement) renderer.setProperty(placeholderElement, 'hidden', true);
 
     const paragraphEl: HTMLParagraphElement = renderer.createElement('p');
+    paragraphEl.style.setProperty('margin-bottom', '0');
     renderer.setAttribute(paragraphEl, 'id', 'timer-sessions-info-dynamic');
 
     // Initial text

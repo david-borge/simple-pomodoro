@@ -74,8 +74,10 @@ export class TimerAndCircleComponent implements OnInit, OnChanges, AfterViewInit
   private changeCircleProgressBasedOnTimePassedOnInterval() {
     const currentIntervalDurationRatio = this.getCurrentIntervalDurationRatio();
     const circleProgressFromRatio = this.getCircleDegreesFromRatio(currentIntervalDurationRatio);
-    console.log(this.totalSeconds(), this.intervalDurationInSec);
-    this.setCircleProgress(circleProgressFromRatio);
+
+    // TODO: set this again after intervals start and stop properly
+    // console.log(this.totalSeconds(), this.intervalDurationInSec);
+    // this.setCircleProgress(circleProgressFromRatio);
   }
 
   private setCircleProgress(degrees: number) {
