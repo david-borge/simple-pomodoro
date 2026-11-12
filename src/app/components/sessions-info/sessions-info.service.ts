@@ -13,57 +13,79 @@ export class SessionsInfoService {
     shortRests: number | null,
     longRests: number | null,
   ): void {
-    // Target element lookup
-    const targetElement: Element | null =
-      el.nativeElement.querySelector('#timer-sessions-info-text') ||
-      document.getElementById('timer-sessions-info-text');
+    const targetElement = this.getTargetElement(el);
 
     if (!targetElement) return;
 
-    const existingInfo = targetElement.querySelector('#timer-sessions-info-dynamic');
-
     if (focusSessions === null) {
-      if (existingInfo) renderer.removeChild(targetElement, existingInfo);
-      renderer.removeClass(targetElement, 'ion-text-center');
+      this.clearSessionsInfo(targetElement, renderer);
       return;
     }
 
-    if (existingInfo) renderer.removeChild(targetElement, existingInfo);
+    this.clearSessionsInfo(targetElement, renderer);
 
+    const paragraphEl = this.createSessionsInfoParagraph(renderer, focusSessions, shortRests, longRests);
+    renderer.appendChild(targetElement, paragraphEl);
+  }
+
+  private getTargetElement(el: ElementRef): Element | null {
+    return (
+      el.nativeElement.querySelector('#timer-sessions-info-text') || document.getElementById('timer-sessions-info-text')
+    );
+  }
+
+  private clearSessionsInfo(targetElement: Element, renderer: Renderer2): void {
+    const existingInfo = targetElement.querySelector('#timer-sessions-info-dynamic');
+    if (existingInfo) renderer.removeChild(targetElement, existingInfo);
+  }
+
+  private createSessionsInfoParagraph(
+    renderer: Renderer2,
+    focusSessions: number,
+    shortRests: number | null,
+    longRests: number | null,
+  ): HTMLParagraphElement {
     const paragraphEl: HTMLParagraphElement = renderer.createElement('p');
     paragraphEl.style.setProperty('margin-bottom', '0');
     renderer.setAttribute(paragraphEl, 'id', 'timer-sessions-info-dynamic');
 
-    // Initial text
-    renderer.appendChild(paragraphEl, renderer.createText("You'll have "));
-
-    // Focus sessions span
-    const focusSpan = this.createSpan(renderer, focusSessions.toString(), 'text-focus-color', true);
-    renderer.appendChild(paragraphEl, focusSpan);
-
-    const focusText = focusSessions === 1 ? ' focus session' : ' focus sessions';
-    const focusTextSpan = this.createSpan(renderer, focusText, 'text-focus-color', false);
-    renderer.appendChild(paragraphEl, focusTextSpan);
-
-    // Rest sessions if applicable
-    if (shortRests !== null && longRests !== null) {
-      const totalRests = shortRests + longRests;
-      if (totalRests >= 1) {
-        renderer.appendChild(paragraphEl, renderer.createText(' and '));
-
-        const restSpan = this.createSpan(renderer, totalRests.toString(), 'text-rest-color', true);
-        renderer.appendChild(paragraphEl, restSpan);
-
-        const restText = totalRests === 1 ? ' rest' : ' rests';
-        const restTextSpan = this.createSpan(renderer, restText, 'text-rest-color', false);
-        renderer.appendChild(paragraphEl, restTextSpan);
-      }
-    }
+    this.appendInitialText(paragraphEl, renderer);
+    this.appendFocusSessions(paragraphEl, renderer, focusSessions);
+    this.appendRestSessions(paragraphEl, renderer, shortRests, longRests);
 
     renderer.appendChild(paragraphEl, renderer.createText('.'));
+    return paragraphEl;
+  }
 
-    targetElement.classList.add('ion-text-center');
-    renderer.appendChild(targetElement, paragraphEl);
+  private appendInitialText(paragraphEl: HTMLParagraphElement, renderer: Renderer2): void {
+    renderer.appendChild(paragraphEl, renderer.createText("You'll have "));
+  }
+
+  private appendFocusSessions(paragraphEl: HTMLParagraphElement, renderer: Renderer2, focusSessions: number): void {
+    renderer.appendChild(paragraphEl, this.createSpan(renderer, focusSessions.toString(), 'text-focus-color', true));
+    renderer.appendChild(
+      paragraphEl,
+      this.createSpan(renderer, focusSessions === 1 ? ' focus session' : ' focus sessions', 'text-focus-color', false),
+    );
+  }
+
+  private appendRestSessions(
+    paragraphEl: HTMLParagraphElement,
+    renderer: Renderer2,
+    shortRests: number | null,
+    longRests: number | null,
+  ): void {
+    if (shortRests === null || longRests === null) return;
+
+    const totalRests = shortRests + longRests;
+    if (totalRests < 1) return;
+
+    renderer.appendChild(paragraphEl, renderer.createText(' and '));
+    renderer.appendChild(paragraphEl, this.createSpan(renderer, totalRests.toString(), 'text-rest-color', true));
+    renderer.appendChild(
+      paragraphEl,
+      this.createSpan(renderer, totalRests === 1 ? ' rest' : ' rests', 'text-rest-color', false),
+    );
   }
 
   private createSpan(renderer: Renderer2, text: string, className: string, isBold: boolean): HTMLSpanElement {
