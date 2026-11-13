@@ -53,6 +53,9 @@
     --ion-color-rest-contrast-rgb: var(--ds-text-primary-rgb);
     --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
     --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
+
+    //* Custom Components - Circle *
+    --circle-max-width: 400px;
   }
 }
 
@@ -80,6 +83,7 @@
 ion-button {
   --border-color: var(--ds-focus-accent);
   --border-width: 1px;
+  --border-radius: 28px;
 
   --background-hover: var(--ds-focus-accent);
 
@@ -89,6 +93,8 @@ ion-button {
 
 //* Custom Components - Circle *
 #circle {
+  --circle-max-width: var(--circle-max-width);
+
   --circle-progress-color: var(--ds-focus-accent);
   --circle-border-color: var(--ds-focus-base);
   --circle-border-width: 15px;
