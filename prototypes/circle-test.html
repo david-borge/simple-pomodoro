@@ -5,15 +5,18 @@
     <style>
       #circle {
         --progress: 170deg;
-        --border-color: #ddd;
-        --progress-color: #3498db;
+        --circle-border-color: #ddd;
+        --circle-progress-color: #3498db;
         --thickness: 12px;
 
         width: 160px;
         height: 160px;
         border-radius: 100%;
 
-        background: conic-gradient(var(--progress-color) var(--progress), var(--border-color) var(--progress));
+        background: conic-gradient(
+          var(--circle-progress-color) var(--progress),
+          var(--circle-border-color) var(--progress)
+        );
 
         display: flex;
         align-items: center;

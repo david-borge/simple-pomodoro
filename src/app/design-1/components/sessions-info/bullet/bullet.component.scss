@@ -24,16 +24,16 @@
   border-image-repeat: stretch;
 
   &.focus-color {
-    border-top-color: var(--focus-color);
-    border-right-color: var(--focus-color);
-    border-bottom-color: var(--focus-color);
-    border-left-color: var(--focus-color);
+    border-top-color: var(--ds-focus-accent);
+    border-right-color: var(--ds-focus-accent);
+    border-bottom-color: var(--ds-focus-accent);
+    border-left-color: var(--ds-focus-accent);
   }
 
   &.rest-color {
-    border-top-color: var(--rest-color);
-    border-right-color: var(--rest-color);
-    border-bottom-color: var(--rest-color);
-    border-left-color: var(--rest-color);
+    border-top-color: var(--ds-rest-accent);
+    border-right-color: var(--ds-rest-accent);
+    border-bottom-color: var(--ds-rest-accent);
+    border-left-color: var(--ds-rest-accent);
   }
 }

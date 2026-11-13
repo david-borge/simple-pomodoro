@@ -81,8 +81,9 @@
 
 // Theme colors
 .text-focus-color {
-  color: var(--focus-color);
+  color: var(--ds-focus-accent);
 }
+
 .text-rest-color {
-  color: var(--rest-color);
+  color: var(--ds-rest-accent);
 }

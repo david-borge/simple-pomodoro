@@ -44,11 +44,8 @@
 
 #circle {
   --progress: 360deg;
-  --progress-color: var(--focus-color);
-  --border-color: #d9d9d9;
-  --circle-border-width: 10px;
 
-  background: conic-gradient(var(--progress-color) var(--progress), var(--border-color) var(--progress));
+  background: conic-gradient(var(--circle-progress-color) var(--progress), var(--circle-border-color) var(--progress));
 
   transition: --progress 1s linear;
 
