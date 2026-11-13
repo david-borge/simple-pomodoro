@@ -9,6 +9,7 @@ import { SessionsInfoComponent } from '../../components/sessions-info/sessions-i
 import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer-and-circle.component';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
+import { CustomIonicColors } from '../../design-system/custom-ionic-colors';
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
@@ -55,8 +56,8 @@ export class Design1Page {
     this.timerService.cancelTimer();
   }
 
-  startPauseBtnColor(): PredefinedColors {
-    return !this.timerService.isTimerRunning ? 'dark' : 'medium';
+  startPauseBtnColor(): PredefinedColors | CustomIonicColors {
+    return !this.timerService.isTimerRunning ? 'focus' : 'rest';
   }
 
   startPauseBtnText(): string {
