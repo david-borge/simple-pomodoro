@@ -12,9 +12,6 @@ export const routes: Routes = [
   },
   {
     path: RouteSlugs.Prototype1,
-    loadComponent: () =>
-      import('./simple-pomodoro.prototype-1/pages/simple-pomodoro.prototype-1/simple-pomodoro.prototype-1.page').then(
-        (m) => m.SimplePomodoroPrototype1Page,
-      ),
+    loadComponent: () => import('./prototype-1/pages/prototype-1/prototype-1.page').then((m) => m.Prototype1Page),
   },
 ];
