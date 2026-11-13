@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <h1 class="ion-text-center">Simple Pomodoro</h1>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container expand-main-content">
+    <div id="main-content">
+      <div class="center-horizontally center-vertically" style="width: 100%; flex-direction: column">
+        <div class="center-horizontally center-vertically" style="width: 100%">
+          <app-timer-and-circle [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
+        </div>
+        <div [ngStyle]="{ visibility: showSessionInfo() ? 'visible' : 'hidden' }" style="margin-top: 50px">
+          <app-sessions-info [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
+        </div>
+      </div>
+    </div>
+    <div id="bottom-content">
+      <div class="center-horizontally" style="gap: 30px">
+        @if(timerService.isTimerPaused && !timerService.isTimerCancelled) {
+        <ion-button (click)="onClickCancelBtn()" class="ion-text-uppercase" color="danger" size="large"
+          >Cancel</ion-button
+        >
+        }
+
+        <ion-button
+          (click)="onClickStartPauseBtn()"
+          class="ion-text-uppercase"
+          [color]="startPauseBtnColor()"
+          size="large"
+        >
+          {{ startPauseBtnText() }}
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

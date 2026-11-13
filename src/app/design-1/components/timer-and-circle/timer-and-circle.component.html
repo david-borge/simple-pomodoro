@@ -1,0 +1,38 @@
+<div id="timer-and-circle-container">
+  <!-- TODO: move circle to separate component -->
+  <div id="circle" #circleLocalRef>
+    <div id="circle-inner"></div>
+  </div>
+
+  @if (!isTimerBeingEdited()) {
+    <div id="timer-container">
+      <div id="label-container">
+        @if (hours() >= 1) {
+          <div>hr</div>
+        }
+        <div>min</div>
+        <div>sec</div>
+      </div>
+      <div>
+        <p id="timer-numbers">
+          @if (hours() >= 1) {
+            <span>{{ hours() | twoDigits }}</span>
+            <span>:</span>
+          }
+          <span>{{ minutes() | twoDigits }}</span>
+          <span>:</span>
+          <span>{{ seconds() | twoDigits }}</span>
+        </p>
+      </div>
+    </div>
+    @if (!timerService.isTimerRunning && !isTimerBeingEdited() && !timerService.isTimerPaused) {
+      <div class="center-horizontally" style="margin-bottom: 30px">
+        <ion-button (click)="onClickEditBtn()" class="ion-text-uppercase" color="dark" fill="outline" size="default"
+          >Edit</ion-button
+        >
+      </div>
+    }
+  } @else {
+    <app-timer-edit></app-timer-edit>
+  }
+</div>

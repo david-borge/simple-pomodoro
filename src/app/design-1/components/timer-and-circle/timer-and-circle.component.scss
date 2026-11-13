@@ -1,0 +1,90 @@
+:host {
+  width: 100%;
+  max-width: 400px;
+}
+
+// TODO: change to circle() CSS function: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/basic-shape/circle#browser_compatibility
+#timer-and-circle-container {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: calc(2 * var(--ion-padding) + var(--circle-border-width));
+}
+
+#timer-container {
+  @extend .center-absolute;
+  // TODO: center vertically the numbers (measure height of labels and compensate)
+  transform: translate(-50%, -49%);
+
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#label-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+#timer-numbers {
+  margin: 0;
+  font-size: 64px;
+  font-weight: bold;
+  text-align: center;
+  font-variant-numeric: tabular-nums; // Forces all numeric glyphs to have a uniform, monospaced width while keeping letters proportional—ideal for alignment in tables, prices, dashboards, and timers.
+}
+
+#circle {
+  --progress: 360deg;
+  --progress-color: var(--focus-color);
+  --border-color: #d9d9d9;
+  --circle-border-width: 10px;
+
+  background: conic-gradient(var(--progress-color) var(--progress), var(--border-color) var(--progress));
+
+  transition: --progress 1s linear;
+
+  @extend .center-absolute;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@property --progress {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 290deg;
+}
+
+#circle-inner {
+  width: calc(100% - var(--circle-border-width) * 2);
+  height: calc(100% - var(--circle-border-width) * 2);
+  border-radius: 50%;
+  background: var(--ion-background-color);
+}
+
+app-timer-edit {
+  @extend .center-absolute;
+}
+
+.center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

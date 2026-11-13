@@ -1,0 +1,11 @@
+ion-toolbar {
+  --background: var(--ion-background-color);
+}
+
+h1 {
+  margin: 0;
+}
+
+.container.expand-main-content {
+  padding-bottom: var(--ion-safe-area-bottom, 0px);
+}
