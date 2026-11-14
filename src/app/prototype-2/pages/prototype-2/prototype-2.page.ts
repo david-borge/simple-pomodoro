@@ -33,6 +33,7 @@ export class Prototype2Page {
   @ViewChild('startPauseBtnLocalRef') private readonly startPauseBtnEl!: ElementRef<IonButton>;
 
   readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+  readonly isCancelButtonVisible = signal(this.timerService.isTimerPaused);
 
   constructor() {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {
@@ -41,6 +42,9 @@ export class Prototype2Page {
       if (this.totalSeconds() < 0) {
         this.timerService.cancelTimer();
       }
+    });
+    this.timerService.timerStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(({ isTimerPaused }) => {
+      this.isCancelButtonVisible.set(isTimerPaused);
     });
   }
 
