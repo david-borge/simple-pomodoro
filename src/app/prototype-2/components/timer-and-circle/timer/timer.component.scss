@@ -1,0 +1,65 @@
+:host {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max-content;
+  transform: translate3d(-50%, calc(-49% - 20px), 48px) scale(1.07);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
+}
+
+:host(.is-visible) {
+  transform: translate3d(-50%, -49%, 0) scale(1);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
+#timer-container {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#label-container {
+  font-size: var(--ds-font-size-small);
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+#timer-numbers {
+  margin: 0;
+}
+
+#timer-numbers > span {
+  font-family: var(--ds-accent-font);
+
+  font-size: 76px;
+  font-weight: 400;
+  letter-spacing: 3px;
+
+  font-variant-numeric: tabular-nums; // Forces all numeric glyphs to have a uniform, monospaced width while keeping letters proportional—ideal for alignment in tables, dashboards, prices, and timers.
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host,
+  :host(.is-visible) {
+    transition: none;
+  }
+}

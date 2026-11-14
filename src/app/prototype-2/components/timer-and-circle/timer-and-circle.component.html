@@ -1,31 +1,12 @@
 <div id="timer-and-circle-container">
   <app-circle [totalSeconds]="totalSeconds()" [isTimerBeingEdited]="isTimerBeingEdited() === true"></app-circle>
 
-  <div
-    id="timer-container"
+  <app-timer
+    [totalSeconds]="totalSeconds()"
     [class.is-visible]="isTimerBeingEdited() !== true"
     [attr.aria-hidden]="isTimerBeingEdited() === true"
     [attr.inert]="isTimerBeingEdited() === true ? '' : null"
-  >
-    <div id="label-container">
-      @if (hours() >= 1) {
-        <div>hr</div>
-      }
-      <div>min</div>
-      <div>sec</div>
-    </div>
-    <div>
-      <p id="timer-numbers">
-        @if (hours() >= 1) {
-          <span>{{ hours() | twoDigits }}</span>
-          <span>:</span>
-        }
-        <span>{{ minutes() | twoDigits }}</span>
-        <span>:</span>
-        <span>{{ seconds() | twoDigits }}</span>
-      </p>
-    </div>
-  </div>
+  ></app-timer>
 
   <app-edit-button
     [class.is-editing]="isTimerBeingEdited() === true"

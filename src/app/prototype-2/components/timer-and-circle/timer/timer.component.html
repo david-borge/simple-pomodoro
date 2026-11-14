@@ -1,0 +1,20 @@
+<div id="timer-container">
+  <div id="label-container">
+    @if (hours() >= 1) {
+      <div>hr</div>
+    }
+    <div>min</div>
+    <div>sec</div>
+  </div>
+  <div>
+    <p id="timer-numbers">
+      @if (hours() >= 1) {
+        <span>{{ hours() | twoDigits }}</span>
+        <span>:</span>
+      }
+      <span>{{ minutes() | twoDigits }}</span>
+      <span>:</span>
+      <span>{{ seconds() | twoDigits }}</span>
+    </p>
+  </div>
+</div>
