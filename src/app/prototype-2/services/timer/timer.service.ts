@@ -8,9 +8,15 @@ import { ONE_MINUTE_IN_SECONDS, ONE_SECOND_IN_MILIISECONDS } from '../../constan
 
 @Injectable({ providedIn: InjectionScopes.ROOT })
 export class TimerService {
+  // TODO: unifiy all BehaviorSubjects in one?
   private intervalId: ReturnType<typeof setInterval> | null = null;
   private _isTimerCancelled = true;
   private _isTimerPaused = false;
+  private timerStatusBehaviorSubject = new BehaviorSubject({
+    isTimerRunning: false,
+    isTimerPaused: this._isTimerPaused,
+  });
+  public readonly timerStatus$ = this.timerStatusBehaviorSubject.asObservable();
 
   private _totalSeconds = TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS;
   private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
@@ -37,6 +43,7 @@ export class TimerService {
       this._totalSeconds--;
       this.totalSecondsBehaviorSubject.next(this._totalSeconds);
     }, ONE_SECOND_IN_MILIISECONDS);
+    this.publishTimerStatus();
   }
 
   public pauseTimer() {
@@ -47,6 +54,7 @@ export class TimerService {
     clearInterval(this.intervalId);
     this.intervalId = null;
     this._isTimerPaused = true;
+    this.publishTimerStatus();
   }
 
   public cancelTimer() {
@@ -55,6 +63,7 @@ export class TimerService {
     this._isTimerCancelled = true;
     this._isTimerPaused = false;
     this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+    this.publishTimerStatus();
   }
 
   public starEditingTimer() {
@@ -92,5 +101,12 @@ export class TimerService {
 
   public get editedTotalSeconds(): typeof this._editedTotalSeconds {
     return this._editedTotalSeconds;
+  }
+
+  private publishTimerStatus() {
+    this.timerStatusBehaviorSubject.next({
+      isTimerRunning: this.isTimerRunning,
+      isTimerPaused: this.isTimerPaused,
+    });
   }
 }

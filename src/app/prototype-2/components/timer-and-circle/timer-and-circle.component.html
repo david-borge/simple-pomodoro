@@ -25,11 +25,7 @@
         </p>
       </div>
     </div>
-    @if (!timerService.isTimerRunning && !isTimerBeingEdited() && !timerService.isTimerPaused) {
-      <div class="center-content-horizontally" style="margin-bottom: 30px">
-        <ion-button (click)="onClickEditBtn()" fill="outline" size="default">Edit</ion-button>
-      </div>
-    }
+    <app-edit-button></app-edit-button>
   } @else {
     <app-timer-edit></app-timer-edit>
   }

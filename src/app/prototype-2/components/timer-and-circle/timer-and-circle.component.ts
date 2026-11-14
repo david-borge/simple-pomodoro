@@ -1,5 +1,3 @@
-import { IonButton } from '@ionic/angular';
-
 import {
   AfterViewInit,
   Component,
@@ -21,12 +19,13 @@ import { TimeConversionService } from '../../services/time-conversion/time-conve
 import { TimerService } from '../../services/timer/timer.service';
 import { TimerEditComponent } from '../timer-edit/timer-edit.component';
 import { CIRCLE } from './circle.constants';
+import { EditButtonComponent } from './edit-button/edit-button.component';
 
 @Component({
   selector: 'app-timer-and-circle',
   templateUrl: './timer-and-circle.component.html',
   styleUrls: ['./timer-and-circle.component.scss'],
-  imports: [FormsModule, IonButton, TimerEditComponent, TwoDigitsPipe],
+  imports: [EditButtonComponent, FormsModule, TimerEditComponent, TwoDigitsPipe],
 })
 export class TimerAndCircleComponent implements OnInit, OnChanges, AfterViewInit {
   private readonly timerService = inject(TimerService);
@@ -52,7 +51,6 @@ export class TimerAndCircleComponent implements OnInit, OnChanges, AfterViewInit
     this.timerService.isTimerBeingEdited$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isTimerBeingEdited) => {
       this.isTimerBeingEdited.set(isTimerBeingEdited);
     });
-
     this.intervalDurationInSec = this.totalSeconds();
   }
 
@@ -70,10 +68,6 @@ export class TimerAndCircleComponent implements OnInit, OnChanges, AfterViewInit
     }
 
     this.changeCircleProgressBasedOnTimePassedOnInterval();
-  }
-
-  protected onClickEditBtn() {
-    this.timerService.starEditingTimer();
   }
 
   private changeCircleProgressBasedOnTimePassedOnInterval() {

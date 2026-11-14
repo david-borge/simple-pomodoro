@@ -39,6 +39,10 @@
     --ds-font-size-small: 14px;
     --ds-font-size-caption: 12px; // TODO: unused
 
+    //* Design System CSS Variables - Transitions *
+    --ds-transition-duration: 200ms;
+    --ds-transition-timing-function: ease-out;
+
     //* Ionic CSS Variables - Application Variables *
     // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
     --ion-default-font: var(--ds-default-font);
