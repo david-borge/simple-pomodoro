@@ -1,4 +1,4 @@
-.edit-button-container {
+#edit-button-container {
   opacity: 0;
   pointer-events: none;
 
@@ -7,18 +7,18 @@
   transition-timing-function: var(--ds-transition-timing-function);
 }
 
-.edit-button-container.is-visible {
+#edit-button-container.is-visible {
   opacity: 1;
   pointer-events: auto;
 }
 
-.edit-button-content {
+#edit-button-content {
   margin-bottom: 30px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .edit-button-container,
-  .edit-button-container.is-visible {
+  #edit-button-container,
+  #edit-button-container.is-visible {
     transition: none;
   }
 }
