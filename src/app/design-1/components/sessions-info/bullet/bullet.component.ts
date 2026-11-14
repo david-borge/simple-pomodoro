@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 import { TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
-import { BulletBorderColor } from './bullet-border-color.enum';
+import { BulletBorderColorClass } from './bullet-border-color.enum';
 
 @Component({
   selector: 'app-bullet',
@@ -13,17 +13,17 @@ import { BulletBorderColor } from './bullet-border-color.enum';
 export class BulletComponent {
   readonly timerSessionType = input.required<TimerSessionType>();
 
-  getBulletColor() {
+  getBulletColorClass() {
     switch (this.timerSessionType()) {
       case TimerSessionType.Focus:
-        return BulletBorderColor.BorderColorFocus;
+        return BulletBorderColorClass.BorderColorFocus;
 
       case TimerSessionType.ShortRest:
       case TimerSessionType.LongRest:
-        return BulletBorderColor.BorderColorRest;
+        return BulletBorderColorClass.BorderColorRest;
 
       default:
-        return BulletBorderColor.BorderColorFocus;
+        return BulletBorderColorClass.BorderColorFocus;
     }
   }
 }

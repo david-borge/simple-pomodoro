@@ -1,3 +1,7 @@
 ion-picker-column-option {
   font-size: 24px;
+
+  &.option-active {
+    color: var(--ion-color-focus);
+  }
 }
