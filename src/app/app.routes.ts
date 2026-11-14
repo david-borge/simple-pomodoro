@@ -2,13 +2,13 @@ import type { Routes } from '@angular/router';
 
 enum RouteSlugs {
   Prototype1 = 'prototype-1',
-  Design1 = 'design-1',
+  Prototype2 = 'prototype-2',
 }
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: RouteSlugs.Design1,
+    redirectTo: RouteSlugs.Prototype2,
     pathMatch: 'full',
   },
   {
@@ -16,7 +16,7 @@ export const routes: Routes = [
     loadComponent: () => import('./prototype-1/pages/prototype-1/prototype-1.page').then((m) => m.Prototype1Page),
   },
   {
-    path: RouteSlugs.Design1,
-    loadComponent: () => import('./design-1/pages/design-1/design-1.page').then((m) => m.Design1Page),
+    path: RouteSlugs.Prototype2,
+    loadComponent: () => import('./prototype-2/pages/prototype-2/prototype-2.page').then((m) => m.Prototype2Page),
   },
 ];

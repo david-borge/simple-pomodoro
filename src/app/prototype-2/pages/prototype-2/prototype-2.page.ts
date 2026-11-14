@@ -13,8 +13,8 @@ import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
   selector: 'app-design-1',
-  templateUrl: 'design-1.page.html',
-  styleUrls: ['design-1.page.scss'],
+  templateUrl: 'prototype-2.page.html',
+  styleUrls: ['prototype-2.page.scss'],
   imports: [
     CommonModule,
     IonButton,
@@ -26,13 +26,13 @@ import { TimerService } from '../../services/timer/timer.service';
     TimerAndCircleComponent,
   ],
 })
-export class Design1Page {
+export class Prototype2Page {
   private readonly timerService = inject(TimerService);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
-
   @ViewChild('startPauseBtnLocalRef') private readonly startPauseBtnEl!: ElementRef<IonButton>;
+
+  readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
 
   constructor() {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {
