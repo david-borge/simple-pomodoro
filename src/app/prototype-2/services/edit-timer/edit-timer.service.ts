@@ -2,7 +2,6 @@ import { Service } from '@angular/core';
 
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { ONE_MINUTE_IN_SECONDS, SECONDS_PER_HOUR } from '../../constants/time-conversion.constants';
-import { TIMER_EDITOR_INTERVAL_IN_SEC } from '../../constants/timer-editor-interval.constant';
 import { TimerEditorOptions } from './timer-editor.options.type';
 
 @Service()
@@ -16,7 +15,7 @@ export class EditTimerService {
         timeInSec: counterInSec,
         text: this.getFormattedTime(counterInSec),
       });
-      counterInSec += TIMER_EDITOR_INTERVAL_IN_SEC;
+      counterInSec += TIMER_CONFIG.timerEditorIntervalInMin * ONE_MINUTE_IN_SECONDS;
     } while (counterInSec <= TIMER_CONFIG.maximumTimerInMin * ONE_MINUTE_IN_SECONDS);
 
     return timerEditorOptions;
