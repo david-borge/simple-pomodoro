@@ -1,8 +1,5 @@
 <div id="timer-and-circle-container">
-  <!-- TODO: move circle to separate component -->
-  <div id="circle" #circleLocalRef>
-    <div id="circle-inner"></div>
-  </div>
+  <app-circle [totalSeconds]="totalSeconds()" [isTimerBeingEdited]="isTimerBeingEdited() === true"></app-circle>
 
   <div
     id="timer-container"

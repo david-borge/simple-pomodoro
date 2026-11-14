@@ -92,39 +92,6 @@ app-edit-button.is-editing {
   font-variant-numeric: tabular-nums; // Forces all numeric glyphs to have a uniform, monospaced width while keeping letters proportional—ideal for alignment in tables, prices, dashboards, and timers.
 }
 
-#circle {
-  --progress: 360deg;
-
-  background: conic-gradient(var(--circle-progress-color) var(--progress), var(--circle-border-color) var(--progress));
-
-  transition: --progress 1s linear;
-
-  @extend .center-absolute;
-
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@property --progress {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 290deg;
-}
-
-#circle-inner {
-  width: calc(100% - var(--circle-border-width) * 2);
-  height: calc(100% - var(--circle-border-width) * 2);
-  border-radius: 50%;
-  background: var(--ion-background-color);
-}
-
 app-timer-edit {
   position: absolute;
   top: 50%;
@@ -163,11 +130,4 @@ app-timer-edit.is-visible {
   app-timer-edit.is-visible {
     transition: none;
   }
-}
-
-.center-absolute {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

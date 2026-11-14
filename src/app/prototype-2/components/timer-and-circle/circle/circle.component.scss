@@ -1,0 +1,45 @@
+:host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#circle {
+  --progress: 360deg;
+
+  background: conic-gradient(var(--circle-progress-color) var(--progress), var(--circle-border-color) var(--progress));
+
+  transition: --progress 1s linear;
+
+  @extend .center-absolute;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@property --progress {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 290deg;
+}
+
+#circle-inner {
+  width: calc(100% - var(--circle-border-width) * 2);
+  height: calc(100% - var(--circle-border-width) * 2);
+  border-radius: 50%;
+  background: var(--ion-background-color);
+}
+
+.center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
