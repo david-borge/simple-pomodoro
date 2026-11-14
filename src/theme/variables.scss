@@ -1,16 +1,22 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
 
+// * Application CSS Variables
+:root,
+:root.md {
+  // md = material design (aka Android)
+
+  //* Design System CSS Variables - Font *
+  --ds-default-font: 'Inter', sans-serif;
+  --ds-accent-font: 'Lato', sans-serif;
+}
+
 //** Dark Mode **
 @media (prefers-color-scheme: dark) {
   // * Application CSS Variables
   :root,
   :root.md {
     // md = material design (aka Android)
-
-    //* Design System CSS Variables - Font *
-    --ds-default-font: 'Inter', sans-serif;
-    --ds-accent-font: 'Lato', sans-serif;
 
     //* Design System CSS Variables - Colors *
     --ds-focus-accent: #89afc0;
@@ -28,6 +34,91 @@
     --ds-text-primary-rgb: rgb(243, 246, 243);
 
     --ds-text-secondary: #a8b3ac; // TODO: unused
+
+    --ds-divider: #3a4440; // TODO: unused
+    --ds-success: #8fbf9f; // TODO: unused
+    --ds-warning: #f6c078; // TODO: unused
+    --ds-info: #89b6d4; // TODO: unused
+
+    //* Design System CSS Variables - Text size *
+    --ds-font-size-body: 16px;
+    --ds-font-size-small: 14px;
+    --ds-font-size-caption: 12px; // TODO: unused
+
+    //* Design System CSS Variables - Transitions *
+    --ds-transition-duration: 200ms;
+    --ds-transition-timing-function: ease-out;
+
+    //* Ionic CSS Variables - Application Variables *
+    // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
+    --ion-default-font: var(--ds-default-font);
+    --ion-font-family: var(--ds-default-font);
+    --ion-background-color: var(--ds-focus-background);
+    --ion-background-color-rgb: var(--ds-focus-background-rgb);
+
+    --ion-text-color: var(--ds-text-primary);
+    --ion-text-color-rgb: var(--ds-text-primary-rgb);
+
+    --ion-padding: 16px; // Adjust the margin of the Padding attributes
+
+    //* Ionic CSS Variables - New Colors - Focus *
+    --ion-color-focus: var(--ds-focus-accent);
+    --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
+    --ion-color-focus-contrast: var(--ds-text-primary);
+    --ion-color-focus-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
+    --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
+
+    //* Ionic CSS Variables - New Colors - Rest *
+    --ion-color-rest: var(--ds-rest-accent);
+    --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
+    --ion-color-rest-contrast: var(--ds-text-primary);
+    --ion-color-rest-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
+    --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
+
+    //* Custom Components - Circle *
+    --circle-max-width: 400px;
+  }
+}
+
+//** Light Mode **
+@media (prefers-color-scheme: light) {
+  // * Application CSS Variables
+  :root,
+  :root.md {
+    // md = material design (aka Android)
+
+    /*
+    TODO: apply Light Mode
+    --ds-focus-base: #ESEDE2;
+    --ds-rest-accent: #a9c1d0;
+    --ds-rest-background: #ESEEF3;
+    --ds-divider: #E8EBEG;
+    --ds-success: #8fbf9f;
+    --ds-warning: #f6d7b5;
+    --ds-info: #b9d6ea;
+    --ds-focus-accent: #0088ff;
+    --ds-rest-accent: #34c759;
+
+     */
+
+    //* Design System CSS Variables - Colors *
+    --ds-focus-accent: #a9bfa9;
+    --ds-focus-accent-rgb: rgb(137, 175, 192);
+    --ds-focus-base: #2e3f47;
+    --ds-focus-background: #faf9f5;
+    --ds-focus-background-rgb: rgb(250, 249, 245);
+
+    --ds-rest-accent: #8fae96;
+    --ds-rest-base: #2a3a32; // TODO: unused
+    --ds-rest-background: var(--ds-focus-background); // TODO: unused
+    --ds-rest-background-rgb: var(--ds-focus-background-rgb); // TODO: unused
+
+    --ds-text-primary: #2f3e36;
+    --ds-text-primary-rgb: rgb(47, 62, 54);
+
+    --ds-text-secondary: #6b766f; // TODO: unused
 
     --ds-divider: #3a4440; // TODO: unused
     --ds-success: #8fbf9f; // TODO: unused
@@ -115,34 +206,3 @@ ion-button {
   --circle-border-color: var(--ds-focus-base);
   --circle-border-width: 15px;
 }
-
-/*
-// TODO: Posible Future Feature: Light Mode
-//** Design System CSS Variables - Light Mode **
-@media (prefers-color-scheme: light) {
-  :root,
-  :root.md {
-    //** Design System CSS Variables **
-    --ds-focus-background: #faf9f5;
-    --ds-focus-background-rgb: rgb(250, 249, 245);
-    --ds-rest-background: #ffffff;
-    --ds-text-primary: #2f3e36;
-    --ds-text-secondary: #6b766f;
-    --ds-focus-accent: #a9bfa9;
-    --ds-focus-base: #ESEDE2;
-    --ds-rest-accent: #a9c1d0;
-    --ds-rest-background: #ESEEF3;
-    --ds-divider: #E8EBEG;
-    --ds-success: #8fbf9f;
-    --ds-warning: #f6d7b5;
-    --ds-info: #b9d6ea;
-    --ds-focus-accent: #0088ff;
-    --ds-rest-accent: #34c759;
-
-    //** Ionic CSS Variables **
-    // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
-    --ion-background-color: var(--ds-focus-background);
-    --ion-background-color-rgb: var(--ds-focus-background-rgb);
-    --ion-padding: 16px; // Adjust the margin of the Padding attributes
-  }
-} */
