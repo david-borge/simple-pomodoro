@@ -1,7 +1,13 @@
 ion-picker-column-option {
+  --ion-font-family: var(--ds-accent-font);
+  font-family: var(--ion-font-family);
+
   font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 1.2px;
 
   &.option-active {
+    font-weight: 400;
     color: var(--ion-color-focus);
   }
 }

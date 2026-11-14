@@ -6,6 +6,12 @@
   // * Application CSS Variables
   :root,
   :root.md {
+    // md = material design (aka Android)
+
+    //* Design System CSS Variables - Font *
+    --ds-default-font: 'Inter', sans-serif;
+    --ds-accent-font: 'Lato', sans-serif;
+
     //* Design System CSS Variables - Colors *
     --ds-focus-accent: #89afc0;
     --ds-focus-accent-rgb: rgb(137, 175, 192);
@@ -35,6 +41,8 @@
 
     //* Ionic CSS Variables - Application Variables *
     // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
+    --ion-default-font: var(--ds-default-font);
+    --ion-font-family: var(--ds-default-font);
     --ion-background-color: var(--ds-focus-background);
     --ion-background-color-rgb: var(--ds-focus-background-rgb);
 
