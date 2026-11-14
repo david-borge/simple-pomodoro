@@ -23,14 +23,14 @@
   border-image-outset: 0;
   border-image-repeat: stretch;
 
-  &.focus-color {
+  &.border-color-focus {
     border-top-color: var(--ds-focus-accent);
     border-right-color: var(--ds-focus-accent);
     border-bottom-color: var(--ds-focus-accent);
     border-left-color: var(--ds-focus-accent);
   }
 
-  &.rest-color {
+  &.border-rest-focus {
     border-top-color: var(--ds-rest-accent);
     border-right-color: var(--ds-rest-accent);
     border-bottom-color: var(--ds-rest-accent);

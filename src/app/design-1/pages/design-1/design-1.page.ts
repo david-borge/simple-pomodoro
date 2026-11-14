@@ -1,15 +1,14 @@
 import { IonButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-import type { PredefinedColors } from '@ionic/core/components';
 
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { SessionsInfoComponent } from '../../components/sessions-info/sessions-info.component';
 import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer-and-circle.component';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
-import { CustomIonicColors } from '../../design-system/custom-ionic-colors';
+import { IonicColors } from '../../design-system/ionic-colors';
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
@@ -32,6 +31,8 @@ export class Design1Page {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+
+  @ViewChild('startPauseBtnLocalRef') private readonly startPauseBtnEl!: ElementRef<IonButton>;
 
   constructor() {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {
@@ -56,8 +57,10 @@ export class Design1Page {
     this.timerService.cancelTimer();
   }
 
-  startPauseBtnColor(): PredefinedColors | CustomIonicColors {
-    return !this.timerService.isTimerRunning ? 'focus' : 'rest';
+  startPauseBtnColor(): IonicColors {
+    // TODO: change condition based on focus/rest when that is implemented
+    return !this.timerService.isTimerRunning ? 'focus' : 'focus';
+    // return !this.timerService.isTimerRunning ? 'focus' : 'rest';
   }
 
   startPauseBtnText(): string {

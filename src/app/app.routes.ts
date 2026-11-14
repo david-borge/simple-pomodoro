@@ -8,7 +8,7 @@ enum RouteSlugs {
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: RouteSlugs.Prototype1,
+    redirectTo: RouteSlugs.Design1,
     pathMatch: 'full',
   },
   {

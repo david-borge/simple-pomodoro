@@ -25,7 +25,13 @@ export class SessionsInfoService {
 
     this.clearSessionsInfo(targetElement, renderer);
 
-    const paragraphEl = this.createSessionsInfoParagraph(renderer, focusSessions, shortRests, longRests, isTimerRunning);
+    const paragraphEl = this.createSessionsInfoParagraph(
+      renderer,
+      focusSessions,
+      shortRests,
+      longRests,
+      isTimerRunning,
+    );
     renderer.appendChild(targetElement, paragraphEl);
   }
 
