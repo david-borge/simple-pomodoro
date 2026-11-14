@@ -9,8 +9,8 @@
 <ion-content [fullscreen]="true">
   <div class="container expand-main-content">
     <div id="main-content">
-      <div class="center-horizontally center-vertically" style="width: 100%; flex-direction: column">
-        <div class="center-horizontally center-vertically" style="width: 100%">
+      <div class="center-content-horizontally center-content-vertically" style="width: 100%; flex-direction: column">
+        <div class="center-content-horizontally center-content-vertically" style="width: 100%">
           <app-timer-and-circle [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
         </div>
         <div [ngStyle]="{ visibility: showSessionInfo() ? 'visible' : 'hidden' }" style="margin-top: 50px">
@@ -18,26 +18,32 @@
         </div>
       </div>
     </div>
-    <div id="bottom-content">
-      <div class="container">
-        <div class="container center-horizontally" style="gap: var(--ion-padding)">
-          @if(timerService.isTimerPaused && !timerService.isTimerCancelled) {
-          <div>
-            <ion-button (click)="onClickCancelBtn()" color="danger" size="large" expand="block">Cancel</ion-button>
-          </div>
-          }
+    <div id="bottom-content" class="center-content-horizontally">
+      <div
+        class="center-content-horizontally"
+        style="
+          flex: 1;
+          padding: 0 calc(2 * var(--ion-padding));
+          max-width: var(--circle-max-width);
+          gap: var(--ion-padding);
+        "
+      >
+        @if(timerService.isTimerPaused && !timerService.isTimerCancelled) {
+        <div>
+          <ion-button (click)="onClickCancelBtn()" color="danger" size="large" expand="block">Cancel</ion-button>
+        </div>
+        }
 
-          <div class="ion-flex-1">
-            <ion-button
-              #startPauseBtnLocalRef
-              (click)="onClickStartPauseBtn()"
-              [color]="startPauseBtnColor()"
-              size="large"
-              expand="block"
-            >
-              {{ startPauseBtnText() }}
-            </ion-button>
-          </div>
+        <div class="ion-flex-1">
+          <ion-button
+            #startPauseBtnLocalRef
+            (click)="onClickStartPauseBtn()"
+            [color]="startPauseBtnColor()"
+            size="large"
+            expand="block"
+          >
+            {{ startPauseBtnText() }}
+          </ion-button>
         </div>
       </div>
     </div>

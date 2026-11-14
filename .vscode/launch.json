@@ -4,7 +4,7 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Ionic Angular: Chrome",
+            "name": "Ionic",
             "url": "http://localhost:8100",
             "webRoot": "${workspaceFolder}",
             "sourceMaps": true,

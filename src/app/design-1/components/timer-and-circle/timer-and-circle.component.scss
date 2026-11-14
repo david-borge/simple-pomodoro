@@ -38,9 +38,15 @@
 
 #timer-numbers {
   margin: 0;
-  font-size: 64px;
-  font-weight: bold;
-  text-align: center;
+}
+
+#timer-numbers > span {
+  font-family: 'Lato', sans-serif;
+
+  font-size: 76px;
+  font-weight: 400;
+  letter-spacing: 3px;
+
   font-variant-numeric: tabular-nums; // Forces all numeric glyphs to have a uniform, monospaced width while keeping letters proportional—ideal for alignment in tables, prices, dashboards, and timers.
 }
 
