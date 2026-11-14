@@ -19,29 +19,7 @@
       </div>
     </div>
     <div id="bottom-content" class="center-content-horizontally">
-      <div id="timer-controls-row" [class.has-cancel-button]="isCancelButtonVisible()">
-        <div id="cancel-button-slot" [attr.aria-hidden]="!isCancelButtonVisible()">
-          <ion-button
-            (click)="onClickCancelBtn()"
-            [disabled]="!isCancelButtonVisible()"
-            color="danger"
-            size="large"
-            expand="block"
-            >Cancel</ion-button
-          >
-        </div>
-
-        <div id="start-pause-button-slot">
-          <ion-button
-            #startPauseBtnLocalRef
-            (click)="onClickStartPauseBtn()"
-            [color]="startPauseBtnColor()"
-            size="large"
-            expand="block"
-            >{{ startPauseBtnText() }}</ion-button
-          >
-        </div>
-      </div>
+      <app-timer-controls-start-pause-cancel />
     </div>
   </div>
 </ion-content>
