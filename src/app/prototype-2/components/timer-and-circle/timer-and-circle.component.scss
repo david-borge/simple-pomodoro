@@ -10,6 +10,7 @@
   aspect-ratio: 1;
 
   position: relative;
+  perspective: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -18,14 +19,55 @@
 }
 
 #timer-container {
-  @extend .center-absolute;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
   // TODO: center vertically the numbers (measure height of labels and compensate)
-  transform: translate(-50%, -49%);
+  transform: translate3d(-50%, calc(-49% - 20px), 48px) scale(1.07);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
 
   width: max-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+#timer-container.is-visible {
+  transform: translate3d(-50%, -49%, 0) scale(1);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
+app-edit-button {
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
+app-edit-button.is-editing {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
 }
 
 #label-container {
@@ -84,7 +126,43 @@
 }
 
 app-timer-edit {
-  @extend .center-absolute;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, calc(-50% + 22px), -48px) scale(0.9);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
+}
+
+app-timer-edit.is-visible {
+  transform: translate3d(-50%, -50%, 0) scale(1);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #timer-container,
+  #timer-container.is-visible,
+  app-edit-button,
+  app-edit-button.is-editing,
+  app-timer-edit,
+  app-timer-edit.is-visible {
+    transition: none;
+  }
 }
 
 .center-absolute {
