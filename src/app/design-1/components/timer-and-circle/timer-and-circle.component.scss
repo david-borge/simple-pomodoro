@@ -29,6 +29,8 @@
 }
 
 #label-container {
+  font-size: var(--ds-font-size-small);
+
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-around;

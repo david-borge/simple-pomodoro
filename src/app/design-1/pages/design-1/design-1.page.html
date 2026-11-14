@@ -19,22 +19,26 @@
       </div>
     </div>
     <div id="bottom-content">
-      <div class="center-horizontally" style="gap: 30px">
-        @if(timerService.isTimerPaused && !timerService.isTimerCancelled) {
-        <ion-button (click)="onClickCancelBtn()" class="ion-text-uppercase" color="danger" size="large"
-          >Cancel</ion-button
-        >
-        }
+      <div class="container">
+        <div class="container center-horizontally" style="gap: var(--ion-padding)">
+          @if(timerService.isTimerPaused && !timerService.isTimerCancelled) {
+          <div>
+            <ion-button (click)="onClickCancelBtn()" color="danger" size="large" expand="block">Cancel</ion-button>
+          </div>
+          }
 
-        <ion-button
-          #startPauseBtnLocalRef
-          (click)="onClickStartPauseBtn()"
-          class="ion-text-uppercase"
-          [color]="startPauseBtnColor()"
-          size="large"
-        >
-          {{ startPauseBtnText() }}
-        </ion-button>
+          <div class="ion-flex-1">
+            <ion-button
+              #startPauseBtnLocalRef
+              (click)="onClickStartPauseBtn()"
+              [color]="startPauseBtnColor()"
+              size="large"
+              expand="block"
+            >
+              {{ startPauseBtnText() }}
+            </ion-button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

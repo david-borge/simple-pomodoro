@@ -28,6 +28,11 @@
     --ds-warning: #f6c078; // TODO: unused
     --ds-info: #89b6d4; // TODO: unused
 
+    //* Design System CSS Variables - Text size *
+    --ds-font-size-body: 16px;
+    --ds-font-size-small: 14px;
+    --ds-font-size-caption: 12px; // TODO: unused
+
     //* Ionic CSS Variables - Application Variables *
     // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
     --ion-background-color: var(--ds-focus-background);
@@ -88,7 +93,6 @@ ion-button {
   --background-hover: var(--ds-focus-accent);
 
   --color: var(--ds-focus-accent);
-  text-transform: none;
 }
 
 //* Custom Components - Circle *
