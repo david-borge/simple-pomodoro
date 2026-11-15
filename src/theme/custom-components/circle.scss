@@ -9,6 +9,13 @@
 #circle {
   --circle-max-width: var(--circle-max-width);
 
-  --circle-progress-color: var(--ds-focus-accent);
   --circle-border-color: var(--ds-focus-base);
+
+  &.focus {
+    --circle-progress-color: var(--ds-focus-accent);
+  }
+
+  &.rest {
+    --circle-progress-color: var(--ds-rest-accent);
+  }
 }

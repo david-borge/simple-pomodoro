@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, input, OnChanges, OnInit, ViewChild } from '@angular/core';
 
-import { CIRCLE } from './circle.constants';
+import { TimerSession, TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
+import { CircleColorClass } from './circle-color-class.enum';
+import { CircleDegrees } from './circle-degrees.constant';
 
 @Component({
   selector: 'app-circle',
@@ -10,6 +12,7 @@ import { CIRCLE } from './circle.constants';
 export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
   readonly totalSeconds = input.required<number>();
   readonly isTimerBeingEdited = input.required<boolean>();
+  readonly currentTimerSession = input.required<TimerSession | null>();
 
   private intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
   private isViewInitialized = false;
@@ -43,18 +46,18 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   private setCircleProgress(degrees: number): void {
-    if (degrees < CIRCLE.minDegrees) {
+    if (degrees < CircleDegrees.minDegrees) {
       throw new Error(
         'The degrees for the circle have to be greater than ' +
-          CIRCLE.minDegrees +
+          CircleDegrees.minDegrees +
           '. Current value: ' +
           degrees +
           'deg.',
       );
-    } else if (degrees > CIRCLE.maxDegrees) {
+    } else if (degrees > CircleDegrees.maxDegrees) {
       throw new Error(
         'The degrees for the circle have to be lower than ' +
-          CIRCLE.maxDegrees +
+          CircleDegrees.maxDegrees +
           '. Current value: ' +
           degrees +
           'deg.',
@@ -69,6 +72,20 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   private getCircleDegreesFromRatio(ratio: number): number {
-    return ratio * CIRCLE.maxDegrees;
+    return ratio * CircleDegrees.maxDegrees;
+  }
+
+  protected get circleColor(): string {
+    switch (this.currentTimerSession()?.type) {
+      case TimerSessionType.Focus:
+        return CircleColorClass.Focus;
+
+      case TimerSessionType.ShortRest:
+      case TimerSessionType.LongRest:
+        return CircleColorClass.Rest;
+
+      default:
+        return CircleColorClass.Focus;
+    }
   }
 }

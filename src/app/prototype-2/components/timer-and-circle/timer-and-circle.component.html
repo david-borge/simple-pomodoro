@@ -1,5 +1,9 @@
 <div id="timer-and-circle-container">
-  <app-circle [totalSeconds]="totalSeconds()" [isTimerBeingEdited]="isTimerBeingEdited() === true"></app-circle>
+  <app-circle
+    [totalSeconds]="totalSeconds()"
+    [isTimerBeingEdited]="isTimerBeingEdited() === true"
+    [currentTimerSession]="currentTimerSession()"
+  ></app-circle>
 
   <app-timer
     [totalSeconds]="totalSeconds()"
