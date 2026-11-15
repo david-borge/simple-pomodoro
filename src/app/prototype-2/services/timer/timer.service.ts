@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { InjectionScopes } from '../../constants/injection-scopes.constant';
 import { ONE_MINUTE_IN_SECONDS, ONE_SECOND_IN_MILIISECONDS } from '../../constants/time-conversion.constants';
-import { TimerSession } from '../timer-sessions/timer-session.interface';
+import { TimerSession, TimerSessionsList } from '../timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../timer-sessions/timer-sessions.service';
 
 @Injectable({ providedIn: InjectionScopes.ROOT })
@@ -28,6 +28,7 @@ export class TimerService {
   public readonly timerStatus$ = this.timerStatusBehaviorSubject.asObservable();
 
   private _totalSeconds = TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS;
+  private timerSessionList: TimerSessionsList = [];
 
   private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
   public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
@@ -55,16 +56,13 @@ export class TimerService {
     this._isTimerCancelled = false;
     this._isTimerBeingEdited = false;
 
-    const timerSessionList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(this._editedTotalSeconds);
-    const currentTimerSession = this.timerSessionsService.getCurrentTimerSessionFromCurrentTotalSeconds(
-      timerSessionList,
-      this._totalSeconds,
-    );
-    this.currentTimerSessionBehaviorSubject.next(currentTimerSession);
+    this.timerSessionList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(this._editedTotalSeconds);
+    this.emitCurrentTimerSession();
 
     this.intervalId = setInterval(() => {
       this._totalSeconds--;
       this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+      this.emitCurrentTimerSession();
     }, ONE_SECOND_IN_MILIISECONDS);
     this.emitTimerStatus();
   }
@@ -104,6 +102,21 @@ export class TimerService {
     this.totalSecondsBehaviorSubject.next(this._totalSeconds);
 
     this._editedTotalSeconds = totalSeconds;
+  }
+
+  private emitCurrentTimerSession() {
+    if (this._totalSeconds <= 0) {
+      return;
+    }
+
+    const currentTimerSession = this.timerSessionsService.getCurrentTimerSessionFromCurrentTotalSeconds(
+      this.timerSessionList,
+      this._totalSeconds,
+    );
+
+    if (currentTimerSession !== this.currentTimerSessionBehaviorSubject.value) {
+      this.currentTimerSessionBehaviorSubject.next(currentTimerSession);
+    }
   }
 
   public get isTimerRunning(): boolean {
