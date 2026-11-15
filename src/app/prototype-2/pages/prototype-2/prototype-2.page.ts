@@ -1,3 +1,5 @@
+// TODO: add protected to functions that are only used in template
+
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 
 import { CommonModule } from '@angular/common';
