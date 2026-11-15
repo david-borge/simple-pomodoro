@@ -8,13 +8,18 @@ import { ONE_MINUTE_IN_SECONDS, ONE_SECOND_IN_MILIISECONDS } from '../../constan
 
 @Injectable({ providedIn: InjectionScopes.ROOT })
 export class TimerService {
-  // TODO: unifiy all BehaviorSubjects in one?
   private intervalId: ReturnType<typeof setInterval> | null = null;
-  private _isTimerCancelled = true;
+
+  private _isTimerRunning = false;
   private _isTimerPaused = false;
+  private _isTimerCancelled = true;
+  private _isTimerBeingEdited = false;
+
   private timerStatusBehaviorSubject = new BehaviorSubject({
-    isTimerRunning: false,
+    isTimerRunning: this._isTimerRunning,
     isTimerPaused: this._isTimerPaused,
+    isTimerCancelled: this._isTimerCancelled,
+    isTimerBeingEdited: this._isTimerBeingEdited,
   });
   public readonly timerStatus$ = this.timerStatusBehaviorSubject.asObservable();
 
@@ -22,28 +27,31 @@ export class TimerService {
   private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
   public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
 
-  private _isTimerBeingEdited = false;
-  private isTimerBeingEditedBehaviorSubject = new BehaviorSubject(this._isTimerBeingEdited);
-  public readonly isTimerBeingEdited$ = this.isTimerBeingEditedBehaviorSubject.asObservable();
-
   private _editedTotalSeconds = this._totalSeconds;
+
+  private emitTimerStatus() {
+    this.timerStatusBehaviorSubject.next({
+      isTimerRunning: this.isTimerRunning,
+      isTimerPaused: this.isTimerPaused,
+      isTimerCancelled: this._isTimerCancelled,
+      isTimerBeingEdited: this.isTimerBeingEdited,
+    });
+  }
 
   public startTimer() {
     if (this.intervalId) {
       return;
     }
 
-    this._isTimerCancelled = false;
     this._isTimerPaused = false;
-
+    this._isTimerCancelled = false;
     this._isTimerBeingEdited = false;
-    this.isTimerBeingEditedBehaviorSubject.next(this._isTimerBeingEdited);
 
     this.intervalId = setInterval(() => {
       this._totalSeconds--;
       this.totalSecondsBehaviorSubject.next(this._totalSeconds);
     }, ONE_SECOND_IN_MILIISECONDS);
-    this.publishTimerStatus();
+    this.emitTimerStatus();
   }
 
   public pauseTimer() {
@@ -54,26 +62,26 @@ export class TimerService {
     clearInterval(this.intervalId);
     this.intervalId = null;
     this._isTimerPaused = true;
-    this.publishTimerStatus();
+    this.emitTimerStatus();
   }
 
   public cancelTimer() {
     this.pauseTimer();
     this._totalSeconds = this._editedTotalSeconds;
-    this._isTimerCancelled = true;
     this._isTimerPaused = false;
+    this._isTimerCancelled = true;
     this.totalSecondsBehaviorSubject.next(this._totalSeconds);
-    this.publishTimerStatus();
+    this.emitTimerStatus();
   }
 
   public starEditingTimer() {
     this._isTimerBeingEdited = true;
-    this.isTimerBeingEditedBehaviorSubject.next(this._isTimerBeingEdited);
+    this.emitTimerStatus();
   }
 
   public stopEditingTimer() {
     this._isTimerBeingEdited = false;
-    this.isTimerBeingEditedBehaviorSubject.next(this._isTimerBeingEdited);
+    this.emitTimerStatus();
   }
 
   public editTimer(totalSeconds: typeof this._totalSeconds) {
@@ -101,12 +109,5 @@ export class TimerService {
 
   public get editedTotalSeconds(): typeof this._editedTotalSeconds {
     return this._editedTotalSeconds;
-  }
-
-  private publishTimerStatus() {
-    this.timerStatusBehaviorSubject.next({
-      isTimerRunning: this.isTimerRunning,
-      isTimerPaused: this.isTimerPaused,
-    });
   }
 }

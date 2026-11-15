@@ -22,7 +22,7 @@ export class TimerAndCircleComponent implements OnInit {
   isTimerBeingEdited = signal<boolean | null>(null);
 
   ngOnInit() {
-    this.timerService.isTimerBeingEdited$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isTimerBeingEdited) => {
+    this.timerService.timerStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(({ isTimerBeingEdited }) => {
       this.isTimerBeingEdited.set(isTimerBeingEdited);
     });
   }
