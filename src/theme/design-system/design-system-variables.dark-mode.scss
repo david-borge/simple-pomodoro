@@ -5,22 +5,22 @@
   :root.md {
     // * Colors *
     --ds-text-primary: #f3f6f3;
-    --ds-text-primary-rgb: rgb(243, 246, 243);
+    --ds-text-primary-rgb: 243, 246, 243;
 
     --ds-focus-accent: #89afc0;
-    --ds-focus-accent-rgb: rgb(137, 175, 192);
+    --ds-focus-accent-rgb: 137, 175, 192;
     --ds-focus-base: #2e3f47;
     --ds-focus-background: #191f1f;
-    --ds-focus-background-rgb: rgb(30, 36, 32);
+    --ds-focus-background-rgb: 30, 36, 32;
 
     --ds-rest-accent: #8fae96;
-    --ds-rest-accent-rgb: rgb(143, 174, 150);
+    --ds-rest-accent-rgb: 143, 174, 150;
     --ds-rest-base: #2a3a32;
     --ds-rest-background: #2a2f2b; // TODO: unused
-    --ds-rest-background-rgb: rgb(42, 47, 43); // TODO: unused
+    --ds-rest-background-rgb: 42, 47, 43; // TODO: unused
 
     --ds-color-danger: #d96b6b;
-    --ds-color-danger-rgb: rgb(217, 107, 107);
+    --ds-color-danger-rgb: 217, 107, 107;
     --ds-color-danger-contrast: var(--ds-text-primary);
     --ds-color-danger-contrast-rgb: var(--ds-text-primary-rgb);
     --ds-color-danger-shade: color-mix(in srgb, var(--ds-color-danger), black 10%);
