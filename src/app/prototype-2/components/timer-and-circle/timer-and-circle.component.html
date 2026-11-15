@@ -3,15 +3,13 @@
 
   <app-timer
     [totalSeconds]="totalSeconds()"
+    [isTimerRunning]="isTimerRunning()"
+    [isTimerPaused]="isTimerPaused()"
+    [currentTimerSession]="currentTimerSession()"
     [class.is-visible]="isTimerBeingEdited() !== true"
     [attr.aria-hidden]="isTimerBeingEdited() === true"
     [attr.inert]="isTimerBeingEdited() === true ? '' : null"
   ></app-timer>
-
-  <div style="z-index: 0; text-align: center">
-    <!-- TODO: toggle visibility -->
-    <ion-chip [color]="sessionTypeIonChipColor">{{ currentTimerSessionText() }}</ion-chip>
-  </div>
 
   <app-edit-button
     [class.is-editing]="isTimerBeingEdited() === true"

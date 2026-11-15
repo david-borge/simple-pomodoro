@@ -3,6 +3,7 @@
 :root,
 :root.md {
   --circle-max-width: 400px;
+  --circle-border-width: 15px;
 }
 
 #circle {
@@ -10,5 +11,4 @@
 
   --circle-progress-color: var(--ds-focus-accent);
   --circle-border-color: var(--ds-focus-base);
-  --circle-border-width: 15px;
 }

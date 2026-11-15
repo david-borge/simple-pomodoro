@@ -3,7 +3,7 @@ import { IonButton } from '@ionic/angular';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { IonicColors } from '../../design-system/ionic-colors';
+import { CustomIonicColors, IonicColors } from '../../design-system/ionic-colors';
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
@@ -40,8 +40,8 @@ export class TimerControlsStartPauseCancelComponent {
   startPauseBtnColor(): IonicColors {
     // TODO: change condition based on focus/rest when that is implemented
     // TODO: move values to enum
-    return !this.timerService.isTimerRunning ? 'focus' : 'focus';
-    // return !this.timerService.isTimerRunning ? 'focus' : 'rest';
+    return !this.timerService.isTimerRunning ? CustomIonicColors.Focus : CustomIonicColors.Focus;
+    // return !this.timerService.isTimerRunning ? CustomIonicColors.Focus : CustomIonicColors.Rest;
   }
 
   startPauseBtnFill() {

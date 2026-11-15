@@ -9,15 +9,23 @@
   aspect-ratio: 1;
 
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  padding: calc(2 * var(--ion-padding) + var(--circle-border-width));
+
   perspective: 600px;
+}
+
+app-edit-button {
+  flex: 1;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
-  padding: calc(2 * var(--ion-padding) + var(--circle-border-width));
-}
-
-app-edit-button {
   transition:
     opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
     visibility 0s;

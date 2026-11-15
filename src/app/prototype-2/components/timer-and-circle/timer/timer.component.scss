@@ -35,6 +35,29 @@
   justify-content: center;
 }
 
+.session-type-container {
+  margin-bottom: 30px;
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
+}
+
+.session-type-container.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
 #label-container {
   font-size: var(--ds-font-size-small);
 
@@ -59,7 +82,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   :host,
-  :host(.is-visible) {
+  :host(.is-visible),
+  .session-type-container,
+  .session-type-container.is-visible {
     transition: none;
   }
 }
