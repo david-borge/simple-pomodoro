@@ -1,21 +1,23 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { InjectionScopes } from '../../constants/injection-scopes.constant';
 import { ONE_MINUTE_IN_SECONDS, ONE_SECOND_IN_MILIISECONDS } from '../../constants/time-conversion.constants';
+import { TimerSession } from '../timer-sessions/timer-session.interface';
+import { TimerSessionsService } from '../timer-sessions/timer-sessions.service';
 
 @Injectable({ providedIn: InjectionScopes.ROOT })
 export class TimerService {
+  private readonly timerSessionsService = inject(TimerSessionsService);
+
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
   private _isTimerRunning = false;
   private _isTimerPaused = false;
   private _isTimerCancelled = true;
   private _isTimerBeingEdited = false;
-
-  //   TODO: Unify both BS?
 
   private timerStatusBehaviorSubject = new BehaviorSubject({
     isTimerRunning: this._isTimerRunning,
@@ -26,10 +28,14 @@ export class TimerService {
   public readonly timerStatus$ = this.timerStatusBehaviorSubject.asObservable();
 
   private _totalSeconds = TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS;
+
   private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
   public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
 
   private _editedTotalSeconds = this._totalSeconds;
+
+  private currentTimerSessionBehaviorSubject = new BehaviorSubject<TimerSession | null>(null);
+  public readonly currentTimerSession$ = this.currentTimerSessionBehaviorSubject.asObservable();
 
   private emitTimerStatus() {
     this.timerStatusBehaviorSubject.next({
@@ -48,6 +54,13 @@ export class TimerService {
     this._isTimerPaused = false;
     this._isTimerCancelled = false;
     this._isTimerBeingEdited = false;
+
+    const timerSessionList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(this._editedTotalSeconds);
+    const currentTimerSession = this.timerSessionsService.getCurrentTimerSessionFromCurrentTotalSeconds(
+      timerSessionList,
+      this._totalSeconds,
+    );
+    this.currentTimerSessionBehaviorSubject.next(currentTimerSession);
 
     this.intervalId = setInterval(() => {
       this._totalSeconds--;

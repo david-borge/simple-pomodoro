@@ -4,7 +4,7 @@ export enum TimerSessionType {
   LongRest = 'long-rest',
 }
 
-interface TimerSession {
+export interface TimerSession {
   durationInSec: number;
   type: TimerSessionType;
 }

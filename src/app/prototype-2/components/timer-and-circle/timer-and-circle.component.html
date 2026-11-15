@@ -8,6 +8,11 @@
     [attr.inert]="isTimerBeingEdited() === true ? '' : null"
   ></app-timer>
 
+  <div style="z-index: 0; text-align: center">
+    <!-- TODO: add ion-chip -->
+    <p>{{ currentTimerSessionText() }}</p>
+  </div>
+
   <app-edit-button
     [class.is-editing]="isTimerBeingEdited() === true"
     [attr.aria-hidden]="isTimerBeingEdited() === true"
