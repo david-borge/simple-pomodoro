@@ -36,7 +36,12 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
-// * Design System CSS Variables - Text size *
+/**
+ * Design System
+ * -----------------------------------------------------
+ */
+
+//  Font size
 body {
   font-size: var(--ds-font-size-body);
 }
@@ -49,13 +54,27 @@ body {
   font-size: var(--ds-font-size-caption); // TODO: unused
 }
 
-// * Ionic - Ionic Button
-ion-button {
-  font-weight: 300;
-  text-transform: none; // Android buttons are uppercase by default. iOS sentence case.
+// Text color
+.text-focus-color {
+  color: var(--ds-focus-accent);
 }
 
-// * Custom Styles *
+.text-rest-color {
+  color: var(--ds-rest-accent);
+}
+/**
+ * Ionic Components - Overriden properties
+ * -----------------------------------------------------
+ */
+ion-button {
+  font-weight: 300;
+  text-transform: none; // Android buttons are uppercase by default. iOS, sentence case.
+}
+
+/**
+ * Custom Styles
+ * -----------------------------------------------------
+ */
 
 // Font
 * {
@@ -98,13 +117,4 @@ ion-button {
 .center-content-vertically {
   display: flex;
   align-items: center;
-}
-
-// Theme colors
-.text-focus-color {
-  color: var(--ds-focus-accent);
-}
-
-.text-rest-color {
-  color: var(--ds-rest-accent);
 }
