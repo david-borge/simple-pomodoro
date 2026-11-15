@@ -8,7 +8,7 @@
         [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
         [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
       >
-        <ion-text color="focus">{{ currentTimerSessionText }}</ion-text>
+        <ion-text [color]="currentTimerSessionColor">{{ currentTimerSessionText }}</ion-text>
       </div>
     </div>
 

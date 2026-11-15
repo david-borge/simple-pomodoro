@@ -27,7 +27,7 @@ export class TimerComponent {
   readonly minutes = computed(() => this.timeConversionService.totalSecondsToMinutes(this.totalSeconds()));
   readonly seconds = computed(() => this.timeConversionService.totalSecondsToSeconds(this.totalSeconds()));
 
-  protected get sessionTypeIonChipColor(): CustomIonicColors {
+  protected get currentTimerSessionColor(): CustomIonicColors {
     switch (this.currentTimerSession()?.type) {
       case TimerSessionType.Focus:
         return CustomIonicColors.Focus;
