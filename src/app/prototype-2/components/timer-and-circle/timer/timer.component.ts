@@ -1,4 +1,4 @@
-import { IonChip } from '@ionic/angular';
+import { IonText } from '@ionic/angular';
 
 import { Component, computed, inject, input } from '@angular/core';
 
@@ -12,7 +12,7 @@ import { TimerSessionsService } from '../../../services/timer-sessions/timer-ses
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
-  imports: [IonChip, TwoDigitsPipe],
+  imports: [IonText, TwoDigitsPipe],
 })
 export class TimerComponent {
   private readonly timeConversionService = inject(TimeConversionService);
