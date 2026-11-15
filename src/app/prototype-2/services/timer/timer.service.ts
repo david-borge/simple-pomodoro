@@ -15,6 +15,8 @@ export class TimerService {
   private _isTimerCancelled = true;
   private _isTimerBeingEdited = false;
 
+  //   TODO: Unify both BS?
+
   private timerStatusBehaviorSubject = new BehaviorSubject({
     isTimerRunning: this._isTimerRunning,
     isTimerPaused: this._isTimerPaused,

@@ -13,8 +13,12 @@
         <div class="center-content-horizontally center-content-vertically" style="width: 100%">
           <app-timer-and-circle [totalSeconds]="totalSeconds()" />
         </div>
-        <div [ngStyle]="{ visibility: showSessionInfo() ? 'visible' : 'hidden' }" style="margin-top: 50px">
-          <app-sessions-info [totalSeconds]="totalSeconds()" [isTimerRunning]="timerService.isTimerRunning" />
+        <div style="margin-top: 50px">
+          <app-sessions-info
+            [class.is-visible]="showSessionInfo()"
+            [totalSeconds]="totalSeconds()"
+            [isTimerRunning]="timerService.isTimerRunning"
+          />
         </div>
       </div>
     </div>
