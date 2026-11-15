@@ -1,24 +1,25 @@
-<!-- TODO: Center on numbers -->
 <!-- TODO: check if chip changes when session type changes -->
 <div id="timer-container">
-  <div
-    class="session-type-container"
-    [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
-    [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
-    [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
-  >
-    <ion-chip [color]="sessionTypeIonChipColor">{{ currentTimerSessionText }}</ion-chip>
-  </div>
+  <div id="timer-number-group">
+    <div id="timer-meta-container">
+      <div
+        id="session-type-container"
+        [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
+        [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
+        [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
+      >
+        <ion-chip [color]="sessionTypeIonChipColor">{{ currentTimerSessionText }}</ion-chip>
+      </div>
 
-  <div id="label-container">
-    @if (hours() >= 1) {
-      <div>hr</div>
-    }
-    <div>min</div>
-    <div>sec</div>
-  </div>
+      <div id="label-container">
+        @if (hours() >= 1) {
+          <div>hr</div>
+        }
+        <div>min</div>
+        <div>sec</div>
+      </div>
+    </div>
 
-  <div>
     <p id="timer-numbers">
       @if (hours() >= 1) {
         <span>{{ hours() | twoDigits }}</span>
