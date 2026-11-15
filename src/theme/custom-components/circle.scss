@@ -1,0 +1,14 @@
+// ** Custom Components CSS Variables - Circle **
+
+:root,
+:root.md {
+  --circle-max-width: 400px;
+}
+
+#circle {
+  --circle-max-width: var(--circle-max-width);
+
+  --circle-progress-color: var(--ds-focus-accent);
+  --circle-border-color: var(--ds-focus-base);
+  --circle-border-width: 15px;
+}

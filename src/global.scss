@@ -36,7 +36,7 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
-//* Design System CSS Variables - Text size *
+// * Design System CSS Variables - Text size *
 body {
   font-size: var(--ds-font-size-body);
 }
@@ -55,7 +55,7 @@ ion-button {
   text-transform: none; // Android buttons are uppercase by default. iOS sentence case.
 }
 
-//* Custom Styles *
+// * Custom Styles *
 
 // Font
 * {
