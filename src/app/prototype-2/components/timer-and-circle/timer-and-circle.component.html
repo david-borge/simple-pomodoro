@@ -9,8 +9,8 @@
   ></app-timer>
 
   <div style="z-index: 0; text-align: center">
-    <!-- TODO: add ion-chip -->
-    <p>{{ currentTimerSessionText() }}</p>
+    <!-- TODO: toggle visibility -->
+    <ion-chip [color]="sessionTypeIonChipColor">{{ currentTimerSessionText() }}</ion-chip>
   </div>
 
   <app-edit-button
