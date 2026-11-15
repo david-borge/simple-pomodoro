@@ -11,8 +11,13 @@
   </div>
 
   <div id="start-pause-button-slot">
-    <ion-button (click)="onClickStartPauseBtn()" [color]="startPauseBtnColor()" size="large" expand="block">{{
-      startPauseBtnText()
-    }}</ion-button>
+    <ion-button
+      (click)="onClickStartPauseBtn()"
+      [color]="startPauseBtnColor()"
+      [fill]="startPauseBtnFill()"
+      size="large"
+      expand="block"
+      >{{ startPauseBtnText() }}</ion-button
+    >
   </div>
 </div>

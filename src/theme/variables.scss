@@ -1,6 +1,10 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
 
+// TODO: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+// [ng]   More info and automated migrator: https://sass-lang.com/d/import
+// [ng]   The plugin "angular-sass" was triggered by this import
+
 // ** Design System - CSS Variables **
 @import './design-system/design-system-variables.general.scss';
 @import './design-system/design-system-variables.light-mode.scss';

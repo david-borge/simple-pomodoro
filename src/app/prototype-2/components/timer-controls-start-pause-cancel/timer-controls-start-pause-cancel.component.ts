@@ -39,8 +39,14 @@ export class TimerControlsStartPauseCancelComponent {
 
   startPauseBtnColor(): IonicColors {
     // TODO: change condition based on focus/rest when that is implemented
+    // TODO: move values to enum
     return !this.timerService.isTimerRunning ? 'focus' : 'focus';
     // return !this.timerService.isTimerRunning ? 'focus' : 'rest';
+  }
+
+  startPauseBtnFill() {
+    // TODO: move values to enum or take from Ionic interface or stg
+    return !this.timerService.isTimerRunning ? 'solid' : 'outline';
   }
 
   startPauseBtnText(): string {
