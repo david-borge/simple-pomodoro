@@ -21,25 +21,26 @@ export class EditTimerService {
     return timerEditorOptions;
   }
 
-  private getFormattedTime(seconds: number): string {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
+  private getFormattedTime(totalSeconds: number): string {
+    const wholeSeconds = Math.round(totalSeconds);
 
-    if (seconds < SECONDS_PER_HOUR) {
-      return `${minutes} min`;
+    if (wholeSeconds < ONE_MINUTE_IN_SECONDS) {
+      return `${wholeSeconds} sec`;
     }
 
-    let hoursString = '';
-    if (hours === 1) {
-      hoursString = `${hours} hr`;
-    } else if (hours > 1) {
-      hoursString = `${hours} hrs`;
+    const hours = Math.floor(wholeSeconds / SECONDS_PER_HOUR);
+    const minutes = Math.floor((wholeSeconds % SECONDS_PER_HOUR) / 60);
+
+    const timeParts: string[] = [];
+
+    if (hours > 0) {
+      timeParts.push(`${hours} hr${hours > 1 ? 's' : ''}`);
     }
 
-    let minutesString = minutes > 0 ? `${minutes} min` : '';
+    if (minutes > 0) {
+      timeParts.push(`${minutes} min`);
+    }
 
-    let spaceString = hoursString !== '' && minutesString !== '' ? ' ' : '';
-
-    return `${hoursString}${spaceString}${minutesString}`;
+    return timeParts.join(' ');
   }
 }
