@@ -1,5 +1,11 @@
 // ** Custom Components CSS Variables - Circle **
 
+@property --circle-progress-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #a9c1d0;
+}
+
 :root,
 :root.md {
   --circle-max-width: 400px;
@@ -10,6 +16,8 @@
   --circle-max-width: var(--circle-max-width);
 
   --circle-border-color: var(--ds-focus-base);
+  --circle-progress-color-transition: var(--ds-transition-duration, 200ms)
+    var(--ds-transition-timing-function, ease-out);
 
   &.focus {
     --circle-progress-color: var(--ds-focus-accent);

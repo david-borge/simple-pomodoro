@@ -11,7 +11,9 @@
 
   background: conic-gradient(var(--circle-progress-color) var(--progress), var(--circle-border-color) var(--progress));
 
-  transition: --progress 1s linear;
+  transition:
+    --progress 1s linear,
+    --circle-progress-color var(--circle-progress-color-transition);
 
   @extend .center-absolute;
 
