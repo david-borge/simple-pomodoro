@@ -73,10 +73,7 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
       return;
     }
 
-    if (
-      changes['totalSeconds'] ||
-      changes['isTimerBeingEdited']?.currentValue === false
-    ) {
+    if (changes['totalSeconds'] || changes['isTimerBeingEdited']?.currentValue === false) {
       this.changeCircleProgressBasedOnTimePassedOnInterval();
     }
   }

@@ -11,6 +11,7 @@ import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer
 import { TimerControlsStartPauseCancelComponent } from '../../components/timer-controls-start-pause-cancel/timer-controls-start-pause-cancel.component';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
+import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
@@ -30,6 +31,7 @@ import { TimerService } from '../../services/timer/timer.service';
 })
 export class Prototype2Page {
   private readonly timerService = inject(TimerService);
+  private readonly timerSessionsService = inject(TimerSessionsService);
   private readonly destroyRef = inject(DestroyRef);
 
   readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
@@ -45,10 +47,8 @@ export class Prototype2Page {
   }
 
   showSessionInfo() {
-    return (
-      this.timerService.isTimerBeingEdited ||
-      (!this.timerService.isTimerBeingEdited &&
-        this.totalSeconds() > TIMER_CONFIG.sessions.showSessionsInfoThresholdInMin * ONE_MINUTE_IN_SECONDS)
-    );
+    const totalSeconds = this.totalSeconds();
+
+    return totalSeconds <= 0 || this.timerSessionsService.getTimerSessionsFromTotalSeconds(totalSeconds).length !== 1;
   }
 }
