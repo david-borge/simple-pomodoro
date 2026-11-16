@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
+import { ONE_SECOND_IN_MILIISECONDS } from '../../../constants/time-conversion.constants';
 import { TimerSession, TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
 import { CircleColorClass } from './circle-color-class.enum';
 import { CircleDegrees } from './circle-degrees.constant';
@@ -19,6 +20,8 @@ import { CircleDegrees } from './circle-degrees.constant';
   styleUrls: ['./circle.component.scss'],
 })
 export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
+  private static readonly MIN_CIRCLE_RESET_DURATION_RATIO = 0.2;
+
   readonly totalSeconds = input.required<number>();
   readonly isTimerBeingEdited = input.required<boolean>();
   readonly isTimerRunning = input.required<boolean | null>();
@@ -59,6 +62,12 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
       return;
     }
 
+    if (changes['isTimerCancelled']?.currentValue === true) {
+      this.setCircleProgressResetDuration();
+      this.changeCircleProgressBasedOnTimePassedOnInterval();
+      return;
+    }
+
     if (changes['totalSeconds'] && this.isTimerRunning() === true) {
       this.animateCircleProgressToNextSecond();
       return;
@@ -66,7 +75,6 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
 
     if (
       changes['totalSeconds'] ||
-      changes['isTimerCancelled']?.currentValue === true ||
       changes['isTimerBeingEdited']?.currentValue === false
     ) {
       this.changeCircleProgressBasedOnTimePassedOnInterval();
@@ -104,6 +112,23 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
   private freezeCircleProgressAtCurrentPosition(): void {
     const currentProgress = getComputedStyle(this.circleEl.nativeElement).getPropertyValue('--progress').trim();
     this.circleEl.nativeElement.style.setProperty('--progress', currentProgress);
+  }
+
+  private setCircleProgressResetDuration(): void {
+    const currentProgress = Number.parseFloat(
+      getComputedStyle(this.circleEl.nativeElement).getPropertyValue('--progress'),
+    );
+
+    if (!Number.isFinite(currentProgress)) return;
+
+    const remainingProgressRatio = Math.min(
+      Math.max((CircleDegrees.maxDegrees - currentProgress) / CircleDegrees.maxDegrees, 0),
+      1,
+    );
+    const resetDurationRatio = Math.max(remainingProgressRatio, CircleComponent.MIN_CIRCLE_RESET_DURATION_RATIO);
+    const resetDurationInMs = resetDurationRatio * ONE_SECOND_IN_MILIISECONDS;
+
+    this.circleEl.nativeElement.style.setProperty('--circle-progress-reset-duration', `${resetDurationInMs}ms`);
   }
 
   private animateCircleProgressToNextSecond(): void {

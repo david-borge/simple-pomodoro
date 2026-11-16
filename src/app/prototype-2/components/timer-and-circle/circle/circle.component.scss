@@ -26,10 +26,15 @@
   align-items: center;
 }
 
-#circle.is-running,
-#circle.is-resetting {
+#circle.is-running {
   transition:
     --progress 1s linear,
+    --circle-progress-color var(--circle-progress-color-transition);
+}
+
+#circle.is-resetting {
+  transition:
+    --progress var(--circle-progress-reset-duration, 1s) linear,
     --circle-progress-color var(--circle-progress-color-transition);
 }
 
