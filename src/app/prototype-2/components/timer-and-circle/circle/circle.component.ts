@@ -72,6 +72,7 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
 
     if (changes['isTimerRunning']?.currentValue === true) {
       this.circleEl.nativeElement.classList.add('is-running');
+      this.circleEl.nativeElement.classList.remove('is-resetting');
       this.animateCircleProgressToNextSecond();
       this.updateProgressShadowVisibility();
       return;
@@ -84,6 +85,7 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
     }
 
     if (changes['isTimerCancelled']?.currentValue === true) {
+      this.circleEl.nativeElement.classList.add('is-resetting');
       this.setCircleProgressResetDuration();
       this.changeCircleProgressBasedOnTimePassedOnInterval();
       this.resetProgressShadowVisibility();
