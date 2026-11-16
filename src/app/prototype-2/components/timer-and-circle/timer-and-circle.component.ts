@@ -4,6 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TimerSession } from '../../services/timer-sessions/timer-session.interface';
 import { TimerService } from '../../services/timer/timer.service';
 import { TimerEditComponent } from '../timer-edit/timer-edit.component';
+import { AlarmComponent } from './alarm/alarm.component';
 import { CircleComponent } from './circle/circle.component';
 import { EditButtonComponent } from './edit-button/edit-button.component';
 import { TimerComponent } from './timer/timer.component';
@@ -12,7 +13,7 @@ import { TimerComponent } from './timer/timer.component';
   selector: 'app-timer-and-circle',
   templateUrl: './timer-and-circle.component.html',
   styleUrls: ['./timer-and-circle.component.scss'],
-  imports: [CircleComponent, EditButtonComponent, TimerComponent, TimerEditComponent],
+  imports: [AlarmComponent, CircleComponent, EditButtonComponent, TimerComponent, TimerEditComponent],
 })
 export class TimerAndCircleComponent implements OnInit {
   private readonly timerService = inject(TimerService);
