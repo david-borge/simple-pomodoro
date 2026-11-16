@@ -5,7 +5,12 @@
     [currentTimerSession]="currentTimerSession()"
   ></app-circle>
 
-  <app-alarm [currentTimerSession]="currentTimerSession()"></app-alarm>
+  <app-alarm
+    [currentTimerSession]="currentTimerSession()"
+    [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
+    [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
+    [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
+  ></app-alarm>
 
   <app-timer
     [totalSeconds]="totalSeconds()"

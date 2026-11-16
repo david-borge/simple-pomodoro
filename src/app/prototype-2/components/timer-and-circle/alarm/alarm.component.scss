@@ -1,5 +1,29 @@
 :host {
   z-index: 0;
+
+  transform: translateY(6px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
+}
+
+:host(.is-visible) {
+  transform: translateY(0);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
 }
 
 #alarm-container {
@@ -9,4 +33,11 @@
   align-items: center;
   flex-wrap: nowrap;
   gap: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host,
+  :host(.is-visible) {
+    transition: none;
+  }
 }
