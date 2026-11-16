@@ -35,9 +35,29 @@
   gap: 8px;
 }
 
+.alarm-time-enter {
+  display: inline-block;
+  animation: alarm-time-change var(--ds-transition-duration, 200ms)
+    var(--ds-transition-timing-function, ease-out) both;
+}
+
+@keyframes alarm-time-change {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :host,
-  :host(.is-visible) {
+  :host(.is-visible),
+  .alarm-time-enter {
     transition: none;
+    animation: none;
   }
 }
