@@ -8,8 +8,10 @@
 
 #circle {
   --progress: 360deg;
+  --circle-progress-endpoint-angle: var(--progress);
 
   background: conic-gradient(var(--circle-progress-color) var(--progress), var(--circle-border-color) var(--progress));
+  color: var(--circle-progress-color);
 
   transition: --circle-progress-color var(--circle-progress-color-transition);
 
@@ -24,6 +26,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle calc(var(--circle-border-width) / 2) at 50% calc(var(--circle-border-width) / 2),
+    currentColor 99%,
+    transparent 100%
+  );
+  transform: rotate(var(--circle-progress-endpoint-angle));
+  pointer-events: none;
 }
 
 #circle.is-running {
