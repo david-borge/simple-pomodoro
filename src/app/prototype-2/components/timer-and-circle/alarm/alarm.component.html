@@ -1,6 +1,6 @@
 <div id="alarm-container">
   <ion-icon src="../../../../../assets/icons-svg/notifications.svg"></ion-icon>
-  <div>
+  <div id="alarm-time">
     @for (time of [alarmTime()]; track time) {
       <span animate.enter="alarm-time-enter">{{ time }}</span>
     }
