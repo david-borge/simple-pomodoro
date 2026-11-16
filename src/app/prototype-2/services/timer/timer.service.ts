@@ -84,6 +84,7 @@ export class TimerService {
     this._isTimerPaused = false;
     this._isTimerCancelled = true;
     this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+    this.currentTimerSessionBehaviorSubject.next(null);
     this.emitTimerStatus();
   }
 
