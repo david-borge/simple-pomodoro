@@ -88,6 +88,24 @@
   text-transform: uppercase;
 }
 
+#session-type-container > ion-text.session-type-enter {
+  display: inline-block;
+  animation: session-type-change var(--ds-transition-duration, 200ms)
+    var(--ds-transition-timing-function, ease-out) both;
+}
+
+@keyframes session-type-change {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 #label-container {
   font-size: var(--ds-font-size-small);
   letter-spacing: 1px;
@@ -116,7 +134,9 @@
   :host,
   :host(.is-visible),
   #session-type-container,
-  #session-type-container.is-visible {
+  #session-type-container.is-visible,
+  #session-type-container > ion-text.session-type-enter {
     transition: none;
+    animation: none;
   }
 }
