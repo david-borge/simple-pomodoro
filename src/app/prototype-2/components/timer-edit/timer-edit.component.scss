@@ -7,7 +7,11 @@ ion-picker {
 
   --highlight-background: color-mix(in srgb, var(--ion-color-focus), transparent 90%);
   --highlight-border-radius: var(--ds-border-radius);
-  --fade-background-rgb: wrong-value-on-purpose-to-remove-bg;
+  --fade-background-rgb: color-mix(in srgb, var(--ion-background-color-rgb), transparent 100%);
+}
+
+ion-picker-column {
+  --ion-color-primary-rgb: color-mix(in srgb, var(--ion-background-color-rgb), transparent 100%);
 }
 
 ion-picker-column-option {
