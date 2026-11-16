@@ -27,7 +27,7 @@ export class TimerService {
   });
   public readonly timerStatus$ = this.timerStatusBehaviorSubject.asObservable();
 
-  private _totalSeconds = TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS;
+  private _totalSeconds = Math.round(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
   private timerSessionList: TimerSessionsList = [];
 
   private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);

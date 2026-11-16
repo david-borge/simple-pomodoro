@@ -9,11 +9,11 @@ import { TimerSessionType } from './timer-session.interface';
 @Service()
 export class TimerSessionsService {
   private static readonly FOCUS_SESSION_DURATION_IN_SEC =
-    TIMER_CONFIG.sessions.focusSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
+    Math.round(TIMER_CONFIG.sessions.focusSessionDurationInMin * ONE_MINUTE_IN_SECONDS);
   private static readonly SHORT_REST_SESSION_DURATION_IN_SEC =
-    TIMER_CONFIG.sessions.shortRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
+    Math.round(TIMER_CONFIG.sessions.shortRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS);
   private static readonly LONG_REST_SESSION_DURATION_IN_SEC =
-    TIMER_CONFIG.sessions.longRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
+    Math.round(TIMER_CONFIG.sessions.longRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS);
   private static readonly LONG_REST_CADENCE = TIMER_CONFIG.sessions.longRestCadence;
 
   public getTimerSessionsFromTotalSeconds(totalSeconds: number): TimerSessionsList {

@@ -8,15 +8,17 @@ import { TimerEditorOptions } from './timer-editor.options.type';
 export class EditTimerService {
   public getTimerEditorOptions(): TimerEditorOptions {
     let timerEditorOptions: TimerEditorOptions = [];
-    let counterInSec = TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS;
+    let counterInSec = Math.round(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+    const editorIntervalInSec = Math.round(TIMER_CONFIG.timerEditorIntervalInMin * ONE_MINUTE_IN_SECONDS);
+    const maximumTimerInSec = Math.round(TIMER_CONFIG.maximumTimerInMin * ONE_MINUTE_IN_SECONDS);
 
     do {
       timerEditorOptions.push({
         timeInSec: counterInSec,
         text: this.getFormattedTime(counterInSec),
       });
-      counterInSec += TIMER_CONFIG.timerEditorIntervalInMin * ONE_MINUTE_IN_SECONDS;
-    } while (counterInSec <= TIMER_CONFIG.maximumTimerInMin * ONE_MINUTE_IN_SECONDS);
+      counterInSec += editorIntervalInSec;
+    } while (counterInSec <= maximumTimerInSec);
 
     return timerEditorOptions;
   }
