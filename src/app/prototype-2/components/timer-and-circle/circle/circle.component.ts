@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
 import { TimerSession, TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
 import { CircleColorClass } from './circle-color-class.enum';
@@ -12,6 +12,8 @@ import { CircleDegrees } from './circle-degrees.constant';
 export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
   readonly totalSeconds = input.required<number>();
   readonly isTimerBeingEdited = input.required<boolean>();
+  readonly isTimerRunning = input.required<boolean | null>();
+  readonly isTimerPaused = input.required<boolean | null>();
   readonly currentTimerSession = input.required<TimerSession | null>();
 
   private intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
@@ -28,15 +30,22 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
     this.changeCircleProgressBasedOnTimePassedOnInterval();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (!this.isViewInitialized) return;
+
+    if (changes['isTimerPaused']?.currentValue === true) {
+      this.freezeCircleProgressAtCurrentPosition();
+      return;
+    }
 
     if (this.isTimerBeingEdited()) {
       this.intervalDurationInSec = this.totalSeconds();
       return;
     }
 
-    this.changeCircleProgressBasedOnTimePassedOnInterval();
+    if (changes['totalSeconds'] || changes['isTimerBeingEdited']?.currentValue === false) {
+      this.changeCircleProgressBasedOnTimePassedOnInterval();
+    }
   }
 
   private changeCircleProgressBasedOnTimePassedOnInterval(): void {
@@ -65,6 +74,11 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     this.circleEl.nativeElement.style.setProperty('--progress', degrees + 'deg');
+  }
+
+  private freezeCircleProgressAtCurrentPosition(): void {
+    const currentProgress = getComputedStyle(this.circleEl.nativeElement).getPropertyValue('--progress').trim();
+    this.circleEl.nativeElement.style.setProperty('--progress', currentProgress);
   }
 
   private getCurrentIntervalDurationRatio(): number {

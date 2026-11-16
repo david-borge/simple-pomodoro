@@ -11,9 +11,7 @@
 
   background: conic-gradient(var(--circle-progress-color) var(--progress), var(--circle-border-color) var(--progress));
 
-  transition:
-    --progress 1s linear,
-    --circle-progress-color var(--circle-progress-color-transition);
+  transition: --circle-progress-color var(--circle-progress-color-transition);
 
   @extend .center-absolute;
 
@@ -26,6 +24,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#circle.is-running {
+  transition:
+    --progress 1s linear,
+    --circle-progress-color var(--circle-progress-color-transition);
 }
 
 @property --progress {
