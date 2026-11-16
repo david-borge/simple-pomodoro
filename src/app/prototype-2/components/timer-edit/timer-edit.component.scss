@@ -1,5 +1,14 @@
+:host {
+  min-width: 60%;
+}
+
 ion-picker {
   user-select: none;
+
+  //   TODO: change to rest automatically
+  --highlight-background: color-mix(in srgb, var(--ion-color-focus), transparent 90%);
+  --highlight-border-radius: var(--ds-border-radius);
+  --fade-background-rgb: wrong-value-on-purpose-to-remove-bg;
 }
 
 ion-picker-column-option {
@@ -11,7 +20,7 @@ ion-picker-column-option {
   letter-spacing: 1.2px;
 
   &.option-active {
+    color: var(--ion-color-focus-contrast);
     font-weight: 400;
-    color: var(--ion-color-focus);
   }
 }

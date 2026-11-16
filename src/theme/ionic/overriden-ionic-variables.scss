@@ -63,7 +63,7 @@
 ion-button {
   --border-color: var(--ds-focus-accent);
   --border-width: 1px;
-  --border-radius: 28px;
+  --border-radius: var(--ds-border-radius);
 
   --background-hover: var(--ds-focus-accent);
 
