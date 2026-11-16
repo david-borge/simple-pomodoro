@@ -4,6 +4,7 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CustomIonicColors, IonicColors } from '../../design-system/ionic-colors';
+import { TimerSession, TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
@@ -17,11 +18,18 @@ export class TimerControlsStartPauseCancelComponent {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly isCancelButtonVisible = signal(this.timerService.isTimerPaused);
+  private currentTimerSession = signal<TimerSession | null>(null);
 
   constructor() {
     this.timerService.timerStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(({ isTimerPaused }) => {
       this.isCancelButtonVisible.set(isTimerPaused);
     });
+
+    this.timerService.currentTimerSession$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((currentTimerSession) => {
+        this.currentTimerSession.set(currentTimerSession);
+      });
   }
 
   onClickStartPauseBtn() {
@@ -38,10 +46,17 @@ export class TimerControlsStartPauseCancelComponent {
   }
 
   startPauseBtnColor(): IonicColors {
-    // TODO: change condition based on focus/rest when that is implemented
-    // TODO: move values to enum
-    return !this.timerService.isTimerRunning ? CustomIonicColors.Focus : CustomIonicColors.Focus;
-    // return !this.timerService.isTimerRunning ? CustomIonicColors.Focus : CustomIonicColors.Rest;
+    switch (this.currentTimerSession()?.type) {
+      case TimerSessionType.Focus:
+        return CustomIonicColors.Focus;
+
+      case TimerSessionType.ShortRest:
+      case TimerSessionType.LongRest:
+        return CustomIonicColors.Rest;
+
+      default:
+        return CustomIonicColors.Focus;
+    }
   }
 
   startPauseBtnFill() {
