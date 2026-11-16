@@ -4,6 +4,7 @@ import {
   ElementRef,
   input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
   ViewChild,
@@ -19,8 +20,9 @@ import { CircleDegrees } from './circle-degrees.constant';
   templateUrl: './circle.component.html',
   styleUrls: ['./circle.component.scss'],
 })
-export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
+export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   private static readonly MIN_CIRCLE_RESET_DURATION_RATIO = 0.2;
+  private static readonly PROGRESS_SHADOW_START_OFFSET_IN_DEGREES = 3;
 
   readonly totalSeconds = input.required<number>();
   readonly isTimerBeingEdited = input.required<boolean>();
@@ -31,6 +33,7 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
 
   private intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
   private isViewInitialized = false;
+  private progressShadowFrameId: number | null = null;
   // eslint-disable-next-line angular-class-members-order/angular-class-members-order
   @ViewChild('circleLocalRef') private readonly circleEl!: ElementRef<HTMLDivElement>;
 
@@ -43,33 +46,42 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
     this.changeCircleProgressBasedOnTimePassedOnInterval();
   }
 
+  ngOnDestroy(): void {
+    this.cancelProgressShadowCheck();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.isViewInitialized) return;
 
     if (changes['isTimerPaused']?.currentValue === true) {
       this.freezeCircleProgressAtCurrentPosition();
+      this.cancelProgressShadowCheck();
       return;
     }
 
     if (changes['isTimerRunning']?.currentValue === true) {
       this.circleEl.nativeElement.classList.add('is-running');
       this.animateCircleProgressToNextSecond();
+      this.updateProgressShadowVisibility();
       return;
     }
 
     if (this.isTimerBeingEdited()) {
       this.intervalDurationInSec = this.totalSeconds();
+      this.resetProgressShadowVisibility();
       return;
     }
 
     if (changes['isTimerCancelled']?.currentValue === true) {
       this.setCircleProgressResetDuration();
       this.changeCircleProgressBasedOnTimePassedOnInterval();
+      this.resetProgressShadowVisibility();
       return;
     }
 
     if (changes['totalSeconds'] && this.isTimerRunning() === true) {
       this.animateCircleProgressToNextSecond();
+      this.updateProgressShadowVisibility();
       return;
     }
 
@@ -82,6 +94,57 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
     const currentIntervalDurationRatio = this.getCurrentIntervalDurationRatio();
     const circleProgressFromRatio = this.getCircleDegreesFromRatio(currentIntervalDurationRatio);
     this.setCircleProgress(circleProgressFromRatio);
+    this.setProgressShadowVisible(
+      circleProgressFromRatio <= CircleDegrees.maxDegrees - CircleComponent.PROGRESS_SHADOW_START_OFFSET_IN_DEGREES,
+    );
+
+    if (this.isTimerRunning() === true) this.updateProgressShadowVisibility();
+  }
+
+  private updateProgressShadowVisibility(): void {
+    this.cancelProgressShadowCheck();
+
+    const shadowStartAngle = CircleDegrees.maxDegrees - CircleComponent.PROGRESS_SHADOW_START_OFFSET_IN_DEGREES;
+
+    if (this.isTimerRunning() !== true) return;
+
+    const checkForShadowStart = (): void => {
+      this.progressShadowFrameId = null;
+
+      if (this.isTimerRunning() !== true) return;
+
+      const currentProgress = Number.parseFloat(
+        getComputedStyle(this.circleEl.nativeElement).getPropertyValue('--progress'),
+      );
+
+      if (!Number.isFinite(currentProgress)) return;
+
+      if (currentProgress <= shadowStartAngle) {
+        this.setProgressShadowVisible(true);
+        return;
+      }
+
+      this.setProgressShadowVisible(false);
+      this.progressShadowFrameId = requestAnimationFrame(checkForShadowStart);
+    };
+
+    this.progressShadowFrameId = requestAnimationFrame(checkForShadowStart);
+  }
+
+  private setProgressShadowVisible(isVisible: boolean): void {
+    this.circleEl.nativeElement.classList.toggle('has-progress-shadow', isVisible);
+  }
+
+  private cancelProgressShadowCheck(): void {
+    if (this.progressShadowFrameId === null) return;
+
+    cancelAnimationFrame(this.progressShadowFrameId);
+    this.progressShadowFrameId = null;
+  }
+
+  private resetProgressShadowVisibility(): void {
+    this.cancelProgressShadowCheck();
+    this.setProgressShadowVisible(false);
   }
 
   private setCircleProgress(degrees: number): void {
