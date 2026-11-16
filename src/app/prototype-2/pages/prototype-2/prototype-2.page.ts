@@ -48,7 +48,12 @@ export class Prototype2Page {
 
   showSessionInfo() {
     const totalSeconds = this.totalSeconds();
+    const plannedTotalSeconds = this.timerService.editedTotalSeconds;
 
-    return totalSeconds <= 0 || this.timerSessionsService.getTimerSessionsFromTotalSeconds(totalSeconds).length !== 1;
+    return (
+      this.timerService.isTimerBeingEdited ||
+      totalSeconds <= 0 ||
+      this.timerSessionsService.getTimerSessionsFromTotalSeconds(plannedTotalSeconds).length !== 1
+    );
   }
 }

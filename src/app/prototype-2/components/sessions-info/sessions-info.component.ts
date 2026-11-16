@@ -20,22 +20,34 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   private readonly el = inject(ElementRef);
 
   readonly totalSeconds = input.required<number>();
+  readonly plannedTotalSeconds = input.required<number>();
   readonly isTimerRunning = input.required<boolean>();
+  readonly isTimerBeingEdited = input.required<boolean>();
 
   // Exposed publicly so the template can bind to timerSessionsList without modifications
   readonly timerSessionsList = signal<TimerSessionsList>([]);
+  readonly currentSessionIndex = signal(0);
 
   TimerSessionType = TimerSessionType;
 
   private viewInitialized = false;
   private lastRenderedSessionCounts: [number, number, number, boolean] | null = null;
+  private remainingTimerSessionsList: TimerSessionsList = [];
 
   //   TODO:
   BulletFillType = BulletFillType;
 
   ngOnChanges(): void {
-    // TODO: do I need to call this fn on it changes? Would it be enough with onInit?
-    this.timerSessionsList.set(this.timerSessionsService.getTimerSessionsFromTotalSeconds(this.totalSeconds()));
+    const plannedTotalSeconds = this.plannedTotalSeconds();
+    const timerSessionsList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(plannedTotalSeconds);
+
+    this.timerSessionsList.set(timerSessionsList);
+    this.currentSessionIndex.set(
+      this.getCurrentSessionIndex(timerSessionsList, plannedTotalSeconds, this.totalSeconds()),
+    );
+    this.remainingTimerSessionsList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(
+      Math.max(this.totalSeconds(), 1),
+    );
 
     if (this.viewInitialized) {
       this.renderSessionsInfoIfChanged();
@@ -49,15 +61,15 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
 
   private renderSessionsInfoIfChanged(): void {
     const focusSessions = this.timerSessionsService.getNumberOfSessionsOfAParticulaType(
-      this.timerSessionsList(),
+      this.remainingTimerSessionsList,
       TimerSessionType.Focus,
     );
     const shortRestSessions = this.timerSessionsService.getNumberOfSessionsOfAParticulaType(
-      this.timerSessionsList(),
+      this.remainingTimerSessionsList,
       TimerSessionType.ShortRest,
     );
     const longRestSessions = this.timerSessionsService.getNumberOfSessionsOfAParticulaType(
-      this.timerSessionsList(),
+      this.remainingTimerSessionsList,
       TimerSessionType.LongRest,
     );
     const sessionCounts: [number, number, number, boolean] = [
@@ -81,5 +93,25 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
       longRestSessions,
       this.isTimerRunning(),
     );
+  }
+
+  private getCurrentSessionIndex(
+    timerSessionsList: TimerSessionsList,
+    plannedTotalSeconds: number,
+    remainingTotalSeconds: number,
+  ): number {
+    let elapsedSeconds = Math.max(plannedTotalSeconds - remainingTotalSeconds, 0);
+
+    for (let index = 0; index < timerSessionsList.length; index++) {
+      const timerSession = timerSessionsList[index];
+
+      if (elapsedSeconds < timerSession.durationInSec || index === timerSessionsList.length - 1) {
+        return index;
+      }
+
+      elapsedSeconds -= timerSession.durationInSec;
+    }
+
+    return 0;
   }
 }

@@ -44,4 +44,12 @@
   &.bullet-fill-solid.color-rest {
     background-color: var(--ds-rest-accent);
   }
+
+  &.bullet-fill-outline {
+    opacity: 0.8;
+  }
+
+  &.bullet-fill-outline.is-timer-being-edited {
+    opacity: 1;
+  }
 }

@@ -1,1 +1,5 @@
-<div id="bullet" [ngClass]="[getBulletColorClass(), getBulletFillClass()]"></div>
+<div
+  id="bullet"
+  [ngClass]="[getBulletColorClass(), getBulletFillClass()]"
+  [class.is-timer-being-edited]="isTimerBeingEdited()"
+></div>

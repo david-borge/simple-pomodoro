@@ -1,7 +1,13 @@
 <!-- TODO: check what to do if there are too many bullets to fit in one line -->
 <div id="timer-sessions-bullets-container">
-  @for (timerSession of timerSessionsList(); track $index) {
-    <app-bullet [BulletFillType]="BulletFillType.Solid" [timerSessionType]="timerSession.type"></app-bullet>
+  @for (timerSession of timerSessionsList(); track $index; let index = $index) {
+    <app-bullet
+      [BulletFillType]="
+        isTimerBeingEdited() || index > currentSessionIndex() ? BulletFillType.Outline : BulletFillType.Solid
+      "
+      [isTimerBeingEdited]="isTimerBeingEdited()"
+      [timerSessionType]="timerSession.type"
+    ></app-bullet>
   }
 </div>
 <div id="timer-sessions-info-text"></div>
