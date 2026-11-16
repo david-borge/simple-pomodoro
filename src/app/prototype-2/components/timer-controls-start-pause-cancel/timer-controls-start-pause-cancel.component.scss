@@ -42,9 +42,17 @@
   min-width: 0;
 }
 
+#start-pause-button-slot ion-button::part(native) {
+  transition:
+    color var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    background-color var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    border-color var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out);
+}
+
 @media (prefers-reduced-motion: reduce) {
   #timer-controls-row,
-  #cancel-button-slot {
+  #cancel-button-slot,
+  #start-pause-button-slot ion-button::part(native) {
     transition: none;
   }
 }
