@@ -5,7 +5,6 @@
 ion-picker {
   user-select: none;
 
-  //   TODO: change to rest automatically
   --highlight-background: color-mix(in srgb, var(--ion-color-focus), transparent 90%);
   --highlight-border-radius: var(--ds-border-radius);
   --fade-background-rgb: wrong-value-on-purpose-to-remove-bg;
