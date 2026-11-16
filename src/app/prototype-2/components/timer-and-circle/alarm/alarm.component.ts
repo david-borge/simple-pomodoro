@@ -1,8 +1,8 @@
 import { IonIcon } from '@ionic/angular';
 
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
-import { ONE_SECOND_IN_MILIISECONDS } from '../../../constants/time-conversion.constants';
+import { ONE_MINUTE_IN_SECONDS, ONE_SECOND_IN_MILIISECONDS } from '../../../constants/time-conversion.constants';
 import { TimerSession } from '../../../services/timer-sessions/timer-session.interface';
 
 @Component({
@@ -14,15 +14,15 @@ import { TimerSession } from '../../../services/timer-sessions/timer-session.int
 export class AlarmComponent {
   readonly currentTimerSession = input.required<TimerSession | null>();
 
-  protected get alarmTime() {
+  protected readonly alarmTime = computed(() => {
     const currentTimerSession = this.currentTimerSession();
 
-    if (!currentTimerSession) return;
+    if (!currentTimerSession) return '';
 
     const now = new Date();
     const alarmDate = this.addSecondsToDate(now, currentTimerSession.durationInSec);
     return this.getTimeFromDate(alarmDate);
-  }
+  });
 
   private addSecondsToDate(date: Date, seconds: number) {
     return new Date(date.getTime() + seconds * ONE_SECOND_IN_MILIISECONDS);
@@ -32,7 +32,15 @@ export class AlarmComponent {
     const hours = this.formatNumberWithTwoDigits(date.getHours());
     const minutes = this.formatNumberWithTwoDigits(date.getMinutes());
 
-    return `${hours}:${minutes}`;
+    let time = `${hours}:${minutes}`;
+
+    const currentTimerSession = this.currentTimerSession();
+    if (currentTimerSession && currentTimerSession.durationInSec < ONE_MINUTE_IN_SECONDS) {
+      const seconds = this.formatNumberWithTwoDigits(date.getSeconds());
+      time += `:${seconds}`;
+    }
+
+    return time;
   }
 
   private formatNumberWithTwoDigits(number: number): string {
