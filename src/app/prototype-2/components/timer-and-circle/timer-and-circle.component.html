@@ -11,6 +11,7 @@
   <app-alarm
     [currentTimerSession]="currentTimerSession()"
     [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
+    [class.is-paused]="isTimerPaused() === true"
     [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
     [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
   ></app-alarm>

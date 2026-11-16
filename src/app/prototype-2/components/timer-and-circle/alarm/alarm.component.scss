@@ -26,6 +26,10 @@
     visibility 0s;
 }
 
+:host(.is-visible.is-paused) {
+  opacity: 0.5;
+}
+
 #alarm-container {
   display: flex;
   flex-direction: row;
