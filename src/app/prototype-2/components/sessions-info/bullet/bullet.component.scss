@@ -23,17 +23,25 @@
   border-image-outset: 0;
   border-image-repeat: stretch;
 
-  &.border-color-focus {
+  &.color-focus {
     border-top-color: var(--ds-focus-accent);
     border-right-color: var(--ds-focus-accent);
     border-bottom-color: var(--ds-focus-accent);
     border-left-color: var(--ds-focus-accent);
   }
 
-  &.border-color-rest {
+  &.color-rest {
     border-top-color: var(--ds-rest-accent);
     border-right-color: var(--ds-rest-accent);
     border-bottom-color: var(--ds-rest-accent);
     border-left-color: var(--ds-rest-accent);
+  }
+
+  &.bullet-fill-solid.color-focus {
+    background-color: var(--ds-focus-accent);
+  }
+
+  &.bullet-fill-solid.color-rest {
+    background-color: var(--ds-rest-accent);
   }
 }

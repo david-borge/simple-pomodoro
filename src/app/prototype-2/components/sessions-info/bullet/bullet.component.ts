@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 import { TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
-import { BulletBorderColorClass } from './bullet-border-color.enum';
+import { BulletColorClass } from './bullet-color.enum';
+import { BulletFillClass, BulletFillType } from './bullet-fill.enum';
 
 @Component({
   selector: 'app-bullet',
@@ -11,19 +12,33 @@ import { BulletBorderColorClass } from './bullet-border-color.enum';
   imports: [CommonModule],
 })
 export class BulletComponent {
+  readonly BulletFillType = input.required<BulletFillType>();
   readonly timerSessionType = input.required<TimerSessionType>();
 
   getBulletColorClass() {
     switch (this.timerSessionType()) {
       case TimerSessionType.Focus:
-        return BulletBorderColorClass.BorderColorFocus;
+        return BulletColorClass.Focus;
 
       case TimerSessionType.ShortRest:
       case TimerSessionType.LongRest:
-        return BulletBorderColorClass.BorderColorRest;
+        return BulletColorClass.Rest;
 
       default:
-        return BulletBorderColorClass.BorderColorFocus;
+        return BulletColorClass.Focus;
+    }
+  }
+
+  getBulletFillClass(): BulletFillClass {
+    switch (this.BulletFillType()) {
+      case BulletFillType.Solid:
+        return BulletFillClass.Solid;
+
+      case BulletFillType.Outline:
+        return BulletFillClass.Outline;
+
+      default:
+        return BulletFillClass.Solid;
     }
   }
 }

@@ -3,6 +3,7 @@ import { AfterViewInit, Component, ElementRef, inject, input, OnChanges, Rendere
 
 import { TimerSessionsList, TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
+import { BulletFillType } from './bullet/bullet-fill.enum';
 import { BulletComponent } from './bullet/bullet.component';
 import { SessionsInfoService } from './sessions-info.service';
 
@@ -28,6 +29,9 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
 
   private viewInitialized = false;
   private lastRenderedSessionCounts: [number, number, number, boolean] | null = null;
+
+  //   TODO:
+  BulletFillType = BulletFillType;
 
   ngOnChanges(): void {
     // TODO: do I need to call this fn on it changes? Would it be enough with onInit?
