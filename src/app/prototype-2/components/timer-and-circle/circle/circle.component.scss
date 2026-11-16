@@ -8,9 +8,14 @@
 
 #circle {
   --progress: 360deg;
-  --circle-progress-endpoint-angle: var(--progress);
+  --circle-progress-start-angle: 0deg;
+  --circle-progress-endpoint-angle: calc(var(--circle-progress-start-angle) + var(--progress));
 
-  background: conic-gradient(var(--circle-progress-color) var(--progress), var(--circle-border-color) var(--progress));
+  background: conic-gradient(
+    from var(--circle-progress-start-angle),
+    var(--circle-progress-color) 0deg var(--progress),
+    var(--circle-border-color) var(--progress)
+  );
   color: var(--circle-progress-color);
 
   transition: --circle-progress-color var(--circle-progress-color-transition);
@@ -47,6 +52,10 @@
   transform: rotate(var(--circle-progress-endpoint-angle));
 }
 
+#circle::after {
+  transform: rotate(var(--circle-progress-start-angle));
+}
+
 #circle-cap-shadows {
   position: absolute;
   inset: 0;
@@ -77,6 +86,7 @@
 
 #circle-cap-shadows::before {
   clip-path: inset(0 50% 0 0);
+  transform: rotate(var(--circle-progress-start-angle));
 }
 
 #circle-cap-shadows::after {
