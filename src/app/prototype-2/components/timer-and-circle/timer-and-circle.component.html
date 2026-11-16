@@ -5,7 +5,7 @@
     [currentTimerSession]="currentTimerSession()"
   ></app-circle>
 
-  <app-alarm></app-alarm>
+  <app-alarm [currentTimerSession]="currentTimerSession()"></app-alarm>
 
   <app-timer
     [totalSeconds]="totalSeconds()"
