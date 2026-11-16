@@ -38,8 +38,19 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
       return;
     }
 
+    if (changes['isTimerRunning']?.currentValue === true) {
+      this.circleEl.nativeElement.classList.add('is-running');
+      this.animateCircleProgressToNextSecond();
+      return;
+    }
+
     if (this.isTimerBeingEdited()) {
       this.intervalDurationInSec = this.totalSeconds();
+      return;
+    }
+
+    if (changes['totalSeconds'] && this.isTimerRunning() === true) {
+      this.animateCircleProgressToNextSecond();
       return;
     }
 
@@ -79,6 +90,12 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
   private freezeCircleProgressAtCurrentPosition(): void {
     const currentProgress = getComputedStyle(this.circleEl.nativeElement).getPropertyValue('--progress').trim();
     this.circleEl.nativeElement.style.setProperty('--progress', currentProgress);
+  }
+
+  private animateCircleProgressToNextSecond(): void {
+    const totalSecondsAfterNextTick = Math.max(this.totalSeconds() - 1, 0);
+    const progressRatio = totalSecondsAfterNextTick / this.intervalDurationInSec;
+    this.setCircleProgress(this.getCircleDegreesFromRatio(progressRatio));
   }
 
   private getCurrentIntervalDurationRatio(): number {
