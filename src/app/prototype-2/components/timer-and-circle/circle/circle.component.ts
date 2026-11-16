@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, ElementRef, input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 
 import { TimerSession, TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
 import { CircleColorClass } from './circle-color-class.enum';
@@ -14,6 +23,7 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
   readonly isTimerBeingEdited = input.required<boolean>();
   readonly isTimerRunning = input.required<boolean | null>();
   readonly isTimerPaused = input.required<boolean | null>();
+  readonly isTimerCancelled = input.required<boolean | null>();
   readonly currentTimerSession = input.required<TimerSession | null>();
 
   private intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
@@ -54,7 +64,11 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit {
       return;
     }
 
-    if (changes['totalSeconds'] || changes['isTimerBeingEdited']?.currentValue === false) {
+    if (
+      changes['totalSeconds'] ||
+      changes['isTimerCancelled']?.currentValue === true ||
+      changes['isTimerBeingEdited']?.currentValue === false
+    ) {
       this.changeCircleProgressBasedOnTimePassedOnInterval();
     }
   }

@@ -1,3 +1,9 @@
-<div id="circle" #circleLocalRef [class]="circleColor" [class.is-running]="isTimerRunning() === true">
+<div
+  id="circle"
+  #circleLocalRef
+  [class]="circleColor"
+  [class.is-running]="isTimerRunning() === true"
+  [class.is-resetting]="isTimerCancelled() === true"
+>
   <div id="circle-inner"></div>
 </div>

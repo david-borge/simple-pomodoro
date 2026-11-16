@@ -26,7 +26,8 @@
   align-items: center;
 }
 
-#circle.is-running {
+#circle.is-running,
+#circle.is-resetting {
   transition:
     --progress 1s linear,
     --circle-progress-color var(--circle-progress-color-transition);

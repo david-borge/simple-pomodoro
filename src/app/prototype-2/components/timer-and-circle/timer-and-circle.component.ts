@@ -23,6 +23,7 @@ export class TimerAndCircleComponent implements OnInit {
 
   isTimerRunning = signal<boolean | null>(null);
   isTimerPaused = signal<boolean | null>(null);
+  isTimerCancelled = signal<boolean | null>(null);
   isTimerBeingEdited = signal<boolean | null>(null);
 
   currentTimerSession = signal<TimerSession | null>(null);
@@ -30,9 +31,10 @@ export class TimerAndCircleComponent implements OnInit {
   ngOnInit() {
     this.timerService.timerStatus$
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(({ isTimerRunning, isTimerPaused, isTimerBeingEdited }) => {
+      .subscribe(({ isTimerRunning, isTimerPaused, isTimerCancelled, isTimerBeingEdited }) => {
         this.isTimerRunning.set(isTimerRunning);
         this.isTimerPaused.set(isTimerPaused);
+        this.isTimerCancelled.set(isTimerCancelled);
         this.isTimerBeingEdited.set(isTimerBeingEdited);
       });
 
