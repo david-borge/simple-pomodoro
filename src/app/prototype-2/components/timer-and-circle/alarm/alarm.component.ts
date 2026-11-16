@@ -1,6 +1,6 @@
 import { IonIcon } from '@ionic/angular';
 
-import { Component, computed, input } from '@angular/core';
+import { Component, input, OnChanges, signal, SimpleChanges } from '@angular/core';
 
 import { ONE_MINUTE_IN_SECONDS, ONE_SECOND_IN_MILIISECONDS } from '../../../constants/time-conversion.constants';
 import { TimerSession } from '../../../services/timer-sessions/timer-session.interface';
@@ -11,10 +11,17 @@ import { TimerSession } from '../../../services/timer-sessions/timer-session.int
   styleUrls: ['./alarm.component.scss'],
   imports: [IonIcon],
 })
-export class AlarmComponent {
+export class AlarmComponent implements OnChanges {
   readonly currentTimerSession = input.required<TimerSession | null>();
+  protected readonly alarmTime = signal('');
 
-  protected readonly alarmTime = computed(() => {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['currentTimerSession']?.currentValue) {
+      this.alarmTime.set(this.getAlarmTime());
+    }
+  }
+
+  private getAlarmTime(): string {
     const currentTimerSession = this.currentTimerSession();
 
     if (!currentTimerSession) return '';
@@ -22,7 +29,7 @@ export class AlarmComponent {
     const now = new Date();
     const alarmDate = this.addSecondsToDate(now, currentTimerSession.durationInSec);
     return this.getTimeFromDate(alarmDate);
-  });
+  }
 
   private addSecondsToDate(date: Date, seconds: number) {
     return new Date(date.getTime() + seconds * ONE_SECOND_IN_MILIISECONDS);
