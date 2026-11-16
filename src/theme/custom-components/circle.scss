@@ -20,10 +20,12 @@
     var(--ds-transition-timing-function, ease-out);
 
   &.focus {
+    --circle-border-color: var(--ds-focus-base);
     --circle-progress-color: var(--ds-focus-accent);
   }
 
   &.rest {
+    --circle-border-color: var(--ds-rest-base);
     --circle-progress-color: var(--ds-rest-accent);
   }
 }
