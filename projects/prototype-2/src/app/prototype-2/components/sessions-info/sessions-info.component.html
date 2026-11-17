@@ -3,9 +3,11 @@
   @for (timerSession of timerSessionsList(); track $index; let index = $index) {
     <app-bullet
       [BulletFillType]="
-        isTimerBeingEdited() || index > currentSessionIndex() ? BulletFillType.Outline : BulletFillType.Solid
+        timerStatus().isTimerBeingEdited || timerStatus().isTimerCancelled || index > currentSessionIndex()
+          ? BulletFillType.Outline
+          : BulletFillType.Solid
       "
-      [isTimerBeingEdited]="isTimerBeingEdited()"
+      [isTimerBeingEdited]="timerStatus().isTimerBeingEdited"
       [timerSessionType]="timerSession.type"
     ></app-bullet>
   }

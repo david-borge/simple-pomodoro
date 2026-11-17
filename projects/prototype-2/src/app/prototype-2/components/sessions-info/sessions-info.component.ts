@@ -1,8 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, inject, input, OnChanges, Renderer2, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  input,
+  OnChanges,
+  Renderer2,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TimerSessionsList, TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
+import { TimerService } from '../../services/timer/timer.service';
 import { BulletFillType } from './bullet/bullet-fill.enum';
 import { BulletComponent } from './bullet/bullet.component';
 import { SessionsInfoService } from './sessions-info.service';
@@ -15,14 +27,20 @@ import { SessionsInfoService } from './sessions-info.service';
 })
 export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   private readonly timerSessionsService = inject(TimerSessionsService);
+  private readonly timerService = inject(TimerService);
   private readonly sessionsInfoService = inject(SessionsInfoService);
   private readonly renderer = inject(Renderer2);
   private readonly el = inject(ElementRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly totalSeconds = input.required<number>();
   readonly plannedTotalSeconds = input.required<number>();
-  readonly isTimerRunning = input.required<boolean>();
-  readonly isTimerBeingEdited = input.required<boolean>();
+  readonly timerStatus = signal({
+    isTimerRunning: this.timerService.isTimerRunning,
+    isTimerPaused: this.timerService.isTimerPaused,
+    isTimerCancelled: this.timerService.isTimerCancelled,
+    isTimerBeingEdited: this.timerService.isTimerBeingEdited,
+  });
 
   // Exposed publicly so the template can bind to timerSessionsList without modifications
   readonly timerSessionsList = signal<TimerSessionsList>([]);
@@ -36,6 +54,16 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
 
   //   TODO:
   BulletFillType = BulletFillType;
+
+  constructor() {
+    this.timerService.timerStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timerStatus) => {
+      this.timerStatus.set(timerStatus);
+
+      if (this.viewInitialized) {
+        this.renderSessionsInfoIfChanged();
+      }
+    });
+  }
 
   ngOnChanges(): void {
     const plannedTotalSeconds = this.plannedTotalSeconds();
@@ -74,7 +102,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
       focusSessions,
       shortRestSessions,
       longRestSessions,
-      this.isTimerRunning(),
+      this.timerStatus().isTimerRunning,
     ];
 
     if (this.lastRenderedSessionCounts?.every((count, index) => count === sessionCounts[index])) {
@@ -89,7 +117,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
       focusSessions,
       shortRestSessions,
       longRestSessions,
-      this.isTimerRunning(),
+      this.timerStatus().isTimerRunning,
     );
   }
 
