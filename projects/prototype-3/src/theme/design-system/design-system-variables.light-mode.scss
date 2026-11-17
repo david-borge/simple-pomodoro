@@ -12,11 +12,13 @@
 
     --ds-focus-accent: #a9c1d0;
     --ds-focus-accent-rgb: 169, 193, 208;
+    --ds-focus-accent-lighter: color-mix(in srgb, var(--ds-focus-accent), white 60%);
     --ds-focus-background: #e5eef3;
     --ds-focus-background-rgb: 229, 238, 243;
 
     --ds-rest-accent: #a9bfa9;
     --ds-rest-accent-rgb: 169, 191, 169;
+    --ds-rest-accent-lighter: color-mix(in srgb, var(--ds-rest-accent), white 60%);
     --ds-rest-background: #e5ede2;
     --ds-rest-background-rgb: 229, 237, 226;
 
