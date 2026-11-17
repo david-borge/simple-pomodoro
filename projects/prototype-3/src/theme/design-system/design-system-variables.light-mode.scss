@@ -10,17 +10,17 @@
     --ds-text-color: #0e222d;
     // --ds-text-color-rgb: 47, 62, 54; // TODO:
 
-    --ds-focus-accent: #cfebfc;
+    --ds-focus-accent: hsl(203, 15%, 71%);
     // --ds-focus-accent-rgb: 169, 193, 208; // TODO:
     --ds-focus-accent-lighter: hsl(204, 33%, 97%);
     --ds-focus-accent-darker: hsl(203 29% 60%);
-    --ds-focus-background: #fafdff;
+    --ds-focus-background: hsl(203, 23%, 95%);
     // --ds-focus-background-rgb: 237, 244, 247; // TODO:
 
-    --ds-rest-accent: rgb(169, 191, 169);
+    --ds-rest-accent: hsl(120, 15%, 71%);
     // --ds-rest-accent-rgb: 169, 191, 169; // TODO:
     --ds-rest-accent-lighter: color-mix(in srgb, var(--ds-rest-accent), white 60%);
-    --ds-rest-background: rgb(241, 245, 239);
+    --ds-rest-background: hsl(100, 23%, 95%);
     // --ds-rest-background-rgb: 241, 245, 239; // TODO:
 
     --ds-color-danger: rgb(217, 107, 107);
