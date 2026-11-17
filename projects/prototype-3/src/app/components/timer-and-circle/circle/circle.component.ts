@@ -46,7 +46,7 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   @ViewChild('circleLocalRef') private readonly circleEl!: ElementRef<HTMLDivElement>;
 
   ngOnInit(): void {
-    this.intervalDurationInSec = this.totalSeconds();
+    this.intervalDurationInSec = this.currentTimerSession()?.durationInSec ?? this.totalSeconds();
   }
 
   ngAfterViewInit(): void {
@@ -70,6 +70,10 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.isViewInitialized) return;
+
+    if (changes['currentTimerSession']) {
+      this.intervalDurationInSec = this.currentTimerSession()?.durationInSec ?? this.totalSeconds();
+    }
 
     if (changes['isTimerPaused']?.currentValue === true) {
       this.freezeCircleProgressAtCurrentPosition();
@@ -288,13 +292,17 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   }
 
   private animateCircleProgressToNextSecond(): void {
-    const totalSecondsAfterNextTick = Math.max(this.totalSeconds() - 1, 0);
-    const progressRatio = totalSecondsAfterNextTick / this.intervalDurationInSec;
+    const currentSessionSecondsAfterNextTick = Math.max(this.getCurrentIntervalRemainingSeconds() - 1, 0);
+    const progressRatio = currentSessionSecondsAfterNextTick / this.intervalDurationInSec;
     this.setCircleProgress(this.getCircleDegreesFromRatio(progressRatio));
   }
 
   private getCurrentIntervalDurationRatio(): number {
-    return this.totalSeconds() / this.intervalDurationInSec;
+    return this.getCurrentIntervalRemainingSeconds() / this.intervalDurationInSec;
+  }
+
+  private getCurrentIntervalRemainingSeconds(): number {
+    return this.currentTimerSession() ? this.timerService.currentTimerSessionRemainingSeconds : this.totalSeconds();
   }
 
   private getCircleDegreesFromRatio(ratio: number): number {

@@ -91,6 +91,26 @@ export class TimerSessionsService {
     throw new Error('totalSeconds exceeds the total duration of timerSessionList.');
   }
 
+  public getCurrentTimerSessionRemainingSeconds(timerSessionList: TimerSessionsList, totalSeconds: number): number {
+    if (totalSeconds <= 0) {
+      throw new Error('totalSeconds must be a positive number.');
+    }
+
+    let remainingSeconds = totalSeconds;
+
+    for (let index = timerSessionList.length - 1; index >= 0; index--) {
+      const timerSession = timerSessionList[index];
+
+      if (remainingSeconds <= timerSession.durationInSec) {
+        return remainingSeconds;
+      }
+
+      remainingSeconds -= timerSession.durationInSec;
+    }
+
+    throw new Error('totalSeconds exceeds the total duration of timerSessionList.');
+  }
+
   public getTimerSessionTypeText(timerSessionType: TimerSessionType | undefined): string {
     switch (timerSessionType) {
       case TimerSessionType.Focus:

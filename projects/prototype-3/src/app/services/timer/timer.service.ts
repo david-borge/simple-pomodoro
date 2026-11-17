@@ -157,4 +157,16 @@ export class TimerService {
   public get editedTotalSeconds(): typeof this._editedTotalSeconds {
     return this._editedTotalSeconds;
   }
+
+  public get currentTimerSessionRemainingSeconds(): number {
+    if (this._totalSeconds <= 0) {
+      return 0;
+    }
+
+    if (this.currentTimerSessionBehaviorSubject.value === null) {
+      return this._totalSeconds;
+    }
+
+    return this.timerSessionsService.getCurrentTimerSessionRemainingSeconds(this.timerSessionList, this._totalSeconds);
+  }
 }
