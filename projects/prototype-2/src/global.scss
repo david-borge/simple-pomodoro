@@ -71,6 +71,10 @@ ion-button {
   text-transform: none; // Android buttons are uppercase by default. iOS, sentence case.
 }
 
+ion-button.button-default {
+  min-height: var(--ds-min-touch-size);
+}
+
 /**
  * Custom Styles
  * -----------------------------------------------------
