@@ -52,7 +52,6 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   private lastRenderedSessionCounts: [number, number, number, boolean] | null = null;
   private remainingTimerSessionsList: TimerSessionsList = [];
 
-  //   TODO:
   BulletFillType = BulletFillType;
 
   constructor() {
