@@ -7,8 +7,8 @@
   :root.md,
   :root.ios {
     // * Colors *
-    --ds-text-primary: #f3f6f3;
-    --ds-text-primary-rgb: 243, 246, 243;
+    --ds-text-color: #f3f6f3;
+    --ds-text-color-rgb: 243, 246, 243;
 
     // TODO:
     --ds-focus-accent: #89afc0;
@@ -25,8 +25,8 @@
 
     --ds-color-danger: #d96b6b;
     --ds-color-danger-rgb: 217, 107, 107;
-    --ds-color-danger-contrast: var(--ds-text-primary);
-    --ds-color-danger-contrast-rgb: var(--ds-text-primary-rgb);
+    --ds-color-danger-contrast: var(--ds-text-color);
+    --ds-color-danger-contrast-rgb: var(--ds-text-color-rgb);
     --ds-color-danger-shade: color-mix(in srgb, var(--ds-color-danger), black 10%);
     --ds-color-danger-tint: color-mix(in srgb, var(--ds-color-danger), white 10%);
 
@@ -40,7 +40,6 @@
     // * Text size *
     --ds-font-size-body: 16px;
     --ds-font-size-small: 14px;
-    --ds-font-size-caption: 12px; // TODO: unused
 
     // * Transitions *
     --ds-transition-duration: 200ms;
@@ -53,8 +52,8 @@
     --ion-background-color: var(--ds-focus-background);
     --ion-background-color-rgb: var(--ds-focus-background-rgb);
 
-    --ion-text-color: var(--ds-text-primary);
-    --ion-text-color-rgb: var(--ds-text-primary-rgb);
+    --ion-text-color: var(--ds-text-color);
+    --ion-text-color-rgb: var(--ds-text-color-rgb);
 
     --ion-padding: 16px; // Adjust the margin of the Padding attributes
 
@@ -69,16 +68,16 @@
     // * Ionic CSS Variables - New Color - Focus *
     --ion-color-focus: var(--ds-focus-accent);
     --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
-    --ion-color-focus-contrast: var(--ds-text-primary);
-    --ion-color-focus-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-focus-contrast: var(--ds-text-color);
+    --ion-color-focus-contrast-rgb: var(--ds-text-color-rgb);
     --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
     --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
 
     // * Ionic CSS Variables - New Color - Rest *
     --ion-color-rest: var(--ds-rest-accent);
     --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
-    --ion-color-rest-contrast: var(--ds-text-primary);
-    --ion-color-rest-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-rest-contrast: var(--ds-text-color);
+    --ion-color-rest-contrast-rgb: var(--ds-text-color-rgb);
     --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
     --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
   }

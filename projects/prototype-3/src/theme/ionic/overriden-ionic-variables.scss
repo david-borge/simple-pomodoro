@@ -10,8 +10,8 @@
   --ion-background-color: var(--ds-focus-background);
   --ion-background-color-rgb: var(--ds-focus-background-rgb);
 
-  --ion-text-color: var(--ds-text-primary);
-  --ion-text-color-rgb: var(--ds-text-primary-rgb);
+  --ion-text-color: var(--ds-text-color);
+  --ion-text-color-rgb: var(--ds-text-color-rgb);
 
   --ion-padding: 16px; // Adjust the margin of the Padding attributes
 
@@ -26,16 +26,16 @@
   // * New Color - Focus *
   --ion-color-focus: var(--ds-focus-accent);
   --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
-  --ion-color-focus-contrast: var(--ds-text-primary);
-  --ion-color-focus-contrast-rgb: var(--ds-text-primary-rgb);
+  --ion-color-focus-contrast: var(--ds-text-color);
+  --ion-color-focus-contrast-rgb: var(--ds-text-color-rgb);
   --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
   --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
 
   // * New Color - Rest *
   --ion-color-rest: var(--ds-rest-accent);
   --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
-  --ion-color-rest-contrast: var(--ds-text-primary);
-  --ion-color-rest-contrast-rgb: var(--ds-text-primary-rgb);
+  --ion-color-rest-contrast: var(--ds-text-color);
+  --ion-color-rest-contrast-rgb: var(--ds-text-color-rgb);
   --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
   --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
 }
