@@ -12,19 +12,20 @@
     --ds-text-color-rgb: 14, 34, 45;
 
     --ds-focus-accent: hsl(200, 87%, 82%); // OK!
-    --ds-focus-accent-rgb: 169, 222, 249;
+    --ds-focus-accent-rgb: 169, 222, 249; // OK!
     --ds-focus-accent-lighter: color-mix(in srgb, var(--ds-focus-accent), white 60%);
-    // --ds-focus-accent-darker: hsl(203 29% 60%);
+    --ds-focus-accent-darker: #07425f; // OK!
     --ds-focus-background: hsl(200, 87%, 97%); // OK!
     --ds-focus-background-rgb: 241, 250, 254;
 
     --ds-rest-accent: hsl(143, 62%, 65%); // OK!
-    --ds-rest-accent-rgb: 110, 221, 153;
+    --ds-rest-accent-rgb: 110, 221, 153; // OK!
     --ds-rest-accent-lighter: color-mix(in srgb, var(--ds-rest-accent), white 60%);
-    --ds-rest-background: hsl(143, 62%, 97%); // OK!
-    --ds-rest-background-rgb: 243, 252, 246;
+    --ds-rest-accent-darker: #104625; // OK!
+    --ds-rest-background: hsl(140, 60%, 97%); // OK!
+    --ds-rest-background-rgb: 243, 252, 246; // OK!
 
-    --ds-color-danger: hsl(332, 100%, 80%);
+    --ds-color-danger: hsl(332, 100%, 80%); // OK!
     --ds-color-danger-rgb: 255, 153, 201;
     --ds-color-danger-contrast: var(--ds-text-color);
     --ds-color-danger-contrast-rgb: var(--ds-text-color-rgb);

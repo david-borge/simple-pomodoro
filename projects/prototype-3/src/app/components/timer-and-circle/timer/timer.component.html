@@ -16,7 +16,7 @@
     </div>
 
     <div>
-      <p id="timer-numbers">
+      <p id="timer-numbers" [style.color]="'var(--ds-' + currentTimerSessionColor + '-accent-darker)'">
         @if (hours() >= 1) {
           <span>{{ hours() | twoDigits }}</span>
           <span>:</span>
