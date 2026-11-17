@@ -64,11 +64,6 @@ export class TimerControlsStartPauseCancelComponent {
     }
   }
 
-  startPauseBtnFill() {
-    // TODO: move values to enum or take from Ionic interface or stg
-    return !this.timerService.isTimerRunning ? 'solid' : 'outline';
-  }
-
   startPauseBtnText(): string {
     if (!this.timerService.isTimerRunning && this.timerService.isTimerCancelled) {
       return 'Start';

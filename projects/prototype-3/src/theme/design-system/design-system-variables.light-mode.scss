@@ -25,12 +25,12 @@
     --ds-rest-background: hsl(140, 60%, 97%); // OK!
     --ds-rest-background-rgb: 243, 252, 246; // OK!
 
-    --ds-color-secondary: var(--ds-focus-accent-lighter);
-    --ds-color-secondary-rgb: 221, 242, 253;
-    --ds-color-secondary-contrast: var(--ds-text-color);
-    --ds-color-secondary-contrast-rgb: var(--ds-text-color-rgb);
-    --ds-color-secondary-shade: color-mix(in srgb, var(--ds-color-secondary), black 10%);
-    --ds-color-secondary-tint: color-mix(in srgb, var(--ds-color-secondary), white 10%);
+    --ds-color-focus-lighter: var(--ds-focus-accent-lighter);
+    --ds-color-focus-lighter-rgb: 221, 242, 253;
+    --ds-color-focus-lighter-contrast: var(--ds-text-color);
+    --ds-color-focus-lighter-contrast-rgb: var(--ds-text-color-rgb);
+    --ds-color-focus-lighter-shade: color-mix(in srgb, var(--ds-color-focus-lighter), black 10%);
+    --ds-color-focus-lighter-tint: color-mix(in srgb, var(--ds-color-focus-lighter), white 10%);
 
     --ds-color-danger: hsl(332, 100%, 80%); // OK!
     --ds-color-danger-rgb: 255, 153, 201;
@@ -59,14 +59,6 @@
 
     --ion-padding: 16px; // Adjust the margin of the Padding attributes
 
-    // * Ionic CSS Variables - Modified Color - Secondary *
-    --ion-color-secondary: var(--ds-color-secondary);
-    --ion-color-secondary-rgb: var(--ds-color-secondary-rgb);
-    --ion-color-secondary-contrast: var(--ds-color-secondary-contrast);
-    --ion-color-secondary-contrast-rgb: var(--ds-color-secondary-contrast-rgb);
-    --ion-color-secondary-shade: var(--ds-color-secondary-shade);
-    --ion-color-secondary-tint: var(--ds-color-secondary-tint);
-
     // * Ionic CSS Variables - Modified Color - Danger *
     --ion-color-danger: var(--ds-color-danger);
     --ion-color-danger-rgb: var(--ds-color-danger-rgb);
@@ -82,6 +74,14 @@
     --ion-color-focus-contrast-rgb: var(--ds-text-color-rgb);
     --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
     --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
+
+    // * Ionic CSS Variables - New Color - Focus Lighter *
+    --ion-color-focus-lighter: var(--ds-color-focus-lighter);
+    --ion-color-focus-lighter-rgb: var(--ds-color-focus-lighter-rgb);
+    --ion-color-focus-lighter-contrast: var(--ds-color-focus-lighter-contrast);
+    --ion-color-focus-lighter-contrast-rgb: var(--ds-color-focus-lighter-contrast-rgb);
+    --ion-color-focus-lighter-shade: var(--ds-color-focus-lighter-shade);
+    --ion-color-focus-lighter-tint: var(--ds-color-focus-lighter-tint);
 
     // * Ionic CSS Variables - New Color - Rest *
     --ion-color-rest: var(--ds-rest-accent);

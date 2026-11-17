@@ -50,6 +50,16 @@
   --ion-color-tint: var(--ion-color-focus-tint);
 }
 
+// * Ionic CSS Variables - New Color - Focus Lighter
+.ion-color-focus-lighter {
+  --ion-color-base: var(--ion-color-focus-lighter);
+  --ion-color-base-rgb: var(--ion-color-focus-lighter-rgb);
+  --ion-color-contrast: var(--ion-color-focus-lighter-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-focus-lighter-contrast-rgb);
+  --ion-color-shade: var(--ion-color-focus-lighter-shade);
+  --ion-color-tint: var(--ion-color-focus-lighter-tint);
+}
+
 // * Ionic CSS Variables - New Color - Rest
 .ion-color-rest {
   --ion-color-base: var(--ion-color-rest);
