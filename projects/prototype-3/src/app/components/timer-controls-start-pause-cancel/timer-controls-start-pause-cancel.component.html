@@ -1,8 +1,8 @@
-<div id="timer-controls-row" [class.has-cancel-button]="isCancelButtonVisible()">
-  <div id="cancel-button-slot" [attr.aria-hidden]="!isCancelButtonVisible()">
+<div id="timer-controls-row" [class.has-cancel-button]="isTimerPaused()">
+  <div id="cancel-button-slot" [attr.aria-hidden]="!isTimerPaused()">
     <ion-button
       (click)="onClickCancelBtn()"
-      [disabled]="!isCancelButtonVisible()"
+      [disabled]="!isTimerPaused()"
       fill="outline"
       color="danger"
       size="large"

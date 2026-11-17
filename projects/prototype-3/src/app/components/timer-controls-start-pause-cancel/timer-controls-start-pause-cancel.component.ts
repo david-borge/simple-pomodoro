@@ -17,13 +17,13 @@ export class TimerControlsStartPauseCancelComponent {
   private readonly timerService = inject(TimerService);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly isCancelButtonVisible = signal(this.timerService.isTimerPaused);
+  readonly isTimerPaused = signal(this.timerService.isTimerPaused);
   readonly isCircleResetting = signal(this.timerService.isCircleResetting);
   private currentTimerSession = signal<TimerSession | null>(null);
 
   constructor() {
     this.timerService.timerStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(({ isTimerPaused }) => {
-      this.isCancelButtonVisible.set(isTimerPaused);
+      this.isTimerPaused.set(isTimerPaused);
     });
 
     this.timerService.isCircleResetting$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isCircleResetting) => {
@@ -51,16 +51,24 @@ export class TimerControlsStartPauseCancelComponent {
   }
 
   startPauseBtnColor(): IonicColors {
-    switch (this.currentTimerSession()?.type) {
-      case TimerSessionType.Focus:
-        return CustomIonicColors.Focus;
-
-      case TimerSessionType.ShortRest:
-      case TimerSessionType.LongRest:
-        return CustomIonicColors.Rest;
-
-      default:
-        return CustomIonicColors.Focus;
+    if (this.currentTimerSession()?.type === TimerSessionType.Focus && this.isTimerPaused()) {
+      return CustomIonicColors.Focus;
+    } else if (this.currentTimerSession()?.type === TimerSessionType.Focus && !this.isTimerPaused()) {
+      return CustomIonicColors.FocusLighter;
+    } else if (
+      (this.currentTimerSession()?.type === TimerSessionType.ShortRest ||
+        this.currentTimerSession()?.type === TimerSessionType.LongRest) &&
+      !this.isTimerPaused()
+    ) {
+      return CustomIonicColors.Rest;
+    } else if (
+      (this.currentTimerSession()?.type === TimerSessionType.ShortRest ||
+        this.currentTimerSession()?.type === TimerSessionType.LongRest) &&
+      this.isTimerPaused()
+    ) {
+      return CustomIonicColors.RestLighter;
+    } else {
+      return CustomIonicColors.Focus;
     }
   }
 
