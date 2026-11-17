@@ -31,17 +31,17 @@
         "strictTemplates": true
     },
     "references": [
-        // {
-        //     "path": "./projects/prototype-1/tsconfig.app.json"
-        // },
-        // {
-        //     "path": "./projects/prototype-1/tsconfig.spec.json"
-        // },
         {
             "path": "./projects/prototype-2/tsconfig.app.json"
         },
         {
             "path": "./projects/prototype-2/tsconfig.spec.json"
+        },
+        {
+            "path": "./projects/prototype-1/tsconfig.app.json"
+        },
+        {
+            "path": "./projects/prototype-1/tsconfig.spec.json"
         }
     ]
 }

@@ -12,9 +12,9 @@ import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
-  selector: 'app-prototype-1',
-  templateUrl: 'prototype-1.page.html',
-  styleUrls: ['prototype-1.page.scss'],
+  selector: 'app-simple-pomodoro',
+  templateUrl: 'simple-pomodoro.prototype-1.page.html',
+  styleUrls: ['simple-pomodoro.prototype-1.page.scss'],
   imports: [
     CommonModule,
     IonButton,
@@ -26,7 +26,7 @@ import { TimerService } from '../../services/timer/timer.service';
     TimerAndCircleComponent,
   ],
 })
-export class Prototype1Page {
+export class SimplePomodoroPrototype1Page {
   private readonly timerService = inject(TimerService);
   private readonly destroyRef = inject(DestroyRef);
 

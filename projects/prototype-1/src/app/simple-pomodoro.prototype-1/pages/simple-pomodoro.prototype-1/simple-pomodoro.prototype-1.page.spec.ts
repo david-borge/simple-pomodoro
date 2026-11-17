@@ -1,14 +1,14 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { Prototype1Page } from './prototype-1.page';
+import { SimplePomodoroPrototype1Page } from './simple-pomodoro.prototype-1.page';
 
 describe('SimplePomodoroPrototype1Page', () => {
-  let component: Prototype1Page;
-  let fixture: ComponentFixture<Prototype1Page>;
+  let component: SimplePomodoroPrototype1Page;
+  let fixture: ComponentFixture<SimplePomodoroPrototype1Page>;
 
   beforeEach(async () => {
-    fixture = TestBed.createComponent(Prototype1Page);
+    fixture = TestBed.createComponent(SimplePomodoroPrototype1Page);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
