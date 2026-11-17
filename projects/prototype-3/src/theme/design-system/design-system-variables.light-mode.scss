@@ -10,9 +10,10 @@
     --ds-text-primary: rgb(47, 62, 54);
     --ds-text-primary-rgb: 47, 62, 54;
 
-    --ds-focus-accent: rgb(169, 193, 208);
+    --ds-focus-accent: hsl(203, 29%, 74%);
     --ds-focus-accent-rgb: 169, 193, 208;
-    --ds-focus-accent-lighter: color-mix(in srgb, var(--ds-focus-accent), white 60%);
+    --ds-focus-accent-lighter: hsl(203 29% 91%);
+    --ds-focus-accent-darker: hsl(203 29% 60%);
     --ds-focus-background: rgb(237, 244, 247);
     --ds-focus-background-rgb: 237, 244, 247;
 
