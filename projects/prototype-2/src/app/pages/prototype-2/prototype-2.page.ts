@@ -15,7 +15,7 @@ import { TimerSessionsService } from '../../services/timer-sessions/timer-sessio
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
-  selector: 'app-design-1',
+  selector: 'app-prototype-2',
   templateUrl: 'prototype-2.page.html',
   styleUrls: ['prototype-2.page.scss'],
   imports: [
