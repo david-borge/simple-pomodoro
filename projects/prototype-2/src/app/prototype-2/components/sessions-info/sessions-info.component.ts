@@ -45,9 +45,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
     this.currentSessionIndex.set(
       this.getCurrentSessionIndex(timerSessionsList, plannedTotalSeconds, this.totalSeconds()),
     );
-    this.remainingTimerSessionsList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(
-      Math.max(this.totalSeconds(), 1),
-    );
+    this.remainingTimerSessionsList = timerSessionsList.slice(this.currentSessionIndex());
 
     if (this.viewInitialized) {
       this.renderSessionsInfoIfChanged();
