@@ -8,6 +8,18 @@ const readline = require('node:readline/promises');
 const projectRoot = path.resolve(__dirname, '..');
 const port = 8100;
 
+function getAngularProjects() {
+    const angularConfigPath = path.join(projectRoot, 'angular.json');
+    const angularConfig = JSON.parse(fs.readFileSync(angularConfigPath, 'utf8'));
+
+    return Object.entries(angularConfig.projects ?? {})
+        .filter(([, project]) => {
+            const targets = project.architect ?? project.targets;
+            return project.projectType === 'application' && targets?.serve;
+        })
+        .map(([projectName]) => projectName);
+}
+
 function findAdb() {
     const sdkRoots = [process.env.ANDROID_SDK_ROOT, process.env.ANDROID_HOME];
 
@@ -86,6 +98,40 @@ async function chooseDevice(devices) {
     }
 }
 
+async function chooseAngularProject(angularProjects) {
+    if (angularProjects.length === 0) {
+        throw new Error('No Angular application projects with a serve target were found in angular.json.');
+    }
+    if (angularProjects.length === 1) return angularProjects[0];
+
+    if (!process.stdin.isTTY) {
+        throw new Error('Run this script in a terminal to choose the Angular project.');
+    }
+
+    console.log('\nWhich Angular project do you want to use?');
+    angularProjects.forEach((project, index) => {
+        console.log('  ' + (index + 1) + '. ' + project);
+    });
+
+    const prompt = readline.createInterface({ input: process.stdin, output: process.stdout });
+    try {
+        while (true) {
+            const answer = (await prompt.question('Enter a number or project name: '))
+                .trim()
+                .toLowerCase();
+            const projectIndex = Number(answer) - 1;
+            const project = angularProjects[projectIndex];
+
+            if (project && /^\d+$/.test(answer)) return project;
+            if (angularProjects.includes(answer)) return answer;
+
+            console.log('Choose a number from 1 to ' + angularProjects.length + ', or enter a project name.');
+        }
+    } finally {
+        prompt.close();
+    }
+}
+
 function isPortInUse() {
     return new Promise((resolve, reject) => {
         const server = net.createServer();
@@ -154,8 +200,8 @@ function escapeForAppleScript(value) {
     return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
-function openMacOSTerminal(serial) {
-    const serverCommand = `printf '\\033]0;Ionic Angular server\\007'; cd ${quoteForShell(projectRoot)} && ionic serve --host=127.0.0.1 --port=${port} --no-open`;
+function openMacOSTerminal(serial, angularProject) {
+    const serverCommand = `printf '\\033]0;Ionic Angular server\\007'; cd ${quoteForShell(projectRoot)} && ionic serve --project=${quoteForShell(angularProject)} --host=127.0.0.1 --port=${port} --no-open`;
     const androidCommand = `printf '\\033]0;Ionic Android app\\007'; cd ${quoteForShell(projectRoot)} && ${quoteForShell(process.execPath)} ${quoteForShell(path.join(__dirname, 'capacitor-android-live-from-macos.js'))} --android-tab ${quoteForShell(serial)}`;
 
     const scriptLines = [
@@ -222,6 +268,7 @@ async function launchLiveReload() {
     }
 
     const serial = await chooseDevice(getPhysicalDevices());
+    const angularProject = await chooseAngularProject(getAngularProjects());
     if (!/^[A-Za-z0-9._:-]+$/.test(serial)) {
         throw new Error(`The device serial contains unsupported characters: ${serial}`);
     }
@@ -239,7 +286,7 @@ async function launchLiveReload() {
     console.log('🚀 Opening one Terminal window with two tabs (Angular server and Android app)...');
 
     console.log(`\n🐞 You can go to chrome://inspect/#devices to debug the Angular app.\n`);
-    await openMacOSTerminal(serial);
+    await openMacOSTerminal(serial, angularProject);
 }
 
 const androidTabSerial = process.argv[2] === '--android-tab' ? process.argv[3] : undefined;
