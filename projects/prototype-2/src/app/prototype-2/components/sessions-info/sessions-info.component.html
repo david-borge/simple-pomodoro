@@ -8,6 +8,7 @@
           : BulletFillType.Solid
       "
       [isTimerBeingEdited]="timerStatus().isTimerBeingEdited"
+      [isCompleted]="(timerStatus().isTimerRunning || timerStatus().isTimerPaused) && index < currentSessionIndex()"
       [timerSessionType]="timerSession.type"
     ></app-bullet>
   }

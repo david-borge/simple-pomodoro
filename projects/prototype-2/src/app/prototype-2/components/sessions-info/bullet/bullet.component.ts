@@ -13,6 +13,7 @@ import { BulletFillClass, BulletFillType } from './bullet-fill.enum';
 })
 export class BulletComponent {
   readonly BulletFillType = input.required<BulletFillType>();
+  readonly isCompleted = input(false);
   readonly isTimerBeingEdited = input.required<boolean>();
   readonly timerSessionType = input.required<TimerSessionType>();
 
