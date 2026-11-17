@@ -2,7 +2,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root,
-  :root.md {
+  :root.md,
+  :root.ios {
     // * Colors *
     --ds-text-primary: #f3f6f3;
     --ds-text-primary-rgb: 243, 246, 243;

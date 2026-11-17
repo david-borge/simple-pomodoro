@@ -1,7 +1,8 @@
 // ** Design System - General CSS Variables **
 
 :root,
-:root.md {
+:root.md,
+:root.ios {
   // * Font *
   --ds-default-font: 'Inter', sans-serif;
   --ds-accent-font: 'Lato', sans-serif;

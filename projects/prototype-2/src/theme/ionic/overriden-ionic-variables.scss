@@ -1,7 +1,8 @@
 // ** Overriden Ionic CSS Variables - Light Mode **
 
 :root,
-:root.md {
+:root.md,
+:root.ios {
   // * Application Variables *
   // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
   --ion-default-font: var(--ds-default-font);
