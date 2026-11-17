@@ -15,9 +15,9 @@ import { TimerSessionsService } from '../../services/timer-sessions/timer-sessio
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
-  selector: 'app-design-1',
-  templateUrl: 'prototype-2.page.html',
-  styleUrls: ['prototype-2.page.scss'],
+  selector: 'app-prototype-3',
+  templateUrl: 'prototype-3.page.html',
+  styleUrls: ['prototype-3.page.scss'],
   imports: [
     CommonModule,
     IonContent,
@@ -29,7 +29,7 @@ import { TimerService } from '../../services/timer/timer.service';
     TimerControlsStartPauseCancelComponent,
   ],
 })
-export class Prototype2Page {
+export class Prototype3Page {
   private readonly timerService = inject(TimerService);
   private readonly timerSessionsService = inject(TimerSessionsService);
   private readonly destroyRef = inject(DestroyRef);

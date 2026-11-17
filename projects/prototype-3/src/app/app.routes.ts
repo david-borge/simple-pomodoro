@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: RouteSlugs.Prototype3,
-    loadComponent: () => import('./prototype-2/pages/prototype-2/prototype-2.page').then((m) => m.Prototype2Page),
+    loadComponent: () => import('./pages/prototype-3/prototype-3.page').then((m) => m.Prototype3Page),
   },
   {
     path: '**', // Cualquier URL que no coincida con ninguna de las anteriores de la lista de la constante appRoutes
