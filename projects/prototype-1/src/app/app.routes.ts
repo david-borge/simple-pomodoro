@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'prototype-1',
     loadComponent: () =>
-      import('./simple-pomodoro.prototype-1/pages/simple-pomodoro.prototype-1/simple-pomodoro.prototype-1.page').then(
+      import('./pages/simple-pomodoro.prototype-1/simple-pomodoro.prototype-1.page').then(
         (m) => m.SimplePomodoroPrototype1Page,
       ),
   },
