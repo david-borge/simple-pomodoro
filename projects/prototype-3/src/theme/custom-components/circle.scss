@@ -16,17 +16,18 @@
 #circle {
   --circle-max-width: var(--circle-max-width);
 
-  --circle-border-color: var(--ds-focus-base);
   --circle-progress-color-transition: var(--ds-transition-duration, 200ms)
     var(--ds-transition-timing-function, ease-out);
 
+  --circle-border-color: color-mix(in srgb, var(--ds-focus-accent), white 60%);
+
   &.focus {
-    --circle-border-color: var(--ds-focus-base);
     --circle-progress-color: var(--ds-focus-accent);
+    --circle-border-color: color-mix(in srgb, var(--ds-focus-accent), white 60%);
   }
 
   &.rest {
-    --circle-border-color: var(--ds-rest-base);
     --circle-progress-color: var(--ds-rest-accent);
+    --circle-border-color: color-mix(in srgb, var(--ds-rest-accent), white 60%);
   }
 }

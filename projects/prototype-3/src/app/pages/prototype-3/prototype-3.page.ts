@@ -11,6 +11,7 @@ import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer
 import { TimerControlsStartPauseCancelComponent } from '../../components/timer-controls-start-pause-cancel/timer-controls-start-pause-cancel.component';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
+import { TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
 import { TimerService } from '../../services/timer/timer.service';
 
@@ -18,6 +19,9 @@ import { TimerService } from '../../services/timer/timer.service';
   selector: 'app-prototype-3',
   templateUrl: 'prototype-3.page.html',
   styleUrls: ['prototype-3.page.scss'],
+  host: {
+    '[class.is-rest-session]': 'isRestSession()',
+  },
   imports: [
     CommonModule,
     IonContent,
@@ -35,6 +39,7 @@ export class Prototype3Page {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+  readonly isRestSession = signal(false);
 
   constructor() {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {
@@ -43,6 +48,12 @@ export class Prototype3Page {
       if (timeInSec <= 0) {
         this.timerService.cancelTimer();
       }
+    });
+
+    this.timerService.currentTimerSession$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((session) => {
+      this.isRestSession.set(
+        session?.type === TimerSessionType.ShortRest || session?.type === TimerSessionType.LongRest,
+      );
     });
   }
 
