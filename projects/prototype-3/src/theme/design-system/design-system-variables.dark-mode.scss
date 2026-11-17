@@ -1,0 +1,82 @@
+// ** Design System - Dark Mode CSS Variables **
+
+@media (prefers-color-scheme: dark) {
+  :root,
+  :root.md,
+  :root.ios {
+    // * Colors *
+    --ds-text-primary: #f3f6f3;
+    --ds-text-primary-rgb: 243, 246, 243;
+
+    --ds-focus-accent: #89afc0;
+    --ds-focus-accent-rgb: 137, 175, 192;
+    --ds-focus-base: #2e3f47;
+    --ds-focus-background: #191f1f;
+    --ds-focus-background-rgb: 30, 36, 32;
+
+    --ds-rest-accent: #8fae96;
+    --ds-rest-accent-rgb: 143, 174, 150;
+    --ds-rest-base: #2a3a32;
+    --ds-rest-background: #2a2f2b; // TODO: unused
+    --ds-rest-background-rgb: 42, 47, 43; // TODO: unused
+
+    --ds-color-danger: #d96b6b;
+    --ds-color-danger-rgb: 217, 107, 107;
+    --ds-color-danger-contrast: var(--ds-text-primary);
+    --ds-color-danger-contrast-rgb: var(--ds-text-primary-rgb);
+    --ds-color-danger-shade: color-mix(in srgb, var(--ds-color-danger), black 10%);
+    --ds-color-danger-tint: color-mix(in srgb, var(--ds-color-danger), white 10%);
+
+    --ds-text-secondary: #a8b3ac; // TODO: unused
+
+    --ds-divider: #3a4440; // TODO: unused
+    --ds-success: #8fbf9f; // TODO: unused
+    --ds-warning: #f6c078; // TODO: unused
+    --ds-info: #89b6d4; // TODO: unused
+
+    // * Text size *
+    --ds-font-size-body: 16px;
+    --ds-font-size-small: 14px;
+    --ds-font-size-caption: 12px; // TODO: unused
+
+    // * Transitions *
+    --ds-transition-duration: 200ms;
+    --ds-transition-timing-function: ease-out;
+
+    // * Ionic CSS Variables - Application Variables *
+    // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
+    --ion-default-font: var(--ds-default-font);
+    --ion-font-family: var(--ds-default-font);
+    --ion-background-color: var(--ds-focus-background);
+    --ion-background-color-rgb: var(--ds-focus-background-rgb);
+
+    --ion-text-color: var(--ds-text-primary);
+    --ion-text-color-rgb: var(--ds-text-primary-rgb);
+
+    --ion-padding: 16px; // Adjust the margin of the Padding attributes
+
+    // * Ionic CSS Variables - Modified Color - Danger *
+    --ion-color-danger: var(--ds-color-danger);
+    --ion-color-danger-rgb: var(--ds-color-danger-rgb);
+    --ion-color-danger-contrast: var(--ds-color-danger-contrast);
+    --ion-color-danger-contrast-rgb: var(--ds-color-danger-contrast-rgb);
+    --ion-color-danger-shade: var(--ds-color-danger-shade);
+    --ion-color-danger-tint: var(--ds-color-danger-tint);
+
+    // * Ionic CSS Variables - New Color - Focus *
+    --ion-color-focus: var(--ds-focus-accent);
+    --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
+    --ion-color-focus-contrast: var(--ds-text-primary);
+    --ion-color-focus-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
+    --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
+
+    // * Ionic CSS Variables - New Color - Rest *
+    --ion-color-rest: var(--ds-rest-accent);
+    --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
+    --ion-color-rest-contrast: var(--ds-text-primary);
+    --ion-color-rest-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
+    --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
+  }
+}

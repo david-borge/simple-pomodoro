@@ -1,0 +1,70 @@
+:host {
+  z-index: 0;
+
+  transform: translateY(-4px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
+}
+
+:host(.is-visible) {
+  transform: translateY(0);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
+:host(.is-visible.is-paused) {
+  opacity: 0.5;
+}
+
+#alarm-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+#alarm-time {
+  font-variant-numeric: tabular-nums; // Forces all numeric glyphs to have a uniform, monospaced width while keeping letters proportional—ideal for alignment in tables, dashboards, prices, and timers.
+}
+
+.alarm-time-enter {
+  display: inline-block;
+  animation: alarm-time-change var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out) both;
+}
+
+@keyframes alarm-time-change {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host,
+  :host(.is-visible),
+  .alarm-time-enter {
+    transition: none;
+    animation: none;
+  }
+}

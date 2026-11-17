@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <h1 class="ion-text-center">Simple Pomodoro</h1>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container expand-main-content">
+    <div id="main-content">
+      <div class="center-content-horizontally center-content-vertically" style="width: 100%; flex-direction: column">
+        <div class="center-content-horizontally center-content-vertically" style="width: 100%">
+          <app-timer-and-circle [totalSeconds]="totalSeconds()" />
+        </div>
+        <div style="margin-top: 50px">
+          <app-sessions-info
+            [class.is-visible]="showSessionInfo()"
+            [totalSeconds]="totalSeconds()"
+            [plannedTotalSeconds]="timerService.editedTotalSeconds"
+          />
+        </div>
+      </div>
+    </div>
+    <div id="bottom-content" class="center-content-horizontally">
+      <app-timer-controls-start-pause-cancel />
+    </div>
+  </div>
+</ion-content>

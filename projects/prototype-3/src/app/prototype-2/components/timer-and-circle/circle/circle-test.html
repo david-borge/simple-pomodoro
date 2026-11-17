@@ -1,0 +1,60 @@
+<!-- Source: ChatGPT -->
+<!doctype html>
+<html>
+  <head>
+    <style>
+      #circle {
+        --progress: 170deg;
+        --circle-border-color: #ddd;
+        --circle-progress-color: #3498db;
+        --thickness: 12px;
+
+        width: 160px;
+        height: 160px;
+        border-radius: 100%;
+
+        background: conic-gradient(
+          var(--circle-progress-color) var(--progress),
+          var(--circle-border-color) var(--progress)
+        );
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .circle-inner {
+        width: calc(100% - var(--thickness) * 2);
+        height: calc(100% - var(--thickness) * 2);
+        border-radius: 50%;
+        background: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font: bold 24px Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="circle">
+      <div class="circle-inner" id="value">120º</div>
+    </div>
+
+    <script>
+      //   setCircleProgress(310);
+
+      function setCircleProgress(degrees) {
+        // Clamp value between 0 and 360
+        degrees = Math.max(0, Math.min(360, degrees));
+
+        const circleEl = document.getElementById('circle');
+
+        circleEl.style.setProperty('--progress', degrees + 'deg');
+
+        document.getElementById('value').textContent = degrees + '°';
+      }
+    </script>
+  </body>
+</html>
