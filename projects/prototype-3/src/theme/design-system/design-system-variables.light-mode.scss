@@ -25,6 +25,13 @@
     --ds-rest-background: hsl(140, 60%, 97%); // OK!
     --ds-rest-background-rgb: 243, 252, 246; // OK!
 
+    --ds-color-secondary: var(--ds-focus-accent-lighter);
+    --ds-color-secondary-rgb: 221, 242, 253;
+    --ds-color-secondary-contrast: var(--ds-text-color);
+    --ds-color-secondary-contrast-rgb: var(--ds-text-color-rgb);
+    --ds-color-secondary-shade: color-mix(in srgb, var(--ds-color-secondary), black 10%);
+    --ds-color-secondary-tint: color-mix(in srgb, var(--ds-color-secondary), white 10%);
+
     --ds-color-danger: hsl(332, 100%, 80%); // OK!
     --ds-color-danger-rgb: 255, 153, 201;
     --ds-color-danger-contrast: var(--ds-text-color);
@@ -51,6 +58,14 @@
     --ion-text-color-rgb: var(--ds-text-color-rgb);
 
     --ion-padding: 16px; // Adjust the margin of the Padding attributes
+
+    // * Ionic CSS Variables - Modified Color - Secondary *
+    --ion-color-secondary: var(--ds-color-secondary);
+    --ion-color-secondary-rgb: var(--ds-color-secondary-rgb);
+    --ion-color-secondary-contrast: var(--ds-color-secondary-contrast);
+    --ion-color-secondary-contrast-rgb: var(--ds-color-secondary-contrast-rgb);
+    --ion-color-secondary-shade: var(--ds-color-secondary-shade);
+    --ion-color-secondary-tint: var(--ds-color-secondary-tint);
 
     // * Ionic CSS Variables - Modified Color - Danger *
     --ion-color-danger: var(--ds-color-danger);

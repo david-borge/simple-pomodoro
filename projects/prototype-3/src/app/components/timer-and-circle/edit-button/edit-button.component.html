@@ -1,5 +1,7 @@
 <div id="edit-button-container" [class.is-visible]="isVisible()" [attr.aria-hidden]="!isVisible()">
   <div id="edit-button-content" class="center-content-horizontally">
-    <ion-button (click)="onClickEditBtn()" [disabled]="!isVisible()" fill="outline" size="default">Edit</ion-button>
+    <ion-button (click)="onClickEditBtn()" [disabled]="!isVisible()" color="secondary" fill="solid" size="default"
+      >Edit</ion-button
+    >
   </div>
 </div>
