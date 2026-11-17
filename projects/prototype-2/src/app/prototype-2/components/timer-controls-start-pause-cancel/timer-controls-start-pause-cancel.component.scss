@@ -49,6 +49,10 @@
     border-color var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out);
 }
 
+#start-pause-button-slot ion-button.button-disabled {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   #timer-controls-row,
   #cancel-button-slot,

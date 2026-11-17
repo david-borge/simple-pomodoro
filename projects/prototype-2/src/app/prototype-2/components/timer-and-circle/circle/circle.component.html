@@ -3,6 +3,7 @@
   #circleLocalRef
   [class]="circleColor"
   [class.is-running]="isTimerRunning() === true"
+  (transitionend)="onCircleTransitionEnd($event)"
 >
   <div id="circle-cap-shadows"></div>
   <div id="circle-inner"></div>

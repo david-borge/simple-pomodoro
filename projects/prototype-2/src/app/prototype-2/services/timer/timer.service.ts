@@ -19,6 +19,11 @@ export class TimerService {
   private _isTimerCancelled = true;
   private _isTimerBeingEdited = false;
 
+  private _totalSeconds = Math.round(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+  private timerSessionList: TimerSessionsList = [];
+  private _editedTotalSeconds = this._totalSeconds;
+  private _isCircleResetting = false;
+
   private timerStatusBehaviorSubject = new BehaviorSubject({
     isTimerRunning: this._isTimerRunning,
     isTimerPaused: this._isTimerPaused,
@@ -27,16 +32,14 @@ export class TimerService {
   });
   public readonly timerStatus$ = this.timerStatusBehaviorSubject.asObservable();
 
-  private _totalSeconds = Math.round(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
-  private timerSessionList: TimerSessionsList = [];
-
   private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
   public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
 
-  private _editedTotalSeconds = this._totalSeconds;
-
   private currentTimerSessionBehaviorSubject = new BehaviorSubject<TimerSession | null>(null);
   public readonly currentTimerSession$ = this.currentTimerSessionBehaviorSubject.asObservable();
+
+  private circleResettingBehaviorSubject = new BehaviorSubject(this._isCircleResetting);
+  public readonly isCircleResetting$ = this.circleResettingBehaviorSubject.asObservable();
 
   private emitTimerStatus() {
     this.timerStatusBehaviorSubject.next({
@@ -48,7 +51,7 @@ export class TimerService {
   }
 
   public startTimer() {
-    if (this.intervalId) {
+    if (this.intervalId || this._isCircleResetting) {
       return;
     }
 
@@ -80,12 +83,23 @@ export class TimerService {
 
   public cancelTimer() {
     this.pauseTimer();
+    this._isCircleResetting = true;
+    this.circleResettingBehaviorSubject.next(this._isCircleResetting);
     this._totalSeconds = this._editedTotalSeconds;
     this._isTimerPaused = false;
     this._isTimerCancelled = true;
     this.totalSecondsBehaviorSubject.next(this._totalSeconds);
     this.currentTimerSessionBehaviorSubject.next(null);
     this.emitTimerStatus();
+  }
+
+  public completeCircleReset() {
+    if (!this._isCircleResetting) {
+      return;
+    }
+
+    this._isCircleResetting = false;
+    this.circleResettingBehaviorSubject.next(this._isCircleResetting);
   }
 
   public starEditingTimer() {
@@ -134,6 +148,10 @@ export class TimerService {
 
   public get isTimerBeingEdited(): typeof this._isTimerBeingEdited {
     return this._isTimerBeingEdited;
+  }
+
+  public get isCircleResetting(): typeof this._isCircleResetting {
+    return this._isCircleResetting;
   }
 
   public get editedTotalSeconds(): typeof this._editedTotalSeconds {

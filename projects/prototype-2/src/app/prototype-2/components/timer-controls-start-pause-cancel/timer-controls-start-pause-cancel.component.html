@@ -16,6 +16,7 @@
       (click)="onClickStartPauseBtn()"
       [color]="startPauseBtnColor()"
       [fill]="startPauseBtnFill()"
+      [disabled]="isCircleResetting()"
       size="large"
       expand="block"
       >{{ startPauseBtnText() }}</ion-button

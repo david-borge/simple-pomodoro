@@ -18,11 +18,16 @@ export class TimerControlsStartPauseCancelComponent {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly isCancelButtonVisible = signal(this.timerService.isTimerPaused);
+  readonly isCircleResetting = signal(this.timerService.isCircleResetting);
   private currentTimerSession = signal<TimerSession | null>(null);
 
   constructor() {
     this.timerService.timerStatus$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(({ isTimerPaused }) => {
       this.isCancelButtonVisible.set(isTimerPaused);
+    });
+
+    this.timerService.isCircleResetting$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((isCircleResetting) => {
+      this.isCircleResetting.set(isCircleResetting);
     });
 
     this.timerService.currentTimerSession$

@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  inject,
   input,
   OnChanges,
   OnDestroy,
@@ -12,6 +13,7 @@ import {
 
 import { ONE_SECOND_IN_MILIISECONDS } from '../../../constants/time-conversion.constants';
 import { TimerSession, TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
+import { TimerService } from '../../../services/timer/timer.service';
 import { CircleColorClass } from './circle-color-class.enum';
 import { CircleDegrees } from './circle-degrees.constant';
 
@@ -24,6 +26,8 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   private static readonly MIN_CIRCLE_RESET_DURATION_RATIO = 0.2;
   private static readonly PROGRESS_SHADOW_START_OFFSET_IN_DEGREES = 3;
 
+  private readonly timerService = inject(TimerService);
+
   readonly totalSeconds = input.required<number>();
   readonly isTimerBeingEdited = input.required<boolean>();
   readonly isTimerRunning = input.required<boolean | null>();
@@ -35,6 +39,7 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   private isViewInitialized = false;
   private progressShadowFrameId: number | null = null;
   private progressGeometryResizeObserver: ResizeObserver | null = null;
+  private circleResetTimeoutId: ReturnType<typeof setTimeout> | null = null;
   private progressSweepMaxDegrees = CircleDegrees.maxDegrees;
   private isProgressGeometryInitialized = false;
   // eslint-disable-next-line angular-class-members-order/angular-class-members-order
@@ -58,6 +63,8 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
 
   ngOnDestroy(): void {
     this.cancelProgressShadowCheck();
+    this.cancelCircleResetCompletion();
+    this.timerService.completeCircleReset();
     this.progressGeometryResizeObserver?.disconnect();
   }
 
@@ -86,8 +93,9 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
 
     if (changes['isTimerCancelled']?.currentValue === true) {
       this.circleEl.nativeElement.classList.add('is-resetting');
-      this.setCircleProgressResetDuration();
+      const resetDurationInMs = this.setCircleProgressResetDuration();
       this.changeCircleProgressBasedOnTimePassedOnInterval();
+      this.scheduleCircleResetCompletion(resetDurationInMs);
       this.resetProgressShadowVisibility();
       return;
     }
@@ -236,12 +244,12 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
     this.circleEl.nativeElement.style.setProperty('--progress', currentProgress);
   }
 
-  private setCircleProgressResetDuration(): void {
+  private setCircleProgressResetDuration(): number {
     const currentProgress = Number.parseFloat(
       getComputedStyle(this.circleEl.nativeElement).getPropertyValue('--progress'),
     );
 
-    if (!Number.isFinite(currentProgress)) return;
+    if (!Number.isFinite(currentProgress)) return ONE_SECOND_IN_MILIISECONDS;
 
     const remainingProgressRatio = Math.min(
       Math.max((this.progressSweepMaxDegrees - currentProgress) / CircleDegrees.maxDegrees, 0),
@@ -251,6 +259,32 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
     const resetDurationInMs = resetDurationRatio * ONE_SECOND_IN_MILIISECONDS;
 
     this.circleEl.nativeElement.style.setProperty('--circle-progress-reset-duration', `${resetDurationInMs}ms`);
+    return resetDurationInMs;
+  }
+
+  private scheduleCircleResetCompletion(durationInMs: number): void {
+    this.cancelCircleResetCompletion();
+    this.circleResetTimeoutId = setTimeout(() => {
+      this.completeCircleReset();
+    }, durationInMs + 50);
+  }
+
+  onCircleTransitionEnd(event: TransitionEvent): void {
+    if (event.target !== this.circleEl.nativeElement || event.propertyName !== '--progress') return;
+
+    this.completeCircleReset();
+  }
+
+  private completeCircleReset(): void {
+    this.cancelCircleResetCompletion();
+    this.timerService.completeCircleReset();
+  }
+
+  private cancelCircleResetCompletion(): void {
+    if (this.circleResetTimeoutId === null) return;
+
+    clearTimeout(this.circleResetTimeoutId);
+    this.circleResetTimeoutId = null;
   }
 
   private animateCircleProgressToNextSecond(): void {
