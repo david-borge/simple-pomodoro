@@ -1,30 +1,31 @@
 // TODO: refactor: create a theme service and move all the color changes there
 
 // ** Design System - Light Mode CSS Variables **
+// Color Palette: "Pastel Dreams" (https://coolors.co/palette/ff99c8-fcf6bd-d0f4de-a9def9-e4c1f9)
 
 @media (prefers-color-scheme: light) {
   :root,
   :root.md,
   :root.ios {
     // * Colors *
-    --ds-text-color: #0e222d;
-    // --ds-text-color-rgb: 47, 62, 54; // TODO:
+    --ds-text-color: #0e222d; // TODO: maybe too dark?
+    --ds-text-color-rgb: 14, 34, 45;
 
-    --ds-focus-accent: hsl(203, 15%, 71%);
-    // --ds-focus-accent-rgb: 169, 193, 208; // TODO:
-    --ds-focus-accent-lighter: hsl(204, 33%, 97%);
-    --ds-focus-accent-darker: hsl(203 29% 60%);
-    --ds-focus-background: hsl(203, 23%, 95%);
-    // --ds-focus-background-rgb: 237, 244, 247; // TODO:
+    --ds-focus-accent: hsl(200, 87%, 82%); // OK!
+    --ds-focus-accent-rgb: 169, 222, 249;
+    --ds-focus-accent-lighter: color-mix(in srgb, var(--ds-focus-accent), white 60%);
+    // --ds-focus-accent-darker: hsl(203 29% 60%);
+    --ds-focus-background: hsl(200, 87%, 97%); // OK!
+    --ds-focus-background-rgb: 241, 250, 254;
 
-    --ds-rest-accent: hsl(120, 15%, 71%);
-    // --ds-rest-accent-rgb: 169, 191, 169; // TODO:
+    --ds-rest-accent: hsl(143, 62%, 65%); // OK!
+    --ds-rest-accent-rgb: 110, 221, 153;
     --ds-rest-accent-lighter: color-mix(in srgb, var(--ds-rest-accent), white 60%);
-    --ds-rest-background: hsl(100, 23%, 95%);
-    // --ds-rest-background-rgb: 241, 245, 239; // TODO:
+    --ds-rest-background: hsl(143, 62%, 97%); // OK!
+    --ds-rest-background-rgb: 243, 252, 246;
 
-    --ds-color-danger: rgb(217, 107, 107);
-    --ds-color-danger-rgb: 217, 107, 107;
+    --ds-color-danger: hsl(332, 100%, 80%);
+    --ds-color-danger-rgb: 255, 153, 201;
     --ds-color-danger-contrast: var(--ds-text-color);
     --ds-color-danger-contrast-rgb: var(--ds-text-color-rgb);
     --ds-color-danger-shade: color-mix(in srgb, var(--ds-color-danger), black 10%);
