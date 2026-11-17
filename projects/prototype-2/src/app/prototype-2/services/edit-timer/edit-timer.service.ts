@@ -26,12 +26,9 @@ export class EditTimerService {
   private getFormattedTime(totalSeconds: number): string {
     const wholeSeconds = Math.round(totalSeconds);
 
-    if (wholeSeconds < ONE_MINUTE_IN_SECONDS) {
-      return `${wholeSeconds} sec`;
-    }
-
     const hours = Math.floor(wholeSeconds / SECONDS_PER_HOUR);
     const minutes = Math.floor((wholeSeconds % SECONDS_PER_HOUR) / 60);
+    const seconds = wholeSeconds % ONE_MINUTE_IN_SECONDS;
 
     const timeParts: string[] = [];
 
@@ -43,6 +40,10 @@ export class EditTimerService {
       timeParts.push(`${minutes} min`);
     }
 
-    return timeParts.join(' ');
+    if (seconds > 0 && TIMER_CONFIG.sessions.focusSessionDurationInMin < 1) {
+      timeParts.push(`${seconds} sec`);
+    }
+
+    return timeParts.length > 0 ? timeParts.join(' ') : '0 min';
   }
 }
