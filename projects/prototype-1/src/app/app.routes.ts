@@ -13,4 +13,8 @@ export const routes: Routes = [
         (m) => m.SimplePomodoroPrototype1Page,
       ),
   },
+  {
+    path: '**', // Cualquier URL que no coincida con ninguna de las anteriores de la lista de la constante appRoutes
+    redirectTo: 'prototype-1',
+  },
 ];
