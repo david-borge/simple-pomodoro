@@ -30,6 +30,13 @@
     --ds-color-focus-lighter-shade: color-mix(in srgb, var(--ds-color-focus-lighter), black 10%);
     --ds-color-focus-lighter-tint: color-mix(in srgb, var(--ds-color-focus-lighter), white 10%);
 
+    --ds-color-focus-darker: var(--ds-focus-accent-darker);
+    --ds-color-focus-darker-rgb: 221, 242, 253;
+    --ds-color-focus-darker-contrast: var(--ds-text-color);
+    --ds-color-focus-darker-contrast-rgb: var(--ds-text-color-rgb);
+    --ds-color-focus-darker-shade: color-mix(in srgb, var(--ds-color-focus-darker), black 10%);
+    --ds-color-focus-darker-tint: color-mix(in srgb, var(--ds-color-focus-darker), white 10%);
+
     --ds-rest-accent: hsl(143, 62%, 65%); // OK!
     --ds-rest-accent-rgb: 110, 221, 153; // OK!
     --ds-rest-accent-lighter: color-mix(in srgb, var(--ds-rest-accent), white 60%);
@@ -43,6 +50,13 @@
     --ds-rest-lighter-accent-darker: #104625; // OK!
     --ds-rest-lighter-background: hsl(140, 60%, 97%); // OK!
     --ds-rest-lighter-background-rgb: 243, 252, 246; // OK!
+
+    --ds-rest-darker-accent: var(--ds-rest-accent-darker); // OK!
+    --ds-rest-darker-accent-rgb: 110, 221, 153; // OK!
+    --ds-rest-darker-accent-darker: color-mix(in srgb, var(--ds-rest-darker-accent), white 60%);
+    --ds-rest-darker-accent-darker: #104625; // OK!
+    --ds-rest-darker-background: hsl(140, 60%, 97%); // OK!
+    --ds-rest-darker-background-rgb: 243, 252, 246; // OK!
 
     --ds-color-danger: hsl(332, 100%, 80%); // OK!
     --ds-color-danger-rgb: 255, 153, 201;
@@ -95,6 +109,14 @@
     --ion-color-focus-lighter-shade: var(--ds-color-focus-lighter-shade);
     --ion-color-focus-lighter-tint: var(--ds-color-focus-lighter-tint);
 
+    // * Ionic CSS Variables - New Color - Focus Darker *
+    --ion-color-focus-darker: var(--ds-color-focus-darker);
+    --ion-color-focus-darker-rgb: var(--ds-color-focus-darker-rgb);
+    --ion-color-focus-darker-contrast: var(--ds-color-focus-darker-contrast);
+    --ion-color-focus-darker-contrast-rgb: var(--ds-color-focus-darker-contrast-rgb);
+    --ion-color-focus-darker-shade: var(--ds-color-focus-darker-shade);
+    --ion-color-focus-darker-tint: var(--ds-color-focus-darker-tint);
+
     // * Ionic CSS Variables - New Color - Rest *
     --ion-color-rest: var(--ds-rest-accent);
     --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
@@ -110,5 +132,13 @@
     --ion-color-rest-lighter-contrast-rgb: var(--ds-text-color-rgb);
     --ion-color-rest-lighter-shade: color-mix(in srgb, var(--ds-rest-lighter-accent), black 10%);
     --ion-color-rest-lighter-tint: color-mix(in srgb, var(--ds-rest-lighter-accent), white 10%);
+
+    // * Ionic CSS Variables - New Color - Rest Darker *
+    --ion-color-rest-darker: var(--ds-rest-darker-accent);
+    --ion-color-rest-darker-rgb: var(--ds-rest-darker-accent-rgb);
+    --ion-color-rest-darker-contrast: var(--ds-text-color);
+    --ion-color-rest-darker-contrast-rgb: var(--ds-text-color-rgb);
+    --ion-color-rest-darker-shade: color-mix(in srgb, var(--ds-rest-darker-accent), black 10%);
+    --ion-color-rest-darker-tint: color-mix(in srgb, var(--ds-rest-darker-accent), white 10%);
   }
 }

@@ -16,7 +16,7 @@
     </div>
 
     <div>
-      <p id="timer-numbers" [style.color]="'var(--ds-' + currentTimerSessionColor + '-accent-darker)'">
+      <ion-text id="timer-numbers" [color]="currentTimerSessionColor">
         @if (hours() >= 1) {
           <span>{{ hours() | twoDigits }}</span>
           <span>:</span>
@@ -24,7 +24,7 @@
         <span>{{ minutes() | twoDigits }}</span>
         <span>:</span>
         <span>{{ seconds() | twoDigits }}</span>
-      </p>
+      </ion-text>
       <div id="label-container">
         @if (hours() >= 1) {
           <div>hr</div>

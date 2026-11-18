@@ -37,14 +37,14 @@ export class TimerComponent {
   protected get currentTimerSessionColor(): CustomIonicColors {
     switch (this.currentTimerSession()?.type) {
       case TimerSessionType.Focus:
-        return CustomIonicColors.Focus;
+        return CustomIonicColors.FocusDarker;
 
       case TimerSessionType.ShortRest:
       case TimerSessionType.LongRest:
-        return CustomIonicColors.Rest;
+        return CustomIonicColors.RestDarker;
 
       default:
-        return CustomIonicColors.Focus;
+        return CustomIonicColors.FocusDarker;
     }
   }
 

@@ -60,6 +60,16 @@
   --ion-color-tint: var(--ion-color-focus-lighter-tint);
 }
 
+// * Ionic CSS Variables - New Color - Focus Darker
+.ion-color-focus-darker {
+  --ion-color-base: var(--ion-color-focus-darker);
+  --ion-color-base-rgb: var(--ion-color-focus-darker-rgb);
+  --ion-color-contrast: var(--ion-color-focus-darker-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-focus-darker-contrast-rgb);
+  --ion-color-shade: var(--ion-color-focus-darker-shade);
+  --ion-color-tint: var(--ion-color-focus-darker-tint);
+}
+
 // * Ionic CSS Variables - New Color - Rest
 .ion-color-rest {
   --ion-color-base: var(--ion-color-rest);
@@ -78,6 +88,16 @@
   --ion-color-contrast-rgb: var(--ion-color-rest-lighter-contrast-rgb);
   --ion-color-shade: var(--ion-color-rest-lighter-shade);
   --ion-color-tint: var(--ion-color-rest-lighter-tint);
+}
+
+// * Ionic CSS Variables - New Color - Rest Darker
+.ion-color-rest-darker {
+  --ion-color-base: var(--ion-color-rest-darker);
+  --ion-color-base-rgb: var(--ion-color-rest-darker-rgb);
+  --ion-color-contrast: var(--ion-color-rest-darker-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-rest-darker-contrast-rgb);
+  --ion-color-shade: var(--ion-color-rest-darker-shade);
+  --ion-color-tint: var(--ion-color-rest-darker-tint);
 }
 
 // * Ionic CSS Variables - Ionic Button
