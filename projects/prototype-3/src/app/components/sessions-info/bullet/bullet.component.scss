@@ -41,6 +41,18 @@
     border-left-color: var(--ds-rest-accent);
   }
 
+  &.is-active {
+    --bullet-width: 1px;
+  }
+
+  &.is-active.color-focus {
+    border-color: var(--ds-focus-accent-darker);
+  }
+
+  &.is-active.color-rest {
+    border-color: var(--ds-rest-accent-darker);
+  }
+
   &.bullet-fill-solid.color-focus {
     background-color: var(--ds-focus-accent);
   }
