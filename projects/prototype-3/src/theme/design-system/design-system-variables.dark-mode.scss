@@ -28,12 +28,12 @@
     --ds-color-focus-lighter-accent-tint: color-mix(in srgb, var(--ds-color-focus-lighter-accent), white 10%);
 
     // * Design System - Color - Focus Darker *
-    --ds-color-focus-darker: var(--ds-color-focus-accent);
-    --ds-color-focus-darker-rgb: var(--ds-color-focus-accent-rgb);
-    --ds-color-focus-darker-contrast: var(--ds-accent-contrast-color);
-    --ds-color-focus-darker-contrast-rgb: var(--ds-accent-contrast-color-rgb);
-    --ds-color-focus-darker-shade: color-mix(in srgb, var(--ds-color-focus-darker), black 10%);
-    --ds-color-focus-darker-tint: color-mix(in srgb, var(--ds-color-focus-darker), white 10%);
+    --ds-color-focus-darker-accent: var(--ds-color-focus-accent);
+    --ds-color-focus-darker-accent-rgb: var(--ds-color-focus-accent-rgb);
+    --ds-color-focus-darker-accent-contrast: var(--ds-accent-contrast-color);
+    --ds-color-focus-darker-accent-contrast-rgb: var(--ds-accent-contrast-color-rgb);
+    --ds-color-focus-darker-accent-shade: color-mix(in srgb, var(--ds-color-focus-darker-accent), black 10%);
+    --ds-color-focus-darker-accent-tint: color-mix(in srgb, var(--ds-color-focus-darker-accent), white 10%);
 
     // * Design System - Color - Rest *
     --ds-color-rest-accent: hsl(143, 62%, 65%);
@@ -46,7 +46,7 @@
     // * Design System - Color - Rest Lighter *
     --ds-color-rest-lighter-accent: var(--ds-color-rest-accent);
     --ds-color-rest-lighter-accent-rgb: var(--ds-color-rest-accent-rgb);
-    --ds-color-rest-lighter-accent-lighter: color-mix(in srgb, var(--ds-color-rest-lighter-accent), white 60%);
+    --ds-color-rest-lighter-accent-contrast: color-mix(in srgb, var(--ds-color-rest-lighter-accent), white 60%);
     --ds-color-rest-lighter-accent-darker: #4f9b68;
     --ds-color-rest-lighter-background: var(--ds-color-rest-background);
     --ds-color-rest-lighter-background-rgb: var(--ds-color-rest-background-rgb);
@@ -113,12 +113,12 @@
     --ion-color-focus-lighter-tint: var(--ds-color-focus-lighter-accent-tint);
 
     // * Ionic CSS Variables - New Color - Focus Darker *
-    --ion-color-focus-darker: var(--ds-color-focus-darker);
-    --ion-color-focus-darker-rgb: var(--ds-color-focus-darker-rgb);
-    --ion-color-focus-darker-contrast: var(--ds-color-focus-darker-contrast);
-    --ion-color-focus-darker-contrast-rgb: var(--ds-color-focus-darker-contrast-rgb);
-    --ion-color-focus-darker-shade: var(--ds-color-focus-darker-shade);
-    --ion-color-focus-darker-tint: var(--ds-color-focus-darker-tint);
+    --ion-color-focus-darker: var(--ds-color-focus-darker-accent);
+    --ion-color-focus-darker-rgb: var(--ds-color-focus-darker-accent-rgb);
+    --ion-color-focus-darker-contrast: var(--ds-color-focus-darker-accent-contrast);
+    --ion-color-focus-darker-contrast-rgb: var(--ds-color-focus-darker-accent-contrast-rgb);
+    --ion-color-focus-darker-shade: var(--ds-color-focus-darker-accent-shade);
+    --ion-color-focus-darker-tint: var(--ds-color-focus-darker-accent-tint);
 
     // * Ionic CSS Variables - New Color - Rest *
     --ion-color-rest: var(--ds-color-rest-accent);
