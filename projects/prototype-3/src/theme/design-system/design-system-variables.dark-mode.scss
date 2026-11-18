@@ -46,18 +46,10 @@
     // * Design System - Color - Rest Lighter *
     --ds-color-rest-lighter-accent: var(--ds-color-rest-accent);
     --ds-color-rest-lighter-accent-rgb: var(--ds-color-rest-accent-rgb);
-    --ds-color-rest-lighter-accent-contrast: color-mix(in srgb, var(--ds-color-rest-lighter-accent), white 60%);
-    --ds-color-rest-lighter-accent-darker: #4f9b68;
-    --ds-color-rest-lighter-background: var(--ds-color-rest-background);
-    --ds-color-rest-lighter-background-rgb: var(--ds-color-rest-background-rgb);
 
     // * Design System - Color - Rest Darker *
     --ds-color-rest-darker-accent: var(--ds-color-rest-accent-darker);
     --ds-color-rest-darker-accent-rgb: var(--ds-color-rest-accent-rgb);
-    --ds-color-rest-darker-accent-lighter: color-mix(in srgb, var(--ds-color-rest-darker-accent), white 60%);
-    --ds-color-rest-darker-accent-darker: #104625;
-    --ds-color-rest-darker-background: var(--ds-color-rest-background);
-    --ds-color-rest-darker-background-rgb: var(--ds-color-rest-background-rgb);
 
     // * Design System - Color - Danger *
     --ds-color-danger: #ff99c9;
