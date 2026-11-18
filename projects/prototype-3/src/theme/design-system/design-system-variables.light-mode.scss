@@ -6,22 +6,22 @@
   :root.md,
   :root.ios {
     // * Colors *
-    --ds-text-color: #0e222d; // TODO: maybe too dark?
+    --ds-text-color: #0e222d;
     --ds-text-color-rgb: 14, 34, 45;
 
-    --ds-focus-accent: hsl(200, 87%, 82%); // OK!
-    --ds-focus-accent-rgb: 169, 222, 249; // OK!
+    --ds-focus-accent: hsl(200, 87%, 82%);
+    --ds-focus-accent-rgb: 169, 222, 249;
     --ds-focus-accent-lighter: color-mix(in srgb, var(--ds-focus-accent), white 60%);
-    --ds-focus-accent-darker: #1f6f9f; // OK!
-    --ds-focus-background: hsl(200, 87%, 97%); // OK!
+    --ds-focus-accent-darker: #1f6f9f;
+    --ds-focus-background: hsl(200, 87%, 97%);
     --ds-focus-background-rgb: 241, 250, 254;
 
-    --ds-color-focus-lighter: var(--ds-focus-accent-lighter);
-    --ds-color-focus-lighter-rgb: 221, 242, 253;
-    --ds-color-focus-lighter-contrast: var(--ds-text-color);
-    --ds-color-focus-lighter-contrast-rgb: var(--ds-text-color-rgb);
-    --ds-color-focus-lighter-shade: color-mix(in srgb, var(--ds-color-focus-lighter), black 10%);
-    --ds-color-focus-lighter-tint: color-mix(in srgb, var(--ds-color-focus-lighter), white 10%);
+    --ds-focus-lighter-accent: var(--ds-focus-accent-lighter);
+    --ds-focus-lighter-accent-rgb: 221, 242, 253;
+    --ds-focus-lighter-accent-contrast: var(--ds-text-color);
+    --ds-focus-lighter-accent-contrast-rgb: var(--ds-text-color-rgb);
+    --ds-focus-lighter-accent-shade: color-mix(in srgb, var(--ds-focus-lighter-accent), black 10%);
+    --ds-focus-lighter-accent-tint: color-mix(in srgb, var(--ds-focus-lighter-accent), white 10%);
 
     --ds-color-focus-darker: var(--ds-focus-accent-darker);
     --ds-color-focus-darker-rgb: 221, 242, 253;
@@ -30,28 +30,28 @@
     --ds-color-focus-darker-shade: color-mix(in srgb, var(--ds-color-focus-darker), black 10%);
     --ds-color-focus-darker-tint: color-mix(in srgb, var(--ds-color-focus-darker), white 10%);
 
-    --ds-rest-accent: hsl(143, 62%, 65%); // OK!
-    --ds-rest-accent-rgb: 110, 221, 153; // OK!
+    --ds-rest-accent: hsl(143, 62%, 65%);
+    --ds-rest-accent-rgb: 110, 221, 153;
     --ds-rest-accent-lighter: color-mix(in srgb, var(--ds-rest-accent), white 60%);
-    --ds-rest-accent-darker: #237a47; // OK!
-    --ds-rest-background: hsl(140, 60%, 97%); // OK!
-    --ds-rest-background-rgb: 243, 252, 246; // OK!
+    --ds-rest-accent-darker: #237a47;
+    --ds-rest-background: hsl(140, 60%, 97%);
+    --ds-rest-background-rgb: 243, 252, 246;
 
-    --ds-rest-lighter-accent: var(--ds-rest-accent-lighter); // OK!
-    --ds-rest-lighter-accent-rgb: 110, 221, 153; // OK!
+    --ds-rest-lighter-accent: var(--ds-rest-accent-lighter);
+    --ds-rest-lighter-accent-rgb: 110, 221, 153;
     --ds-rest-lighter-accent-lighter: color-mix(in srgb, var(--ds-rest-lighter-accent), white 60%);
-    --ds-rest-lighter-accent-darker: #104625; // OK!
-    --ds-rest-lighter-background: hsl(140, 60%, 97%); // OK!
-    --ds-rest-lighter-background-rgb: 243, 252, 246; // OK!
+    --ds-rest-lighter-accent-darker: #104625;
+    --ds-rest-lighter-background: hsl(140, 60%, 97%);
+    --ds-rest-lighter-background-rgb: 243, 252, 246;
 
-    --ds-rest-darker-accent: var(--ds-rest-accent-darker); // OK!
-    --ds-rest-darker-accent-rgb: 110, 221, 153; // OK!
+    --ds-rest-darker-accent: var(--ds-rest-accent-darker);
+    --ds-rest-darker-accent-rgb: 110, 221, 153;
     --ds-rest-darker-accent-darker: color-mix(in srgb, var(--ds-rest-darker-accent), white 60%);
-    --ds-rest-darker-accent-darker: #104625; // OK!
-    --ds-rest-darker-background: hsl(140, 60%, 97%); // OK!
-    --ds-rest-darker-background-rgb: 243, 252, 246; // OK!
+    --ds-rest-darker-accent-darker: #104625;
+    --ds-rest-darker-background: hsl(140, 60%, 97%);
+    --ds-rest-darker-background-rgb: 243, 252, 246;
 
-    --ds-color-danger: hsl(332, 100%, 80%); // OK!
+    --ds-color-danger: #ff99c9;
     --ds-color-danger-rgb: 255, 153, 201;
     --ds-color-danger-contrast: var(--ds-text-color);
     --ds-color-danger-contrast-rgb: var(--ds-text-color-rgb);
@@ -95,12 +95,12 @@
     --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
 
     // * Ionic CSS Variables - New Color - Focus Lighter *
-    --ion-color-focus-lighter: var(--ds-color-focus-lighter);
-    --ion-color-focus-lighter-rgb: var(--ds-color-focus-lighter-rgb);
-    --ion-color-focus-lighter-contrast: var(--ds-color-focus-lighter-contrast);
-    --ion-color-focus-lighter-contrast-rgb: var(--ds-color-focus-lighter-contrast-rgb);
-    --ion-color-focus-lighter-shade: var(--ds-color-focus-lighter-shade);
-    --ion-color-focus-lighter-tint: var(--ds-color-focus-lighter-tint);
+    --ion-color-focus-lighter: var(--ds-focus-lighter-accent);
+    --ion-color-focus-lighter-rgb: var(--ds-focus-lighter-accent-rgb);
+    --ion-color-focus-lighter-contrast: var(--ds-focus-lighter-accent-contrast);
+    --ion-color-focus-lighter-contrast-rgb: var(--ds-focus-lighter-accent-contrast-rgb);
+    --ion-color-focus-lighter-shade: var(--ds-focus-lighter-accent-shade);
+    --ion-color-focus-lighter-tint: var(--ds-focus-lighter-accent-tint);
 
     // * Ionic CSS Variables - New Color - Focus Darker *
     --ion-color-focus-darker: var(--ds-color-focus-darker);
