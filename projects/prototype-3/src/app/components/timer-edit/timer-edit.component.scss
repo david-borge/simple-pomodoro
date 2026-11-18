@@ -5,7 +5,7 @@
 ion-picker {
   user-select: none;
 
-  --highlight-background: color-mix(in srgb, var(--ion-color-focus), transparent 90%);
+  --highlight-background: color-mix(in srgb, var(--ion-color-focus), transparent 70%);
   --highlight-border-radius: var(--ds-border-radius);
   --fade-background-rgb: color-mix(in srgb, var(--ion-background-color-rgb), transparent 100%);
 }

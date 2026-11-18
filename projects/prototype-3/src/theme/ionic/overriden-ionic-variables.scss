@@ -110,3 +110,10 @@ ion-button {
 
   --color: var(--ds-color-focus-accent);
 }
+
+@media (prefers-color-scheme: dark) {
+  ion-button.ion-color-focus {
+    --ion-color-focus-contrast: var(--ds-text-color-contrast);
+    --ion-color-focus-contrast-rgb: var(--ds-text-color-contrast-rgb);
+  }
+}
