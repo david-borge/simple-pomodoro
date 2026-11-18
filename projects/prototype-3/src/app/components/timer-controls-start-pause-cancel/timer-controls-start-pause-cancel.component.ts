@@ -58,13 +58,13 @@ export class TimerControlsStartPauseCancelComponent {
     } else if (
       (this.currentTimerSession()?.type === TimerSessionType.ShortRest ||
         this.currentTimerSession()?.type === TimerSessionType.LongRest) &&
-      !this.isTimerPaused()
+      this.isTimerPaused()
     ) {
       return CustomIonicColors.Rest;
     } else if (
       (this.currentTimerSession()?.type === TimerSessionType.ShortRest ||
         this.currentTimerSession()?.type === TimerSessionType.LongRest) &&
-      this.isTimerPaused()
+      !this.isTimerPaused()
     ) {
       return CustomIonicColors.RestLighter;
     } else {
