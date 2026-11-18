@@ -12,52 +12,52 @@
     --ds-accent-contrast-color-rgb: 14, 34, 45;
 
     // * Design System - Color - Focus *
-    --ds-focus-accent: hsl(200, 87%, 82%);
-    --ds-focus-accent-rgb: 169, 222, 249;
-    --ds-focus-accent-lighter: rgb(from var(--ds-focus-accent) r g b / 0.2);
-    --ds-focus-accent-darker: var(--ds-focus-accent);
-    --ds-focus-background: hsl(198, 88%, 19%);
-    --ds-focus-background-rgb: 25, 31, 31;
+    --ds-color-focus-accent: hsl(200, 87%, 82%);
+    --ds-color-focus-accent-rgb: 169, 222, 249;
+    --ds-color-focus-accent-lighter: rgb(from var(--ds-color-focus-accent) r g b / 0.2);
+    --ds-color-focus-accent-darker: var(--ds-color-focus-accent);
+    --ds-color-focus-background: hsl(198, 88%, 19%);
+    --ds-color-focus-background-rgb: 25, 31, 31;
 
     // * Design System - Color - Focus Lighter *
-    --ds-focus-lighter-accent: var(--ds-focus-accent);
-    --ds-focus-lighter-accent-rgb: var(--ds-focus-accent-rgb);
-    --ds-focus-lighter-accent-contrast: var(--ds-accent-contrast-color);
-    --ds-focus-lighter-accent-contrast-rgb: var(--ds-accent-contrast-color-rgb);
-    --ds-focus-lighter-accent-shade: color-mix(in srgb, var(--ds-focus-lighter-accent), black 10%);
-    --ds-focus-lighter-accent-tint: color-mix(in srgb, var(--ds-focus-lighter-accent), white 10%);
+    --ds-color-focus-lighter-accent: var(--ds-color-focus-accent);
+    --ds-color-focus-lighter-accent-rgb: var(--ds-color-focus-accent-rgb);
+    --ds-color-focus-lighter-accent-contrast: var(--ds-accent-contrast-color);
+    --ds-color-focus-lighter-accent-contrast-rgb: var(--ds-accent-contrast-color-rgb);
+    --ds-color-focus-lighter-accent-shade: color-mix(in srgb, var(--ds-color-focus-lighter-accent), black 10%);
+    --ds-color-focus-lighter-accent-tint: color-mix(in srgb, var(--ds-color-focus-lighter-accent), white 10%);
 
     // * Design System - Color - Focus Darker *
-    --ds-color-focus-darker: var(--ds-focus-accent);
-    --ds-color-focus-darker-rgb: var(--ds-focus-accent-rgb);
+    --ds-color-focus-darker: var(--ds-color-focus-accent);
+    --ds-color-focus-darker-rgb: var(--ds-color-focus-accent-rgb);
     --ds-color-focus-darker-contrast: var(--ds-accent-contrast-color);
     --ds-color-focus-darker-contrast-rgb: var(--ds-accent-contrast-color-rgb);
     --ds-color-focus-darker-shade: color-mix(in srgb, var(--ds-color-focus-darker), black 10%);
     --ds-color-focus-darker-tint: color-mix(in srgb, var(--ds-color-focus-darker), white 10%);
 
     // * Design System - Color - Rest *
-    --ds-rest-accent: hsl(143, 62%, 65%);
-    --ds-rest-accent-rgb: 110, 221, 153;
-    --ds-rest-accent-lighter: rgb(from var(--ds-rest-accent) r g b / 0.2);
-    --ds-rest-accent-darker: var(--ds-rest-accent);
-    --ds-rest-background: hsl(142, 62%, 19%);
-    --ds-rest-background-rgb: 18, 78, 40;
+    --ds-color-rest-accent: hsl(143, 62%, 65%);
+    --ds-color-rest-accent-rgb: 110, 221, 153;
+    --ds-color-rest-accent-lighter: rgb(from var(--ds-color-rest-accent) r g b / 0.2);
+    --ds-color-rest-accent-darker: var(--ds-color-rest-accent);
+    --ds-color-rest-background: hsl(142, 62%, 19%);
+    --ds-color-rest-background-rgb: 18, 78, 40;
 
     // * Design System - Color - Rest Lighter *
-    --ds-rest-lighter-accent: var(--ds-rest-accent);
-    --ds-rest-lighter-accent-rgb: var(--ds-rest-accent-rgb);
-    --ds-rest-lighter-accent-lighter: color-mix(in srgb, var(--ds-rest-lighter-accent), white 60%);
-    --ds-rest-lighter-accent-darker: #4f9b68;
-    --ds-rest-lighter-background: var(--ds-rest-background);
-    --ds-rest-lighter-background-rgb: var(--ds-rest-background-rgb);
+    --ds-color-rest-lighter-accent: var(--ds-color-rest-accent);
+    --ds-color-rest-lighter-accent-rgb: var(--ds-color-rest-accent-rgb);
+    --ds-color-rest-lighter-accent-lighter: color-mix(in srgb, var(--ds-color-rest-lighter-accent), white 60%);
+    --ds-color-rest-lighter-accent-darker: #4f9b68;
+    --ds-color-rest-lighter-background: var(--ds-color-rest-background);
+    --ds-color-rest-lighter-background-rgb: var(--ds-color-rest-background-rgb);
 
     // * Design System - Color - Rest Darker *
-    --ds-rest-darker-accent: var(--ds-rest-accent-darker);
-    --ds-rest-darker-accent-rgb: var(--ds-rest-accent-rgb);
-    --ds-rest-darker-accent-lighter: color-mix(in srgb, var(--ds-rest-darker-accent), white 60%);
-    --ds-rest-darker-accent-darker: #104625;
-    --ds-rest-darker-background: var(--ds-rest-background);
-    --ds-rest-darker-background-rgb: var(--ds-rest-background-rgb);
+    --ds-color-rest-darker-accent: var(--ds-color-rest-accent-darker);
+    --ds-color-rest-darker-accent-rgb: var(--ds-color-rest-accent-rgb);
+    --ds-color-rest-darker-accent-lighter: color-mix(in srgb, var(--ds-color-rest-darker-accent), white 60%);
+    --ds-color-rest-darker-accent-darker: #104625;
+    --ds-color-rest-darker-background: var(--ds-color-rest-background);
+    --ds-color-rest-darker-background-rgb: var(--ds-color-rest-background-rgb);
 
     // * Design System - Color - Danger *
     --ds-color-danger: #ff99c9;
@@ -80,8 +80,8 @@
     // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
     --ion-default-font: var(--ds-default-font);
     --ion-font-family: var(--ds-default-font);
-    --ion-background-color: var(--ds-focus-background);
-    --ion-background-color-rgb: var(--ds-focus-background-rgb);
+    --ion-background-color: var(--ds-color-focus-background);
+    --ion-background-color-rgb: var(--ds-color-focus-background-rgb);
 
     --ion-text-color: var(--ds-text-color);
     --ion-text-color-rgb: var(--ds-text-color-rgb);
@@ -97,20 +97,20 @@
     --ion-color-danger-tint: var(--ds-color-danger-tint);
 
     // * Ionic CSS Variables - New Color - Focus *
-    --ion-color-focus: var(--ds-focus-accent);
-    --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
+    --ion-color-focus: var(--ds-color-focus-accent);
+    --ion-color-focus-rgb: var(--ds-color-focus-accent-rgb);
     --ion-color-focus-contrast: var(--ds-accent-contrast-color);
     --ion-color-focus-contrast-rgb: var(--ds-accent-contrast-color-rgb);
-    --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
-    --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
+    --ion-color-focus-shade: color-mix(in srgb, var(--ds-color-focus-accent), black 10%);
+    --ion-color-focus-tint: color-mix(in srgb, var(--ds-color-focus-accent), white 10%);
 
     // * Ionic CSS Variables - New Color - Focus Lighter *
-    --ion-color-focus-lighter: var(--ds-focus-lighter-accent);
-    --ion-color-focus-lighter-rgb: var(--ds-focus-lighter-accent-rgb);
-    --ion-color-focus-lighter-contrast: var(--ds-focus-lighter-accent-contrast);
-    --ion-color-focus-lighter-contrast-rgb: var(--ds-focus-lighter-accent-contrast-rgb);
-    --ion-color-focus-lighter-shade: var(--ds-focus-lighter-accent-shade);
-    --ion-color-focus-lighter-tint: var(--ds-focus-lighter-accent-tint);
+    --ion-color-focus-lighter: var(--ds-color-focus-lighter-accent);
+    --ion-color-focus-lighter-rgb: var(--ds-color-focus-lighter-accent-rgb);
+    --ion-color-focus-lighter-contrast: var(--ds-color-focus-lighter-accent-contrast);
+    --ion-color-focus-lighter-contrast-rgb: var(--ds-color-focus-lighter-accent-contrast-rgb);
+    --ion-color-focus-lighter-shade: var(--ds-color-focus-lighter-accent-shade);
+    --ion-color-focus-lighter-tint: var(--ds-color-focus-lighter-accent-tint);
 
     // * Ionic CSS Variables - New Color - Focus Darker *
     --ion-color-focus-darker: var(--ds-color-focus-darker);
@@ -121,27 +121,27 @@
     --ion-color-focus-darker-tint: var(--ds-color-focus-darker-tint);
 
     // * Ionic CSS Variables - New Color - Rest *
-    --ion-color-rest: var(--ds-rest-accent);
-    --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
+    --ion-color-rest: var(--ds-color-rest-accent);
+    --ion-color-rest-rgb: var(--ds-color-rest-accent-rgb);
     --ion-color-rest-contrast: var(--ds-accent-contrast-color);
     --ion-color-rest-contrast-rgb: var(--ds-accent-contrast-color-rgb);
-    --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
-    --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
+    --ion-color-rest-shade: color-mix(in srgb, var(--ds-color-rest-accent), black 10%);
+    --ion-color-rest-tint: color-mix(in srgb, var(--ds-color-rest-accent), white 10%);
 
     // * Ionic CSS Variables - New Color - Rest Lighter *
-    --ion-color-rest-lighter: var(--ds-rest-lighter-accent);
-    --ion-color-rest-lighter-rgb: var(--ds-rest-lighter-accent-rgb);
+    --ion-color-rest-lighter: var(--ds-color-rest-lighter-accent);
+    --ion-color-rest-lighter-rgb: var(--ds-color-rest-lighter-accent-rgb);
     --ion-color-rest-lighter-contrast: var(--ds-accent-contrast-color);
     --ion-color-rest-lighter-contrast-rgb: var(--ds-accent-contrast-color-rgb);
-    --ion-color-rest-lighter-shade: color-mix(in srgb, var(--ds-rest-lighter-accent), black 10%);
-    --ion-color-rest-lighter-tint: color-mix(in srgb, var(--ds-rest-lighter-accent), white 10%);
+    --ion-color-rest-lighter-shade: color-mix(in srgb, var(--ds-color-rest-lighter-accent), black 10%);
+    --ion-color-rest-lighter-tint: color-mix(in srgb, var(--ds-color-rest-lighter-accent), white 10%);
 
     // * Ionic CSS Variables - New Color - Rest Darker *
-    --ion-color-rest-darker: var(--ds-rest-darker-accent);
-    --ion-color-rest-darker-rgb: var(--ds-rest-darker-accent-rgb);
+    --ion-color-rest-darker: var(--ds-color-rest-darker-accent);
+    --ion-color-rest-darker-rgb: var(--ds-color-rest-darker-accent-rgb);
     --ion-color-rest-darker-contrast: var(--ds-accent-contrast-color);
     --ion-color-rest-darker-contrast-rgb: var(--ds-accent-contrast-color-rgb);
-    --ion-color-rest-darker-shade: color-mix(in srgb, var(--ds-rest-darker-accent), black 10%);
-    --ion-color-rest-darker-tint: color-mix(in srgb, var(--ds-rest-darker-accent), white 10%);
+    --ion-color-rest-darker-shade: color-mix(in srgb, var(--ds-color-rest-darker-accent), black 10%);
+    --ion-color-rest-darker-tint: color-mix(in srgb, var(--ds-color-rest-darker-accent), white 10%);
   }
 }

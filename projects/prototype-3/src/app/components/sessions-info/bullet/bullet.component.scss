@@ -28,17 +28,17 @@
   border-image-repeat: stretch;
 
   &.color-focus {
-    border-top-color: var(--ds-focus-accent);
-    border-right-color: var(--ds-focus-accent);
-    border-bottom-color: var(--ds-focus-accent);
-    border-left-color: var(--ds-focus-accent);
+    border-top-color: var(--ds-color-focus-accent);
+    border-right-color: var(--ds-color-focus-accent);
+    border-bottom-color: var(--ds-color-focus-accent);
+    border-left-color: var(--ds-color-focus-accent);
   }
 
   &.color-rest {
-    border-top-color: var(--ds-rest-accent);
-    border-right-color: var(--ds-rest-accent);
-    border-bottom-color: var(--ds-rest-accent);
-    border-left-color: var(--ds-rest-accent);
+    border-top-color: var(--ds-color-rest-accent);
+    border-right-color: var(--ds-color-rest-accent);
+    border-bottom-color: var(--ds-color-rest-accent);
+    border-left-color: var(--ds-color-rest-accent);
   }
 
   &.is-active {
@@ -46,19 +46,19 @@
   }
 
   &.is-active.color-focus {
-    border-color: var(--ds-focus-accent-darker);
+    border-color: var(--ds-color-focus-accent-darker);
   }
 
   &.is-active.color-rest {
-    border-color: var(--ds-rest-accent-darker);
+    border-color: var(--ds-color-rest-accent-darker);
   }
 
   &.bullet-fill-solid.color-focus {
-    background-color: var(--ds-focus-accent);
+    background-color: var(--ds-color-focus-accent);
   }
 
   &.bullet-fill-solid.color-rest {
-    background-color: var(--ds-rest-accent);
+    background-color: var(--ds-color-rest-accent);
   }
 
   &.bullet-fill-outline {

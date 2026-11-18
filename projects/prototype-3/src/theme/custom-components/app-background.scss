@@ -1,9 +1,9 @@
 app-prototype-3 {
-  --ion-background-color: var(--ds-focus-background);
-  --ion-background-color-rgb: var(--ds-focus-background-rgb);
+  --ion-background-color: var(--ds-color-focus-background);
+  --ion-background-color-rgb: var(--ds-color-focus-background-rgb);
 }
 
 app-prototype-3.is-rest-session {
-  --ion-background-color: var(--ds-rest-background);
-  --ion-background-color-rgb: var(--ds-rest-background-rgb);
+  --ion-background-color: var(--ds-color-rest-background);
+  --ion-background-color-rgb: var(--ds-color-rest-background-rgb);
 }

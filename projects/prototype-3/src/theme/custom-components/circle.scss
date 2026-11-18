@@ -17,15 +17,15 @@
   --circle-progress-color-transition: var(--ds-transition-duration, 200ms)
     var(--ds-transition-timing-function, ease-out);
 
-  --circle-border-color: var(--ds-focus-accent-lighter);
+  --circle-border-color: var(--ds-color-focus-accent-lighter);
 
   &.focus {
-    --circle-progress-color: var(--ds-focus-accent);
-    --circle-border-color: var(--ds-focus-accent-lighter);
+    --circle-progress-color: var(--ds-color-focus-accent);
+    --circle-border-color: var(--ds-color-focus-accent-lighter);
   }
 
   &.rest {
-    --circle-progress-color: var(--ds-rest-accent);
-    --circle-border-color: var(--ds-rest-accent-lighter);
+    --circle-progress-color: var(--ds-color-rest-accent);
+    --circle-border-color: var(--ds-color-rest-accent-lighter);
   }
 }

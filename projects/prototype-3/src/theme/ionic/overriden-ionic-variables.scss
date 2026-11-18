@@ -7,8 +7,8 @@
   // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
   --ion-default-font: var(--ds-default-font);
   --ion-font-family: var(--ds-default-font);
-  --ion-background-color: var(--ds-focus-background);
-  --ion-background-color-rgb: var(--ds-focus-background-rgb);
+  --ion-background-color: var(--ds-color-focus-background);
+  --ion-background-color-rgb: var(--ds-color-focus-background-rgb);
 
   --ion-text-color: var(--ds-text-color);
   --ion-text-color-rgb: var(--ds-text-color-rgb);
@@ -24,20 +24,20 @@
   --ion-color-danger-tint: var(--ds-color-danger-tint);
 
   // * New Color - Focus *
-  --ion-color-focus: var(--ds-focus-accent);
-  --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
+  --ion-color-focus: var(--ds-color-focus-accent);
+  --ion-color-focus-rgb: var(--ds-color-focus-accent-rgb);
   --ion-color-focus-contrast: var(--ds-text-color);
   --ion-color-focus-contrast-rgb: var(--ds-text-color-rgb);
-  --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
-  --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
+  --ion-color-focus-shade: color-mix(in srgb, var(--ds-color-focus-accent), black 10%);
+  --ion-color-focus-tint: color-mix(in srgb, var(--ds-color-focus-accent), white 10%);
 
   // * New Color - Rest *
-  --ion-color-rest: var(--ds-rest-accent);
-  --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
+  --ion-color-rest: var(--ds-color-rest-accent);
+  --ion-color-rest-rgb: var(--ds-color-rest-accent-rgb);
   --ion-color-rest-contrast: var(--ds-text-color);
   --ion-color-rest-contrast-rgb: var(--ds-text-color-rgb);
-  --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
-  --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
+  --ion-color-rest-shade: color-mix(in srgb, var(--ds-color-rest-accent), black 10%);
+  --ion-color-rest-tint: color-mix(in srgb, var(--ds-color-rest-accent), white 10%);
 }
 
 // * Ionic CSS Variables - New Color - Focus
@@ -102,11 +102,11 @@
 
 // * Ionic CSS Variables - Ionic Button
 ion-button {
-  --border-color: var(--ds-focus-accent);
+  --border-color: var(--ds-color-focus-accent);
   --border-width: 1px;
   --border-radius: var(--ds-border-radius);
 
-  --background-hover: var(--ds-focus-accent);
+  --background-hover: var(--ds-color-focus-accent);
 
-  --color: var(--ds-focus-accent);
+  --color: var(--ds-color-focus-accent);
 }
