@@ -1,6 +1,14 @@
+:host {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
 #outline {
   --outline-border-width: 2px;
 
+  box-sizing: border-box;
   border-top-width: var(--outline-border-width);
   border-right-width: var(--outline-border-width);
   border-bottom-width: var(--outline-border-width);
@@ -13,12 +21,14 @@
 
   border-radius: 50px;
 
-  max-width: 30px;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1;
+  height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#number {
+  font-weight: bold;
 }

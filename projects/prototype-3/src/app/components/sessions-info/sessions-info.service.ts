@@ -1,4 +1,16 @@
-import { ElementRef, Renderer2, Service } from '@angular/core';
+import {
+  ApplicationRef,
+  ComponentRef,
+  createComponent,
+  ElementRef,
+  EnvironmentInjector,
+  inject,
+  Renderer2,
+  Service,
+} from '@angular/core';
+
+import { TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
+import { OutlinedNumberComponent } from './outlined-number/outlined-number.component';
 
 /**
  * Presenter service handling imperative DOM creation and styling.
@@ -6,6 +18,10 @@ import { ElementRef, Renderer2, Service } from '@angular/core';
  */
 @Service()
 export class SessionsInfoService {
+  private readonly applicationRef = inject(ApplicationRef);
+  private readonly environmentInjector = inject(EnvironmentInjector);
+  private readonly outlinedNumberComponentRefs: ComponentRef<OutlinedNumberComponent>[] = [];
+
   renderSessionsInfo(
     el: ElementRef,
     renderer: Renderer2,
@@ -42,8 +58,18 @@ export class SessionsInfoService {
   }
 
   private clearSessionsInfo(targetElement: Element, renderer: Renderer2): void {
+    this.destroyOutlinedNumberComponents();
+
     const existingInfo = targetElement.querySelector('#timer-sessions-info-dynamic');
     if (existingInfo) renderer.removeChild(targetElement, existingInfo);
+  }
+
+  public destroyOutlinedNumberComponents(): void {
+    this.outlinedNumberComponentRefs.forEach((componentRef) => {
+      this.applicationRef.detachView(componentRef.hostView);
+      componentRef.destroy();
+    });
+    this.outlinedNumberComponentRefs.length = 0;
   }
 
   private createSessionsInfoParagraph(
@@ -58,10 +84,10 @@ export class SessionsInfoService {
     renderer.setAttribute(paragraphEl, 'id', 'timer-sessions-info-dynamic');
 
     this.appendInitialText(paragraphEl, renderer, isTimerRunning);
-    this.appendFocusSessions(paragraphEl, renderer, focusSessions);
-    this.appendRestSessions(paragraphEl, renderer, shortRests, longRests);
+    const focusSessionsGroup = this.appendFocusSessions(paragraphEl, renderer, focusSessions);
+    const restSessionsGroup = this.appendRestSessions(paragraphEl, renderer, shortRests, longRests);
 
-    this.appendFinalText(paragraphEl, renderer, isTimerRunning);
+    this.appendFinalText(restSessionsGroup ?? focusSessionsGroup, renderer, isTimerRunning);
     return paragraphEl;
   }
 
@@ -69,15 +95,22 @@ export class SessionsInfoService {
     renderer.appendChild(paragraphEl, renderer.createText(isTimerRunning ? 'You have ' : "You'll have "));
   }
 
-  private appendFinalText(paragraphEl: HTMLParagraphElement, renderer: Renderer2, isTimerRunning: boolean): void {
-    renderer.appendChild(paragraphEl, renderer.createText(isTimerRunning ? ' left.' : '.'));
+  private appendFinalText(group: HTMLSpanElement, renderer: Renderer2, isTimerRunning: boolean): void {
+    renderer.appendChild(group, renderer.createText(isTimerRunning ? ' left.' : '.'));
   }
 
-  private appendFocusSessions(paragraphEl: HTMLParagraphElement, renderer: Renderer2, focusSessions: number): void {
-    renderer.appendChild(paragraphEl, this.createSpan(renderer, focusSessions.toString(), 'text-focus-color', true));
-    renderer.appendChild(
+  private appendFocusSessions(
+    paragraphEl: HTMLParagraphElement,
+    renderer: Renderer2,
+    focusSessions: number,
+  ): HTMLSpanElement {
+    return this.appendNumberAndLabel(
       paragraphEl,
-      this.createSpan(renderer, focusSessions === 1 ? ' focus session' : ' focus sessions', 'text-focus-color', true),
+      renderer,
+      focusSessions,
+      TimerSessionType.Focus,
+      focusSessions === 1 ? ' focus session' : ' focus sessions',
+      'text-focus-color',
     );
   }
 
@@ -86,18 +119,60 @@ export class SessionsInfoService {
     renderer: Renderer2,
     shortRests: number | null,
     longRests: number | null,
-  ): void {
-    if (shortRests === null || longRests === null) return;
+  ): HTMLSpanElement | null {
+    if (shortRests === null || longRests === null) return null;
 
     const totalRests = shortRests + longRests;
-    if (totalRests < 1) return;
+    if (totalRests < 1) return null;
 
-    renderer.appendChild(paragraphEl, renderer.createText(' and '));
-    renderer.appendChild(paragraphEl, this.createSpan(renderer, totalRests.toString(), 'text-rest-color', true));
-    renderer.appendChild(
+    renderer.appendChild(paragraphEl, renderer.createText(' '));
+    return this.appendNumberAndLabel(
       paragraphEl,
-      this.createSpan(renderer, totalRests === 1 ? ' rest' : ' rests', 'text-rest-color', true),
+      renderer,
+      totalRests,
+      TimerSessionType.ShortRest,
+      totalRests === 1 ? ' rest' : ' rests',
+      'text-rest-color',
+      'and ',
     );
+  }
+
+  private appendNumberAndLabel(
+    paragraphEl: HTMLParagraphElement,
+    renderer: Renderer2,
+    number: number,
+    sessionType: TimerSessionType,
+    label: string,
+    labelClass: string,
+    prefix = '',
+  ): HTMLSpanElement {
+    const group: HTMLSpanElement = renderer.createElement('span');
+    renderer.setStyle(group, 'white-space', 'nowrap');
+    if (prefix) renderer.appendChild(group, renderer.createText(prefix));
+    this.appendOutlinedNumber(group, renderer, number, sessionType);
+    renderer.appendChild(group, this.createSpan(renderer, label, labelClass, true));
+    renderer.appendChild(paragraphEl, group);
+    return group;
+  }
+
+  private appendOutlinedNumber(
+    parentElement: HTMLElement,
+    renderer: Renderer2,
+    number: number,
+    sessionType: TimerSessionType,
+  ): void {
+    const hostElement = renderer.createElement('app-outlined-number') as HTMLElement;
+    const componentRef = createComponent(OutlinedNumberComponent, {
+      environmentInjector: this.environmentInjector,
+      hostElement,
+    });
+
+    componentRef.setInput('number', number);
+    componentRef.setInput('sessionType', sessionType);
+    this.applicationRef.attachView(componentRef.hostView);
+    componentRef.changeDetectorRef.detectChanges();
+    this.outlinedNumberComponentRefs.push(componentRef);
+    renderer.appendChild(parentElement, hostElement);
   }
 
   private createSpan(renderer: Renderer2, text: string, className: string, isBold: boolean): HTMLSpanElement {

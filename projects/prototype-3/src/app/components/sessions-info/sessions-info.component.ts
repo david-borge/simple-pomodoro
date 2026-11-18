@@ -7,6 +7,7 @@ import {
   inject,
   input,
   OnChanges,
+  OnDestroy,
   Renderer2,
   signal,
 } from '@angular/core';
@@ -25,7 +26,7 @@ import { SessionsInfoService } from './sessions-info.service';
   styleUrls: ['./sessions-info.component.scss'],
   imports: [BulletComponent, CommonModule],
 })
-export class SessionsInfoComponent implements OnChanges, AfterViewInit {
+export class SessionsInfoComponent implements OnChanges, AfterViewInit, OnDestroy {
   private readonly timerSessionsService = inject(TimerSessionsService);
   private readonly timerService = inject(TimerService);
   private readonly sessionsInfoService = inject(SessionsInfoService);
@@ -82,6 +83,10 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
   ngAfterViewInit(): void {
     this.viewInitialized = true;
     this.renderSessionsInfoIfChanged();
+  }
+
+  ngOnDestroy(): void {
+    this.sessionsInfoService.destroyOutlinedNumberComponents();
   }
 
   private renderSessionsInfoIfChanged(): void {
