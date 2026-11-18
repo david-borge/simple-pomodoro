@@ -1,5 +1,8 @@
 <!-- TODO: check what to do if there are too many bullets to fit in one line -->
-<div id="timer-sessions-bullets-container">
+<div
+  id="timer-sessions-bullets-container"
+  [class.is-hidden]="timerStatus().isTimerBeingEdited && timerSessionsList().length === 1"
+>
   @for (timerSession of timerSessionsList(); track $index; let index = $index) {
     <app-bullet
       [BulletFillType]="

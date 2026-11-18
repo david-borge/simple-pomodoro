@@ -5,6 +5,10 @@
   gap: 10px;
 }
 
+#timer-sessions-bullets-container.is-hidden {
+  visibility: hidden;
+}
+
 #timer-sessions-info-text {
   font-weight: 300;
   letter-spacing: 5%;
