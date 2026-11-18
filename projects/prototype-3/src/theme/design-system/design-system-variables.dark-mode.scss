@@ -5,12 +5,13 @@
   :root,
   :root.md,
   :root.ios {
-    // * Colors *
+    // * Design System - Text Color *
     --ds-text-color: rgb(243, 246, 243);
     --ds-text-color-rgb: 243, 246, 243;
     --ds-accent-contrast-color: rgb(14, 34, 45);
     --ds-accent-contrast-color-rgb: 14, 34, 45;
 
+    // * Design System - Color - Focus *
     --ds-focus-accent: hsl(200, 87%, 82%);
     --ds-focus-accent-rgb: 169, 222, 249;
     --ds-focus-accent-lighter: rgb(from var(--ds-focus-accent) r g b / 0.2);
@@ -18,6 +19,7 @@
     --ds-focus-background: hsl(198, 88%, 19%);
     --ds-focus-background-rgb: 25, 31, 31;
 
+    // * Design System - Color - Focus Lighter *
     --ds-focus-lighter-accent: var(--ds-focus-accent);
     --ds-focus-lighter-accent-rgb: var(--ds-focus-accent-rgb);
     --ds-focus-lighter-accent-contrast: var(--ds-accent-contrast-color);
@@ -25,6 +27,7 @@
     --ds-focus-lighter-accent-shade: color-mix(in srgb, var(--ds-focus-lighter-accent), black 10%);
     --ds-focus-lighter-accent-tint: color-mix(in srgb, var(--ds-focus-lighter-accent), white 10%);
 
+    // * Design System - Color - Focus Darker *
     --ds-color-focus-darker: var(--ds-focus-accent);
     --ds-color-focus-darker-rgb: var(--ds-focus-accent-rgb);
     --ds-color-focus-darker-contrast: var(--ds-accent-contrast-color);
@@ -32,6 +35,7 @@
     --ds-color-focus-darker-shade: color-mix(in srgb, var(--ds-color-focus-darker), black 10%);
     --ds-color-focus-darker-tint: color-mix(in srgb, var(--ds-color-focus-darker), white 10%);
 
+    // * Design System - Color - Rest *
     --ds-rest-accent: hsl(143, 62%, 65%);
     --ds-rest-accent-rgb: 110, 221, 153;
     --ds-rest-accent-lighter: rgb(from var(--ds-rest-accent) r g b / 0.2);
@@ -39,6 +43,7 @@
     --ds-rest-background: hsl(142, 62%, 19%);
     --ds-rest-background-rgb: 18, 78, 40;
 
+    // * Design System - Color - Rest Lighter *
     --ds-rest-lighter-accent: var(--ds-rest-accent);
     --ds-rest-lighter-accent-rgb: var(--ds-rest-accent-rgb);
     --ds-rest-lighter-accent-lighter: color-mix(in srgb, var(--ds-rest-lighter-accent), white 60%);
@@ -46,6 +51,7 @@
     --ds-rest-lighter-background: var(--ds-rest-background);
     --ds-rest-lighter-background-rgb: var(--ds-rest-background-rgb);
 
+    // * Design System - Color - Rest Darker *
     --ds-rest-darker-accent: var(--ds-rest-accent-darker);
     --ds-rest-darker-accent-rgb: var(--ds-rest-accent-rgb);
     --ds-rest-darker-accent-lighter: color-mix(in srgb, var(--ds-rest-darker-accent), white 60%);
@@ -53,6 +59,7 @@
     --ds-rest-darker-background: var(--ds-rest-background);
     --ds-rest-darker-background-rgb: var(--ds-rest-background-rgb);
 
+    // * Design System - Color - Danger *
     --ds-color-danger: #ff99c9;
     --ds-color-danger-rgb: 255, 153, 201;
     --ds-color-danger-contrast: var(--ds-accent-contrast-color);
@@ -68,6 +75,7 @@
     --ds-transition-duration: 200ms;
     --ds-transition-timing-function: ease-out;
 
+    // TODO: move Ionic to ionic/overriden-ionic-variables.scss
     // * Ionic CSS Variables - Application Variables *
     // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
     --ion-default-font: var(--ds-default-font);
