@@ -15,14 +15,14 @@
     // * Design System - Color - Focus *
     --ds-color-focus-accent: hsl(200, 87%, 82%);
     --ds-color-focus-accent-rgb: 169, 222, 249;
-    --ds-color-focus-accent-lighter: rgb(from var(--ds-color-focus-accent) r g b / 0.2);
+    --ds-color-focus-accent-lighter: rgb(from var(--ds-color-focus-accent) r g b / 0.5);
     --ds-color-focus-accent-darker: var(--ds-color-focus-accent);
     --ds-color-focus-background: hsl(198, 88%, 19%);
     --ds-color-focus-background-rgb: 25, 31, 31;
 
     // * Design System - Color - Focus Lighter *
-    --ds-color-focus-lighter-accent: var(--ds-color-focus-accent);
-    --ds-color-focus-lighter-accent-rgb: var(--ds-color-focus-accent-rgb);
+    --ds-color-focus-lighter-accent: var(--ds-color-focus-accent-lighter);
+    --ds-color-focus-lighter-accent-rgb: 169 222 249 0.2;
     --ds-color-focus-lighter-accent-contrast: var(--ds-text-color-contrast);
     --ds-color-focus-lighter-accent-contrast-rgb: var(--ds-text-color-contrast-rgb);
     --ds-color-focus-lighter-accent-shade: color-mix(in srgb, var(--ds-color-focus-lighter-accent), black 10%);
@@ -39,7 +39,7 @@
     // * Design System - Color - Rest *
     --ds-color-rest-accent: hsl(143, 62%, 65%);
     --ds-color-rest-accent-rgb: 110, 221, 153;
-    --ds-color-rest-accent-lighter: rgb(from var(--ds-color-rest-accent) r g b / 0.2);
+    --ds-color-rest-accent-lighter: rgb(from var(--ds-color-rest-accent) r g b / 0.5);
     --ds-color-rest-accent-darker: var(--ds-color-rest-accent);
     --ds-color-rest-background: hsl(142, 62%, 19%);
     --ds-color-rest-background-rgb: 18, 78, 40;
