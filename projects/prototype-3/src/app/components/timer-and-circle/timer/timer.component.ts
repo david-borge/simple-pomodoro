@@ -34,6 +34,7 @@ export class TimerComponent {
   readonly minutes = computed(() => this.timeConversionService.totalSecondsToMinutes(this.displayedSeconds()));
   readonly seconds = computed(() => this.timeConversionService.totalSecondsToSeconds(this.displayedSeconds()));
 
+  //   TODO: move to a theme service
   protected get currentTimerSessionColor(): CustomIonicColors {
     switch (this.currentTimerSession()?.type) {
       case TimerSessionType.Focus:
