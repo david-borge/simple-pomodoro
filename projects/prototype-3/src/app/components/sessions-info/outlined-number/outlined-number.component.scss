@@ -1,0 +1,24 @@
+#outline {
+  --outline-border-width: 2px;
+
+  border-top-width: var(--outline-border-width);
+  border-right-width: var(--outline-border-width);
+  border-bottom-width: var(--outline-border-width);
+  border-left-width: var(--outline-border-width);
+
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+
+  border-radius: 50px;
+
+  max-width: 30px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { OutlinedNumberComponent } from '../../components/sessions-info/outlined-number/outlined-number.component';
 import { SessionsInfoComponent } from '../../components/sessions-info/sessions-info.component';
 import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer-and-circle.component';
 import { TimerControlsStartPauseCancelComponent } from '../../components/timer-controls-start-pause-cancel/timer-controls-start-pause-cancel.component';
@@ -31,6 +32,7 @@ import { TimerService } from '../../services/timer/timer.service';
     SessionsInfoComponent,
     TimerAndCircleComponent,
     TimerControlsStartPauseCancelComponent,
+    OutlinedNumberComponent,
   ],
 })
 export class Prototype3Page {
@@ -40,6 +42,9 @@ export class Prototype3Page {
 
   readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
   readonly isRestSession = signal(false);
+
+  //   TODO:
+  TimerSessionType = TimerSessionType;
 
   constructor() {
     this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {

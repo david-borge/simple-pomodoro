@@ -77,7 +77,7 @@ export class SessionsInfoService {
     renderer.appendChild(paragraphEl, this.createSpan(renderer, focusSessions.toString(), 'text-focus-color', true));
     renderer.appendChild(
       paragraphEl,
-      this.createSpan(renderer, focusSessions === 1 ? ' focus session' : ' focus sessions', 'text-focus-color', false),
+      this.createSpan(renderer, focusSessions === 1 ? ' focus session' : ' focus sessions', 'text-focus-color', true),
     );
   }
 
@@ -96,7 +96,7 @@ export class SessionsInfoService {
     renderer.appendChild(paragraphEl, this.createSpan(renderer, totalRests.toString(), 'text-rest-color', true));
     renderer.appendChild(
       paragraphEl,
-      this.createSpan(renderer, totalRests === 1 ? ' rest' : ' rests', 'text-rest-color', false),
+      this.createSpan(renderer, totalRests === 1 ? ' rest' : ' rests', 'text-rest-color', true),
     );
   }
 

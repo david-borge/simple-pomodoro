@@ -51,12 +51,14 @@ body {
 }
 
 // Text color
+// TODO: this class should not be necessary. I have it in CustomIonicColors.
 .text-focus-color {
-  color: var(--ds-focus-accent);
+  color: var(--ds-focus-accent-darker);
 }
 
+// TODO: this class should not be necessary. I have it in CustomIonicColors.
 .text-rest-color {
-  color: var(--ds-rest-accent);
+  color: var(--ds-rest-accent-darker);
 }
 
 /**

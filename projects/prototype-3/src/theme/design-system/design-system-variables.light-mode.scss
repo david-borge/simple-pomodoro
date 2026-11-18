@@ -1,5 +1,5 @@
 // TODO: CONTINUE HERE
-// - Contrast of session info
+// - Contrast of bullets
 // - Colors of Dark Mode (generator from https://coolors.co/palette/ff99c8-fcf6bd-d0f4de-a9def9-e4c1f9)
 
 // TODO: refactor: create a theme service and move all the color changes there
@@ -18,7 +18,7 @@
     --ds-focus-accent: hsl(200, 87%, 82%); // OK!
     --ds-focus-accent-rgb: 169, 222, 249; // OK!
     --ds-focus-accent-lighter: color-mix(in srgb, var(--ds-focus-accent), white 60%);
-    --ds-focus-accent-darker: #07425f; // OK!
+    --ds-focus-accent-darker: #1f6f9f; // OK!
     --ds-focus-background: hsl(200, 87%, 97%); // OK!
     --ds-focus-background-rgb: 241, 250, 254;
 
@@ -39,7 +39,7 @@
     --ds-rest-accent: hsl(143, 62%, 65%); // OK!
     --ds-rest-accent-rgb: 110, 221, 153; // OK!
     --ds-rest-accent-lighter: color-mix(in srgb, var(--ds-rest-accent), white 60%);
-    --ds-rest-accent-darker: #104625; // OK!
+    --ds-rest-accent-darker: #237a47; // OK!
     --ds-rest-background: hsl(140, 60%, 97%); // OK!
     --ds-rest-background-rgb: 243, 252, 246; // OK!
 
