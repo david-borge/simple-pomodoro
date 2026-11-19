@@ -8,14 +8,18 @@ import {
     ONE_MINUTE_IN_SECONDS,
     ONE_SECOND_IN_MILIISECONDS,
 } from '../../constants/time-conversion.constants';
+import { PersistentStateService } from '../persistent-state/persistent-state.service';
+import { PomodoroTimerState } from '../persistent-state/pomodoro-timer-state.interface';
 import { TimerSession, TimerSessionsList } from '../timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../timer-sessions/timer-sessions.service';
 
 @Injectable({ providedIn: InjectionScopes.ROOT })
 export class TimerService {
+    private readonly persistentStateService = inject(PersistentStateService);
     private readonly timerSessionsService = inject(TimerSessionsService);
 
     private intervalId: ReturnType<typeof setInterval> | null = null;
+    private timerEndsAtMs: number | null = null;
 
     private _isTimerRunning = false;
     private _isTimerPaused = false;
@@ -46,6 +50,41 @@ export class TimerService {
     private circleResettingBehaviorSubject = new BehaviorSubject(this._isCircleResetting);
     public readonly isCircleResetting$ = this.circleResettingBehaviorSubject.asObservable();
 
+    public async restorePersistedState(): Promise<void> {
+        try {
+            const persistedState = await this.persistentStateService.loadPomodoroTimerState();
+
+            if (persistedState === null) {
+                return;
+            }
+
+            this._editedTotalSeconds = persistedState.totalDurationSeconds;
+            this._totalSeconds = persistedState.remainingSeconds;
+            this.timerEndsAtMs = null;
+            this._isTimerPaused = persistedState.status === 'paused';
+            this._isTimerCancelled = persistedState.status === 'cancelled';
+            this._isTimerBeingEdited = false;
+            this._isCircleResetting = false;
+            this.timerSessionList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(
+                this._editedTotalSeconds,
+            );
+
+            if (persistedState.status === 'running' && this._totalSeconds > 0) {
+                this._isTimerCancelled = false;
+                this.timerEndsAtMs = persistedState.endsAtMs;
+                this.startTimerInterval();
+            }
+
+            if (persistedState.status !== 'cancelled') {
+                this.emitCurrentTimerSession();
+            }
+            this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+            this.emitTimerStatus();
+        } catch {
+            // Keep the default timer usable if native or web storage is unavailable.
+        }
+    }
+
     private emitTimerStatus() {
         this.timerStatusBehaviorSubject.next({
             isTimerRunning: this.isTimerRunning,
@@ -67,14 +106,12 @@ export class TimerService {
         this.timerSessionList = this.timerSessionsService.getTimerSessionsFromTotalSeconds(
             this._editedTotalSeconds,
         );
+        this.timerEndsAtMs = Date.now() + this._totalSeconds * ONE_SECOND_IN_MILIISECONDS;
         this.emitCurrentTimerSession();
 
-        this.intervalId = setInterval(() => {
-            this._totalSeconds--;
-            this.totalSecondsBehaviorSubject.next(this._totalSeconds);
-            this.emitCurrentTimerSession();
-        }, ONE_SECOND_IN_MILIISECONDS);
+        this.startTimerInterval();
         this.emitTimerStatus();
+        this.persistTimerState();
     }
 
     public pauseTimer() {
@@ -82,14 +119,17 @@ export class TimerService {
             return;
         }
 
-        clearInterval(this.intervalId);
-        this.intervalId = null;
+        this._totalSeconds = this.getRemainingSecondsFromDeadline();
+        this.clearTimerInterval();
         this._isTimerPaused = true;
+        this.emitCurrentTimerSession();
+        this.totalSecondsBehaviorSubject.next(this._totalSeconds);
         this.emitTimerStatus();
+        this.persistTimerState();
     }
 
     public cancelTimer() {
-        this.pauseTimer();
+        this.clearTimerInterval();
         this._isCircleResetting = true;
         this.circleResettingBehaviorSubject.next(this._isCircleResetting);
         this._totalSeconds = this._editedTotalSeconds;
@@ -98,6 +138,7 @@ export class TimerService {
         this.totalSecondsBehaviorSubject.next(this._totalSeconds);
         this.currentTimerSessionBehaviorSubject.next(null);
         this.emitTimerStatus();
+        this.persistTimerState();
     }
 
     public completeCircleReset() {
@@ -124,6 +165,53 @@ export class TimerService {
         this.totalSecondsBehaviorSubject.next(this._totalSeconds);
 
         this._editedTotalSeconds = totalSeconds;
+        this.persistTimerState();
+    }
+
+    private startTimerInterval() {
+        if (this.intervalId) {
+            return;
+        }
+
+        this.intervalId = setInterval(() => {
+            this._totalSeconds = this.getRemainingSecondsFromDeadline();
+            this.emitCurrentTimerSession();
+            this.totalSecondsBehaviorSubject.next(this._totalSeconds);
+        }, ONE_SECOND_IN_MILIISECONDS);
+    }
+
+    private clearTimerInterval() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
+
+        this.timerEndsAtMs = null;
+    }
+
+    private getRemainingSecondsFromDeadline(): number {
+        if (this.timerEndsAtMs === null) {
+            return this._totalSeconds;
+        }
+
+        return Math.max(
+            0,
+            Math.ceil((this.timerEndsAtMs - Date.now()) / ONE_SECOND_IN_MILIISECONDS),
+        );
+    }
+
+    private persistTimerState() {
+        const isRunning = this.isTimerRunning;
+        const state: PomodoroTimerState = {
+            status: isRunning ? 'running' : this._isTimerPaused ? 'paused' : 'cancelled',
+            totalDurationSeconds: this._editedTotalSeconds,
+            remainingSeconds: isRunning
+                ? this.getRemainingSecondsFromDeadline()
+                : this._totalSeconds,
+            endsAtMs: isRunning ? this.timerEndsAtMs : null,
+        };
+
+        void this.persistentStateService.savePomodoroTimerState(state).catch(() => undefined);
     }
 
     private emitCurrentTimerSession() {
