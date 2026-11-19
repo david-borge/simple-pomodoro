@@ -1,29 +1,29 @@
 :host {
-  min-width: 60%;
+    min-width: 60%;
 }
 
 ion-picker {
-  user-select: none;
+    user-select: none;
 
-  --highlight-background: color-mix(in srgb, var(--ion-color-focus), transparent 90%);
-  --highlight-border-radius: var(--ds-border-radius);
-  --fade-background-rgb: color-mix(in srgb, var(--ion-background-color-rgb), transparent 100%);
+    --highlight-background: color-mix(in srgb, var(--ion-color-focus), transparent 90%);
+    --highlight-border-radius: var(--ds-border-radius);
+    --fade-background-rgb: color-mix(in srgb, var(--ion-background-color-rgb), transparent 100%);
 }
 
 ion-picker-column {
-  --ion-color-primary-rgb: color-mix(in srgb, var(--ion-background-color-rgb), transparent 100%);
+    --ion-color-primary-rgb: color-mix(in srgb, var(--ion-background-color-rgb), transparent 100%);
 }
 
 ion-picker-column-option {
-  --ion-font-family: var(--ds-accent-font);
-  font-family: var(--ion-font-family);
+    --ion-font-family: var(--ds-accent-font);
+    font-family: var(--ion-font-family);
 
-  font-size: 24px;
-  font-weight: 300;
-  letter-spacing: 1.2px;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 1.2px;
 
-  &.option-active {
-    color: var(--ion-color-focus-contrast);
-    font-weight: 400;
-  }
+    &.option-active {
+        color: var(--ion-color-focus-contrast);
+        font-weight: 400;
+    }
 }

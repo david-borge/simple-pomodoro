@@ -3,16 +3,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BulletComponent } from './bullet.component';
 
 describe('BulletComponent', () => {
-  let component: BulletComponent;
-  let fixture: ComponentFixture<BulletComponent>;
+    let component: BulletComponent;
+    let fixture: ComponentFixture<BulletComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BulletComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BulletComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

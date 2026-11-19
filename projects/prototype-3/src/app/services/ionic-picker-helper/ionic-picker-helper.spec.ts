@@ -2,14 +2,14 @@ import { TestBed } from '@angular/core/testing';
 import { IonicPickerHelper } from './ionic-picker-helper';
 
 describe('IonicPickerHelper', () => {
-  let service: IonicPickerHelper;
+    let service: IonicPickerHelper;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(IonicPickerHelper);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(IonicPickerHelper);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

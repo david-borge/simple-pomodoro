@@ -15,45 +15,48 @@ import { TimerSessionsService } from '../../services/timer-sessions/timer-sessio
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
-  selector: 'app-prototype-2',
-  templateUrl: 'prototype-2.page.html',
-  styleUrls: ['prototype-2.page.scss'],
-  imports: [
-    CommonModule,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    SessionsInfoComponent,
-    TimerAndCircleComponent,
-    TimerControlsStartPauseCancelComponent,
-  ],
+    selector: 'app-prototype-2',
+    templateUrl: 'prototype-2.page.html',
+    styleUrls: ['prototype-2.page.scss'],
+    imports: [
+        CommonModule,
+        IonContent,
+        IonHeader,
+        IonTitle,
+        IonToolbar,
+        SessionsInfoComponent,
+        TimerAndCircleComponent,
+        TimerControlsStartPauseCancelComponent,
+    ],
 })
 export class Prototype2Page {
-  private readonly timerService = inject(TimerService);
-  private readonly timerSessionsService = inject(TimerSessionsService);
-  private readonly destroyRef = inject(DestroyRef);
+    private readonly timerService = inject(TimerService);
+    private readonly timerSessionsService = inject(TimerSessionsService);
+    private readonly destroyRef = inject(DestroyRef);
 
-  readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+    readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
 
-  constructor() {
-    this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {
-      this.totalSeconds.set(timeInSec);
+    constructor() {
+        this.timerService.totalSeconds$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((timeInSec) => {
+                this.totalSeconds.set(timeInSec);
 
-      if (timeInSec <= 0) {
-        this.timerService.cancelTimer();
-      }
-    });
-  }
+                if (timeInSec <= 0) {
+                    this.timerService.cancelTimer();
+                }
+            });
+    }
 
-  showSessionInfo() {
-    const totalSeconds = this.totalSeconds();
-    const plannedTotalSeconds = this.timerService.editedTotalSeconds;
+    showSessionInfo() {
+        const totalSeconds = this.totalSeconds();
+        const plannedTotalSeconds = this.timerService.editedTotalSeconds;
 
-    return (
-      this.timerService.isTimerBeingEdited ||
-      totalSeconds <= 0 ||
-      this.timerSessionsService.getTimerSessionsFromTotalSeconds(plannedTotalSeconds).length !== 1
-    );
-  }
+        return (
+            this.timerService.isTimerBeingEdited ||
+            totalSeconds <= 0 ||
+            this.timerSessionsService.getTimerSessionsFromTotalSeconds(plannedTotalSeconds)
+                .length !== 1
+        );
+    }
 }

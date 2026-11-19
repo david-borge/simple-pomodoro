@@ -7,63 +7,69 @@ import { TimerSessionType } from './timer-session.interface';
 
 @Service()
 export class TimerSessionsService {
-  private static readonly FOCUS_SESSION_DURATION_IN_SEC =
-    TIMER_CONFIG.sessions.focusSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
-  private static readonly SHORT_REST_SESSION_DURATION_IN_SEC =
-    TIMER_CONFIG.sessions.shortRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
-  private static readonly LONG_REST_SESSION_DURATION_IN_SEC =
-    TIMER_CONFIG.sessions.longRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
-  private static readonly LONG_REST_CADENCE = TIMER_CONFIG.sessions.longRestCadence;
+    private static readonly FOCUS_SESSION_DURATION_IN_SEC =
+        TIMER_CONFIG.sessions.focusSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
+    private static readonly SHORT_REST_SESSION_DURATION_IN_SEC =
+        TIMER_CONFIG.sessions.shortRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
+    private static readonly LONG_REST_SESSION_DURATION_IN_SEC =
+        TIMER_CONFIG.sessions.longRestSessionDurationInMin * ONE_MINUTE_IN_SECONDS;
+    private static readonly LONG_REST_CADENCE = TIMER_CONFIG.sessions.longRestCadence;
 
-  public getTimerSessionsFromTotalSeconds(totalSeconds: number): TimerSessionsList {
-    if (totalSeconds <= 0) {
-      throw new Error('totalSeconds must be a positive integer');
+    public getTimerSessionsFromTotalSeconds(totalSeconds: number): TimerSessionsList {
+        if (totalSeconds <= 0) {
+            throw new Error('totalSeconds must be a positive integer');
+        }
+
+        const timerSessions: TimerSessionsList = [];
+        let remainingDurationInSec = totalSeconds;
+        let completedFocusSessions = 0;
+
+        while (remainingDurationInSec > 0) {
+            const focusDurationInSec = Math.min(
+                remainingDurationInSec,
+                TimerSessionsService.FOCUS_SESSION_DURATION_IN_SEC,
+            );
+
+            timerSessions.push({
+                durationInSec: focusDurationInSec,
+                type: TimerSessionType.Focus,
+            });
+            remainingDurationInSec -= focusDurationInSec;
+
+            if (focusDurationInSec < TimerSessionsService.FOCUS_SESSION_DURATION_IN_SEC) {
+                break;
+            }
+
+            completedFocusSessions += 1;
+
+            if (remainingDurationInSec === 0) {
+                break;
+            }
+
+            const restDurationInSec =
+                completedFocusSessions % TimerSessionsService.LONG_REST_CADENCE === 0
+                    ? TimerSessionsService.LONG_REST_SESSION_DURATION_IN_SEC
+                    : TimerSessionsService.SHORT_REST_SESSION_DURATION_IN_SEC;
+
+            const actualRestDurationInSec = Math.min(remainingDurationInSec, restDurationInSec);
+
+            timerSessions.push({
+                durationInSec: actualRestDurationInSec,
+                type:
+                    restDurationInSec === TimerSessionsService.LONG_REST_SESSION_DURATION_IN_SEC
+                        ? TimerSessionType.LongRest
+                        : TimerSessionType.ShortRest,
+            });
+            remainingDurationInSec -= actualRestDurationInSec;
+        }
+
+        return timerSessions;
     }
 
-    const timerSessions: TimerSessionsList = [];
-    let remainingDurationInSec = totalSeconds;
-    let completedFocusSessions = 0;
-
-    while (remainingDurationInSec > 0) {
-      const focusDurationInSec = Math.min(remainingDurationInSec, TimerSessionsService.FOCUS_SESSION_DURATION_IN_SEC);
-
-      timerSessions.push({
-        durationInSec: focusDurationInSec,
-        type: TimerSessionType.Focus,
-      });
-      remainingDurationInSec -= focusDurationInSec;
-
-      if (focusDurationInSec < TimerSessionsService.FOCUS_SESSION_DURATION_IN_SEC) {
-        break;
-      }
-
-      completedFocusSessions += 1;
-
-      if (remainingDurationInSec === 0) {
-        break;
-      }
-
-      const restDurationInSec =
-        completedFocusSessions % TimerSessionsService.LONG_REST_CADENCE === 0
-          ? TimerSessionsService.LONG_REST_SESSION_DURATION_IN_SEC
-          : TimerSessionsService.SHORT_REST_SESSION_DURATION_IN_SEC;
-
-      const actualRestDurationInSec = Math.min(remainingDurationInSec, restDurationInSec);
-
-      timerSessions.push({
-        durationInSec: actualRestDurationInSec,
-        type:
-          restDurationInSec === TimerSessionsService.LONG_REST_SESSION_DURATION_IN_SEC
-            ? TimerSessionType.LongRest
-            : TimerSessionType.ShortRest,
-      });
-      remainingDurationInSec -= actualRestDurationInSec;
+    public getNumberOfSessionsOfAParticulaType(
+        timerSessionsList: TimerSessionsList,
+        sessionType: TimerSessionType,
+    ) {
+        return timerSessionsList.filter((timerSession) => timerSession.type === sessionType).length;
     }
-
-    return timerSessions;
-  }
-
-  public getNumberOfSessionsOfAParticulaType(timerSessionsList: TimerSessionsList, sessionType: TimerSessionType) {
-    return timerSessionsList.filter((timerSession) => timerSession.type === sessionType).length;
-  }
 }

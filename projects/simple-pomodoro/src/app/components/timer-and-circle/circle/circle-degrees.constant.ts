@@ -1,4 +1,4 @@
 export const CircleDegrees = {
-  minDegrees: 0,
-  maxDegrees: 360,
+    minDegrees: 0,
+    maxDegrees: 360,
 };

@@ -1,24 +1,29 @@
 <!-- TODO: check what to do if there are too many bullets to fit in one line -->
 <div
-  id="timer-sessions-bullets-container"
-  [class.is-hidden]="timerStatus().isTimerBeingEdited && timerSessionsList().length === 1"
+    id="timer-sessions-bullets-container"
+    [class.is-hidden]="timerStatus().isTimerBeingEdited && timerSessionsList().length === 1"
 >
-  @for (timerSession of timerSessionsList(); track $index; let index = $index) {
-    <app-bullet
-      [BulletFillType]="
-        timerStatus().isTimerBeingEdited || timerStatus().isTimerCancelled || index > currentSessionIndex()
-          ? BulletFillType.Outline
-          : BulletFillType.Solid
-      "
-      [isTimerBeingEdited]="timerStatus().isTimerBeingEdited"
-      [isCompleted]="(timerStatus().isTimerRunning || timerStatus().isTimerPaused) && index < currentSessionIndex()"
-      [isActive]="
-        index === currentSessionIndex() &&
-        (timerStatus().isTimerRunning || timerStatus().isTimerPaused) &&
-        !timerStatus().isTimerCancelled
-      "
-      [timerSessionType]="timerSession.type"
-    ></app-bullet>
-  }
+    @for (timerSession of timerSessionsList(); track $index; let index = $index) {
+        <app-bullet
+            [BulletFillType]="
+                timerStatus().isTimerBeingEdited ||
+                timerStatus().isTimerCancelled ||
+                index > currentSessionIndex()
+                    ? BulletFillType.Outline
+                    : BulletFillType.Solid
+            "
+            [isTimerBeingEdited]="timerStatus().isTimerBeingEdited"
+            [isCompleted]="
+                (timerStatus().isTimerRunning || timerStatus().isTimerPaused) &&
+                index < currentSessionIndex()
+            "
+            [isActive]="
+                index === currentSessionIndex() &&
+                (timerStatus().isTimerRunning || timerStatus().isTimerPaused) &&
+                !timerStatus().isTimerCancelled
+            "
+            [timerSessionType]="timerSession.type"
+        ></app-bullet>
+    }
 </div>
 <div id="timer-sessions-info-text"></div>

@@ -1,37 +1,37 @@
 <div id="timer-container">
-  <div id="timer-number-group">
-    <div id="timer-meta-container">
-      <div
-        id="session-type-container"
-        [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
-        [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
-        [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
-      >
-        @for (session of [currentTimerSession()]; track session?.type ?? 'none') {
-          <ion-text [color]="currentTimerSessionColor" animate.enter="session-type-enter">
-            {{ currentTimerSessionText }}
-          </ion-text>
-        }
-      </div>
-    </div>
+    <div id="timer-number-group">
+        <div id="timer-meta-container">
+            <div
+                id="session-type-container"
+                [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
+                [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
+                [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
+            >
+                @for (session of [currentTimerSession()]; track session?.type ?? 'none') {
+                    <ion-text [color]="currentTimerSessionColor" animate.enter="session-type-enter">
+                        {{ currentTimerSessionText }}
+                    </ion-text>
+                }
+            </div>
+        </div>
 
-    <div>
-      <p id="timer-numbers">
-        @if (hours() >= 1) {
-          <span>{{ hours() | twoDigits }}</span>
-          <span>:</span>
-        }
-        <span>{{ minutes() | twoDigits }}</span>
-        <span>:</span>
-        <span>{{ seconds() | twoDigits }}</span>
-      </p>
-      <div id="label-container">
-        @if (hours() >= 1) {
-          <div>hr</div>
-        }
-        <div>min</div>
-        <div>sec</div>
-      </div>
+        <div>
+            <p id="timer-numbers">
+                @if (hours() >= 1) {
+                    <span>{{ hours() | twoDigits }}</span>
+                    <span>:</span>
+                }
+                <span>{{ minutes() | twoDigits }}</span>
+                <span>:</span>
+                <span>{{ seconds() | twoDigits }}</span>
+            </p>
+            <div id="label-container">
+                @if (hours() >= 1) {
+                    <div>hr</div>
+                }
+                <div>min</div>
+                <div>sec</div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

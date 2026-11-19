@@ -3,13 +3,13 @@
 :root,
 :root.md,
 :root.ios {
-  // * Font *
-  --ds-default-font: 'Inter', sans-serif;
-  --ds-accent-font: 'Lato', sans-serif;
+    // * Font *
+    --ds-default-font: 'Inter', sans-serif;
+    --ds-accent-font: 'Lato', sans-serif;
 
-  // * Border Radius (ion button and selected value of ion-picker) *
-  --ds-border-radius: 28px;
+    // * Border Radius (ion button and selected value of ion-picker) *
+    --ds-border-radius: 28px;
 
-  // * Minimum width and height of touch target *
-  --ds-min-touch-size: 44px;
+    // * Minimum width and height of touch target *
+    --ds-min-touch-size: 44px;
 }

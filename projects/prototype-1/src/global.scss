@@ -38,51 +38,51 @@
 
 // Font
 * {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
+    font-family: 'Inter', sans-serif;
+    font-optical-sizing: auto;
 }
 
 // General container
 .container {
-  padding-right: var(--ion-padding);
-  padding-left: var(--ion-padding);
+    padding-right: var(--ion-padding);
+    padding-left: var(--ion-padding);
 }
 
 .container.expand-main-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 #main-content {
-  flex: 1;
-  display: flex;
+    flex: 1;
+    display: flex;
 }
 
 #main-content {
-  padding-top: var(--ion-padding);
-  padding-bottom: calc(var(--ion-padding));
+    padding-top: var(--ion-padding);
+    padding-bottom: calc(var(--ion-padding));
 }
 
 #bottom-content {
-  padding-top: var(--ion-padding);
-  padding-bottom: calc(2 * var(--ion-padding));
+    padding-top: var(--ion-padding);
+    padding-bottom: calc(2 * var(--ion-padding));
 }
 
 // Centering
 .center-horizontally {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 .center-vertically {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 // Theme colors
 .text-focus-color {
-  color: var(--focus-color);
+    color: var(--focus-color);
 }
 .text-rest-color {
-  color: var(--rest-color);
+    color: var(--rest-color);
 }

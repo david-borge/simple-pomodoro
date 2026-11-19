@@ -1,40 +1,40 @@
 ion-toolbar {
-  --background: var(--ion-background-color);
+    --background: var(--ion-background-color);
 }
 
 h1 {
-  margin: 0;
+    margin: 0;
 
-  font-family: var(--ds-accent-font);
-  font-weight: 400;
-  letter-spacing: 1.2px;
+    font-family: var(--ds-accent-font);
+    font-weight: 400;
+    letter-spacing: 1.2px;
 }
 
 .container.expand-main-content {
-  padding-bottom: var(--ion-safe-area-bottom, 0px);
+    padding-bottom: var(--ion-safe-area-bottom, 0px);
 }
 
 app-sessions-info {
-  opacity: 0;
-  visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
 
-  transition:
-    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
-    visibility 0s linear var(--ds-transition-duration, 200ms);
+    transition:
+        opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+        visibility 0s linear var(--ds-transition-duration, 200ms);
 }
 
 app-sessions-info.is-visible {
-  opacity: 1;
-  visibility: visible;
+    opacity: 1;
+    visibility: visible;
 
-  transition:
-    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
-    visibility 0s;
+    transition:
+        opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+        visibility 0s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  app-sessions-info,
-  app-sessions-info.is-visible {
-    transition: none;
-  }
+    app-sessions-info,
+    app-sessions-info.is-visible {
+        transition: none;
+    }
 }

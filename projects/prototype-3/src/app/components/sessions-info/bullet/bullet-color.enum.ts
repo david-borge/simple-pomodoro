@@ -1,4 +1,4 @@
 export enum BulletColorClass {
-  Focus = 'color-focus',
-  Rest = 'color-rest',
+    Focus = 'color-focus',
+    Rest = 'color-rest',
 }

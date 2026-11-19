@@ -12,68 +12,71 @@ import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants
 import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
-  selector: 'app-simple-pomodoro',
-  templateUrl: 'simple-pomodoro.prototype-1.page.html',
-  styleUrls: ['simple-pomodoro.prototype-1.page.scss'],
-  imports: [
-    CommonModule,
-    IonButton,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    SessionsInfoComponent,
-    TimerAndCircleComponent,
-  ],
+    selector: 'app-simple-pomodoro',
+    templateUrl: 'simple-pomodoro.prototype-1.page.html',
+    styleUrls: ['simple-pomodoro.prototype-1.page.scss'],
+    imports: [
+        CommonModule,
+        IonButton,
+        IonContent,
+        IonHeader,
+        IonTitle,
+        IonToolbar,
+        SessionsInfoComponent,
+        TimerAndCircleComponent,
+    ],
 })
 export class SimplePomodoroPrototype1Page {
-  private readonly timerService = inject(TimerService);
-  private readonly destroyRef = inject(DestroyRef);
+    private readonly timerService = inject(TimerService);
+    private readonly destroyRef = inject(DestroyRef);
 
-  readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+    readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
 
-  constructor() {
-    this.timerService.totalSeconds$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((timeInSec) => {
-      this.totalSeconds.set(timeInSec);
+    constructor() {
+        this.timerService.totalSeconds$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((timeInSec) => {
+                this.totalSeconds.set(timeInSec);
 
-      if (this.totalSeconds() < 0) {
+                if (this.totalSeconds() < 0) {
+                    this.timerService.cancelTimer();
+                }
+            });
+    }
+
+    onClickStartPauseBtn() {
+        if (this.timerService.isTimerRunning) {
+            this.timerService.pauseTimer();
+            return;
+        }
+
+        this.timerService.startTimer();
+    }
+
+    onClickCancelBtn() {
         this.timerService.cancelTimer();
-      }
-    });
-  }
-
-  onClickStartPauseBtn() {
-    if (this.timerService.isTimerRunning) {
-      this.timerService.pauseTimer();
-      return;
     }
 
-    this.timerService.startTimer();
-  }
-
-  onClickCancelBtn() {
-    this.timerService.cancelTimer();
-  }
-
-  startPauseBtnColor(): PredefinedColors {
-    return !this.timerService.isTimerRunning ? 'dark' : 'medium';
-  }
-
-  startPauseBtnText(): string {
-    if (!this.timerService.isTimerRunning && this.timerService.isTimerCancelled) {
-      return 'Start';
-    } else if (!this.timerService.isTimerRunning && !this.timerService.isTimerCancelled) {
-      return 'Continue';
-    } else {
-      return 'Pause';
+    startPauseBtnColor(): PredefinedColors {
+        return !this.timerService.isTimerRunning ? 'dark' : 'medium';
     }
-  }
 
-  showSessionInfo() {
-    return (
-      this.timerService.isTimerBeingEdited ||
-      (!this.timerService.isTimerBeingEdited &&
-        this.totalSeconds() > TIMER_CONFIG.sessions.showSessionsInfoThresholdInMin * ONE_MINUTE_IN_SECONDS)
-    );
-  }
+    startPauseBtnText(): string {
+        if (!this.timerService.isTimerRunning && this.timerService.isTimerCancelled) {
+            return 'Start';
+        } else if (!this.timerService.isTimerRunning && !this.timerService.isTimerCancelled) {
+            return 'Continue';
+        } else {
+            return 'Pause';
+        }
+    }
+
+    showSessionInfo() {
+        return (
+            this.timerService.isTimerBeingEdited ||
+            (!this.timerService.isTimerBeingEdited &&
+                this.totalSeconds() >
+                    TIMER_CONFIG.sessions.showSessionsInfoThresholdInMin * ONE_MINUTE_IN_SECONDS)
+        );
+    }
 }

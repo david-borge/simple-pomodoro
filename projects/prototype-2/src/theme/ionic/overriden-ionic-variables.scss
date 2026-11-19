@@ -3,70 +3,70 @@
 :root,
 :root.md,
 :root.ios {
-  // * Application Variables *
-  // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
-  --ion-default-font: var(--ds-default-font);
-  --ion-font-family: var(--ds-default-font);
-  --ion-background-color: var(--ds-focus-background);
-  --ion-background-color-rgb: var(--ds-focus-background-rgb);
+    // * Application Variables *
+    // Docs: https://ionicframework.com/docs/theming/advanced#application-variables
+    --ion-default-font: var(--ds-default-font);
+    --ion-font-family: var(--ds-default-font);
+    --ion-background-color: var(--ds-focus-background);
+    --ion-background-color-rgb: var(--ds-focus-background-rgb);
 
-  --ion-text-color: var(--ds-text-primary);
-  --ion-text-color-rgb: var(--ds-text-primary-rgb);
+    --ion-text-color: var(--ds-text-primary);
+    --ion-text-color-rgb: var(--ds-text-primary-rgb);
 
-  --ion-padding: 16px; // Adjust the margin of the Padding attributes
+    --ion-padding: 16px; // Adjust the margin of the Padding attributes
 
-  // * Modified Color - Danger *
-  --ion-color-danger: var(--ds-color-danger);
-  --ion-color-danger-rgb: var(--ds-color-danger-rgb);
-  --ion-color-danger-contrast: var(--ds-color-danger-contrast);
-  --ion-color-danger-contrast-rgb: var(--ds-color-danger-contrast-rgb);
-  --ion-color-danger-shade: var(--ds-color-danger-shade);
-  --ion-color-danger-tint: var(--ds-color-danger-tint);
+    // * Modified Color - Danger *
+    --ion-color-danger: var(--ds-color-danger);
+    --ion-color-danger-rgb: var(--ds-color-danger-rgb);
+    --ion-color-danger-contrast: var(--ds-color-danger-contrast);
+    --ion-color-danger-contrast-rgb: var(--ds-color-danger-contrast-rgb);
+    --ion-color-danger-shade: var(--ds-color-danger-shade);
+    --ion-color-danger-tint: var(--ds-color-danger-tint);
 
-  // * New Color - Focus *
-  --ion-color-focus: var(--ds-focus-accent);
-  --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
-  --ion-color-focus-contrast: var(--ds-text-primary);
-  --ion-color-focus-contrast-rgb: var(--ds-text-primary-rgb);
-  --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
-  --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
+    // * New Color - Focus *
+    --ion-color-focus: var(--ds-focus-accent);
+    --ion-color-focus-rgb: var(--ds-focus-accent-rgb);
+    --ion-color-focus-contrast: var(--ds-text-primary);
+    --ion-color-focus-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-focus-shade: color-mix(in srgb, var(--ds-focus-accent), black 10%);
+    --ion-color-focus-tint: color-mix(in srgb, var(--ds-focus-accent), white 10%);
 
-  // * New Color - Rest *
-  --ion-color-rest: var(--ds-rest-accent);
-  --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
-  --ion-color-rest-contrast: var(--ds-text-primary);
-  --ion-color-rest-contrast-rgb: var(--ds-text-primary-rgb);
-  --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
-  --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
+    // * New Color - Rest *
+    --ion-color-rest: var(--ds-rest-accent);
+    --ion-color-rest-rgb: var(--ds-rest-accent-rgb);
+    --ion-color-rest-contrast: var(--ds-text-primary);
+    --ion-color-rest-contrast-rgb: var(--ds-text-primary-rgb);
+    --ion-color-rest-shade: color-mix(in srgb, var(--ds-rest-accent), black 10%);
+    --ion-color-rest-tint: color-mix(in srgb, var(--ds-rest-accent), white 10%);
 }
 
 // * Ionic CSS Variables - New Color - Focus
 .ion-color-focus {
-  --ion-color-base: var(--ion-color-focus);
-  --ion-color-base-rgb: var(--ion-color-focus-rgb);
-  --ion-color-contrast: var(--ion-color-focus-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-focus-contrast-rgb);
-  --ion-color-shade: var(--ion-color-focus-shade);
-  --ion-color-tint: var(--ion-color-focus-tint);
+    --ion-color-base: var(--ion-color-focus);
+    --ion-color-base-rgb: var(--ion-color-focus-rgb);
+    --ion-color-contrast: var(--ion-color-focus-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-focus-contrast-rgb);
+    --ion-color-shade: var(--ion-color-focus-shade);
+    --ion-color-tint: var(--ion-color-focus-tint);
 }
 
 // * Ionic CSS Variables - New Color - Rest
 .ion-color-rest {
-  --ion-color-base: var(--ion-color-rest);
-  --ion-color-base-rgb: var(--ion-color-rest-rgb);
-  --ion-color-contrast: var(--ion-color-rest-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-rest-contrast-rgb);
-  --ion-color-shade: var(--ion-color-rest-shade);
-  --ion-color-tint: var(--ion-color-rest-tint);
+    --ion-color-base: var(--ion-color-rest);
+    --ion-color-base-rgb: var(--ion-color-rest-rgb);
+    --ion-color-contrast: var(--ion-color-rest-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-rest-contrast-rgb);
+    --ion-color-shade: var(--ion-color-rest-shade);
+    --ion-color-tint: var(--ion-color-rest-tint);
 }
 
 // * Ionic CSS Variables - Ionic Button
 ion-button {
-  --border-color: var(--ds-focus-accent);
-  --border-width: 1px;
-  --border-radius: var(--ds-border-radius);
+    --border-color: var(--ds-focus-accent);
+    --border-width: 1px;
+    --border-radius: var(--ds-border-radius);
 
-  --background-hover: var(--ds-focus-accent);
+    --background-hover: var(--ds-focus-accent);
 
-  --color: var(--ds-focus-accent);
+    --color: var(--ds-focus-accent);
 }

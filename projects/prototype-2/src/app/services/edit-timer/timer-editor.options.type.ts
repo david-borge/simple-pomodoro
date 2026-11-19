@@ -1,6 +1,6 @@
 interface TimerEditorOption {
-  timeInSec: number;
-  text: string;
+    timeInSec: number;
+    text: string;
 }
 
 export type TimerEditorOptions = TimerEditorOption[];

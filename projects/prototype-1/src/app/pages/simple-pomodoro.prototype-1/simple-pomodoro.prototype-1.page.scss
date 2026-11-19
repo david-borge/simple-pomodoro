@@ -1,14 +1,14 @@
 ion-header {
-  padding-top: var(--ion-safe-area-top, 0px);
+    padding-top: var(--ion-safe-area-top, 0px);
 }
 ion-toolbar {
-  --background: var(--ion-background-color);
+    --background: var(--ion-background-color);
 }
 
 h1 {
-  margin: 0;
+    margin: 0;
 }
 
 .container.expand-main-content {
-  padding-bottom: var(--ion-safe-area-bottom, 0px);
+    padding-bottom: var(--ion-safe-area-bottom, 0px);
 }

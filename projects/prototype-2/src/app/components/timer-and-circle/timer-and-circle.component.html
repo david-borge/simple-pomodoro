@@ -1,40 +1,40 @@
 <div id="timer-and-circle-container">
-  <app-circle
-    [totalSeconds]="totalSeconds()"
-    [isTimerBeingEdited]="isTimerBeingEdited() === true"
-    [currentTimerSession]="currentTimerSession()"
-    [isTimerRunning]="isTimerRunning()"
-    [isTimerPaused]="isTimerPaused()"
-    [isTimerCancelled]="isTimerCancelled()"
-  ></app-circle>
+    <app-circle
+        [totalSeconds]="totalSeconds()"
+        [isTimerBeingEdited]="isTimerBeingEdited() === true"
+        [currentTimerSession]="currentTimerSession()"
+        [isTimerRunning]="isTimerRunning()"
+        [isTimerPaused]="isTimerPaused()"
+        [isTimerCancelled]="isTimerCancelled()"
+    ></app-circle>
 
-  <app-alarm
-    [currentTimerSession]="currentTimerSession()"
-    [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
-    [class.is-paused]="isTimerPaused() === true"
-    [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
-    [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
-  ></app-alarm>
+    <app-alarm
+        [currentTimerSession]="currentTimerSession()"
+        [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
+        [class.is-paused]="isTimerPaused() === true"
+        [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
+        [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
+    ></app-alarm>
 
-  <app-timer
-    [totalSeconds]="totalSeconds()"
-    [isTimerRunning]="isTimerRunning()"
-    [isTimerPaused]="isTimerPaused()"
-    [currentTimerSession]="currentTimerSession()"
-    [class.is-visible]="isTimerBeingEdited() !== true"
-    [attr.aria-hidden]="isTimerBeingEdited() === true"
-    [attr.inert]="isTimerBeingEdited() === true ? '' : null"
-  ></app-timer>
+    <app-timer
+        [totalSeconds]="totalSeconds()"
+        [isTimerRunning]="isTimerRunning()"
+        [isTimerPaused]="isTimerPaused()"
+        [currentTimerSession]="currentTimerSession()"
+        [class.is-visible]="isTimerBeingEdited() !== true"
+        [attr.aria-hidden]="isTimerBeingEdited() === true"
+        [attr.inert]="isTimerBeingEdited() === true ? '' : null"
+    ></app-timer>
 
-  <app-edit-button
-    [class.is-editing]="isTimerBeingEdited() === true"
-    [attr.aria-hidden]="isTimerBeingEdited() === true"
-    [attr.inert]="isTimerBeingEdited() === true ? '' : null"
-  ></app-edit-button>
+    <app-edit-button
+        [class.is-editing]="isTimerBeingEdited() === true"
+        [attr.aria-hidden]="isTimerBeingEdited() === true"
+        [attr.inert]="isTimerBeingEdited() === true ? '' : null"
+    ></app-edit-button>
 
-  <app-timer-edit
-    [class.is-visible]="isTimerBeingEdited() === true"
-    [attr.aria-hidden]="isTimerBeingEdited() !== true"
-    [attr.inert]="isTimerBeingEdited() === true ? null : ''"
-  ></app-timer-edit>
+    <app-timer-edit
+        [class.is-visible]="isTimerBeingEdited() === true"
+        [attr.aria-hidden]="isTimerBeingEdited() !== true"
+        [attr.inert]="isTimerBeingEdited() === true ? null : ''"
+    ></app-timer-edit>
 </div>

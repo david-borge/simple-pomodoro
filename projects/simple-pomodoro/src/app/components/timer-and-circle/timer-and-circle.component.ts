@@ -10,38 +10,46 @@ import { EditButtonComponent } from './edit-button/edit-button.component';
 import { TimerComponent } from './timer/timer.component';
 
 @Component({
-  selector: 'app-timer-and-circle',
-  templateUrl: './timer-and-circle.component.html',
-  styleUrls: ['./timer-and-circle.component.scss'],
-  imports: [AlarmComponent, CircleComponent, EditButtonComponent, TimerComponent, TimerEditComponent],
+    selector: 'app-timer-and-circle',
+    templateUrl: './timer-and-circle.component.html',
+    styleUrls: ['./timer-and-circle.component.scss'],
+    imports: [
+        AlarmComponent,
+        CircleComponent,
+        EditButtonComponent,
+        TimerComponent,
+        TimerEditComponent,
+    ],
 })
 export class TimerAndCircleComponent implements OnInit {
-  private readonly timerService = inject(TimerService);
-  private readonly destroyRef = inject(DestroyRef);
+    private readonly timerService = inject(TimerService);
+    private readonly destroyRef = inject(DestroyRef);
 
-  readonly totalSeconds = input.required<number>();
+    readonly totalSeconds = input.required<number>();
 
-  isTimerRunning = signal<boolean | null>(null);
-  isTimerPaused = signal<boolean | null>(null);
-  isTimerCancelled = signal<boolean | null>(null);
-  isTimerBeingEdited = signal<boolean | null>(null);
+    isTimerRunning = signal<boolean | null>(null);
+    isTimerPaused = signal<boolean | null>(null);
+    isTimerCancelled = signal<boolean | null>(null);
+    isTimerBeingEdited = signal<boolean | null>(null);
 
-  currentTimerSession = signal<TimerSession | null>(null);
+    currentTimerSession = signal<TimerSession | null>(null);
 
-  ngOnInit() {
-    this.timerService.timerStatus$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(({ isTimerRunning, isTimerPaused, isTimerCancelled, isTimerBeingEdited }) => {
-        this.isTimerRunning.set(isTimerRunning);
-        this.isTimerPaused.set(isTimerPaused);
-        this.isTimerCancelled.set(isTimerCancelled);
-        this.isTimerBeingEdited.set(isTimerBeingEdited);
-      });
+    ngOnInit() {
+        this.timerService.timerStatus$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(
+                ({ isTimerRunning, isTimerPaused, isTimerCancelled, isTimerBeingEdited }) => {
+                    this.isTimerRunning.set(isTimerRunning);
+                    this.isTimerPaused.set(isTimerPaused);
+                    this.isTimerCancelled.set(isTimerCancelled);
+                    this.isTimerBeingEdited.set(isTimerBeingEdited);
+                },
+            );
 
-    this.timerService.currentTimerSession$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((currentTimerSession) => {
-        this.currentTimerSession.set(currentTimerSession);
-      });
-  }
+        this.timerService.currentTimerSession$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((currentTimerSession) => {
+                this.currentTimerSession.set(currentTimerSession);
+            });
+    }
 }

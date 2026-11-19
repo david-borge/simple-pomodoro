@@ -1,31 +1,31 @@
 // ** Custom Components CSS Variables - Circle **
 
 @property --circle-progress-color {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: #a9c1d0;
+    syntax: '<color>';
+    inherits: false;
+    initial-value: #a9c1d0;
 }
 
 :root,
 :root.md,
 :root.ios {
-  --circle-max-width: 400px;
-  --circle-border-width: 15px;
+    --circle-max-width: 400px;
+    --circle-border-width: 15px;
 }
 
 #circle {
-  --circle-progress-color-transition: var(--ds-transition-duration, 200ms)
-    var(--ds-transition-timing-function, ease-out);
+    --circle-progress-color-transition: var(--ds-transition-duration, 200ms)
+        var(--ds-transition-timing-function, ease-out);
 
-  --circle-border-color: var(--ds-color-focus-accent-lighter);
-
-  &.focus {
-    --circle-progress-color: var(--ds-color-focus-accent);
     --circle-border-color: var(--ds-color-focus-accent-lighter);
-  }
 
-  &.rest {
-    --circle-progress-color: var(--ds-color-rest-accent);
-    --circle-border-color: var(--ds-color-rest-accent-lighter);
-  }
+    &.focus {
+        --circle-progress-color: var(--ds-color-focus-accent);
+        --circle-border-color: var(--ds-color-focus-accent-lighter);
+    }
+
+    &.rest {
+        --circle-progress-color: var(--ds-color-rest-accent);
+        --circle-border-color: var(--ds-color-rest-accent-lighter);
+    }
 }

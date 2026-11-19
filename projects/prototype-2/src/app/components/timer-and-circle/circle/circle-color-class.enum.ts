@@ -1,4 +1,4 @@
 export enum CircleColorClass {
-  Focus = 'focus',
-  Rest = 'rest',
+    Focus = 'focus',
+    Rest = 'rest',
 }

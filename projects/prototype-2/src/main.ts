@@ -2,20 +2,20 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
 
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
-  PreloadAllModules,
-  provideRouter,
-  RouteReuseStrategy,
-  withComponentInputBinding,
-  withPreloading,
+    PreloadAllModules,
+    provideRouter,
+    RouteReuseStrategy,
+    withComponentInputBinding,
+    withPreloading,
 } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular({ mode: 'md' }),
-    provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
-  ],
+    providers: [
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        provideIonicAngular({ mode: 'md' }),
+        provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
+    ],
 });

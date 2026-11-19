@@ -1,7 +1,7 @@
 <!-- TODO: check what to do if there are too many bullets to fit in one line -->
 <div id="timer-sessions-bullets-container">
-  @for (timerSession of timerSessionsList(); track $index) {
-    <app-bullet [timerSessionType]="timerSession.type"></app-bullet>
-  }
+    @for (timerSession of timerSessionsList(); track $index) {
+        <app-bullet [timerSessionType]="timerSession.type"></app-bullet>
+    }
 </div>
 <div id="timer-sessions-info-text" class="ion-text-center"></div>

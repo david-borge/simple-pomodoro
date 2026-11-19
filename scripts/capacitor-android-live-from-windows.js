@@ -100,7 +100,9 @@ async function chooseDevice(devices) {
 
 async function chooseAngularProject(angularProjects) {
     if (angularProjects.length === 0) {
-        throw new Error('No Angular application projects with a serve target were found in angular.json.');
+        throw new Error(
+            'No Angular application projects with a serve target were found in angular.json.',
+        );
     }
     if (angularProjects.length === 1) return angularProjects[0];
 
@@ -125,7 +127,9 @@ async function chooseAngularProject(angularProjects) {
             if (project && /^\d+$/.test(answer)) return project;
             if (angularProjects.includes(answer)) return answer;
 
-            console.log(`Choose a number from 1 to ${angularProjects.length}, or enter a project name.`);
+            console.log(
+                `Choose a number from 1 to ${angularProjects.length}, or enter a project name.`,
+            );
         }
     } finally {
         prompt.close();

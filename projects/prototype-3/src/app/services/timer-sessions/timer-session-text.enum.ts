@@ -1,4 +1,4 @@
 export enum TimerSessionText {
-  Focus = 'Focus',
-  Rest = 'Rest',
+    Focus = 'Focus',
+    Rest = 'Rest',
 }
