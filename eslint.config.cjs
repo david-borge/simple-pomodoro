@@ -19,18 +19,18 @@
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
-const componentImportsOrder = require('./eslint-rules/component-imports-order');
-const emptyLineBeforeComponentDecorator = require('./eslint-rules/empty-line-before-component-decorator');
-const emptyLineBetweenClassFunctions = require('./eslint-rules/empty-line-between-class-functions');
-const emptyLineBeforeServiceDecorator = require('./eslint-rules/empty-line-before-service-decorator');
-const emptyLineBeforeTestBlock = require('./eslint-rules/empty-line-before-test-block');
-const angularClassMembersOrder = require('./eslint-rules/angular-class-members-order');
-const noDuplicateImportItems = require('./eslint-rules/no-duplicate-import-items');
-const noDuplicateImports = require('./eslint-rules/no-duplicate-imports');
-const noUnusedIonicComponentImports = require('./eslint-rules/no-unused-ionic-component-imports');
-const noUnusedImports = require('./eslint-rules/no-unused-imports');
-const noIonicAngularStandaloneImports = require('./eslint-rules/no-ionic-angular-standalone-imports');
-const unifyImports = require('./eslint-rules/unify-imports');
+const componentImportsOrder = require('./eslint-rules/component-imports-order.cjs');
+const emptyLineBeforeComponentDecorator = require('./eslint-rules/empty-line-before-component-decorator.cjs');
+const emptyLineBetweenClassFunctions = require('./eslint-rules/empty-line-between-class-functions.cjs');
+const emptyLineBeforeServiceDecorator = require('./eslint-rules/empty-line-before-service-decorator.cjs');
+const emptyLineBeforeTestBlock = require('./eslint-rules/empty-line-before-test-block.cjs');
+const angularClassMembersOrder = require('./eslint-rules/angular-class-members-order.cjs');
+const noDuplicateImportItems = require('./eslint-rules/no-duplicate-import-items.cjs');
+const noDuplicateImports = require('./eslint-rules/no-duplicate-imports.cjs');
+const noUnusedIonicComponentImports = require('./eslint-rules/no-unused-ionic-component-imports.cjs');
+const noUnusedImports = require('./eslint-rules/no-unused-imports.cjs');
+const noIonicAngularStandaloneImports = require('./eslint-rules/no-ionic-angular-standalone-imports.cjs');
+const unifyImports = require('./eslint-rules/unify-imports.cjs');
 
 module.exports = tseslint.config(
     {

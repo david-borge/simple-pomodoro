@@ -4,13 +4,15 @@
     "version": "0.0.1",
     "author": "David Borge",
     "homepage": "https://simple-pomodoro.com/",
+    "type": "module",
+    "private": true,
     "scripts": {
         "ionic-serve:simple-pomodoro": "ionic serve --project=simple-pomodoro",
         "ionic-serve:prototype-3": "ionic serve --project=prototype-3",
         "ionic-serve:prototype-2": "ionic serve --project=prototype-2",
         "ionic-serve:prototype-1": "ionic serve --project=prototype-1",
-        "capacitor:android:live:real-device:from-windows": "node ./scripts/capacitor-android-live-from-windows.js",
-        "capacitor:android:live:real-device:from-macos": "node ./scripts/capacitor-android-live-from-macos.js",
+        "capacitor:android:live:real-device:from-windows": "node ./scripts/capacitor-android-live-from-windows.cjs",
+        "capacitor:android:live:real-device:from-macos": "node ./scripts/capacitor-android-live-from-macos.cjs",
         "capacitor:android:live:emulator:simple-pomodoro": "ionic capacitor run android --livereload --external --project=simple-pomodoro",
         "capacitor:android:live:emulator:prototype-3": "ionic capacitor run android --livereload --external --project=prototype-3",
         "capacitor:android:live:emulator:prototype-2": "ionic capacitor run android --livereload --external --project=prototype-2",
@@ -23,10 +25,13 @@
         "capacitor:android:open-in-android-studio:prototype-3": "ionic capacitor open android --project=prototype-3",
         "capacitor:android:open-in-android-studio:prototype-2": "ionic capacitor open android --project=prototype-2",
         "capacitor:android:open-in-android-studio:prototype-1": "ionic capacitor open android --project=prototype-1",
-        "web:deploy:simple-pomodoro": "node ./scripts/check-simple-pomodoro-deploy.js && ng build --project=simple-pomodoro --configuration production && firebase deploy",
-        "web:deploy:prototype-3": "node ./scripts/confirm-deploy-of-prototypes.js prototype-3 && ng build --project=prototype-3 --configuration production && firebase deploy",
-        "web:deploy:prototype-2": "node ./scripts/confirm-deploy-of-prototypes.js prototype-2 ng build --project=prototype-2 --configuration production && firebase deploy",
-        "web:deploy:prototype-1": "node ./scripts/confirm-deploy-of-prototypes.js prototype-1 ng build --project=prototype-1 --configuration production && firebase deploy",
+        "web:deploy:simple-pomodoro": "node ./scripts/check-simple-pomodoro-deploy.cjs && ng build --project=simple-pomodoro --configuration production && firebase deploy",
+        "web:deploy:prototype-3": "node ./scripts/confirm-deploy-of-prototypes.cjs prototype-3 && ng build --project=prototype-3 --configuration production && firebase deploy",
+        "web:deploy:prototype-2": "node ./scripts/confirm-deploy-of-prototypes.cjs prototype-2 ng build --project=prototype-2 --configuration production && firebase deploy",
+        "web:deploy:prototype-1": "node ./scripts/confirm-deploy-of-prototypes.cjs prototype-1 ng build --project=prototype-1 --configuration production && firebase deploy",
+        "prepare": "simple-git-hooks",
+        "hook:pre-commit": "lint-staged",
+        "hook:commit-msg": "commitlint --edit",
         "format": "prettier --write .",
         "lint": "eslint . --ext .js,.ts",
         "lint:fix": "eslint . --ext .js,.ts --fix",
@@ -50,7 +55,23 @@
         "test:unit:watch": "ng test --watch",
         "test:e2e": "playwright test"
     },
-    "private": true,
+    "simple-git-hooks": {
+        "pre-commit": "npm.cmd run hook:pre-commit",
+        "commit-msg": "npm.cmd run hook:commit-msg -- $1",
+        "pre-push": "npm.cmd run hook:pre-push"
+    },
+    "lint-staged": {
+        "*.html": [
+            "prettier --write"
+        ],
+        "*.{js,ts}": [
+            "prettier --write",
+            "eslint --fix"
+        ],
+        "*.{json,md,yml,yaml}": [
+            "prettier --write"
+        ]
+    },
     "dependencies": {
         "@angular/common": "22.2.5",
         "@angular/compiler": "22.2.5",
@@ -75,6 +96,8 @@
         "@angular/compiler-cli": "22.2.5",
         "@angular/language-service": "22.2.5",
         "@capacitor/cli": "8.6.0",
+        "@commitlint/cli": "^21.2.4",
+        "@commitlint/config-conventional": "^21.2.4",
         "@ionic/angular-toolkit": "^13.0.0",
         "@ionic/eslint-config": "^0.5.0",
         "@ionic/prettier-config": "^4.0.0",
@@ -84,7 +107,9 @@
         "eslint": "^10.10.0",
         "eslint-plugin-simple-import-sort": "^14.0.0",
         "jsdom": "^30.1.1",
+        "lint-staged": "^17.6.1",
         "prettier": "^3.9.10",
+        "simple-git-hooks": "^2.14.0",
         "typescript": "~6.0.0",
         "typescript-eslint": "^8.61.0",
         "vitest": "^5.1.0"
