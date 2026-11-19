@@ -28,12 +28,30 @@ export class TimerComponent {
     readonly isTimerPaused = input.required<boolean | null>();
     readonly currentTimerSession = input.required<TimerSession | null>();
 
-    readonly displayedSeconds = computed(() => {
+    readonly firstSessionDurationInSeconds = computed(() => {
         const totalSeconds = this.totalSeconds();
 
-        return this.currentTimerSession()
+        if (totalSeconds <= 0) {
+            return totalSeconds;
+        }
+
+        const timerSessions = this.timerSessionsService.getTimerSessionsFromTotalSeconds(
+            totalSeconds,
+        );
+
+        return timerSessions[0]?.durationInSec ?? totalSeconds;
+    });
+
+    readonly displayedSeconds = computed(() => {
+        const remainingTotalSeconds = this.totalSeconds();
+
+        if (!this.currentTimerSession()) {
+            return this.firstSessionDurationInSeconds();
+        }
+
+        return remainingTotalSeconds > 0
             ? this.timerService.currentTimerSessionRemainingSeconds
-            : totalSeconds;
+            : 0;
     });
     readonly hours = computed(() =>
         this.timeConversionService.totalSecondsToHours(this.displayedSeconds()),
