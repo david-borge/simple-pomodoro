@@ -165,6 +165,8 @@ export class SessionsInfoService {
     ): HTMLSpanElement {
         const group: HTMLSpanElement = renderer.createElement('span');
         renderer.setStyle(group, 'white-space', 'nowrap');
+        renderer.setStyle(group, 'display', 'inline-block');
+        renderer.setStyle(group, 'margin-top', '5px');
         if (prefix) renderer.appendChild(group, renderer.createText(prefix));
         this.appendOutlinedNumber(group, renderer, number, sessionType);
         renderer.appendChild(group, this.createSpan(renderer, label, labelClass, true));
