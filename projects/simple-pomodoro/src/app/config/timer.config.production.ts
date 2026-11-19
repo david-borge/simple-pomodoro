@@ -8,7 +8,7 @@ export const TIMER_CONFIG = {
         longRestCadence: 4,
         showSessionsInfoThresholdInMin: 25,
     },
-    timerEditorIntervalInMin: 5,
+    timerEditorIntervalInMin: 10,
     colors: {
         focus: '#0088FF',
         rest: '#34c759',
