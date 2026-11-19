@@ -13,3 +13,7 @@ android/
 
 # Built iOS assets
 ios/
+
+# Agents
+.agents/
+.claude/
