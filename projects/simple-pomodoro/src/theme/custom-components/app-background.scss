@@ -7,3 +7,17 @@ app-simple-pomodoro.is-rest-session {
     --ion-background-color: var(--ds-color-rest-background);
     --ion-background-color-rgb: var(--ds-color-rest-background-rgb);
 }
+
+:root.starts-in-rest-session,
+:root.md.starts-in-rest-session,
+:root.ios.starts-in-rest-session {
+    --ion-background-color: var(--ds-color-rest-background);
+    --ion-background-color-rgb: var(--ds-color-rest-background-rgb);
+    background-color: var(--ds-color-rest-background);
+}
+
+html.starts-in-rest-session body,
+html.starts-in-rest-session app-root,
+html.starts-in-rest-session ion-app {
+    background-color: var(--ds-color-rest-background);
+}

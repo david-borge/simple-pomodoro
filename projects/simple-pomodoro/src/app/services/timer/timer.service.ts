@@ -227,6 +227,10 @@ export class TimerService {
 
         if (currentTimerSession !== this.currentTimerSessionBehaviorSubject.value) {
             this.currentTimerSessionBehaviorSubject.next(currentTimerSession);
+
+            if (this.isTimerRunning) {
+                this.persistTimerState();
+            }
         }
     }
 
@@ -244,6 +248,10 @@ export class TimerService {
 
     public get isTimerBeingEdited(): typeof this._isTimerBeingEdited {
         return this._isTimerBeingEdited;
+    }
+
+    public get currentTimerSession(): TimerSession | null {
+        return this.currentTimerSessionBehaviorSubject.value;
     }
 
     public get isCircleResetting(): typeof this._isCircleResetting {

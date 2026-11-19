@@ -3,7 +3,7 @@
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { afterNextRender, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { SessionsInfoComponent } from '../../components/sessions-info/sessions-info.component';
@@ -11,7 +11,10 @@ import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer
 import { TimerControlsStartPauseCancelComponent } from '../../components/timer-controls-start-pause-cancel/timer-controls-start-pause-cancel.component';
 import { TIMER_CONFIG } from '../../config/timer.config.production';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
-import { TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
+import {
+    TimerSessionType,
+    type TimerSession,
+} from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
 import { TimerService } from '../../services/timer/timer.service';
 
@@ -21,6 +24,7 @@ import { TimerService } from '../../services/timer/timer.service';
     styleUrls: ['simple-pomodoro.page.scss'],
     host: {
         '[class.is-rest-session]': 'isRestSession()',
+        '[class.is-ready]': 'isReady()',
     },
     imports: [
         CommonModule,
@@ -39,7 +43,8 @@ export class SimplePomodoroPage {
     private readonly destroyRef = inject(DestroyRef);
 
     readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
-    readonly isRestSession = signal(false);
+    readonly isRestSession = signal(this.isRestSessionType(this.timerService.currentTimerSession));
+    readonly isReady = signal(false);
 
     constructor() {
         this.timerService.totalSeconds$
@@ -55,11 +60,17 @@ export class SimplePomodoroPage {
         this.timerService.currentTimerSession$
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((session) => {
-                this.isRestSession.set(
-                    session?.type === TimerSessionType.ShortRest ||
-                        session?.type === TimerSessionType.LongRest,
-                );
+                this.isRestSession.set(this.isRestSessionType(session));
             });
+
+        afterNextRender(() => this.isReady.set(true));
+    }
+
+    private isRestSessionType(session: TimerSession | null): boolean {
+        return (
+            session?.type === TimerSessionType.ShortRest ||
+            session?.type === TimerSessionType.LongRest
+        );
     }
 
     showSessionInfo() {
