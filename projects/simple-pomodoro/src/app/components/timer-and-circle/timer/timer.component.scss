@@ -132,6 +132,15 @@
     letter-spacing: 3px;
 
     font-variant-numeric: tabular-nums; // Forces all numeric glyphs to have a uniform, monospaced width while keeping letters proportional—ideal for alignment in tables, dashboards, prices, and timers.
+
+    transition: font-size var(--ds-transition-duration, 200ms)
+        var(--ds-transition-timing-function, ease-out);
+}
+
+@media screen and (max-width: 345px) {
+    #timer-numbers > span {
+        font-size: 60px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
