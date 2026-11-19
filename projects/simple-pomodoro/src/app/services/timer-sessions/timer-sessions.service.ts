@@ -1,6 +1,6 @@
 import { Service } from '@angular/core';
 
-import { TIMER_CONFIG } from '../../config/timer.config';
+import { TIMER_CONFIG } from '../../config/timer.config.production';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
 import { TimerSessionText } from './timer-session-text.enum';
 import type { TimerSession, TimerSessionsList } from './timer-session.interface';

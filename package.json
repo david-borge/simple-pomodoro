@@ -23,7 +23,7 @@
         "capacitor:android:open-in-android-studio:prototype-3": "ionic capacitor open android --project=prototype-3",
         "capacitor:android:open-in-android-studio:prototype-2": "ionic capacitor open android --project=prototype-2",
         "capacitor:android:open-in-android-studio:prototype-1": "ionic capacitor open android --project=prototype-1",
-        "web:deploy:simple-pomodoro": "ng build --project=simple-pomodoro --configuration production && firebase deploy",
+        "web:deploy:simple-pomodoro": "node ./scripts/check-simple-pomodoro-deploy.js && ng build --project=simple-pomodoro --configuration production && firebase deploy",
         "web:deploy:prototype-3": "ng build --project=prototype-3 --configuration production && firebase deploy",
         "web:deploy:prototype-2": "ng build --project=prototype-2 --configuration production && firebase deploy",
         "web:deploy:prototype-1": "ng build --project=prototype-1 --configuration production && firebase deploy",

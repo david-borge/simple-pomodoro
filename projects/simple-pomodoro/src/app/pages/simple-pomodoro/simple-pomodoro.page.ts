@@ -9,7 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SessionsInfoComponent } from '../../components/sessions-info/sessions-info.component';
 import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer-and-circle.component';
 import { TimerControlsStartPauseCancelComponent } from '../../components/timer-controls-start-pause-cancel/timer-controls-start-pause-cancel.component';
-import { TIMER_CONFIG } from '../../config/timer.config';
+import { TIMER_CONFIG } from '../../config/timer.config.production';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
 import { TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';

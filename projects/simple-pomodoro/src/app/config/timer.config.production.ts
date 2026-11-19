@@ -1,5 +1,5 @@
 export const TIMER_CONFIG = {
-    defautlTimerDurationInMin: 25,
+    defautlTimerDurationInMin: 20,
     maximumTimerInMin: 600, // 10 hours
     sessions: {
         focusSessionDurationInMin: 25,

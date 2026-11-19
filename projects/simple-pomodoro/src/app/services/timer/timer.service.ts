@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { TIMER_CONFIG } from '../../config/timer.config';
+import { TIMER_CONFIG } from '../../config/timer.config.production';
 import { InjectionScopes } from '../../constants/injection-scopes.constant';
 import {
     ONE_MINUTE_IN_SECONDS,
