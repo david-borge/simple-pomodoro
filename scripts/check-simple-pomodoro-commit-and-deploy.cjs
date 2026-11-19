@@ -35,7 +35,7 @@ if (
     !ts.isObjectLiteralExpression(configDeclaration.initializer)
 ) {
     console.error(
-        '⛔ Commit/deployment blocked: could not read TIMER_CONFIG from timer.config.production.ts.',
+        '⛔ Commit/deployment blocked: could not read TIMER_CONFIG from timer.config.production.ts.\n',
     );
     process.exit(1);
 }
@@ -48,7 +48,9 @@ const durationProperty = configDeclaration.initializer.properties.find(
 );
 
 if (!durationProperty || !ts.isNumericLiteral(durationProperty.initializer)) {
-    console.error('⛔ Commit/deployment blocked: could not read TIMER_CONFIG.defautlTimerDurationInMin.');
+    console.error(
+        '⛔ Commit/deployment blocked: could not read TIMER_CONFIG.defautlTimerDurationInMin.\n',
+    );
     process.exit(1);
 }
 
@@ -56,9 +58,9 @@ const durationInMinutes = Number(durationProperty.initializer.text);
 
 if (durationInMinutes < 25) {
     console.error(
-        `⛔ Commit/deployment blocked: TIMER_CONFIG.defautlTimerDurationInMin is ${durationInMinutes} minutes; it must be at least 25.`,
+        `⛔ Commit/deployment blocked: TIMER_CONFIG.defautlTimerDurationInMin is ${durationInMinutes} minutes; it must be at least 25.\n`,
     );
     process.exit(1);
 }
 
-console.log(`Timer config check passed: default duration is ${durationInMinutes} minutes.`);
+console.log(`☑️  Timer config check passed: default duration is ${durationInMinutes} minutes.\n`);

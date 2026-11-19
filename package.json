@@ -17,7 +17,7 @@
         "capacitor:android:live:emulator:prototype-3": "ionic capacitor run android --livereload --external --project=prototype-3",
         "capacitor:android:live:emulator:prototype-2": "ionic capacitor run android --livereload --external --project=prototype-2",
         "capacitor:android:live:emulator:prototype-1": "ionic capacitor run android --livereload --external --project=prototype-1",
-        "capacitor:android:build:simple-pomodoro": "ng build --project=simple-pomodoro --configuration production && npx cap sync android && ionic capacitor run android --project=simple-pomodoro",
+        "capacitor:android:build:simple-pomodoro": "node ./scripts/check-simple-pomodoro-commit-and-deploy.cjs && ng build --project=simple-pomodoro --configuration production && npx cap sync android && ionic capacitor run android --project=simple-pomodoro",
         "capacitor:android:build:prototype-3": "ng build --project=prototype-3 --configuration production && npx cap sync android && ionic capacitor run android --project=prototype-3",
         "capacitor:android:build:prototype-2": "ng build --project=prototype-2 --configuration production && npx cap sync android && ionic capacitor run android --project=prototype-2",
         "capacitor:android:build:prototype-1": "ng build --project=prototype-1 --configuration production && npx cap sync android && ionic capacitor run android --project=prototype-1",
