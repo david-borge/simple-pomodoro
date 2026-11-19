@@ -1,0 +1,14 @@
+<div
+  id="circle"
+  #circleLocalRef
+  [class]="circleColor"
+  [class.is-running]="isTimerRunning() === true"
+  [class.is-paused]="isTimerPaused() === true"
+  (transitionend)="onCircleTransitionEnd($event)"
+>
+  <div id="circle-cap-shadows">
+    <div id="circle-start-cap-shadow"></div>
+    <div id="circle-end-cap-shadow"></div>
+  </div>
+  <div id="circle-inner"></div>
+</div>

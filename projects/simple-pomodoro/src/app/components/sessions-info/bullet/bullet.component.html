@@ -1,0 +1,7 @@
+<div
+  id="bullet"
+  [ngClass]="[getBulletColorClass(), getBulletFillClass()]"
+  [class.is-active]="isActive()"
+  [class.is-timer-being-edited]="isTimerBeingEdited()"
+  [class.is-completed]="isCompleted()"
+></div>

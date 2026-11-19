@@ -1,0 +1,14 @@
+// For information on how to create your own theme, please refer to:
+// https://ionicframework.com/docs/theming/
+
+// ** Design System - CSS Variables **
+@use './design-system/design-system-variables.general' as general;
+@use './design-system/design-system-variables.light-mode' as light-mode;
+@use './design-system/design-system-variables.dark-mode' as dark-mode;
+
+// ** Ionic - Overriden CSS Variables **
+@use './ionic/overriden-ionic-variables';
+
+// ** Custom Components CSS Variables **
+@use './custom-components/app-background';
+@use './custom-components/circle';

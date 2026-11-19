@@ -1,0 +1,123 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import '@ionic/angular/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '@ionic/angular/css/normalize.css';
+@import '@ionic/angular/css/structure.css';
+@import '@ionic/angular/css/typography.css';
+@import '@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '@ionic/angular/css/padding.css';
+@import '@ionic/angular/css/float-elements.css';
+@import '@ionic/angular/css/text-alignment.css';
+@import '@ionic/angular/css/text-transformation.css';
+@import '@ionic/angular/css/flex-utils.css';
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+/**
+ * Design System
+ * -----------------------------------------------------
+ */
+
+//  Font size
+body {
+  font-size: var(--ds-font-size-body);
+}
+
+.font-size-small {
+  font-size: var(--ds-font-size-small);
+}
+
+// Text color
+// TODO: this class should not be necessary. I have it in CustomIonicColors.
+.text-focus-color {
+  color: var(--ds-color-focus-accent-darker);
+}
+
+// TODO: this class should not be necessary. I have it in CustomIonicColors.
+.text-rest-color {
+  color: var(--ds-color-rest-accent-darker);
+}
+
+/**
+ * Ionic Components - Overriden CSS properties
+ * -----------------------------------------------------
+ */
+ion-button {
+  font-weight: 300;
+  text-transform: none; // Android buttons are uppercase by default. iOS, sentence case.
+}
+
+ion-button.button-default {
+  min-height: var(--ds-min-touch-size);
+}
+
+/**
+ * Custom Styles
+ * -----------------------------------------------------
+ */
+
+// Font
+* {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+}
+
+// General container
+.container {
+  padding-right: var(--ion-padding);
+  padding-left: var(--ion-padding);
+}
+
+.container.expand-main-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-content {
+  flex: 1;
+  display: flex;
+}
+
+#main-content {
+  padding-top: var(--ion-padding);
+  padding-bottom: calc(var(--ion-padding));
+}
+
+#bottom-content {
+  padding-top: var(--ion-padding);
+  padding-bottom: calc(2 * var(--ion-padding));
+}
+
+// Centering
+.center-content-horizontally {
+  display: flex;
+  justify-content: center;
+}
+.center-content-vertically {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,144 @@
+:host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, -20px, 48px) scale(1.07);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
+
+  user-select: none;
+}
+
+:host(.is-visible) {
+  transform: translate3d(0, 0, 0) scale(1);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    transform var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
+#timer-container {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+#timer-number-group {
+  position: relative;
+  grid-row: 2;
+  grid-column: 1;
+  justify-self: center;
+  align-self: center;
+
+  width: max-content;
+}
+
+#timer-meta-container {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#session-type-container {
+  align-self: center;
+
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s linear var(--ds-transition-duration, 200ms);
+}
+
+#session-type-container.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    visibility 0s;
+}
+
+#session-type-container > ion-text {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#session-type-container > ion-text.session-type-enter {
+  display: inline-block;
+  animation: session-type-change var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out)
+    both;
+}
+
+@keyframes session-type-change {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#label-container {
+  font-size: var(--ds-font-size-small);
+  letter-spacing: 1px;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+#timer-numbers {
+  width: max-content;
+  margin: 0;
+}
+
+#timer-numbers > span {
+  font-family: var(--ds-accent-font);
+
+  font-size: 76px;
+  font-weight: 400;
+  letter-spacing: 3px;
+
+  font-variant-numeric: tabular-nums; // Forces all numeric glyphs to have a uniform, monospaced width while keeping letters proportional—ideal for alignment in tables, dashboards, prices, and timers.
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host,
+  :host(.is-visible),
+  #session-type-container,
+  #session-type-container.is-visible,
+  #session-type-container > ion-text.session-type-enter {
+    transition: none;
+    animation: none;
+  }
+}

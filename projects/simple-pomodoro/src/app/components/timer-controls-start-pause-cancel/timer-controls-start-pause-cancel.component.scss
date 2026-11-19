@@ -1,0 +1,62 @@
+:host {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+#timer-controls-row {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  max-width: var(--circle-max-width);
+  padding: 0 calc(2 * var(--ion-padding));
+
+  transition: gap var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out);
+}
+
+#timer-controls-row.has-cancel-button {
+  gap: var(--ion-padding);
+}
+
+#cancel-button-slot {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    max-width var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out);
+}
+
+.has-cancel-button #cancel-button-slot {
+  max-width: 100%;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#start-pause-button-slot {
+  flex: 1;
+  min-width: 0;
+}
+
+#start-pause-button-slot ion-button::part(native) {
+  transition:
+    color var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    background-color var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+    border-color var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out);
+}
+
+#start-pause-button-slot ion-button.button-disabled {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #timer-controls-row,
+  #cancel-button-slot,
+  #start-pause-button-slot ion-button::part(native) {
+    transition: none;
+  }
+}

@@ -1,0 +1,138 @@
+// TODO: change to circle() CSS function: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/basic-shape/circle#browser_compatibility
+
+:host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#circle {
+  --progress: 360deg;
+  --circle-progress-start-angle: 0deg;
+  --circle-progress-endpoint-angle: calc(var(--circle-progress-start-angle) + var(--progress));
+
+  background: conic-gradient(
+    from var(--circle-progress-start-angle),
+    var(--circle-progress-color) 0deg var(--progress),
+    var(--circle-border-color) var(--progress)
+  );
+  color: var(--circle-progress-color);
+
+  transition: --circle-progress-color var(--circle-progress-color-transition);
+
+  @extend .center-absolute;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#circle::before,
+#circle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle calc(var(--circle-border-width) / 2) at 50% calc(var(--circle-border-width) / 2),
+    currentColor 99%,
+    transparent 100%
+  );
+  z-index: 3;
+  pointer-events: none;
+}
+
+#circle::before {
+  transform: rotate(var(--circle-progress-endpoint-angle));
+}
+
+#circle::after {
+  transform: rotate(var(--circle-progress-start-angle));
+}
+
+#circle-cap-shadows {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out);
+}
+
+#circle.is-running.has-progress-shadow #circle-cap-shadows,
+#circle.is-paused.has-progress-shadow #circle-cap-shadows {
+  opacity: 1;
+}
+
+#circle-start-cap-shadow,
+#circle-end-cap-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+#circle-start-cap-shadow::before,
+#circle-end-cap-shadow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--circle-border-width);
+  height: var(--circle-border-width);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #000;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+#circle-start-cap-shadow {
+  clip-path: inset(0 50% 0 0);
+  transform: rotate(var(--circle-progress-start-angle));
+}
+
+#circle-end-cap-shadow {
+  clip-path: inset(0 0 0 50%);
+  transform: rotate(var(--circle-progress-endpoint-angle));
+}
+
+#circle.is-running {
+  transition:
+    --progress 1s linear,
+    --circle-progress-color var(--circle-progress-color-transition);
+}
+
+#circle.is-resetting {
+  transition:
+    --progress var(--circle-progress-reset-duration, 1s) linear,
+    --circle-progress-color var(--circle-progress-color-transition);
+}
+
+@property --progress {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 290deg;
+}
+
+#circle-inner {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - var(--circle-border-width) * 2);
+  height: calc(100% - var(--circle-border-width) * 2);
+  border-radius: 50%;
+  background: var(--ion-background-color);
+}
+
+.center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

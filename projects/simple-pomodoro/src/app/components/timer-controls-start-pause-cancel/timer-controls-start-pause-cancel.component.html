@@ -1,0 +1,25 @@
+<div id="timer-controls-row" [class.has-cancel-button]="isTimerPaused()">
+  <div id="cancel-button-slot" [attr.aria-hidden]="!isTimerPaused()">
+    <ion-button
+      (click)="onClickCancelBtn()"
+      [disabled]="!isTimerPaused()"
+      fill="outline"
+      color="danger"
+      size="large"
+      expand="block"
+      >Cancel</ion-button
+    >
+  </div>
+
+  <div id="start-pause-button-slot">
+    <ion-button
+      (click)="onClickStartPauseBtn()"
+      [color]="startPauseBtnColor()"
+      [disabled]="isCircleResetting()"
+      fill="solid"
+      size="large"
+      expand="block"
+      >{{ startPauseBtnText() }}</ion-button
+    >
+  </div>
+</div>

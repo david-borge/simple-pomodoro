@@ -1,0 +1,20 @@
+#timer-sessions-bullets-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#timer-sessions-bullets-container.is-hidden {
+  visibility: hidden;
+}
+
+#timer-sessions-info-text {
+  font-weight: 300;
+  letter-spacing: 5%;
+  text-align: center;
+}
+
+.prominent-text {
+  font-weight: bold;
+}
