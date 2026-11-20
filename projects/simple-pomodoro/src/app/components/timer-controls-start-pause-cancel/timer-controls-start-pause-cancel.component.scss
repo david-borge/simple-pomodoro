@@ -11,8 +11,17 @@
     max-width: var(--circle-max-width);
     padding: 0 calc(2 * var(--ion-padding));
 
-    transition: gap var(--ds-transition-duration, 200ms)
-        var(--ds-transition-timing-function, ease-out);
+    transition:
+        gap var(--ds-transition-duration, 200ms) var(--ds-transition-timing-function, ease-out),
+        max-width var(--ds-transition-duration, 200ms)
+            var(--ds-transition-timing-function, ease-out);
+}
+
+@media screen and (max-height: 700px) {
+
+    #timer-controls-row {
+        max-width: unset;
+    }
 }
 
 #timer-controls-row.has-cancel-button {
@@ -58,6 +67,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     #timer-controls-row,
     #cancel-button-slot,
     #start-pause-button-slot ion-button::part(native) {

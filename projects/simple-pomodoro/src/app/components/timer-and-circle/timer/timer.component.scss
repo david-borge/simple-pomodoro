@@ -104,6 +104,7 @@
 }
 
 @keyframes session-type-change {
+
     from {
         opacity: 0;
         transform: translateY(-4px);
@@ -143,12 +144,21 @@
 }
 
 @media screen and (max-width: 345px) {
+
     #timer-numbers > span {
         font-size: 60px;
     }
 }
 
+@media screen and (max-height: 700px) {
+
+    #timer-numbers > span {
+        font-size: 39px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
+
     :host,
     :host(.is-visible),
     #session-type-container,

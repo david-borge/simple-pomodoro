@@ -1,6 +1,9 @@
 :host {
     width: 100%;
     max-width: var(--circle-max-width);
+
+    transition: max-width var(--ds-transition-duration, 200ms)
+        var(--ds-transition-timing-function, ease-out);
 }
 
 #timer-and-circle-container {
@@ -17,6 +20,16 @@
     padding: 50px calc(2 * var(--ion-padding) + var(--circle-border-width)) 30px;
 
     perspective: 600px;
+
+    transition: padding var(--ds-transition-duration, 200ms)
+        var(--ds-transition-timing-function, ease-out);
+}
+@media screen and (max-height: 700px) {
+
+    #timer-and-circle-container {
+        padding: 35px calc(var(--ion-padding) + var(--circle-border-width))
+            calc(var(--ion-padding) + var(--circle-border-width));
+    }
 }
 
 app-edit-button {
@@ -67,6 +80,7 @@ app-timer-edit.is-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     app-edit-button,
     app-edit-button.is-editing,
     app-timer-edit,

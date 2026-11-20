@@ -6,11 +6,16 @@
     initial-value: #a9c1d0;
 }
 
-:root,
-:root.md,
-:root.ios {
+:root {
     --circle-max-width: 400px;
     --circle-border-width: 15px;
+}
+
+@media screen and (max-height: 700px) {
+
+    :root {
+        --circle-max-width: 240px;
+    }
 }
 
 #circle {
