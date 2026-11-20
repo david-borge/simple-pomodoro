@@ -18,8 +18,8 @@
 
 import angular from 'angular-eslint';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import tseslint from 'typescript-eslint';
 
+import { defineConfig } from 'eslint/config';
 import angularClassMembersOrder from './eslint-rules/angular-class-members-order.js';
 import componentImportsOrder from './eslint-rules/component-imports-order.js';
 import emptyLineBeforeComponentDecorator from './eslint-rules/empty-line-before-component-decorator.js';
@@ -33,7 +33,7 @@ import noUnusedImports from './eslint-rules/no-unused-imports.js';
 import noUnusedIonicComponentImports from './eslint-rules/no-unused-ionic-component-imports.js';
 import unifyImports from './eslint-rules/unify-imports.js';
 
-export default tseslint.config(
+export default defineConfig(
     {
         ignores: ['projects/**/*', 'www/**/*', 'android/**/*', 'ios/**/*', '.agents/**/*'],
     },

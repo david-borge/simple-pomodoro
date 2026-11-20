@@ -1,3 +1,5 @@
+/** @type {import('eslint').ESLint.Plugin} */
+
 export default {
     rules: {
         'empty-line-before-test-block': {

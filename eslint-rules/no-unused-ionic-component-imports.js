@@ -81,6 +81,8 @@ function getTemplateText(componentObject, filename) {
     }
 }
 
+/** @type {import('eslint').ESLint.Plugin} */
+
 export default {
     rules: {
         'no-unused-ionic-component-imports': {

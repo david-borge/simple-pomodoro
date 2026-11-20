@@ -1,3 +1,5 @@
+/** @type {import('eslint').ESLint.Plugin} */
+
 export default {
     rules: {
         'no-ionic-angular-standalone-imports': {
