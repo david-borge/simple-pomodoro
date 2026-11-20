@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     rules: {
         'angular-class-members-order': {
             meta: {

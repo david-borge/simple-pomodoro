@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     rules: {
         'empty-line-before-service-decorator': {
             meta: {

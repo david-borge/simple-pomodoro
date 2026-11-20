@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     rules: {
         'no-duplicate-import-items': {
             meta: {

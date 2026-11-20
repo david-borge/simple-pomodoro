@@ -16,23 +16,24 @@
  * - unify-imports/unify-imports: combines multiple imports from the same module into one declaration.
  */
 
-const tseslint = require('typescript-eslint');
-const angular = require('angular-eslint');
-const simpleImportSort = require('eslint-plugin-simple-import-sort');
-const componentImportsOrder = require('./eslint-rules/component-imports-order.cjs');
-const emptyLineBeforeComponentDecorator = require('./eslint-rules/empty-line-before-component-decorator.cjs');
-const emptyLineBetweenClassFunctions = require('./eslint-rules/empty-line-between-class-functions.cjs');
-const emptyLineBeforeServiceDecorator = require('./eslint-rules/empty-line-before-service-decorator.cjs');
-const emptyLineBeforeTestBlock = require('./eslint-rules/empty-line-before-test-block.cjs');
-const angularClassMembersOrder = require('./eslint-rules/angular-class-members-order.cjs');
-const noDuplicateImportItems = require('./eslint-rules/no-duplicate-import-items.cjs');
-const noDuplicateImports = require('./eslint-rules/no-duplicate-imports.cjs');
-const noUnusedIonicComponentImports = require('./eslint-rules/no-unused-ionic-component-imports.cjs');
-const noUnusedImports = require('./eslint-rules/no-unused-imports.cjs');
-const noIonicAngularStandaloneImports = require('./eslint-rules/no-ionic-angular-standalone-imports.cjs');
-const unifyImports = require('./eslint-rules/unify-imports.cjs');
+import angular from 'angular-eslint';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import tseslint from 'typescript-eslint';
 
-module.exports = tseslint.config(
+import angularClassMembersOrder from './eslint-rules/angular-class-members-order.js';
+import componentImportsOrder from './eslint-rules/component-imports-order.js';
+import emptyLineBeforeComponentDecorator from './eslint-rules/empty-line-before-component-decorator.js';
+import emptyLineBeforeServiceDecorator from './eslint-rules/empty-line-before-service-decorator.js';
+import emptyLineBeforeTestBlock from './eslint-rules/empty-line-before-test-block.js';
+import emptyLineBetweenClassFunctions from './eslint-rules/empty-line-between-class-functions.js';
+import noDuplicateImportItems from './eslint-rules/no-duplicate-import-items.js';
+import noDuplicateImports from './eslint-rules/no-duplicate-imports.js';
+import noIonicAngularStandaloneImports from './eslint-rules/no-ionic-angular-standalone-imports.js';
+import noUnusedImports from './eslint-rules/no-unused-imports.js';
+import noUnusedIonicComponentImports from './eslint-rules/no-unused-ionic-component-imports.js';
+import unifyImports from './eslint-rules/unify-imports.js';
+
+export default tseslint.config(
     {
         ignores: ['projects/**/*', 'www/**/*', 'android/**/*', 'ios/**/*', '.agents/**/*'],
     },

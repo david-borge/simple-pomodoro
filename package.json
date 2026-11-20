@@ -34,7 +34,7 @@
         "hook:commit-msg": "commitlint --edit",
         "hook:pre-push": "",
         "format": "prettier --write .",
-        "lint": "eslint . --ext .js,.ts",
+        "lint:check": "eslint . --ext .js,.ts",
         "lint:fix": "eslint . --ext .js,.ts --fix",
         "format-and-lint": "prettier --write . && eslint . --ext .js,.ts --fix",
         "ng": "ng",

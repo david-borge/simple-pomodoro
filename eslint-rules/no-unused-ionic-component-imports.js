@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 function getPropertyName(property) {
     if (!property || property.computed || !property.key) {
@@ -81,7 +81,7 @@ function getTemplateText(componentObject, filename) {
     }
 }
 
-module.exports = {
+export default {
     rules: {
         'no-unused-ionic-component-imports': {
             meta: {
