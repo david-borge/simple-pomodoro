@@ -43,6 +43,7 @@
         "start:prototype-3": "ng serve --project=prototype-3",
         "start:prototype-2": "ng serve --project=prototype-2",
         "start:prototype-1": "ng serve --project=prototype-1",
+        "build:simple-pomodoro": "ng build --project=simple-pomodoro",
         "build:prototype-3": "ng build --project=prototype-3",
         "build:prototype-2": "ng build --project=prototype-2",
         "build:prototype-1": "ng build --project=prototype-1",
