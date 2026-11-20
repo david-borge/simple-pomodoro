@@ -1,6 +1,14 @@
 import { IonText } from '@ionic/angular';
 
-import { Component, computed, inject, input } from '@angular/core';
+import {
+    Component,
+    computed,
+    inject,
+    input,
+    OnChanges,
+    signal,
+    SimpleChanges,
+} from '@angular/core';
 
 import { CustomIonicColors } from '../../../design-system/ionic-colors';
 import { TwoDigitsPipe } from '../../../pipes/two-digits.pipe';
@@ -18,15 +26,35 @@ import { TimerService } from '../../../services/timer/timer.service';
     styleUrls: ['./timer.component.scss'],
     imports: [IonText, TwoDigitsPipe],
 })
-export class TimerComponent {
+export class TimerComponent implements OnChanges {
     private readonly timeConversionService = inject(TimeConversionService);
     private readonly timerSessionsService = inject(TimerSessionsService);
     private readonly timerService = inject(TimerService);
+
+    protected readonly skipInitialAnimation = signal(false);
+
+    constructor() {
+        if (this.timerService.wasRestoredFromPersistentState) {
+            this.skipInitialAnimation.set(true);
+        }
+    }
 
     readonly totalSeconds = input.required<number>();
     readonly isTimerRunning = input.required<boolean | null>();
     readonly isTimerPaused = input.required<boolean | null>();
     readonly currentTimerSession = input.required<TimerSession | null>();
+
+    ngOnChanges(changes: SimpleChanges): void {
+        const sessionChange = changes['currentTimerSession'];
+
+        if (
+            sessionChange &&
+            !sessionChange.firstChange &&
+            sessionChange.previousValue?.type !== sessionChange.currentValue?.type
+        ) {
+            this.skipInitialAnimation.set(false);
+        }
+    }
 
     readonly firstSessionDurationInSeconds = computed(() => {
         const totalSeconds = this.totalSeconds();
@@ -35,9 +63,8 @@ export class TimerComponent {
             return totalSeconds;
         }
 
-        const timerSessions = this.timerSessionsService.getTimerSessionsFromTotalSeconds(
-            totalSeconds,
-        );
+        const timerSessions =
+            this.timerSessionsService.getTimerSessionsFromTotalSeconds(totalSeconds);
 
         return timerSessions[0]?.durationInSec ?? totalSeconds;
     });

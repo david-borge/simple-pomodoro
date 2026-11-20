@@ -25,6 +25,7 @@ export class TimerService {
     private _isTimerPaused = false;
     private _isTimerCancelled = true;
     private _isTimerBeingEdited = false;
+    private _wasRestoredFromPersistentState = false;
 
     private _totalSeconds = Math.round(
         TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS,
@@ -58,6 +59,7 @@ export class TimerService {
                 return;
             }
 
+            this._wasRestoredFromPersistentState = true;
             this._editedTotalSeconds = persistedState.totalDurationSeconds;
             this._totalSeconds = persistedState.remainingSeconds;
             this.timerEndsAtMs = null;
@@ -248,6 +250,10 @@ export class TimerService {
 
     public get isTimerBeingEdited(): typeof this._isTimerBeingEdited {
         return this._isTimerBeingEdited;
+    }
+
+    public get wasRestoredFromPersistentState(): typeof this._wasRestoredFromPersistentState {
+        return this._wasRestoredFromPersistentState;
     }
 
     public get currentTimerSession(): TimerSession | null {

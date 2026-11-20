@@ -1,12 +1,13 @@
 import { IonIcon } from '@ionic/angular';
 
-import { Component, input, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { Component, inject, input, OnChanges, signal, SimpleChanges } from '@angular/core';
 
 import {
     ONE_MINUTE_IN_SECONDS,
     ONE_SECOND_IN_MILIISECONDS,
 } from '../../../constants/time-conversion.constants';
 import { TimerSession } from '../../../services/timer-sessions/timer-session.interface';
+import { TimerService } from '../../../services/timer/timer.service';
 
 @Component({
     selector: 'app-alarm',
@@ -15,11 +16,26 @@ import { TimerSession } from '../../../services/timer-sessions/timer-session.int
     imports: [IonIcon],
 })
 export class AlarmComponent implements OnChanges {
+    private readonly timerService = inject(TimerService);
+
     readonly currentTimerSession = input.required<TimerSession | null>();
     protected readonly alarmTime = signal('');
+    protected readonly skipInitialAnimation = signal(false);
+
+    constructor() {
+        if (this.timerService.wasRestoredFromPersistentState) {
+            this.skipInitialAnimation.set(true);
+        }
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes['currentTimerSession']?.currentValue) {
+        const sessionChange = changes['currentTimerSession'];
+
+        if (sessionChange && !sessionChange.firstChange && this.skipInitialAnimation()) {
+            this.skipInitialAnimation.set(false);
+        }
+
+        if (sessionChange?.currentValue) {
             this.alarmTime.set(this.getAlarmTime());
         }
     }

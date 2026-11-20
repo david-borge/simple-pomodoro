@@ -3,14 +3,24 @@
         <div id="timer-meta-container">
             <div
                 id="session-type-container"
+                [class.skip-initial-animation]="skipInitialAnimation()"
                 [class.is-visible]="isTimerRunning() === true || isTimerPaused() === true"
                 [attr.aria-hidden]="isTimerRunning() !== true && isTimerPaused() !== true"
                 [attr.inert]="isTimerRunning() === true || isTimerPaused() === true ? null : ''"
             >
                 @for (session of [currentTimerSession()]; track session?.type ?? 'none') {
-                    <ion-text [color]="currentTimerSessionColor" animate.enter="session-type-enter">
-                        {{ currentTimerSessionText }}
-                    </ion-text>
+                    @if (skipInitialAnimation()) {
+                        <ion-text [color]="currentTimerSessionColor">
+                            {{ currentTimerSessionText }}
+                        </ion-text>
+                    } @else {
+                        <ion-text
+                            [color]="currentTimerSessionColor"
+                            animate.enter="session-type-enter"
+                        >
+                            {{ currentTimerSessionText }}
+                        </ion-text>
+                    }
                 }
             </div>
         </div>

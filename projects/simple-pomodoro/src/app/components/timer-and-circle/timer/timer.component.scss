@@ -85,6 +85,11 @@
         visibility 0s;
 }
 
+#session-type-container.skip-initial-animation,
+#session-type-container.skip-initial-animation.is-visible {
+    transition: none;
+}
+
 #session-type-container > ion-text {
     font-size: 18px;
     font-weight: 300;
