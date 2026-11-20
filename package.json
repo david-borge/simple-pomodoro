@@ -33,10 +33,11 @@
         "hook:pre-commit": "node ./scripts/check-simple-pomodoro-commit-build-and-deploy.js && lint-staged",
         "hook:commit-msg": "commitlint --edit",
         "hook:pre-push": "",
-        "format": "prettier --write .",
-        "lint:check": "eslint . --ext .js,.ts",
-        "lint:fix": "eslint . --ext .js,.ts --fix",
-        "format-and-lint": "prettier --write . && eslint . --ext .js,.ts --fix",
+        "format": "prettier --write . && stylelint \"**/*.{css,scss}\" --fix",
+        "lint:check": "eslint . --ext .js,.ts && npm run lint:only-css-scss",
+        "lint:fix": "eslint . --ext .js,.ts --fix && npm run lint:only-css-scss -- --fix",
+        "format-and-lint": "prettier --write . && eslint . --ext .js,.ts --fix && npm run lint:only-css-scss -- --fix",
+        "lint:only-css-scss": "stylelint \"**/*.{css,scss}\"",
         "ng": "ng",
         "start:simple-pomodoro": "ng serve --project=simple-pomodoro",
         "start:prototype-3": "ng serve --project=prototype-3",
@@ -68,6 +69,9 @@
         "*.{js,ts}": [
             "prettier --write",
             "eslint --fix"
+        ],
+        "*.{css,scss}": [
+            "stylelint --fix"
         ],
         "*.{json,md,yml,yaml}": [
             "prettier --write"
@@ -110,8 +114,10 @@
         "eslint-plugin-simple-import-sort": "^14.0.0",
         "jsdom": "^30.1.1",
         "lint-staged": "^17.6.1",
+        "postcss-scss": "^4.0.9",
         "prettier": "^3.9.10",
         "simple-git-hooks": "^2.14.0",
+        "stylelint": "^18.1.0",
         "typescript": "~6.0.0",
         "typescript-eslint": "^8.61.0",
         "vitest": "^5.1.0"

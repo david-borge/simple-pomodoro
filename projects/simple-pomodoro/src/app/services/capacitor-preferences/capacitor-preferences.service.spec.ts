@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { CapacitorPreferencesService } from './capacitor-preferences.service';
 
 describe('PersistentState', () => {

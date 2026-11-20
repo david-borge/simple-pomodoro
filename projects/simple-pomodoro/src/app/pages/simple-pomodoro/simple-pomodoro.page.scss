@@ -39,6 +39,7 @@ app-sessions-info.is-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     :host,
     :host(.is-ready) ion-content::part(background),
     :host(.is-ready) ion-toolbar::part(background),

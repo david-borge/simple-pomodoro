@@ -1,8 +1,8 @@
 import { Service } from '@angular/core';
 
+import { TimerEditorOptions } from './timer-editor.options.type';
 import { TIMER_CONFIG } from '../../config/timer.config.production';
 import { ONE_MINUTE_IN_SECONDS, SECONDS_PER_HOUR } from '../../constants/time-conversion.constants';
-import { TimerEditorOptions } from './timer-editor.options.type';
 
 @Service()
 export class EditTimerService {

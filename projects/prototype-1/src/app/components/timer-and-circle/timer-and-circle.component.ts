@@ -16,11 +16,11 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
+import { CIRCLE } from './circle.constants';
 import { TwoDigitsPipe } from '../../pipes/two-digits.pipe';
 import { TimeConversionService } from '../../services/time-conversion/time-conversion.service';
 import { TimerService } from '../../services/timer/timer.service';
 import { TimerEditComponent } from '../timer-edit/timer-edit.component';
-import { CIRCLE } from './circle.constants';
 
 @Component({
     selector: 'app-timer-and-circle',

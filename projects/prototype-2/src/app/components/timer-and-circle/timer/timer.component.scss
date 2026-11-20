@@ -99,6 +99,7 @@
 }
 
 @keyframes session-type-change {
+
     from {
         opacity: 0;
         transform: translateY(-4px);
@@ -135,6 +136,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     :host,
     :host(.is-visible),
     #session-type-container,

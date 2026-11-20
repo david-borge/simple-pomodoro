@@ -29,6 +29,18 @@
     },
     "references": [
         {
+            "path": "./projects/simple-pomodoro/tsconfig.app.json"
+        },
+        {
+            "path": "./projects/simple-pomodoro/tsconfig.spec.json"
+        },
+        {
+            "path": "./projects/prototype-3/tsconfig.app.json"
+        },
+        {
+            "path": "./projects/prototype-3/tsconfig.spec.json"
+        },
+        {
             "path": "./projects/prototype-2/tsconfig.app.json"
         },
         {

@@ -6,8 +6,8 @@ import {
     ONE_MINUTE_IN_SECONDS,
     ONE_SECOND_IN_MILIISECONDS,
 } from '../../../constants/time-conversion.constants';
-import { TimerSession } from '../../../services/timer-sessions/timer-session.interface';
 import { TimerService } from '../../../services/timer/timer.service';
+import { TimerSession } from '../../../services/timer-sessions/timer-session.interface';
 
 @Component({
     selector: 'app-alarm',
@@ -19,6 +19,7 @@ export class AlarmComponent implements OnChanges {
     private readonly timerService = inject(TimerService);
 
     readonly currentTimerSession = input.required<TimerSession | null>();
+
     protected readonly alarmTime = signal('');
     protected readonly skipInitialAnimation = signal(false);
 

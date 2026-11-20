@@ -24,6 +24,7 @@
     transition: padding var(--ds-transition-duration, 200ms)
         var(--ds-transition-timing-function, ease-out);
 }
+
 @media screen and (max-height: 700px) {
 
     #timer-and-circle-container {

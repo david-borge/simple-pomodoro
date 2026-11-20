@@ -10,13 +10,13 @@ import {
     signal,
 } from '@angular/core';
 
+import { BulletComponent } from './bullet/bullet.component';
+import { SessionsInfoService } from './sessions-info.service';
 import {
     TimerSessionsList,
     TimerSessionType,
 } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
-import { BulletComponent } from './bullet/bullet.component';
-import { SessionsInfoService } from './sessions-info.service';
 
 @Component({
     selector: 'app-sessions-info',

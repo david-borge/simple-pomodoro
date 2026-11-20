@@ -42,6 +42,7 @@
  */
 
 //  Font size
+
 body {
     font-size: var(--ds-font-size-body);
 }
@@ -55,6 +56,7 @@ body {
 }
 
 // Text color
+
 .text-focus-color {
     color: var(--ds-focus-accent);
 }
@@ -67,6 +69,7 @@ body {
  * Ionic Components - Overriden CSS properties
  * -----------------------------------------------------
  */
+
 ion-button {
     font-weight: 300;
     text-transform: none; // Android buttons are uppercase by default. iOS, sentence case.
@@ -82,12 +85,14 @@ ion-button.button-default {
  */
 
 // Font
+
 * {
     font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
 }
 
 // General container
+
 .container {
     padding-right: var(--ion-padding);
     padding-left: var(--ion-padding);
@@ -115,10 +120,12 @@ ion-button.button-default {
 }
 
 // Centering
+
 .center-content-horizontally {
     display: flex;
     justify-content: center;
 }
+
 .center-content-vertically {
     display: flex;
     align-items: center;

@@ -1,0 +1,11 @@
+{
+    "customSyntax": "postcss-scss",
+    "rules": {
+        "rule-empty-line-before": [
+            "always-multi-line",
+            {
+                "severity": "warning"
+            }
+        ]
+    }
+}

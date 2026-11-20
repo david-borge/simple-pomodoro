@@ -11,8 +11,8 @@ import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer
 import { TimerControlsStartPauseCancelComponent } from '../../components/timer-controls-start-pause-cancel/timer-controls-start-pause-cancel.component';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
-import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
 import { TimerService } from '../../services/timer/timer.service';
+import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
 
 @Component({
     selector: 'app-prototype-2',

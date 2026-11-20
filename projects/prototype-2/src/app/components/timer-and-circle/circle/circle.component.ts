@@ -11,14 +11,14 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import { CircleColorClass } from './circle-color-class.enum';
+import { CircleDegrees } from './circle-degrees.constant';
 import { ONE_SECOND_IN_MILIISECONDS } from '../../../constants/time-conversion.constants';
+import { TimerService } from '../../../services/timer/timer.service';
 import {
     TimerSession,
     TimerSessionType,
 } from '../../../services/timer-sessions/timer-session.interface';
-import { TimerService } from '../../../services/timer/timer.service';
-import { CircleColorClass } from './circle-color-class.enum';
-import { CircleDegrees } from './circle-degrees.constant';
 
 @Component({
     selector: 'app-circle',
@@ -26,9 +26,6 @@ import { CircleDegrees } from './circle-degrees.constant';
     styleUrls: ['./circle.component.scss'],
 })
 export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-    private static readonly MIN_CIRCLE_RESET_DURATION_RATIO = 0.2;
-    private static readonly PROGRESS_SHADOW_START_OFFSET_IN_DEGREES = 3;
-
     private readonly timerService = inject(TimerService);
 
     readonly totalSeconds = input.required<number>();
@@ -37,6 +34,9 @@ export class CircleComponent implements OnInit, OnChanges, AfterViewInit, OnDest
     readonly isTimerPaused = input.required<boolean | null>();
     readonly isTimerCancelled = input.required<boolean | null>();
     readonly currentTimerSession = input.required<TimerSession | null>();
+
+    private static readonly MIN_CIRCLE_RESET_DURATION_RATIO = 0.2;
+    private static readonly PROGRESS_SHADOW_START_OFFSET_IN_DEGREES = 3;
 
     private intervalDurationInSec!: ReturnType<typeof this.totalSeconds>;
     private isViewInitialized = false;

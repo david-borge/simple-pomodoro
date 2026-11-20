@@ -4,11 +4,11 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CustomIonicColors, IonicColors } from '../../design-system/ionic-colors';
+import { TimerService } from '../../services/timer/timer.service';
 import {
     TimerSession,
     TimerSessionType,
 } from '../../services/timer-sessions/timer-session.interface';
-import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
     selector: 'app-timer-controls-start-pause-cancel',

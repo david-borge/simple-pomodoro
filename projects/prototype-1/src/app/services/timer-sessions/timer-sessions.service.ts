@@ -1,9 +1,9 @@
 import { Service } from '@angular/core';
 
-import { TIMER_CONFIG } from '../../config/timer.config';
-import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
 import type { TimerSessionsList } from './timer-session.interface';
 import { TimerSessionType } from './timer-session.interface';
+import { TIMER_CONFIG } from '../../config/timer.config';
+import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
 
 @Service()
 export class TimerSessionsService {

@@ -33,6 +33,7 @@ app-sessions-info.is-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     app-sessions-info,
     app-sessions-info.is-visible {
         transition: none;

@@ -1,13 +1,13 @@
 import { Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { TimerSession } from '../../services/timer-sessions/timer-session.interface';
-import { TimerService } from '../../services/timer/timer.service';
-import { TimerEditComponent } from '../timer-edit/timer-edit.component';
 import { AlarmComponent } from './alarm/alarm.component';
 import { CircleComponent } from './circle/circle.component';
 import { EditButtonComponent } from './edit-button/edit-button.component';
 import { TimerComponent } from './timer/timer.component';
+import { TimerService } from '../../services/timer/timer.service';
+import { TimerSession } from '../../services/timer-sessions/timer-session.interface';
+import { TimerEditComponent } from '../timer-edit/timer-edit.component';
 
 @Component({
     selector: 'app-timer-and-circle',

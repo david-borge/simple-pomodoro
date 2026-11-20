@@ -1,10 +1,10 @@
-import { Service, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 
+import type { PomodoroTimerState } from './pomodoro-timer-state.interface';
 import { ONE_SECOND_IN_MILIISECONDS } from '../../constants/time-conversion.constants';
 import { CapacitorPreferencesService } from '../capacitor-preferences/capacitor-preferences.service';
 import { TimerSessionType } from '../timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../timer-sessions/timer-sessions.service';
-import type { PomodoroTimerState } from './pomodoro-timer-state.interface';
 
 interface StoredPomodoroTimerState extends PomodoroTimerState {
     version: 1;
@@ -12,11 +12,11 @@ interface StoredPomodoroTimerState extends PomodoroTimerState {
 
 @Service()
 export class PersistentStateService {
-    private static readonly TIMER_STATE_KEY = 'simplePomodoro.timerState';
-    private static readonly INITIAL_BACKGROUND_STATE_KEY = 'simplePomodoro.initialBackgroundState';
-
     private readonly capacitorPreferencesService = inject(CapacitorPreferencesService);
     private readonly timerSessionsService = inject(TimerSessionsService);
+
+    private static readonly TIMER_STATE_KEY = 'simplePomodoro.timerState';
+    private static readonly INITIAL_BACKGROUND_STATE_KEY = 'simplePomodoro.initialBackgroundState';
 
     public async loadPomodoroTimerState(): Promise<PomodoroTimerState | null> {
         const storedState = await this.capacitorPreferencesService.get<unknown>(

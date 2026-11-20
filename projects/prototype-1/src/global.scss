@@ -37,12 +37,14 @@
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 // Font
+
 * {
     font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
 }
 
 // General container
+
 .container {
     padding-right: var(--ion-padding);
     padding-left: var(--ion-padding);
@@ -70,19 +72,23 @@
 }
 
 // Centering
+
 .center-horizontally {
     display: flex;
     justify-content: center;
 }
+
 .center-vertically {
     display: flex;
     align-items: center;
 }
 
 // Theme colors
+
 .text-focus-color {
     color: var(--focus-color);
 }
+
 .text-rest-color {
     color: var(--rest-color);
 }

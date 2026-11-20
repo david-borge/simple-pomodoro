@@ -1,5 +1,7 @@
-import { Component, input } from '@angular/core';
 import { IonText } from '@ionic/angular';
+
+import { Component, input } from '@angular/core';
+
 import { CustomIonicColors } from '../../../design-system/ionic-colors';
 import { TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
 

@@ -9,8 +9,8 @@ import {
     Service,
 } from '@angular/core';
 
-import { TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 import { OutlinedNumberComponent } from './outlined-number/outlined-number.component';
+import { TimerSessionType } from '../../services/timer-sessions/timer-session.interface';
 
 /**
  * Presenter service handling imperative DOM creation and styling.
@@ -20,6 +20,7 @@ import { OutlinedNumberComponent } from './outlined-number/outlined-number.compo
 export class SessionsInfoService {
     private readonly applicationRef = inject(ApplicationRef);
     private readonly environmentInjector = inject(EnvironmentInjector);
+
     private readonly outlinedNumberComponentRefs: ComponentRef<OutlinedNumberComponent>[] = [];
 
     renderSessionsInfo(

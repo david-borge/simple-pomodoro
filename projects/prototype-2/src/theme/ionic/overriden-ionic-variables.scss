@@ -41,6 +41,7 @@
 }
 
 // * Ionic CSS Variables - New Color - Focus
+
 .ion-color-focus {
     --ion-color-base: var(--ion-color-focus);
     --ion-color-base-rgb: var(--ion-color-focus-rgb);
@@ -51,6 +52,7 @@
 }
 
 // * Ionic CSS Variables - New Color - Rest
+
 .ion-color-rest {
     --ion-color-base: var(--ion-color-rest);
     --ion-color-base-rgb: var(--ion-color-rest-rgb);
@@ -61,6 +63,7 @@
 }
 
 // * Ionic CSS Variables - Ionic Button
+
 ion-button {
     --border-color: var(--ds-focus-accent);
     --border-width: 1px;

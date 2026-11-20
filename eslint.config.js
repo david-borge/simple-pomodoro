@@ -35,11 +35,11 @@ import unifyImports from './eslint-rules/unify-imports.js';
 
 export default defineConfig(
     {
-        ignores: ['projects/**/*', 'www/**/*', 'android/**/*', 'ios/**/*', '.agents/**/*'],
+        ignores: ['www/**/*', 'android/**/*', 'ios/**/*', '.agents/**/*'],
     },
     {
         files: ['**/*.ts'],
-        ignores: ['projects/**/*', 'www/**/*', 'android/**/*', 'ios/**/*'],
+        ignores: ['www/**/*', 'android/**/*', 'ios/**/*'],
         extends: [...angular.configs.tsRecommended],
         processor: angular.processInlineTemplates,
         plugins: {

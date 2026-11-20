@@ -1,10 +1,10 @@
 import { Service } from '@angular/core';
 
+import { TimerEditorOptions } from './timer-editor.options.type';
 import { TIMER_CONFIG } from '../../config/timer.config';
 import { MAXIMUM_TIMER } from '../../constants/maximum-timer.constant';
 import { ONE_MINUTE_IN_SECONDS, SECONDS_PER_HOUR } from '../../constants/time-conversion.constants';
 import { TIMER_EDITOR_INTERVAL_IN_SEC } from '../../constants/timer-editor-interval.constant';
-import { TimerEditorOptions } from './timer-editor.options.type';
 
 @Service()
 export class EditTimerService {

@@ -13,12 +13,12 @@ import {
 import { CustomIonicColors } from '../../../design-system/ionic-colors';
 import { TwoDigitsPipe } from '../../../pipes/two-digits.pipe';
 import { TimeConversionService } from '../../../services/time-conversion/time-conversion.service';
+import { TimerService } from '../../../services/timer/timer.service';
 import {
     TimerSession,
     TimerSessionType,
 } from '../../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../../services/timer-sessions/timer-sessions.service';
-import { TimerService } from '../../../services/timer/timer.service';
 
 @Component({
     selector: 'app-timer',
@@ -31,6 +31,11 @@ export class TimerComponent implements OnChanges {
     private readonly timerSessionsService = inject(TimerSessionsService);
     private readonly timerService = inject(TimerService);
 
+    readonly totalSeconds = input.required<number>();
+    readonly isTimerRunning = input.required<boolean | null>();
+    readonly isTimerPaused = input.required<boolean | null>();
+    readonly currentTimerSession = input.required<TimerSession | null>();
+
     protected readonly skipInitialAnimation = signal(false);
 
     constructor() {
@@ -38,11 +43,6 @@ export class TimerComponent implements OnChanges {
             this.skipInitialAnimation.set(true);
         }
     }
-
-    readonly totalSeconds = input.required<number>();
-    readonly isTimerRunning = input.required<boolean | null>();
-    readonly isTimerPaused = input.required<boolean | null>();
-    readonly currentTimerSession = input.required<TimerSession | null>();
 
     ngOnChanges(changes: SimpleChanges): void {
         const sessionChange = changes['currentTimerSession'];

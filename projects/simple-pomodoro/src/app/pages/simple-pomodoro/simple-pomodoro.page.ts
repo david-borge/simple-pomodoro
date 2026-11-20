@@ -11,12 +11,12 @@ import { TimerAndCircleComponent } from '../../components/timer-and-circle/timer
 import { TimerControlsStartPauseCancelComponent } from '../../components/timer-controls-start-pause-cancel/timer-controls-start-pause-cancel.component';
 import { TIMER_CONFIG } from '../../config/timer.config.production';
 import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
+import { TimerService } from '../../services/timer/timer.service';
 import {
-    TimerSessionType,
     type TimerSession,
+    TimerSessionType,
 } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
-import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
     selector: 'app-simple-pomodoro',

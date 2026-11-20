@@ -1,10 +1,10 @@
 import { Service } from '@angular/core';
 
-import { TIMER_CONFIG } from '../../config/timer.config';
-import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
-import { TimerSessionText } from './timer-session-text.enum';
 import type { TimerSession, TimerSessionsList } from './timer-session.interface';
 import { TimerSessionType } from './timer-session.interface';
+import { TimerSessionText } from './timer-session-text.enum';
+import { TIMER_CONFIG } from '../../config/timer.config';
+import { ONE_MINUTE_IN_SECONDS } from '../../constants/time-conversion.constants';
 
 @Service()
 export class TimerSessionsService {

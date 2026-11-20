@@ -6,6 +6,7 @@
     "editor.detectIndentation": false,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "always",
+        "source.fixAll.stylelint": "explicit",
         "source.organizeImports": "explicit",
         "source.fixAll": "explicit"
     },
@@ -17,7 +18,8 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[scss]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
     },
     "[sass]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -37,6 +39,10 @@
     "eslint.validate": [
         "javascript",
         "typescript"
+    ],
+    "stylelint.validate": [
+        "css",
+        "scss"
     ],
     "eslint.format.enable": false,
     // Keeps VS Code from suggesting Ionic components off the entry points this app

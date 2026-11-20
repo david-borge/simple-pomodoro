@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
-import { TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
 import { BulletColorClass } from './bullet-color.enum';
 import { BulletFillClass, BulletFillType } from './bullet-fill.enum';
+import { TimerSessionType } from '../../../services/timer-sessions/timer-session.interface';
 
 @Component({
     selector: 'app-bullet',

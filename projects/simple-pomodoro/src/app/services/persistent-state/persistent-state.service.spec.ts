@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { PersistentStateService } from './persistent-state.service';
 
 describe('PersistentStateService', () => {

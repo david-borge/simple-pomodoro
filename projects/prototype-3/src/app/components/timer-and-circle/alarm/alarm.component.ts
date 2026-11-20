@@ -16,6 +16,7 @@ import { TimerSession } from '../../../services/timer-sessions/timer-session.int
 })
 export class AlarmComponent implements OnChanges {
     readonly currentTimerSession = input.required<TimerSession | null>();
+
     protected readonly alarmTime = signal('');
 
     ngOnChanges(changes: SimpleChanges): void {

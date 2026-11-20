@@ -12,15 +12,15 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { BulletComponent } from './bullet/bullet.component';
+import { BulletFillType } from './bullet/bullet-fill.enum';
+import { SessionsInfoService } from './sessions-info.service';
+import { TimerService } from '../../services/timer/timer.service';
 import {
     TimerSessionsList,
     TimerSessionType,
 } from '../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../services/timer-sessions/timer-sessions.service';
-import { TimerService } from '../../services/timer/timer.service';
-import { BulletFillType } from './bullet/bullet-fill.enum';
-import { BulletComponent } from './bullet/bullet.component';
-import { SessionsInfoService } from './sessions-info.service';
 
 @Component({
     selector: 'app-sessions-info',
@@ -38,6 +38,7 @@ export class SessionsInfoComponent implements OnChanges, AfterViewInit {
 
     readonly totalSeconds = input.required<number>();
     readonly plannedTotalSeconds = input.required<number>();
+
     readonly timerStatus = signal({
         isTimerRunning: this.timerService.isTimerRunning,
         isTimerPaused: this.timerService.isTimerPaused,

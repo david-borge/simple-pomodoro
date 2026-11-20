@@ -5,12 +5,12 @@ import { Component, computed, inject, input } from '@angular/core';
 import { CustomIonicColors } from '../../../design-system/ionic-colors';
 import { TwoDigitsPipe } from '../../../pipes/two-digits.pipe';
 import { TimeConversionService } from '../../../services/time-conversion/time-conversion.service';
+import { TimerService } from '../../../services/timer/timer.service';
 import {
     TimerSession,
     TimerSessionType,
 } from '../../../services/timer-sessions/timer-session.interface';
 import { TimerSessionsService } from '../../../services/timer-sessions/timer-sessions.service';
-import { TimerService } from '../../../services/timer/timer.service';
 
 @Component({
     selector: 'app-timer',
