@@ -25,7 +25,7 @@
         var(--ds-transition-timing-function, ease-out);
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 700px) and (max-width: 400px) {
 
     #timer-and-circle-container {
         padding: 35px calc(var(--ion-padding) + var(--circle-border-width))

@@ -150,7 +150,7 @@
     }
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 700px) and (max-width: 400px) {
 
     #timer-numbers > span {
         font-size: 39px;
