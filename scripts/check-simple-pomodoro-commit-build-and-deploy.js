@@ -1,9 +1,11 @@
-const fs = require('node:fs');
-const path = require('node:path');
-const ts = require('typescript');
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
 
+const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const configPath = path.join(
-    __dirname,
+    scriptDirectory,
     '..',
     'projects',
     'simple-pomodoro',
@@ -35,7 +37,7 @@ if (
     !ts.isObjectLiteralExpression(configDeclaration.initializer)
 ) {
     console.error(
-        '⛔ Commit/deployment blocked: could not read TIMER_CONFIG from timer.config.production.ts.\n',
+        '⛔ Commit/build/deployment blocked: could not read TIMER_CONFIG from timer.config.production.ts.\n',
     );
     process.exit(1);
 }
@@ -49,7 +51,7 @@ const durationProperty = configDeclaration.initializer.properties.find(
 
 if (!durationProperty || !ts.isNumericLiteral(durationProperty.initializer)) {
     console.error(
-        '⛔ Commit/deployment blocked: could not read TIMER_CONFIG.defautlTimerDurationInMin.\n',
+        '⛔ Commit/build/deployment blocked: could not read TIMER_CONFIG.defautlTimerDurationInMin.\n',
     );
     process.exit(1);
 }
@@ -58,7 +60,7 @@ const durationInMinutes = Number(durationProperty.initializer.text);
 
 if (durationInMinutes < 25) {
     console.error(
-        `⛔ Commit/deployment blocked: TIMER_CONFIG.defautlTimerDurationInMin is ${durationInMinutes} minutes; it must be at least 25.\n`,
+        `⛔ Commit/build/deployment blocked: TIMER_CONFIG.defautlTimerDurationInMin is ${durationInMinutes} minutes; it must be at least 25.\n`,
     );
     process.exit(1);
 }

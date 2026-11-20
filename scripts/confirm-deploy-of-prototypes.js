@@ -1,4 +1,4 @@
-const readline = require('node:readline/promises');
+import readline from 'node:readline/promises';
 
 const project = process.argv[2];
 
