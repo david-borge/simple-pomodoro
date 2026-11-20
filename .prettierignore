@@ -5,6 +5,10 @@
 # which causes "npx prettier --check ." to detect issues, which can impide deployment if so configured in GitHub Actions.
 .vscode/
 
+# Agents
+.agents/
+.claude/
+
 # Stylelint controls SCSS whitespace; Prettier removes intentional blank lines after at-rules.
 **/*.scss
 
@@ -16,7 +20,3 @@ android/
 
 # Built iOS assets
 ios/
-
-# Agents
-.agents/
-.claude/
