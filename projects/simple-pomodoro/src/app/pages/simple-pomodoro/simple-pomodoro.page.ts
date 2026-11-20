@@ -43,6 +43,7 @@ export class SimplePomodoroPage {
     private readonly destroyRef = inject(DestroyRef);
 
     readonly totalSeconds = signal(TIMER_CONFIG.defautlTimerDurationInMin * ONE_MINUTE_IN_SECONDS);
+    readonly plannedTotalSeconds = signal(this.timerService.editedTotalSeconds);
     readonly isRestSession = signal(this.isRestSessionType(this.timerService.currentTimerSession));
     readonly isReady = signal(false);
 
@@ -55,6 +56,12 @@ export class SimplePomodoroPage {
                 if (timeInSec <= 0) {
                     this.timerService.cancelTimer();
                 }
+            });
+
+        this.timerService.editedTotalSeconds$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((timeInSec) => {
+                this.plannedTotalSeconds.set(timeInSec);
             });
 
         this.timerService.currentTimerSession$
@@ -75,7 +82,7 @@ export class SimplePomodoroPage {
 
     showSessionInfo() {
         const totalSeconds = this.totalSeconds();
-        const plannedTotalSeconds = this.timerService.editedTotalSeconds;
+        const plannedTotalSeconds = this.plannedTotalSeconds();
 
         return (
             this.timerService.isTimerBeingEdited ||

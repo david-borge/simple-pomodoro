@@ -45,6 +45,9 @@ export class TimerService {
     private totalSecondsBehaviorSubject = new BehaviorSubject(this._totalSeconds);
     public readonly totalSeconds$ = this.totalSecondsBehaviorSubject.asObservable();
 
+    private editedTotalSecondsBehaviorSubject = new BehaviorSubject(this._editedTotalSeconds);
+    public readonly editedTotalSeconds$ = this.editedTotalSecondsBehaviorSubject.asObservable();
+
     private currentTimerSessionBehaviorSubject = new BehaviorSubject<TimerSession | null>(null);
     public readonly currentTimerSession$ = this.currentTimerSessionBehaviorSubject.asObservable();
 
@@ -61,6 +64,7 @@ export class TimerService {
 
             this._wasRestoredFromPersistentState = true;
             this._editedTotalSeconds = persistedState.totalDurationSeconds;
+            this.editedTotalSecondsBehaviorSubject.next(this._editedTotalSeconds);
             this._totalSeconds = persistedState.remainingSeconds;
             this.timerEndsAtMs = null;
             this._isTimerPaused = persistedState.status === 'paused';
@@ -167,6 +171,7 @@ export class TimerService {
         this.totalSecondsBehaviorSubject.next(this._totalSeconds);
 
         this._editedTotalSeconds = totalSeconds;
+        this.editedTotalSecondsBehaviorSubject.next(this._editedTotalSeconds);
         this.persistTimerState();
     }
 
