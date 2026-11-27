@@ -1,14 +1,11 @@
 import { IonButton } from '@ionic/angular';
-import { componentOnReady } from '@ionic/core/components';
 
 import {
-    afterNextRender,
     Component,
     DestroyRef,
     effect,
     ElementRef,
     inject,
-    Injector,
     input,
     signal,
     ViewChild,
@@ -16,6 +13,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CustomIonicColors, IonicColors } from '../../design-system/ionic-colors';
+import { IonicFocusService } from '../../services/ionic-focus/ionic-focus.service';
 import { TimerService } from '../../services/timer/timer.service';
 import {
     TimerSession,
@@ -29,12 +27,12 @@ import {
     imports: [IonButton],
 })
 export class TimerControlsStartPauseCancelComponent {
+    private readonly ionicFocusService = inject(IonicFocusService);
     private readonly timerService = inject(TimerService);
     private readonly destroyRef = inject(DestroyRef);
-    private readonly injector = inject(Injector);
 
     @ViewChild('startPauseButton', { read: ElementRef })
-    private startPauseButton!: ElementRef<HTMLElement>;
+    private startPauseButton!: ElementRef<HTMLIonButtonElement>;
 
     readonly isReady = input(false);
 
@@ -44,22 +42,9 @@ export class TimerControlsStartPauseCancelComponent {
 
     constructor() {
         effect(() => {
-            if (!this.isReady()) {
-                return;
+            if (this.isReady()) {
+                this.ionicFocusService.focusIonButton(this.startPauseButton.nativeElement);
             }
-
-            afterNextRender(
-                () => {
-                    const ionButton = this.startPauseButton.nativeElement;
-
-                    componentOnReady(ionButton, () => {
-                        ionButton.shadowRoot
-                            ?.querySelector<HTMLButtonElement>('[part="native"]')
-                            ?.focus({ preventScroll: true });
-                    });
-                },
-                { injector: this.injector },
-            );
         });
 
         this.timerService.timerStatus$
