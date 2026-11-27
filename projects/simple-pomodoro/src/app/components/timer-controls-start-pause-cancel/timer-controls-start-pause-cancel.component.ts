@@ -1,6 +1,18 @@
 import { IonButton } from '@ionic/angular';
+import { componentOnReady } from '@ionic/core/components';
 
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import {
+    afterNextRender,
+    Component,
+    DestroyRef,
+    effect,
+    ElementRef,
+    inject,
+    Injector,
+    input,
+    signal,
+    ViewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CustomIonicColors, IonicColors } from '../../design-system/ionic-colors';
@@ -19,12 +31,37 @@ import {
 export class TimerControlsStartPauseCancelComponent {
     private readonly timerService = inject(TimerService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly injector = inject(Injector);
+
+    @ViewChild('startPauseButton', { read: ElementRef })
+    private startPauseButton!: ElementRef<HTMLElement>;
+
+    readonly isReady = input(false);
 
     readonly isTimerPaused = signal(this.timerService.isTimerPaused);
     readonly isCircleResetting = signal(this.timerService.isCircleResetting);
     private currentTimerSession = signal<TimerSession | null>(null);
 
     constructor() {
+        effect(() => {
+            if (!this.isReady()) {
+                return;
+            }
+
+            afterNextRender(
+                () => {
+                    const ionButton = this.startPauseButton.nativeElement;
+
+                    componentOnReady(ionButton, () => {
+                        ionButton.shadowRoot
+                            ?.querySelector<HTMLButtonElement>('[part="native"]')
+                            ?.focus({ preventScroll: true });
+                    });
+                },
+                { injector: this.injector },
+            );
+        });
+
         this.timerService.timerStatus$
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(({ isTimerPaused }) => {
