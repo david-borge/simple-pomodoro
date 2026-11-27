@@ -12,6 +12,10 @@
     pointer-events: auto;
 }
 
+ion-button {
+    z-index: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
     #edit-button-container,
