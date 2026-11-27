@@ -4,7 +4,7 @@
         {
             "label": "ionic: serve",
             "type": "npm",
-            "script": "ionic-serve",
+            "script": "ionic-serve:simple-pomodoro",
             "isBackground": true,
             "problemMatcher": {
                 "base": "$tsc-watch",
