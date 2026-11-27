@@ -120,8 +120,14 @@ ion-button {
 
 @media (prefers-color-scheme: dark) {
 
+    // Keyboard Navigation
+
     ion-button.ion-color-focus {
-        --ion-color-focus-contrast: var(--ds-text-color-contrast);
-        --ion-color-focus-contrast-rgb: var(--ds-text-color-contrast-rgb);
+        --ion-color-focus-contrast: var(--ds-color-focus-accent); // This is the background color
+        --ion-color-focus-contrast-rgb: var(--ds-color-focus-accent-rgb); // This is the background color
+
+        --ion-color-contrast: var(--ds-text-color-contrast);
+        --ion-color-contrast-rgb: var(--ds-text-color-contrast-rgb);
+        --background-focused-opacity: 0;
     }
 }

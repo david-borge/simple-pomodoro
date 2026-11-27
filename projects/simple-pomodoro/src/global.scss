@@ -129,3 +129,12 @@ ion-button.button-default {
     display: flex;
     align-items: center;
 }
+
+// Keyboard Navigation
+
+ion-button.ion-focusable.ion-focused {
+    // TODO: set one color for all modes
+    box-shadow: 0px 0px 2px 2px var(--ds-text-color);
+    border-radius: var(--ds-border-radius);
+    outline-color: transparent; /* for high contrast modes */
+}
