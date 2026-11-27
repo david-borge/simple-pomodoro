@@ -26,8 +26,8 @@
     // * New Color - Focus *
     --ion-color-focus: var(--ds-color-focus-accent);
     --ion-color-focus-rgb: var(--ds-color-focus-accent-rgb);
-    --ion-color-focus-contrast: var(--ds-text-color);
-    --ion-color-focus-contrast-rgb: var(--ds-text-color-rgb);
+    --ion-color-focus-contrast: var(--ds-text-color-contrast);
+    --ion-color-focus-contrast-rgb: var(--ds-text-color-contrast-rgb);
     --ion-color-focus-shade: color-mix(in srgb, var(--ds-color-focus-accent), black 10%);
     --ion-color-focus-tint: color-mix(in srgb, var(--ds-color-focus-accent), white 10%);
 
@@ -116,18 +116,8 @@ ion-button {
     --background-hover: var(--ds-color-focus-accent);
 
     --color: var(--ds-color-focus-accent);
-}
-
-@media (prefers-color-scheme: dark) {
 
     // Keyboard Navigation
-
-    ion-button.ion-color-focus {
-        --ion-color-focus-contrast: var(--ds-color-focus-accent); // This is the background color
-        --ion-color-focus-contrast-rgb: var(--ds-color-focus-accent-rgb); // This is the background color
-
-        --ion-color-contrast: var(--ds-text-color-contrast);
-        --ion-color-contrast-rgb: var(--ds-text-color-contrast-rgb);
-        --background-focused-opacity: 0;
-    }
+    --background-focused-opacity: 0;
 }
+

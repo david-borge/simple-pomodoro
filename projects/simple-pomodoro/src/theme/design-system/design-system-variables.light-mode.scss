@@ -10,6 +10,9 @@
         --ds-text-color: #0e222d;
         --ds-text-color-rgb: 14, 34, 45;
 
+        --ds-text-color-contrast: var(--ds-text-color);
+        --ds-text-color-contrast-rgb: var(--ds-text-color-rgb);
+
         // * Design System - Color - Focus *
         --ds-color-focus-accent: hsl(200, 87%, 82%);
         --ds-color-focus-accent-rgb: 169, 222, 249;
